@@ -1,0 +1,2 @@
+/Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc-ar qc libandroid_jniiosystem.a  CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o
+/Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ranlib libandroid_jniiosystem.a

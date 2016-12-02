@@ -1,0 +1,21 @@
+This is a backup for assimp port to Android and demo app that can call assimp from native activity. It proves the OpenGL implmentation on Android + assimp
+
+To compile assimp, we need download CMake 3.7.0-rc3 on Mac OSX 10.11.
+
+Some configurations may matter:
+
+set source code location to assimp
+set build binaries location to bin
+
+add configure entries:
+ANDROID_ABI:armeabi-v7a
+ANDROID_NATIVE_API_LEVEL:9
+ASSIMP_ANDROID_JNIIOSYSTEM:ON
+ASSIMP_INCLUDE_INSTALL_DIR:include
+ASSIMP_LIB_INSTALL_DIR:lib
+CMAKE_ASM_COMPILER:${Your NDK path}/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc
+CMAKE_INSTALL_PREFIX:${Your NDK path}/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/user
+CMAKE_TOOLCHAIN_FILE:${Your Android CMake path - in this repo}/android-cmake/android.toolchain.cmake
+
+Then click on "Configure" button and "Generate" button. Makefiles should be generated. Go ahead and make it.
+
