@@ -24,6 +24,18 @@ add_library(lib_gmath STATIC IMPORTED)
 set_target_properties(lib_gmath PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/gmath/lib/${ANDROID_ABI}/libgmath.a)
 
+add_library(lib_magick STATIC IMPORTED)
+set_target_properties(lib_magick PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagick++.a)
+
+add_library(lib_magickcore STATIC IMPORTED)
+set_target_properties(lib_magickcore PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagickCore.a)
+
+add_library(lib_magickwand STATIC IMPORTED)
+set_target_properties(lib_magickwand PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagickWand.a)
+
 # shared lib will also be tucked into APK and sent to target
 # refer to app/build.gradle, jniLibs section for that purpose.
 # ${ANDROID_ABI} is handy for our purpose here. Probably this ${ANDROID_ABI} is
@@ -52,6 +64,9 @@ target_include_directories(hello-libs PRIVATE
 target_link_libraries(hello-libs
                       android
                       lib_assimp
+                      lib_magick
+                      lib_magickcore
+                      lib_magickwand
                       log
                       EGL
                       GLESv2)
