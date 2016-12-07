@@ -30,7 +30,7 @@ android {
     sourceSets {
         main {
             // let gradle pack the shared library into apk
-            jniLibs.srcDirs = ['../distribution/gperf/lib', '../distribution/assimp/lib']
+            jniLibs.srcDirs = ['../distribution/gperf/lib', '../distribution/assimp/lib', '../distribution/system/lib']
         }
     }
     externalNativeBuild {

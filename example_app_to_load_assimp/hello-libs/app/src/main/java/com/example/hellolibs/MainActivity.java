@@ -26,6 +26,7 @@ import android.widget.TextView;
 public class MainActivity extends NativeActivity {
 
     static {
+        System.loadLibrary("stlport_shared");
         System.loadLibrary("assimp");
     }
 }

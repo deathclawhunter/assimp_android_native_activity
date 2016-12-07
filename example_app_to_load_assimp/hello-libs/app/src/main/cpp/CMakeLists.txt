@@ -48,17 +48,31 @@ add_library(lib_assimp SHARED IMPORTED)
 set_target_properties(lib_assimp PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/assimp/lib/${ANDROID_ABI}/libassimp.so)
 
+add_library(lib_stlport SHARED IMPORTED)
+set_target_properties(lib_stlport PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/system/lib/${ANDROID_ABI}/libstlport_shared.so)
+#    ${ANDROID_NDK}/sources/cxx-stl/stlport/libs/${ANDROID_ABI}/libstlport_share.so)
+
 # build application's shared lib
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library(hello-libs SHARED
             hello-libs.c
+            ogldev_skinned_mesh.cpp
+            gl3stub.cpp
+            math_3d.cpp
+            ogldev_texture.cpp
+            skinning_technique.cpp
+            technique.cpp
+            ogldev_util.cpp
             ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
 
 target_include_directories(hello-libs PRIVATE
                            ${distribution_DIR}/gmath/include
                            ${distribution_DIR}/gperf/include
                            ${distribution_DIR}/assimp/include
+                           ${distribution_DIR}/imagemagick/include
+                           ${distribution_DIR}/imagemagick/include/ImageMagick-6
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 target_link_libraries(hello-libs
@@ -69,4 +83,7 @@ target_link_libraries(hello-libs
                       lib_magickwand
                       log
                       EGL
+                      z
+                      stdc++
+                      lib_stlport
                       GLESv2)
