@@ -36,6 +36,10 @@ add_library(lib_magickwand STATIC IMPORTED)
 set_target_properties(lib_magickwand PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagickWand.a)
 
+add_library(lib_freeglut STATIC IMPORTED)
+set_target_properties(lib_freeglut PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/freeglut/lib/${ANDROID_ABI}/libfreeglut-gles.a)
+
 # shared lib will also be tucked into APK and sent to target
 # refer to app/build.gradle, jniLibs section for that purpose.
 # ${ANDROID_ABI} is handy for our purpose here. Probably this ${ANDROID_ABI} is
@@ -65,6 +69,11 @@ add_library(hello-libs SHARED
             skinning_technique.cpp
             technique.cpp
             ogldev_util.cpp
+            tutorial38.cpp
+            ogldev_app.cpp
+            camera.cpp
+            glut_backend.cpp
+            pipeline.cpp
             ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
 
 target_include_directories(hello-libs PRIVATE
@@ -73,6 +82,7 @@ target_include_directories(hello-libs PRIVATE
                            ${distribution_DIR}/assimp/include
                            ${distribution_DIR}/imagemagick/include
                            ${distribution_DIR}/imagemagick/include/ImageMagick-6
+                           ${distribution_DIR}/freeglut/include
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 target_link_libraries(hello-libs
@@ -86,4 +96,5 @@ target_link_libraries(hello-libs
                       z
                       stdc++
                       lib_stlport
+                      lib_freeglut
                       GLESv2)
