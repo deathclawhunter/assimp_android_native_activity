@@ -1,3 +1,0 @@
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/release/armeabi-v7a/CMakeFiles/hello-libs.dir

@@ -36,9 +36,9 @@ add_library(lib_magickwand STATIC IMPORTED)
 set_target_properties(lib_magickwand PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagickWand.a)
 
-add_library(lib_freeglut STATIC IMPORTED)
-set_target_properties(lib_freeglut PROPERTIES IMPORTED_LOCATION
-    ${distribution_DIR}/freeglut/lib/${ANDROID_ABI}/libfreeglut-gles.a)
+# add_library(lib_freeglut STATIC IMPORTED)
+# set_target_properties(lib_freeglut PROPERTIES IMPORTED_LOCATION
+#     ${distribution_DIR}/freeglut/lib/${ANDROID_ABI}/libfreeglut-gles.a)
 
 # shared lib will also be tucked into APK and sent to target
 # refer to app/build.gradle, jniLibs section for that purpose.
@@ -61,7 +61,9 @@ set_target_properties(lib_stlport PROPERTIES IMPORTED_LOCATION
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 add_library(hello-libs SHARED
-            hello-libs.c
+            # hello-libs.c
+            fg_runtime_android.c
+            tutorial38.cpp
             ogldev_skinned_mesh.cpp
             gl3stub.cpp
             math_3d.cpp
@@ -69,12 +71,52 @@ add_library(hello-libs SHARED
             skinning_technique.cpp
             technique.cpp
             ogldev_util.cpp
-            tutorial38.cpp
             ogldev_app.cpp
             camera.cpp
             glut_backend.cpp
             pipeline.cpp
-            ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
+            android_native_app_glue.c
+            fg_cursor_android.c
+            fg_ext_android.c
+            fg_gamemode_android.c
+            fg_init_android.c
+            fg_input_devices_android.c
+            fg_joystick_android.c
+            fg_main_android.c
+            fg_spaceball_android.c
+            fg_state_android.c
+            fg_structure_android.c
+            fg_window_android.c
+            fg_callbacks.c
+            fg_cursor.c
+            fg_display.c
+            fg_ext.c
+            fg_font_data.c
+            fg_gamemode.c
+            fg_geometry.c
+            fg_gl2.c
+            fg_init.c
+            fg_input_devices.c
+            fg_joystick.c
+            fg_main.c
+            fg_misc.c
+            fg_overlay.c
+            fg_spaceball.c
+            fg_state.c
+            fg_stroke_mono_roman.c
+            fg_stroke_roman.c
+            fg_structure.c
+            fg_teapot.c
+            fg_videoresize.c
+            fg_window.c
+            gles_stubs.c
+            fg_display_egl.c
+            fg_ext_egl.c
+            fg_init_egl.c
+            fg_state_egl.c
+            fg_structure_egl.c
+            fg_window_egl.c
+            xparsegeometry_repl.c )
 
 target_include_directories(hello-libs PRIVATE
                            ${distribution_DIR}/gmath/include
@@ -96,5 +138,5 @@ target_link_libraries(hello-libs
                       z
                       stdc++
                       lib_stlport
-                      lib_freeglut
+                      GLESv1_CM
                       GLESv2)

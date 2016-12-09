@@ -10,6 +10,9 @@
 #include <android_native_app_glue.h>
 
 #include <cimport.h>
+#include <GLES2/gl2.h>
+
+#include <stdbool.h>
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
@@ -26,6 +29,11 @@ struct engine {
     int32_t touchX;
     int32_t touchY;
 };
+
+bool initializedGlut = false;
+bool initialized38 = false;
+
+extern void _android_main(struct android_app* state);
 
 /**
  * Initialize an EGL context for the current display.
@@ -98,8 +106,20 @@ int init_display(struct engine* engine) {
     glDisable(GL_DEPTH_TEST);
     glViewport(0, 0, w, h);
 
+    int prog = glCreateProgram();
+
+    if (prog == 0) {
+        int err = GL_NO_ERROR;
+        err = glGetError();
+        LOGI("err = 0x%x\n", err);
+    } else {
+        LOGI("got prog = 0x%x\n", prog);
+    }
+
     return 0;
 }
+
+extern int main(int argc, char **argv);
 
 /**
  * Just the current frame in the display.
@@ -110,9 +130,28 @@ void draw_frame(struct engine* engine) {
         return;
     }
 
-    glClearColor(255,0,0, 1);
+    glClearColor(255, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     eglSwapBuffers(engine->display, engine->surface);
+
+    /* if (!initializedGlut) {
+        _android_main(engine->app);
+        initializedGlut = true;
+    } */
+
+    if (!initialized38) {
+        int prog = glCreateProgram();
+
+        if (prog == 0) {
+            int err = GL_NO_ERROR;
+            err = glGetError();
+            LOGI("APP_CMD_DESTROY: err = 0x%x\n", err);
+        } else {
+            LOGI("APP_CMD_DESTROY: got prog = 0x%x in fg_main_android\n", prog);
+            initialized38 = true;
+        }
+    }
+
 }
 
 /**
@@ -137,7 +176,7 @@ void terminate_display(struct engine* engine) {
 /**
  * Process the next input event.
  */
-int32_t handle_input(struct android_app* app, AInputEvent* event) {
+int32_t hello_handle_input(struct android_app *app, AInputEvent *event) {
     struct engine* engine = (struct engine*)app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
         engine->touchX = AMotionEvent_getX(event, 0);
@@ -151,7 +190,7 @@ int32_t handle_input(struct android_app* app, AInputEvent* event) {
 /**
  * Process the next main command.
  */
-void handle_cmd(struct android_app* app, int32_t cmd) {
+void hello_handle_cmd(struct android_app *app, int32_t cmd) {
     struct engine* engine = (struct engine*)app->userData;
     switch (cmd) {
         case APP_CMD_SAVE_STATE:
@@ -176,7 +215,7 @@ void handle_cmd(struct android_app* app, int32_t cmd) {
 /**
  * Main entry point, handles events
  */
-void android_main(struct android_app* state) {
+void _android_main(struct android_app* state) {
     app_dummy();
 
     LOGI("in android_main\n");
@@ -189,8 +228,8 @@ void android_main(struct android_app* state) {
 
     memset(&engine, 0, sizeof(engine));
     state->userData = &engine;
-    state->onAppCmd = handle_cmd;
-    state->onInputEvent = handle_input;
+    state->onAppCmd = hello_handle_cmd;
+    state->onInputEvent = hello_handle_input;
     engine.app = state;
 
     // Read all pending events.

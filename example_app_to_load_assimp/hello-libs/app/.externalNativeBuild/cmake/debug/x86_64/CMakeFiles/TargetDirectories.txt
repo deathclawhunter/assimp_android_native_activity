@@ -1,3 +1,0 @@
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/edit_cache.dir
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/rebuild_cache.dir
-/Volumes/Elements/proj/native_activity_4/hello-libs/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/hello-libs.dir

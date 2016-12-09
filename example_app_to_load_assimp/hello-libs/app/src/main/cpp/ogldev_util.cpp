@@ -27,27 +27,63 @@
 
 #include "ogldev_util.h"
 
-bool ReadFile(const char* pFileName, string& outFile)
-{
-    ifstream f(pFileName);
-    
-    bool ret = false;
-    
-    if (f.is_open()) {
-        string line;
-        while (getline(f, line)) {
-            outFile.append(line);
-            outFile.append("\n");
+static int ReadLine(FILE *fp, char *buf, int bufSize) {
+    int readNum = 0;
+    char *ptr = buf;
+    *ptr = 0;
+
+    do {
+        readNum = fread(ptr, 1, 1, fp);
+
+        // hit new line char
+        if (buf[0] != 0 && *ptr == '\r' || *ptr == '\n') {
+            *ptr = 0;
+            break;
+        } else if (buf[0] == 0) {
+            if (*ptr == '\r' || *ptr == '\n') {
+                do {
+                    readNum = fread(ptr, 1, 1, fp);
+                } while (readNum > 0 && (*ptr == '\r' || *ptr == '\n'));
+
+                if (readNum <= 0) {
+                    break;
+                }
+            }
         }
-        
-        f.close();
-        
-        ret = true;
+
+        // hit buffer limit
+        if (ptr < buf + bufSize) {
+            ptr++;
+        } else {
+            *ptr = 0;
+            break;
+        }
+
+    } while (readNum > 0);
+
+    return readNum;
+}
+
+bool ReadFile(const char* pFileName, string& outFile) {
+    bool ret = false;
+    char buf[BUFSIZ + 1];
+    buf[BUFSIZ] = 0;
+
+    FILE *f1 = fopen(pFileName, "rb");
+    if (f1 != NULL) {
+        int readStr = 0;
+        do {
+            memset(buf, 0, BUFSIZ);
+            readStr = ReadLine(f1, buf, BUFSIZ);
+            if (strlen(buf) > 0) {
+                ret = true;
+                outFile.append(buf);
+                outFile.append("\n");
+            }
+        } while (readStr > 0);
+        fclose(f1);
     }
-    else {
-        OGLDEV_FILE_ERROR(pFileName);
-    }
-    
+
     return ret;
 }
 

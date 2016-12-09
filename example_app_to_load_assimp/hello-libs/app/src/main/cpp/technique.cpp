@@ -23,6 +23,10 @@
 #include "ogldev_util.h"
 #include "technique.h"
 
+#include <android/log.h>
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+
 Technique::Technique()
 {
     m_shaderProg = 0;
@@ -53,6 +57,9 @@ bool Technique::Init()
 
     if (m_shaderProg == 0) {
         fprintf(stderr, "Error creating shader program\n");
+        int err = GL_NO_ERROR;
+        err = glGetError();
+        // LOGI("err = %d\n", err);
         return false;
     }
 
@@ -93,6 +100,7 @@ bool Technique::AddShader(GLenum ShaderType, const char* pFilename)
         GLchar InfoLog[1024];
         glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
         fprintf(stderr, "Error compiling '%s': '%s'\n", pFilename, InfoLog);
+        LOGI("Error compiling '%s': '%s'\n", pFilename, InfoLog);
         return false;
     }
 
