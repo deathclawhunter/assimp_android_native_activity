@@ -32,7 +32,7 @@ using namespace std;
 #define WINDOW_WIDTH  1280  
 #define WINDOW_HEIGHT 1024
 
-#define HELLOWORLD 1
+#define HELLOWORLD 0
 #define LOG_TAG "3D_TEST"
 
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
@@ -79,8 +79,8 @@ public:
         m_directionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
 
         m_persProjInfo.FOV = 60.0f;
-        m_persProjInfo.Height = WINDOW_HEIGHT;
-        m_persProjInfo.Width = WINDOW_WIDTH;
+        m_persProjInfo.Height = w;
+        m_persProjInfo.Width = h;
         m_persProjInfo.zNear = 1.0f;
         m_persProjInfo.zFar = 100.0f;  
         
@@ -95,15 +95,11 @@ public:
 
     bool Init()
     {
-        if (initialized) {
-            return true;
-        }
-
         Vector3f Pos(0.0f, 3.0f, -1.0f);
         Vector3f Target(0.0f, 0.0f, 1.0f);
         Vector3f Up(0.0, 1.0f, 0.0f);
 
-        m_pGameCamera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT, Pos, Target, Up);
+        m_pGameCamera = new Camera(w, h, Pos, Target, Up);
       
         m_pEffect = new SkinningTechnique();
 
@@ -132,7 +128,6 @@ public:
             return false;
         } */
 #endif
-        initialized = true;
         return true;
     }
 
@@ -147,16 +142,19 @@ public:
     // virtual void RenderSceneCB()
     void RenderSceneCB()
     {
-
-        if (!Init()) {
-            return;
-        }
-
         CalcFPS();
         
         m_pGameCamera->OnRender();
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        static float grey;
+        grey += 0.01f;
+        if (grey > 1.0f) {
+            grey = 0.0f;
+        }
+        glClearColor(grey, grey, grey, 1.0f);
+        checkGlError("glClearColor");
+        glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        checkGlError("glClear");
 
         m_pEffect->Enable();
         
@@ -222,27 +220,13 @@ private:
 
 Tutorial38* pApp = NULL;
 
-void startPlay(struct android_app* app) {
+void draw_app(struct android_app* app) {
 
-    extract_assets(app);
-
-    if (pApp == NULL) {
-        pApp = new Tutorial38();
-    }
-
-    LOGI("in android_main: tutorial38: 4\n");
-
-    if (!pApp->Init()) {
-        return;
-    }
-
-    LOGI("in android_main: tutorial38: 5\n");
+    LOGI("in draw_app: enter\n");
 
     pApp->Run();
 
-    LOGI("in android_main: tutorial38: 6\n");
-
-    delete pApp;
+    LOGI("in draw_app: leave\n");
 }
 
 static bool addShader(GLuint prog, GLenum ShaderType, const char* pFilename)
@@ -287,7 +271,6 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char* pFilename)
 GLuint m_Buffers[2];
 
 static void CreateVertexBuffer() {
-#if (HELLOWORLD)
     Vector3f Vertices[4];
     Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
     Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
@@ -309,8 +292,6 @@ static void CreateVertexBuffer() {
     glGenBuffers(1, &m_Buffers[1]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
-#else
-#endif
 }
 
 static void initShaders() {
@@ -319,11 +300,11 @@ static void initShaders() {
 
     GLuint prog = glCreateProgram();
 
-    if (!addShader(prog, GL_VERTEX_SHADER, "skinning.vs")) {
+    if (!addShader(prog, GL_VERTEX_SHADER, "skinning2.vs")) {
         return;
     }
 
-    if (!addShader(prog, GL_FRAGMENT_SHADER, "skinning.fs")) {
+    if (!addShader(prog, GL_FRAGMENT_SHADER, "skinning2.fs")) {
         return;
     }
 
@@ -349,12 +330,20 @@ static void initShaders() {
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
          gvPositionHandle);
 
-    //  glUseProgram(prog);
-
     gProgram = prog;
 }
 
+void init() {
+    if (pApp == NULL) {
+        pApp = new Tutorial38();
+    }
 
+    LOGI("in init:\n");
+
+    if (!pApp->Init()) {
+        return;
+    }
+}
 
 /* Helloworld for buffer rendering */
 void helloWorld(struct android_app* app) {
@@ -546,25 +535,22 @@ void draw_frame(struct engine* engine) {
             LOGI("draw_frame: err = 0x%x\n", err);
         } else {
             LOGI("draw_frame: got prog = 0x%x in fg_main_android\n", prog);
-            // startPlay(engine->app);
-            // startPlay2(engine->app);
-            // eglSwapBuffers(engine->display, engine->surface);
-
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+#if HELLOWORLD
             CreateVertexBuffer();
             initShaders();
-            // setupGraphics(w, h);
+#else
+            init();
+#endif
 
             initialized = true;
         }
     } else {
-        //if (pApp != NULL) {
-        //    pApp->RenderSceneCB();
-        //}
-
 #if HELLOWORLD
-            helloWorld(engine->app);
+        helloWorld(engine->app);
 #else
+        draw_app(engine->app);
 #endif
         eglSwapBuffers(engine->display, engine->surface);
     }

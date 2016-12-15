@@ -68,7 +68,7 @@ private:
     
     struct VertexBoneData
     {        
-        uint IDs[NUM_BONES_PER_VEREX];
+        float IDs[NUM_BONES_PER_VEREX];
         float Weights[NUM_BONES_PER_VEREX];
 
         VertexBoneData()
@@ -141,8 +141,16 @@ enum VB_TYPES {
     vector<MeshEntry> m_Entries;
     vector<Texture*> m_Textures;
 
+    struct cmp_str
+    {
+        bool operator()(char const *a, char const *b)
+        {
+            return strcmp(a, b) < 0;
+        }
+    };
+
     // Add by Davis : it seems std::map does not work for STL string on Android, char* will do the work.
-    map<char*,uint> m_BoneMapping; // maps a bone name to its index
+    map<char*,uint,cmp_str> m_BoneMapping; // maps a bone name to its index
     uint m_NumBones;
     vector<BoneInfo> m_BoneInfo;
     Matrix4f m_GlobalInverseTransform;

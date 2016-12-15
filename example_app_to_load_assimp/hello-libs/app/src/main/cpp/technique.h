@@ -23,6 +23,15 @@
 // #include <GL/glew.h>
 #include <GLES/gl.h>
 
+#define POSITION_LOCATION    0
+#define TEX_COORD_LOCATION   1
+#define NORMAL_LOCATION      2
+#define BONE_ID_LOCATION     3
+#define BONE_WEIGHT_LOCATION 4
+#define MESH_LOCATION 5 // Add by Davis
+#define TEST_VB_LOCATION 6 // Add by Davis
+#define TEST_INDEX_LOCATION 7 // Add by Davis
+
 class Technique
 {
 public:
