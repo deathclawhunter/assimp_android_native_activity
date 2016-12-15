@@ -1,5 +1,53 @@
 This is a backup for assimp port to Android and demo app that can call assimp from native activity. It proves the OpenGL implmentation on Android + assimp
 
+Notes
+===========
+std::string
+----------------
+This class seems does not work well on Android. If we use 'string a = "bb";', the class will contain malformed characters rather than "bb". It results vary problems in the code. I have to split it into: 'string a; a.append("bb");'.
+
+STL map
+----------------
+The STL map created a lot of problems. It seems it does not work with std::string well. For some reason it keeps crashing when use std::string as key. Here is how I tested the STL map, which fail:
+
+std::map<string, int> myMap;
+myMap.clear();
+myMap["AAAAAA"] = 12;
+myMap["BBBBBB"] = 222;
+myMap["CCCCCC"] = 121;
+    
+The first call will crash immediately since the problem with std::sting. If we change it into:
+
+string a;
+a.append("AAAAAA");
+myMap[a] = 12;
+sting b;
+b.append("BBBBBB");
+myMap[b] = 222;
+sting c;
+c.append("CCCCCC");
+myMap[c] = 121;
+
+It will crash when 'myMap[b] = 222;' gets called. Tested in vary solutions, eventually it turns out not crashing, after I change the 'string' into 'char*', giving up using string in STL map class.
+
+But another problem is that the template map does not support comparison for char*, so I have to add a comparitor in order to make it work, otherwise find() call will always return null.
+
+Final solution:
+
+struct cmp_str
+{
+    bool operator()(char const *a, char const *b)
+    {
+        return strcmp(a, b) < 0;
+    }
+};
+map<char*,uint,cmp_str> m_BoneMapping; // maps a bone name to its index
+
+
+
+Compile
+===========
+
 To compile assimp, we need download CMake 3.7.0-rc3 on Mac OSX 10.11.
 
 Some configurations may matter:
