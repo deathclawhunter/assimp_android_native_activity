@@ -20,12 +20,16 @@
 
 #include "ogldev_skinned_mesh.h"
 #include "gl3stub.h"
+#include <string>
 
 #define POSITION_LOCATION    0
 #define TEX_COORD_LOCATION   1
 #define NORMAL_LOCATION      2
 #define BONE_ID_LOCATION     3
 #define BONE_WEIGHT_LOCATION 4
+#define MESH_LOCATION 5 // Add by Davis
+#define TEST_VB_LOCATION 6 // Add by Davis
+#define TEST_INDEX_LOCATION 7 // Add by Davis
 
 void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
 {
@@ -43,7 +47,8 @@ void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
 
 SkinnedMesh::SkinnedMesh()
 {
-    m_VAO = 0;
+    // Commet by Davis
+    // m_VAO = 0;
     ZERO_MEM(m_Buffers);
     m_NumBones = 0;
     m_pScene = NULL;
@@ -65,11 +70,12 @@ void SkinnedMesh::Clear()
     if (m_Buffers[0] != 0) {
         glDeleteBuffers(ARRAY_SIZE_IN_ELEMENTS(m_Buffers), m_Buffers);
     }
-       
-    if (m_VAO != 0) {
+
+    // Commet by Davis
+    /* if (m_VAO != 0) {
         glDeleteVertexArrays(1, &m_VAO);
         m_VAO = 0;
-    }
+    } */
 }
 
 
@@ -79,9 +85,10 @@ bool SkinnedMesh::LoadMesh(const string& Filename)
     Clear();
  
     // Create the VAO
-    glGenVertexArrays(1, &m_VAO);   
-    glBindVertexArray(m_VAO);
-    
+    // Add by Davis glGenVertexArrays() not support
+    // glGenVertexArrays(1, &m_VAO);
+    // glBindVertexArray(m_VAO);
+
     // Create the buffers for the vertices attributes
     glGenBuffers(ARRAY_SIZE_IN_ELEMENTS(m_Buffers), m_Buffers);
 
@@ -99,7 +106,8 @@ bool SkinnedMesh::LoadMesh(const string& Filename)
     }
 
     // Make sure the VAO is not changed from the outside
-    glBindVertexArray(0);	
+    // Comment by Davis
+    // glBindVertexArray(0);
 
     return Ret;
 }
@@ -150,7 +158,7 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
     // Generate and populate the buffers with vertex attributes and the indices
   	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[POS_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Positions[0]) * Positions.size(), &Positions[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(POSITION_LOCATION);
+    // glEnableVertexAttribArray(POSITION_LOCATION);
     glVertexAttribPointer(POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);    
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[TEXCOORD_VB]);
@@ -166,7 +174,8 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
    	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[BONE_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Bones[0]) * Bones.size(), &Bones[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(BONE_ID_LOCATION);
-    glVertexAttribIPointer(BONE_ID_LOCATION, 4, GL_INT, sizeof(VertexBoneData), (const GLvoid*)0);
+    // glVertexAttribIPointer(BONE_ID_LOCATION, 4, GL_INT, sizeof(VertexBoneData), (const GLvoid*)0);
+    glVertexAttribPointer(BONE_ID_LOCATION, 4, GL_INT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)0);
     glEnableVertexAttribArray(BONE_WEIGHT_LOCATION);    
     glVertexAttribPointer(BONE_WEIGHT_LOCATION, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
     
@@ -213,17 +222,39 @@ void SkinnedMesh::InitMesh(uint MeshIndex,
 
 void SkinnedMesh::LoadBones(uint MeshIndex, const aiMesh* pMesh, vector<VertexBoneData>& Bones)
 {
-    for (uint i = 0 ; i < pMesh->mNumBones ; i++) {                
-        uint BoneIndex = 0;        
-        string BoneName(pMesh->mBones[i]->mName.data);
+    /* std::map<char *, int> myMap;
+    myMap.clear();
+    myMap["AAAAAA"] = 12;
+    // myMap.insert(std::pair<string, int>(stra, 12));
+    myMap["BBBBBB"] = 222;
+    //  myMap.insert(std::pair<string, int>(strb, 222));
+    myMap["CCCCCC"] = 121; */
+
+
+    // m_BoneMapping.clear();
+
+    for (uint i = 0 ; i < pMesh->mNumBones ; i++) {
+
+        // m_BoneMapping["BBBBB"] = 12;
+
+        uint BoneIndex = 0;
+        // Add by Davis : it seems std::map does not work for STL string on Android, char* will do the work.
+        char *BoneName = pMesh->mBones[i]->mName.data;
+
+        // m_BoneMapping["CCCCCC"] = 12;
         
-        if (m_BoneMapping.find(BoneName) == m_BoneMapping.end()) {
+        if (m_BoneMapping.empty() || m_BoneMapping.find(BoneName) == m_BoneMapping.end()) {
+
             // Allocate an index for a new bone
             BoneIndex = m_NumBones;
             m_NumBones++;            
 	        BoneInfo bi;			
 			m_BoneInfo.push_back(bi);
-            m_BoneInfo[BoneIndex].BoneOffset = pMesh->mBones[i]->mOffsetMatrix;            
+            m_BoneInfo[BoneIndex].BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
+
+            // m_BoneMapping["DDDDDD"] = 12;
+
+
             m_BoneMapping[BoneName] = BoneIndex;
         }
         else {
@@ -267,15 +298,29 @@ bool SkinnedMesh::InitMaterials(const aiScene* pScene, const string& Filename)
             aiString Path;
 
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
-                string p(Path.data);
+                // Add by Davis: c++ string constuctor problem
+                string p;
+                p.append(Path.data);
+                // string p(Path.data);
                 
                 if (p.substr(0, 2) == ".\\") {                    
                     p = p.substr(2, p.size() - 2);
                 }
-                               
-                string FullPath = Dir + "/" + p;
+
+                // Add by Davis: c++ string constuctor problem
+                string FullPath;
+                // FullPath.append(Dir);
+                // FullPath.append("/");
+                FullPath.append(p);
+
+                /* const char *t = FullPath.c_str();
+                FILE *fp = fopen(t, "rb");
+                if (fp != NULL) {
+                    fclose(fp);
+                } */
                     
-                m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath.c_str());
+                // m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath.c_str());
+                m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath);
 
                 if (!m_Textures[i]->Load()) {
                     printf("Error loading texture '%s'\n", FullPath.c_str());
@@ -296,9 +341,15 @@ bool SkinnedMesh::InitMaterials(const aiScene* pScene, const string& Filename)
 
 void SkinnedMesh::Render()
 {
-    glBindVertexArray(m_VAO);
-    
-    for (uint i = 0 ; i < m_Entries.size() ; i++) {
+    // Commet by Davis
+    // glBindVertexArray(m_VAO);
+
+    // glEnableVertexAttribArray(POS_VB);
+    // glEnableVertexAttribArray(INDEX_BUFFER);
+    // glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[POS_VB]);
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
+
+    for (uint i = 0 ; i < m_Entries.size(); i++) {
         const uint MaterialIndex = m_Entries[i].MaterialIndex;
 
         assert(MaterialIndex < m_Textures.size());
@@ -307,15 +358,21 @@ void SkinnedMesh::Render()
             m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
         }
 
-		glDrawElementsBaseVertex(GL_TRIANGLES, 
+        // TODO: implement
+		/* glDrawElementsBaseVertex(GL_TRIANGLES,
                                  m_Entries[i].NumIndices, 
                                  GL_UNSIGNED_INT, 
-                                 (void*)(sizeof(uint) * m_Entries[i].BaseIndex), 
-                                 m_Entries[i].BaseVertex);
+                                 ),
+                                 m_Entries[i].BaseVertex); */
+
+        /* glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
+                       (void*)(sizeof(uint) * m_Entries[i].BaseIndex)); */
     }
 
     // Make sure the VAO is not changed from the outside    
-    glBindVertexArray(0);
+    // glBindVertexArray(0);
+    // glDisableVertexAttribArray(INDEX_BUFFER);
+    // glDisableVertexAttribArray(POS_VB);
 }
 
 
@@ -428,7 +485,7 @@ void SkinnedMesh::CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, 
 
 void SkinnedMesh::ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, const Matrix4f& ParentTransform)
 {    
-    string NodeName(pNode->mName.data);
+    char *NodeName = (char *) pNode->mName.data;
     
     const aiAnimation* pAnimation = m_pScene->mAnimations[0];
         

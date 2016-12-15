@@ -75,7 +75,11 @@ bool ReadFile(const char* pFileName, string& outFile) {
         do {
             memset(buf, 0, BUFSIZ);
             readStr = ReadLine(f1, buf, BUFSIZ);
-            if (strlen(buf) > 0) {
+            int len = strlen(buf);
+            if (len > 0) {
+                if (len >= 2 && buf[0] == '/' && buf[1] == '/') {
+                    continue;
+                }
                 ret = true;
                 outFile.append(buf);
                 outFile.append("\n");

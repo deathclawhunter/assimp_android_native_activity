@@ -1,23 +1,3 @@
-/*
-
-	Copyright 2011 Etay Meiri
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    Tutorial 38 - Skinning
-*/
-
 #include <math.h>
 // #include <GL/glew.h>
 #include <GLES/gl.h>
@@ -38,6 +18,7 @@
 #include "skinning_technique.h"
 #include "ogldev_glut_backend.h"
 #include "ogldev_skinned_mesh.h"
+#include "gl3stub.h"
 
 #include <EGL/egl.h>
 #include <GLES/gl.h>
@@ -51,14 +32,38 @@ using namespace std;
 #define WINDOW_WIDTH  1280  
 #define WINDOW_HEIGHT 1024
 
+#define HELLOWORLD 1
+#define LOG_TAG "3D_TEST"
+
 #define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
 #define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 extern "C" {
     void extract_assets(struct android_app* app);
 }
 
 bool initialized = false;
+
+EGLint w, h;
+
+GLuint pointHandler = 0;
+
+GLuint gProgram;
+GLuint gvPositionHandle;
+
+
+static void printGLString(const char *name, GLenum s) {
+    const char *v = (const char *) glGetString(s);
+    LOGI("GL %s = %s\n", name, v);
+}
+
+static void checkGlError(const char* op) {
+    for (GLint error = glGetError(); error; error
+                                                    = glGetError()) {
+        LOGI("after %s() glError (0x%x)\n", op, error);
+    }
+}
 
 class Tutorial38 : public ICallbacks, public OgldevApp
 {
@@ -90,6 +95,10 @@ public:
 
     bool Init()
     {
+        if (initialized) {
+            return true;
+        }
+
         Vector3f Pos(0.0f, 3.0f, -1.0f);
         Vector3f Target(0.0f, 0.0f, 1.0f);
         Vector3f Up(0.0, 1.0f, 0.0f);
@@ -105,12 +114,15 @@ public:
 
         m_pEffect->Enable();
 
+        std::string str;
+        str.append("boblampclean.md5mesh");
+
         m_pEffect->SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
         m_pEffect->SetDirectionalLight(m_directionalLight);
         m_pEffect->SetMatSpecularIntensity(0.0f);
         m_pEffect->SetMatSpecularPower(0);
 
-        if (!m_mesh.LoadMesh("boblampclean.md5mesh")) {
+        if (!m_mesh.LoadMesh(str)) {
             printf("Mesh load failed\n");
             return false;
         }
@@ -126,11 +138,14 @@ public:
 
     void Run()
     {
-        GLUTBackendRun(this);
+        // GLUTBackendRun(this);
+
+        RenderSceneCB();
     }
     
 
-    virtual void RenderSceneCB()
+    // virtual void RenderSceneCB()
+    void RenderSceneCB()
     {
 
         if (!Init()) {
@@ -172,7 +187,7 @@ public:
                               
         RenderFPS();
         
-        glutSwapBuffers();
+        // glutSwapBuffers();
     }
 
 
@@ -205,12 +220,15 @@ private:
     PersProjInfo m_persProjInfo;
 };
 
+Tutorial38* pApp = NULL;
 
 void startPlay(struct android_app* app) {
 
     extract_assets(app);
 
-    Tutorial38* pApp = new Tutorial38();
+    if (pApp == NULL) {
+        pApp = new Tutorial38();
+    }
 
     LOGI("in android_main: tutorial38: 4\n");
 
@@ -225,6 +243,141 @@ void startPlay(struct android_app* app) {
     LOGI("in android_main: tutorial38: 6\n");
 
     delete pApp;
+}
+
+static bool addShader(GLuint prog, GLenum ShaderType, const char* pFilename)
+{
+    string s;
+
+    if (!ReadFile(pFilename, s)) {
+        return false;
+    }
+
+    GLuint ShaderObj = glCreateShader(ShaderType);
+
+    if (ShaderObj == 0) {
+        fprintf(stderr, "Error creating shader type %d\n", ShaderType);
+        return false;
+    }
+
+    const GLchar* p[1];
+    p[0] = s.c_str();
+    GLint Lengths[1] = { (GLint)s.size() };
+
+    glShaderSource(ShaderObj, 1, p, Lengths);
+
+    glCompileShader(ShaderObj);
+
+    GLint success;
+    glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
+
+    if (!success) {
+        GLchar InfoLog[1024];
+        glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
+        fprintf(stderr, "Error compiling '%s': '%s'\n", pFilename, InfoLog);
+        LOGI("Error compiling '%s': '%s'\n", pFilename, InfoLog);
+        return false;
+    }
+
+    glAttachShader(prog, ShaderObj);
+
+    return true;
+}
+
+GLuint m_Buffers[2];
+
+static void CreateVertexBuffer() {
+#if (HELLOWORLD)
+    Vector3f Vertices[4];
+    Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
+    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
+    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
+    Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f);
+
+    GLubyte Indices[] = {
+            0, 1, 3
+    };
+
+    int a = sizeof(Vertices);
+
+    printf("%d", a);
+
+    glGenBuffers(1, &m_Buffers[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &m_Buffers[1]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+#else
+#endif
+}
+
+static void initShaders() {
+    GLint Success = 0;
+    GLchar ErrorLog[1024] = { 0 };
+
+    GLuint prog = glCreateProgram();
+
+    if (!addShader(prog, GL_VERTEX_SHADER, "skinning.vs")) {
+        return;
+    }
+
+    if (!addShader(prog, GL_FRAGMENT_SHADER, "skinning.fs")) {
+        return;
+    }
+
+    glLinkProgram(prog);
+
+    glGetProgramiv(prog, GL_LINK_STATUS, &Success);
+    if (Success == 0) {
+        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
+        fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
+        return;
+    }
+
+    glValidateProgram(prog);
+    glGetProgramiv(prog, GL_VALIDATE_STATUS, &Success);
+    if (!Success) {
+        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
+        fprintf(stderr, "Invalid shader program: '%s'\n", ErrorLog);
+        return;
+    }
+
+    gvPositionHandle = glGetAttribLocation(prog, "Position");
+    checkGlError("glGetAttribLocation");
+    LOGI("glGetAttribLocation(\"Position\") = %d\n",
+         gvPositionHandle);
+
+    //  glUseProgram(prog);
+
+    gProgram = prog;
+}
+
+
+
+/* Helloworld for buffer rendering */
+void helloWorld(struct android_app* app) {
+
+    static float grey;
+    grey += 0.01f;
+    if (grey > 1.0f) {
+        grey = 0.0f;
+    }
+    glClearColor(grey, grey, grey, 1.0f);
+    checkGlError("glClearColor");
+    glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    checkGlError("glClear");
+
+    glUseProgram(gProgram);
+    checkGlError("glUseProgram");
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
+    glVertexAttribPointer(gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(gvPositionHandle);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, 0);
 }
 
 
@@ -267,10 +420,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-/// From helloworld
-
 #include <cimport.h>
-#include <GLES2/gl2.h>
 
 struct engine {
     struct android_app* app;
@@ -308,7 +458,7 @@ int init_display(struct engine* engine) {
                     EGL_NONE
             };
 
-    EGLint w, h, dummy, format;
+    EGLint dummy, format;
     EGLint numConfigs;
     EGLConfig config;
     EGLSurface surface;
@@ -378,17 +528,17 @@ void draw_frame(struct engine* engine) {
         return;
     }
 
-    glClearColor(255, 0, 0, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    eglSwapBuffers(engine->display, engine->surface);
-
     /* if (!initializedGlut) {
         _android_main(engine->app);
         initializedGlut = true;
     } */
 
+    // glClearColor(255, 1, 1, 1);
+    // glClear(GL_COLOR_BUFFER_BIT);
+
     // hack to test if opengl is ready for use
     if (!initialized) {
+
         int prog = glCreateProgram();
         if (prog == 0) {
             int err = GL_NO_ERROR;
@@ -396,9 +546,27 @@ void draw_frame(struct engine* engine) {
             LOGI("draw_frame: err = 0x%x\n", err);
         } else {
             LOGI("draw_frame: got prog = 0x%x in fg_main_android\n", prog);
-            startPlay(engine->app);
+            // startPlay(engine->app);
+            // startPlay2(engine->app);
+            // eglSwapBuffers(engine->display, engine->surface);
+
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            CreateVertexBuffer();
+            initShaders();
+            // setupGraphics(w, h);
+
             initialized = true;
         }
+    } else {
+        //if (pApp != NULL) {
+        //    pApp->RenderSceneCB();
+        //}
+
+#if HELLOWORLD
+            helloWorld(engine->app);
+#else
+#endif
+        eglSwapBuffers(engine->display, engine->surface);
     }
 }
 
@@ -479,6 +647,8 @@ void android_main(struct android_app* state) {
     state->onAppCmd = hello_handle_cmd;
     state->onInputEvent = hello_handle_input;
     engine.app = state;
+
+    extract_assets(state);
 
     // Read all pending events.
     while (1) {

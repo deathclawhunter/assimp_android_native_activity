@@ -36,6 +36,9 @@ add_library(lib_magickwand STATIC IMPORTED)
 set_target_properties(lib_magickwand PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/imagemagick/lib/${ANDROID_ABI}/libMagickWand.a)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -v")
+set( CMAKE_VERBOSE_MAKEFILE on )
+
 # add_library(lib_freeglut STATIC IMPORTED)
 # set_target_properties(lib_freeglut PROPERTIES IMPORTED_LOCATION
 #     ${distribution_DIR}/freeglut/lib/${ANDROID_ABI}/libfreeglut-gles.a)
@@ -59,6 +62,20 @@ set_target_properties(lib_stlport PROPERTIES IMPORTED_LOCATION
 
 # build application's shared lib
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
+
+file(GLOB coder_src
+    "coders/*.c"
+)
+
+file(GLOB magickwand_src
+    "magickwand/*.c"
+)
+
+file(GLOB Magick_src
+    "Magick++/*.cpp"
+)
+
 
 add_library(hello-libs SHARED
             # hello-libs.c
@@ -116,13 +133,114 @@ add_library(hello-libs SHARED
             fg_state_egl.c
             fg_structure_egl.c
             fg_window_egl.c
-            xparsegeometry_repl.c )
+            xparsegeometry_repl.c
+            accelerate.c
+            animate.c
+            annotate.c
+            artifact.c
+            attribute.c
+            blob.c
+            cache-view.c
+            distribute-cache.c
+            magic.c
+            quantize.c
+            threshold.c
+            cache.c
+            draw.c
+            magick.c
+            quantum-export.c
+            timer.c
+            channel.c
+            effect.c
+            matrix.c
+            quantum-import.c
+            token.c
+            cipher.c
+            enhance.c
+            memory.c
+            quantum.c
+            transform.c
+            client.c
+            exception.c
+            mime.c
+            random.c
+            type.c
+            coder.c
+            feature.c
+            module.c
+            registry.c
+            utility.c
+            color.c
+            fourier.c
+            monitor.c
+            resample.c
+            version.c
+            colormap.c
+            fx.c
+            montage.c
+            resize.c
+            vision.c
+            colorspace.c
+            gem.c
+            morphology.c
+            resource.c
+            vms.c
+            compare.c
+            geometry.c
+            nt-base.c
+            segment.c
+            widget.c
+            composite.c
+            histogram.c
+            nt-feature.c
+            semaphore.c
+            xml-tree.c
+            compress.c
+            identify.c
+            opencl.c
+            shear.c
+            xwindow.c
+            configure.c
+            image-view.c
+            option.c
+            signature.c
+            constitute.c
+            image.c
+            paint.c
+            splay-tree.c
+            decorate.c
+            layer.c
+            pixel.c
+            static.c
+            delegate.c
+            linked-list.c
+            policy.c
+            statistic.c
+            deprecate.c
+            list.c
+            prepress.c
+            stream.c
+            display.c
+            locale.c
+            profile.c
+            string.c
+            distort.c
+            log.c
+            property.c
+            thread.c
+            ${magickwand_src}
+            ${Magick_src}
+            analyze.c
+            ${coder_src}
+             )
 
 target_include_directories(hello-libs PRIVATE
                            ${distribution_DIR}/gmath/include
                            ${distribution_DIR}/gperf/include
                            ${distribution_DIR}/assimp/include
                            ${distribution_DIR}/imagemagick/include
+                           ${distribution_DIR}/imagemagick/include/coders
+                           ${distribution_DIR}/../app/src/main/cpp
                            ${distribution_DIR}/imagemagick/include/ImageMagick-6
                            ${distribution_DIR}/freeglut/include
                            ${ANDROID_NDK}/sources/android/native_app_glue)
@@ -130,9 +248,6 @@ target_include_directories(hello-libs PRIVATE
 target_link_libraries(hello-libs
                       android
                       lib_assimp
-                      lib_magick
-                      lib_magickcore
-                      lib_magickwand
                       log
                       EGL
                       z

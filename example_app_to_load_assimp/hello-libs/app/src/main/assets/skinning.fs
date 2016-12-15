@@ -1,11 +1,11 @@
-#version 330
+precision highp float;
 
 const int MAX_POINT_LIGHTS = 2;
 const int MAX_SPOT_LIGHTS = 2;
 
-in vec2 TexCoord0;
-in vec3 Normal0;                                                                   
-in vec3 WorldPos0;                                                                 
+varying vec2 TexCoord0;
+varying vec3 Normal0;
+varying vec3 WorldPos0;
 
 struct VSOutput
 {
@@ -114,26 +114,25 @@ vec4 CalcSpotLight(SpotLight l, VSOutput In)
     else {                                                                                  
         return vec4(0,0,0,0);                                                               
     }                                                                                       
-}                                                                                           
-                            
-out vec4 FragColor;
+}
                                                                 
 void main()
 {                                    
-    VSOutput In;
-    In.TexCoord = TexCoord0;
-    In.Normal   = normalize(Normal0);
-    In.WorldPos = WorldPos0;
+//    VSOutput In;
+//    In.TexCoord = TexCoord0;
+//    In.Normal   = normalize(Normal0);
+//    In.WorldPos = WorldPos0;
   
-    vec4 TotalLight = CalcDirectionalLight(In);                                         
+//    vec4 TotalLight = CalcDirectionalLight(In);                                         
                                                                                             
-    for (int i = 0 ; i < gNumPointLights ; i++) {                                           
-        TotalLight += CalcPointLight(gPointLights[i], In);                              
-    }                                                                                       
+//    for (int i = 0 ; i < gNumPointLights ; i++) {                                           
+//        TotalLight += CalcPointLight(gPointLights[i], In);                              
+//    }                                                                                       
                                                                                             
-    for (int i = 0 ; i < gNumSpotLights ; i++) {                                            
-        TotalLight += CalcSpotLight(gSpotLights[i], In);                                
-    }                                                                                       
+//    for (int i = 0 ; i < gNumSpotLights ; i++) {                                            
+//        TotalLight += CalcSpotLight(gSpotLights[i], In);                                
+//    }                                                                                       
                                                                                             
-    FragColor = texture(gColorMap, In.TexCoord.xy) * TotalLight;     
+//    gl_FragColor = texture(gColorMap, In.TexCoord.xy) * TotalLight;
+    gl_FragColor = vec4(.5, 1.0, .5, 1.0);
 }

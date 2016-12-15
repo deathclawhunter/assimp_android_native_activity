@@ -91,6 +91,29 @@ bool Technique::AddShader(GLenum ShaderType, const char* pFilename)
 
     glShaderSource(ShaderObj, 1, p, Lengths);
 
+    // Add by Davis - port to GL es 2.0
+    // void glBindAttribLocation(GLuint program​, GLuint index​, const GLchar *name​);
+    // TODO: need to modulize the code a little bit here
+    /* skinning.vs
+        # layout (location = 0) in vec3 Position;
+        attribute vec3 Position
+        # layout (location = 1) in vec2 TexCoord;
+        attribute vec2 TexCoord
+        # layout (location = 2) in vec3 Normal;
+        attribute vec3 Normal;
+        # layout (location = 3) in ivec4 BoneIDs;
+        attribute ivec4 BoneIDs;
+        # layout (location = 4) in vec4 Weights;
+        attribute vec4 Weights;
+     */
+    if (ShaderType == GL_VERTEX_SHADER) {
+        glBindAttribLocation(m_shaderProg, 0, "Position");
+        glBindAttribLocation(m_shaderProg, 1, "TexCoord");
+        glBindAttribLocation(m_shaderProg, 2, "Normal");
+        glBindAttribLocation(m_shaderProg, 4, "BoneIDs");
+        glBindAttribLocation(m_shaderProg, 5, "Weights");
+    }
+
     glCompileShader(ShaderObj);
 
     GLint success;
@@ -134,14 +157,22 @@ bool Technique::Finalize()
      //   return false;
     }
 
+    int err = glGetError();
+
     // Delete the intermediate shader objects that have been added to the program
     for (ShaderObjList::iterator it = m_shaderObjList.begin() ; it != m_shaderObjList.end() ; it++) {
         glDeleteShader(*it);
     }
 
+    err = glGetError();
+
     m_shaderObjList.clear();
 
-    return GLCheckError();
+    err = glGetError();
+
+    // Add by Davis : ignore checking error
+    // return GLCheckError();
+    return true;
 }
 
 

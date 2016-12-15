@@ -45,7 +45,7 @@ protected:
     
     GLint GetProgramParam(GLint param);
     
-    GLuint m_shaderProg;    
+    GLuint m_shaderProg;
     
 private:
 

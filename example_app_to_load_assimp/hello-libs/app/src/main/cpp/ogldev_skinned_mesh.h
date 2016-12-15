@@ -113,10 +113,14 @@ enum VB_TYPES {
     NORMAL_VB,
     TEXCOORD_VB,
     BONE_VB,
+    DUMMP_VB,
+    TEST_VB,
+    TEST_INDEX,
     NUM_VBs            
 };
 
-    GLuint m_VAO;
+    // Commet by Davis
+    // GLuint m_VAO;
     GLuint m_Buffers[NUM_VBs];
 
     struct MeshEntry {
@@ -136,8 +140,9 @@ enum VB_TYPES {
     
     vector<MeshEntry> m_Entries;
     vector<Texture*> m_Textures;
-     
-    map<string,uint> m_BoneMapping; // maps a bone name to its index
+
+    // Add by Davis : it seems std::map does not work for STL string on Android, char* will do the work.
+    map<char*,uint> m_BoneMapping; // maps a bone name to its index
     uint m_NumBones;
     vector<BoneInfo> m_BoneInfo;
     Matrix4f m_GlobalInverseTransform;
