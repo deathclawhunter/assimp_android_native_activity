@@ -3,10 +3,14 @@
 #include <GLES/gl.h>
 #include <GL/freeglut.h>
 #include <string>
+
 #ifndef WIN32
+
 #include <sys/time.h>
 #include <unistd.h>
+
 #endif
+
 #include <sys/types.h>
 
 #include "ogldev_engine_common.h"
@@ -29,7 +33,7 @@
 
 using namespace std;
 
-#define WINDOW_WIDTH  1280  
+#define WINDOW_WIDTH  1280
 #define WINDOW_HEIGHT 1024
 
 #define HELLOWORLD 0
@@ -40,7 +44,7 @@ using namespace std;
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 extern "C" {
-    void extract_assets(struct android_app* app);
+void extract_assets(struct android_app *app);
 }
 
 bool initialized = false;
@@ -58,19 +62,17 @@ static void printGLString(const char *name, GLenum s) {
     LOGI("GL %s = %s\n", name, v);
 }
 
-static void checkGlError(const char* op) {
+static void checkGlError(const char *op) {
     for (GLint error = glGetError(); error; error
                                                     = glGetError()) {
         LOGI("after %s() glError (0x%x)\n", op, error);
     }
 }
 
-class Tutorial38 : public ICallbacks, public OgldevApp
-{
+class Tutorial38 : public ICallbacks, public OgldevApp {
 public:
 
-    Tutorial38() 
-    {
+    Tutorial38() {
         m_pGameCamera = NULL;
         m_pEffect = NULL;
         m_directionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -82,25 +84,23 @@ public:
         m_persProjInfo.Height = w;
         m_persProjInfo.Width = h;
         m_persProjInfo.zNear = 1.0f;
-        m_persProjInfo.zFar = 100.0f;  
-        
-        m_position = Vector3f(0.0f, 0.0f, 6.0f);      
+        m_persProjInfo.zFar = 100.0f;
+
+        m_position = Vector3f(0.0f, 0.0f, 6.0f);
     }
 
-    ~Tutorial38()
-    {
+    ~Tutorial38() {
         SAFE_DELETE(m_pEffect);
         SAFE_DELETE(m_pGameCamera);
-    }    
+    }
 
-    bool Init()
-    {
+    bool Init() {
         Vector3f Pos(0.0f, 3.0f, -1.0f);
         Vector3f Target(0.0f, 0.0f, 1.0f);
         Vector3f Up(0.0, 1.0f, 0.0f);
 
         m_pGameCamera = new Camera(w, h, Pos, Target, Up);
-      
+
         m_pEffect = new SkinningTechnique();
 
         if (!m_pEffect->Init()) {
@@ -122,7 +122,7 @@ public:
             printf("Mesh load failed\n");
             return false;
         }
-        
+
 #ifndef WIN32
         /* if (!m_fontRenderer.InitFontRenderer()) {
             return false;
@@ -131,19 +131,17 @@ public:
         return true;
     }
 
-    void Run()
-    {
+    void Run() {
         // GLUTBackendRun(this);
 
         RenderSceneCB();
     }
-    
+
 
     // virtual void RenderSceneCB()
-    void RenderSceneCB()
-    {
+    void RenderSceneCB() {
         CalcFPS();
-        
+
         m_pGameCamera->OnRender();
 
         static float grey;
@@ -153,84 +151,77 @@ public:
         }
         glClearColor(grey, grey, grey, 1.0f);
         checkGlError("glClearColor");
-        glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         checkGlError("glClear");
 
         m_pEffect->Enable();
-        
+
         vector<Matrix4f> Transforms;
-               
+
         float RunningTime = GetRunningTime();
 
         m_mesh.BoneTransform(RunningTime, Transforms);
-        
-        for (uint i = 0 ; i < Transforms.size() ; i++) {
+
+        for (uint i = 0; i < Transforms.size(); i++) {
             m_pEffect->SetBoneTransform(i, Transforms[i]);
         }
-        
+
         m_pEffect->SetEyeWorldPos(m_pGameCamera->GetPos());
-        
+
         Pipeline p;
         p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
-        p.SetPerspectiveProj(m_persProjInfo);           
-        p.Scale(0.1f, 0.1f, 0.1f);                
-             
+        p.SetPerspectiveProj(m_persProjInfo);
+        p.Scale(0.1f, 0.1f, 0.1f);
+
         Vector3f Pos(m_position);
-        p.WorldPos(Pos);        
-        p.Rotate(270.0f, 180.0f, 0.0f);       
+        p.WorldPos(Pos);
+        p.Rotate(270.0f, 180.0f, 0.0f);
         m_pEffect->SetWVP(p.GetWVPTrans());
-        m_pEffect->SetWorldMatrix(p.GetWorldTrans());            
+        m_pEffect->SetWorldMatrix(p.GetWorldTrans());
 
         m_mesh.Render();
-                              
+
         RenderFPS();
-        
+
         // glutSwapBuffers();
     }
 
 
-	virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State)
-	{
-		switch (OgldevKey) {
-		case OGLDEV_KEY_ESCAPE:
-		case OGLDEV_KEY_q:
-			GLUTBackendLeaveMainLoop();
-			break;
-		default:
-			m_pGameCamera->OnKeyboard(OgldevKey);
-		}
-	}
+    virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State) {
+        switch (OgldevKey) {
+            case OGLDEV_KEY_ESCAPE:
+            case OGLDEV_KEY_q:
+                GLUTBackendLeaveMainLoop();
+                break;
+            default:
+                m_pGameCamera->OnKeyboard(OgldevKey);
+        }
+    }
 
 
-	virtual void PassiveMouseCB(int x, int y)
-	{
-		m_pGameCamera->OnMouse(x, y);
-	}
-    
-    
-private:      
- 
-    SkinningTechnique* m_pEffect;
-    Camera* m_pGameCamera;
+    virtual void PassiveMouseCB(int x, int y) {
+        m_pGameCamera->OnMouse(x, y);
+    }
+
+
+private:
+
+    SkinningTechnique *m_pEffect;
+    Camera *m_pGameCamera;
     DirectionalLight m_directionalLight;
     SkinnedMesh m_mesh;
-    Vector3f m_position;            
+    Vector3f m_position;
     PersProjInfo m_persProjInfo;
 };
 
-Tutorial38* pApp = NULL;
+Tutorial38 *pApp = NULL;
 
-void draw_app(struct android_app* app) {
-
-    LOGI("in draw_app: enter\n");
+void draw_app(struct android_app *app) {
 
     pApp->Run();
-
-    LOGI("in draw_app: leave\n");
 }
 
-static bool addShader(GLuint prog, GLenum ShaderType, const char* pFilename)
-{
+static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     string s;
 
     if (!ReadFile(pFilename, s)) {
@@ -244,9 +235,9 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char* pFilename)
         return false;
     }
 
-    const GLchar* p[1];
+    const GLchar *p[1];
     p[0] = s.c_str();
-    GLint Lengths[1] = { (GLint)s.size() };
+    GLint Lengths[1] = {(GLint) s.size()};
 
     glShaderSource(ShaderObj, 1, p, Lengths);
 
@@ -296,7 +287,7 @@ static void CreateVertexBuffer() {
 
 static void initShaders() {
     GLint Success = 0;
-    GLchar ErrorLog[1024] = { 0 };
+    GLchar ErrorLog[1024] = {0};
 
     GLuint prog = glCreateProgram();
 
@@ -346,7 +337,7 @@ void init() {
 }
 
 /* Helloworld for buffer rendering */
-void helloWorld(struct android_app* app) {
+void helloWorld(struct android_app *app) {
 
     static float grey;
     grey += 0.01f;
@@ -355,7 +346,7 @@ void helloWorld(struct android_app* app) {
     }
     glClearColor(grey, grey, grey, 1.0f);
     checkGlError("glClearColor");
-    glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     checkGlError("glClear");
 
     glUseProgram(gProgram);
@@ -383,11 +374,11 @@ int main(int argc, char **argv) {
     }
 
     LOGI("in android_main: tutorial38: 2\n");
-    
+
     SRANDOM;
 
     // LOGI("in android_main: tutorial38: 3\n");
-    
+
     // Tutorial38* pApp = new Tutorial38();
 
     // LOGI("in android_main: tutorial38: 4\n");
@@ -397,7 +388,7 @@ int main(int argc, char **argv) {
     } */
 
     // LOGI("in android_main: tutorial38: 5\n");
-    
+
     // pApp->Run();
 
     // LOGI("in android_main: tutorial38: 6\n");
@@ -412,7 +403,7 @@ int main(int argc, char **argv) {
 #include <cimport.h>
 
 struct engine {
-    struct android_app* app;
+    struct android_app *app;
 
     EGLDisplay display;
     EGLSurface surface;
@@ -428,7 +419,7 @@ struct engine {
  * Initialize an EGL context for the current display.
  * TODO tidy this up, currently it's mostly Google example code
  */
-int init_display(struct engine* engine) {
+int init_display(struct engine *engine) {
 
     // Setup OpenGL ES 2
     // http://stackoverflow.com/questions/11478957/how-do-i-create-an-opengl-es-2-context-in-a-native-activity
@@ -511,19 +502,11 @@ int init_display(struct engine* engine) {
 /**
  * Just the current frame in the display.
  */
-void draw_frame(struct engine* engine) {
+void draw_frame(struct engine *engine) {
     // No display.
     if (engine->display == NULL) {
         return;
     }
-
-    /* if (!initializedGlut) {
-        _android_main(engine->app);
-        initializedGlut = true;
-    } */
-
-    // glClearColor(255, 1, 1, 1);
-    // glClear(GL_COLOR_BUFFER_BIT);
 
     // hack to test if opengl is ready for use
     if (!initialized) {
@@ -559,7 +542,7 @@ void draw_frame(struct engine* engine) {
 /**
  * Tear down the EGL context currently associated with the display.
  */
-void terminate_display(struct engine* engine) {
+void terminate_display(struct engine *engine) {
     if (engine->display != EGL_NO_DISPLAY) {
         eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (engine->context != EGL_NO_CONTEXT) {
@@ -575,15 +558,110 @@ void terminate_display(struct engine* engine) {
     engine->surface = EGL_NO_SURFACE;
 }
 
+#define KEY_COUNT 10
+int KeyCounter = 0;
+int KeyDirectionFlag = 0;
+#define MAX_STRIKE_TIME 1000 // sec
+long long KeyTimeStamp = 0;
+
+/**
+ * 0: left, 1: right, otherwise n/a
+ */
+int scroll(struct engine *engine, float touchX) {
+
+    // invalidate keys if time passed MAX_STRIKE_TIME
+    if (KeyTimeStamp == 0) {
+        KeyTimeStamp = GetCurrentTimeMillis();
+    } else {
+        long long current = GetCurrentTimeMillis();
+        if (current - KeyTimeStamp >= MAX_STRIKE_TIME) {
+            // reset key buffer
+            KeyCounter = 0;
+            KeyDirectionFlag = 0;
+            KeyTimeStamp= current;
+            return 2;
+        }
+    }
+
+    if (touchX < engine->touchX) {
+        if (KeyDirectionFlag == 0) {
+            KeyCounter++;
+        } else {
+            KeyCounter = 0;
+            KeyDirectionFlag = 0;
+        }
+    } else if (touchX > engine->touchX) {
+
+        if (KeyDirectionFlag == 0) {
+            KeyCounter = 0;
+            KeyDirectionFlag = 1;
+        } else {
+            KeyCounter++;
+        }
+
+        // LOGI("touchX > engine->touchX: KeyCounter = %d, KeyDirectionFlag = %d\n", KeyCounter, KeyDirectionFlag);
+    }
+
+    if (KeyCounter >= KEY_COUNT) {
+        KeyCounter = 0;
+
+        // LOGI("KeyCounter >= KEY_COUNT: KeyDirectionFlag = %d\n", KeyDirectionFlag);
+        if (KeyDirectionFlag == 0) {
+            KeyTimeStamp = GetCurrentTimeMillis();
+            return 0;
+        } else {
+            KeyTimeStamp = GetCurrentTimeMillis();
+            return 1;
+        }
+    }
+
+    return -1;
+}
+
 /**
  * Process the next input event.
  */
 int32_t hello_handle_input(struct android_app *app, AInputEvent *event) {
-    struct engine* engine = (struct engine*)app->userData;
+    struct engine *engine = (struct engine *) app->userData;
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-        engine->touchX = AMotionEvent_getX(event, 0);
-        engine->touchY = AMotionEvent_getY(event, 0);
-        LOGI("x %d\ty %d\n",engine->touchX,engine->touchY);
+
+        int32_t action = AMotionEvent_getAction(event);
+        if (action == AMOTION_EVENT_ACTION_MOVE) {
+            float touchX = AMotionEvent_getX(event, 0);
+            float touchY = AMotionEvent_getY(event, 0);
+
+            int scrollFlag = scroll(engine, touchX);
+            if (scrollFlag == 0) {
+                LOGI("scroll left\n");
+                pApp->KeyboardCB(OGLDEV_KEY_LEFT, OGLDEV_KEY_STATE_PRESS);
+            } else if (scrollFlag == 1) {
+                LOGI("scroll right\n");
+                pApp->KeyboardCB(OGLDEV_KEY_RIGHT, OGLDEV_KEY_STATE_PRESS);
+            }
+
+            engine->touchX = touchX;
+            engine->touchY = touchY;
+
+            // pApp->PassiveMouseCB(touchX, touchY);
+
+            // LOGI("x %d\ty %d\n", engine->touchX, engine->touchY);
+        }
+
+        /* int32_t action = AMotionEvent_getAction(event);
+        if (action == AMOTION_EVENT_ACTION_MOVE) {
+            LOGI("AMOTION_EVENT_ACTION_MOVE\n");
+            LOGI("XOffset: %f\n", AMotionEvent_getXOffset(event));
+        } else if (action == AMOTION_EVENT_ACTION_DOWN) {
+            LOGI("AMOTION_EVENT_ACTION_DOWN");
+        } else if (action == AMOTION_EVENT_ACTION_UP) {
+            LOGI("AMOTION_EVENT_ACTION_UP");
+        } else if (action == AMOTION_EVENT_ACTION_HOVER_MOVE) {
+            LOGI("AMOTION_EVENT_ACTION_HOVER_MOVE");
+        } else if (action == AMOTION_EVENT_ACTION_SCROLL) {
+            LOGI("AMOTION_EVENT_ACTION_SCROLL");
+        } else if (action == AMOTION_EVENT_ACTION_POINTER_DOWN) {
+            LOGI("AMOTION_EVENT_ACTION_POINTER_DOWN");
+        } */
         return 1;
     }
     return 0;
@@ -593,7 +671,7 @@ int32_t hello_handle_input(struct android_app *app, AInputEvent *event) {
  * Process the next main command.
  */
 void hello_handle_cmd(struct android_app *app, int32_t cmd) {
-    struct engine* engine = (struct engine*)app->userData;
+    struct engine *engine = (struct engine *) app->userData;
     switch (cmd) {
         case APP_CMD_SAVE_STATE:
             break;
@@ -617,7 +695,7 @@ void hello_handle_cmd(struct android_app *app, int32_t cmd) {
 /**
  * Main entry point, handles events
  */
-void android_main(struct android_app* state) {
+void android_main(struct android_app *state) {
     app_dummy();
 
     LOGI("in android_main\n");
@@ -640,9 +718,9 @@ void android_main(struct android_app* state) {
     while (1) {
         int ident;
         int events;
-        struct android_poll_source* source;
+        struct android_poll_source *source;
 
-        while ((ident=ALooper_pollAll(0, NULL, &events,(void**)&source)) >= 0) {
+        while ((ident = ALooper_pollAll(0, NULL, &events, (void **) &source)) >= 0) {
 
             // Process this event.
             if (source != NULL) {
