@@ -3,6 +3,15 @@
 #include <string>
 #include "technique.h"
 
+#include <android/log.h>
+#include <android_native_app_glue.h>
+
+#define LOG_TAG "OGLDEV_SKINNED_MESH"
+
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+
 void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
 {
     for (uint i = 0 ; i < ARRAY_SIZE_IN_ELEMENTS(IDs) ; i++) {
@@ -121,6 +130,14 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
     for (uint i = 0 ; i < m_Entries.size() ; i++) {
         const aiMesh* paiMesh = pScene->mMeshes[i];
         InitMesh(i, paiMesh, Positions, Normals, TexCoords, Bones, Indices);
+
+        // This is to fix glDrawElementsBaseVertex() not support issue by
+        // pre adding BaseVertex to Indices values
+        if (i >= 1) {
+            for (int j = m_Entries[i].BaseIndex; j < Indices.size(); j++) {
+                Indices[j] += m_Entries[i].BaseVertex;
+            }
+        }
     }
 
     if (!InitMaterials(pScene, Filename)) {
@@ -323,24 +340,28 @@ void SkinnedMesh::Render()
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
 
+    LOGI("Entry size = %d\n", m_Entries.size());
+
     for (uint i = 0 ; i < m_Entries.size(); i++) {
         const uint MaterialIndex = m_Entries[i].MaterialIndex;
 
         assert(MaterialIndex < m_Textures.size());
-        
+
         if (m_Textures[MaterialIndex]) {
             m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
         }
 
-        // TODO: implement
-		/* glDrawElementsBaseVertex(GL_TRIANGLES,
-                                 m_Entries[i].NumIndices, 
-                                 GL_UNSIGNED_INT, 
-                                 ),
+        // Fix this issue by adding the BaseVertex directly to Indices buffer before binding.
+        /* glDrawElementsBaseVertex(GL_TRIANGLES,
+                                 m_Entries[i].NumIndices,
+                                 GL_UNSIGNED_INT,
+                                 (void*)(sizeof(uint) * m_Entries[i].BaseIndex),
                                  m_Entries[i].BaseVertex); */
 
-        glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
-                       (void*)(sizeof(uint) * m_Entries[i].BaseIndex));
+
+            glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
+                           (void *) (sizeof(uint) * m_Entries[i].BaseIndex));
+
     }
 
     // Make sure the VAO is not changed from the outside    

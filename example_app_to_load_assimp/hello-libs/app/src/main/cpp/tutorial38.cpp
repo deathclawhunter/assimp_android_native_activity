@@ -95,7 +95,7 @@ public:
     }
 
     bool Init() {
-        Vector3f Pos(0.0f, 3.0f, -1.0f);
+        Vector3f Pos(0.0f, 3.0f, -2.0f);
         Vector3f Target(0.0f, 0.0f, 1.0f);
         Vector3f Up(0.0, 1.0f, 0.0f);
 
@@ -149,9 +149,9 @@ public:
         if (grey > 1.0f) {
             grey = 0.0f;
         }
-        glClearColor(grey, grey, grey, 1.0f);
+        // glClearColor(grey, grey, grey, 1.0f);
         checkGlError("glClearColor");
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        // glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         checkGlError("glClear");
 
         m_pEffect->Enable();
@@ -179,9 +179,17 @@ public:
         m_pEffect->SetWVP(p.GetWVPTrans());
         m_pEffect->SetWorldMatrix(p.GetWorldTrans());
 
-        m_mesh.Render();
+        /* glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        glDepthMask(false);
+        glDepthFunc(GL_EQUAL); */
 
+        m_mesh.Render();
         RenderFPS();
+
+        /* glDepthFunc(GL_LESS);
+        glDepthMask(true);
+        glDisable(GL_BLEND); */
 
         // glutSwapBuffers();
     }
@@ -474,6 +482,12 @@ int init_display(struct engine *engine) {
     eglQuerySurface(display, surface, EGL_WIDTH, &w);
     eglQuerySurface(display, surface, EGL_HEIGHT, &h);
 
+    if (w > h) {
+        w = h;
+    } else {
+        h = w;
+    }
+
     engine->display = display;
     engine->context = context;
     engine->surface = surface;
@@ -484,6 +498,9 @@ int init_display(struct engine *engine) {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
     glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
+    glEnable(GL_TEXTURE_2D);
     glViewport(0, 0, w, h);
 
     int prog = glCreateProgram();
@@ -518,7 +535,12 @@ void draw_frame(struct engine *engine) {
             LOGI("draw_frame: err = 0x%x\n", err);
         } else {
             LOGI("draw_frame: got prog = 0x%x in fg_main_android\n", prog);
-            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            static float grey;
+            grey += 0.01f;
+            if (grey > 1.0f) {
+                grey = 0.0f;
+            }
+            glClearColor(grey, grey, grey, 1.0f);
 
 #if HELLOWORLD
             CreateVertexBuffer();
