@@ -5,6 +5,8 @@ TODO
 The head and lantern of the model is not rendered correctly, needs investigation.
 The resource management is not implemented. Animation will not run when launch second time.
 There is a flash between frames.
+The model is stretched.
+The texture seems not proper.
 
 Notes
 ===========
