@@ -1,5 +1,11 @@
 This is a backup for assimp port to Android and demo app that can call assimp from native activity. It proves the OpenGL implmentation on Android + assimp
 
+TODO
+===========
+The head and lantern of the model is not rendered correctly, needs investigation.
+The resource management is not implemented. Animation will not run when launch second time.
+There is a flash between frames.
+
 Notes
 ===========
 std::string
