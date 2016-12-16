@@ -730,7 +730,7 @@ void android_main(struct android_app *state) {
             // Check if we are exiting.
             if (state->destroyRequested != 0) {
                 terminate_display(&engine);
-                return;
+                exit(1); // exit directly
             }
         }
 
