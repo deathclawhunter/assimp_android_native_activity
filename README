@@ -43,7 +43,56 @@ struct cmp_str
 };
 map<char*,uint,cmp_str> m_BoneMapping; // maps a bone name to its index
 
+Shaders
+----------------
+Since this is the first time working on Android shader. It seems a lot difference between regular shader code and Android shader.
 
+First of all, the "#version 330" will not work. The phone I tested is Samsung Galaxy S6, and it does not support 330. I tried to change into "#version 300 es". Even though it compiles, but actually created a lot of problem later when I try to use attributes and other key words. Eventually after study Google example code, I removed the "#version" key word all together.
+
+"layout" key word also not supported. I changed into "attribute". "out" key word will cause problem when compiling without "#version" key word. I changed it into "varying".
+
+"ivec4" also will create compiling problems, I have to change it into "vec4", and change corresponding code to use float instead of integer. Hence, the shader has to cast the float back into integer when using it as array index:
+
+BoneTransform += gBones[int(BoneIDs[1])] * Weights[1];
+
+Also, I changed the FragColor into gl_FragColor and position into gl_Position.
+
+It seems using "precision highp float;" is necessary, otherwise the compiling will fail.
+
+OpenGL API
+----------------
+As expected, not all OpenGL API are supported. The ones not supported:
+
+glGenVertexArrays()
+glBindVertexArray()
+glVertexAttribIPointer()
+glDrawElementsBaseVertex()
+
+I changed the code to use regular buffer rather than vertex array avoiding using glGenVertexArrays().
+Also since the integer ivec4 is not supported in shader, so naturally I have to change glVertexAttribIPointer() into glVertexAttribPointer() to map float instead integer.
+glDrawElementsBaseVertex() can be replaced by glDrawElements(), due to my test. It turns out working just fine.
+
+glDrawElementsBaseVertex(GL_TRIANGLES,
+                         m_Entries[i].NumIndices,
+                         GL_UNSIGNED_INT,
+                         (void*)(sizeof(uint) * m_Entries[i].BaseIndex),
+                         m_Entries[i].BaseVertex);
+
+
+glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
+                       (void*)(sizeof(uint) * m_Entries[i].BaseIndex));
+                       
+FreeGlut
+----------------
+I was able to compile and run FreeGlut on Android, but it does not show anything. It seems the initialization is not working for Android. I have not dig into see why. Instead of using FreeGlut, I just wrote my own initialization which is probably good for a prototype.
+
+Modulize
+----------------
+Originally, I would like to keep it modulized. I compile FreeGlut, ImageMagick++, Assimp separately, but since too many broken pieces in different module need my debugging. I eventually end up put them into one project. This is TODO item, should later figure out modulizing those modules. Hopefully can make FreeGlut work again.
+
+Dynamic Linking
+----------------
+I got a dynamic link problem at very beginning of this project. By search on the Internet, I figured out I have to overwrite the NativeActivity class in Java layer to preload my dependences like: "stlport_shared", "assimp". This seems stupid, but it happened. Also, I should remove the tag 'android:hasCode="false"' in application parameter list, in order to overwrite the NativeActivity class.
 
 Compile
 ===========
