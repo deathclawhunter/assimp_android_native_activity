@@ -5,7 +5,7 @@ android {
     buildToolsVersion = '23.0.2'
 
     defaultConfig {
-        applicationId = 'com.example.hellolibs'
+        applicationId = 'com.example.engine'
         minSdkVersion 13
         targetSdkVersion 23
         versionCode = 1
@@ -31,7 +31,7 @@ android {
     sourceSets {
         main {
             // let gradle pack the shared library into apk
-            jniLibs.srcDirs = ['../distribution/gperf/lib', '../distribution/assimp/lib', '../distribution/system/lib']
+            jniLibs.srcDirs = ['../distribution/assimp/lib', '../distribution/system/lib']
         }
     }
     externalNativeBuild {

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.laurencedawson.native_example"
+    package="com.example.engine"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -17,11 +17,11 @@
         android:label="NativeExample"
         android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <activity
-            android:name="com.example.hellolibs.MainActivity"
+            android:name="com.example.engine.MainActivity"
             android:configChanges="orientation|keyboardHidden" >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="hello-libs" />
+                android:value="engine" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

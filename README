@@ -2,11 +2,21 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-The head and lantern of the model is not rendered correctly, needs investigation.
-The resource management is not implemented. Animation will not run when launch second time.
-There is a flash between frames.
-The model is stretched.
-The texture seems not proper.
+Need to cleanup header files and a few folders
+Need to add blender animation plugin to assimp so that I can load animation from blender or compatible file format
+It seems the lighting system is not working properly.
+Need to check if I can reuse FreeGlut framework
+Need to add gaming control to existing input handler
+Need to add frame rate control
+
+DONE
+===========
+FIXED The directories are messed up due incremental changes to the way I organizing third party libraries.
+FIXED by pre calculate in index buffer. Reference to OpenGL API dev notes. The head and lantern of the model is not rendered correctly, needs investigation.
+Temporaily FIXED by calling exit() when destroying display object. The resource management is not implemented. Animation will not run when launch second time.
+FIXED by remove the clearColor() call There is a flash between frames.
+FIXED by maintain a proper W/H ratio. The model is stretched.
+FIXED by pre calculate in index buffer. Reference to OpenGL API dev notes. The texture seems not proper.
 
 Notes
 ===========
@@ -89,6 +99,9 @@ glDrawElementsBaseVertex(GL_TRIANGLES,
 
 glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
                        (void*)(sizeof(uint) * m_Entries[i].BaseIndex));
+
+The change to glDrawElements() causes problem when draw multiple entries (meshes). That is why the model head and other meshes are not correctly drew on the screen. The fix would be take BaseVertex into account. When I got the Indices values in LoadMesh(), I add the BaseVertex dirctly to Indices values before even binding the array to vertex buffer. In this way, BaseVertex is already taken into account in index buffer, no need for glDrawElementsBaseVertex(). Problem resolved!
+
                        
 FreeGlut
 ----------------
@@ -101,6 +114,15 @@ Originally, I would like to keep it modulized. I compile FreeGlut, ImageMagick++
 Dynamic Linking
 ----------------
 I got a dynamic link problem at very beginning of this project. By search on the Internet, I figured out I have to overwrite the NativeActivity class in Java layer to preload my dependences like: "stlport_shared", "assimp". This seems stupid, but it happened. Also, I should remove the tag 'android:hasCode="false"' in application parameter list, in order to overwrite the NativeActivity class.
+
+Exception support in C++
+----------------
+It seems adding following flags to CMakeLists.txt helps:
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -v")
+set( CMAKE_VERBOSE_MAKEFILE on )
+
+Some of the library code need exception handling.
 
 Compile
 ===========
