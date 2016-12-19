@@ -2,7 +2,6 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-Need to cleanup header files and a few folders
 Need to add blender animation plugin to assimp so that I can load animation from blender or compatible file format
 It seems the lighting system is not working properly.
 Need to check if I can reuse FreeGlut framework
@@ -11,6 +10,7 @@ Need to add frame rate control
 
 DONE
 ===========
+DONE Need to cleanup header files and a few folders
 FIXED The directories are messed up due incremental changes to the way I organizing third party libraries.
 FIXED by pre calculate in index buffer. Reference to OpenGL API dev notes. The head and lantern of the model is not rendered correctly, needs investigation.
 Temporaily FIXED by calling exit() when destroying display object. The resource management is not implemented. Animation will not run when launch second time.
