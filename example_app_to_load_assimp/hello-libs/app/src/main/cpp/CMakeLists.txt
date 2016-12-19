@@ -69,6 +69,7 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/../app/src/main/cpp
                            ${distribution_DIR}/imagemagick/include/ImageMagick-6
                            ${distribution_DIR}/freeglut/include
+                           ${CMAKE_SOURCE_DIR}/app
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 target_link_libraries(engine

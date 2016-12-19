@@ -14,7 +14,7 @@
     <!-- android:hasCode="false" -->
     <application
         android:allowBackup="false"
-        android:label="NativeExample"
+        android:label="EngineExample"
         android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <activity
             android:name="com.example.engine.MainActivity"
