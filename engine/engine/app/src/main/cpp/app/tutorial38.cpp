@@ -95,7 +95,7 @@ public:
     }
 
     bool Init() {
-        Vector3f Pos(0.0f, 3.0f, -2.0f);
+        Vector3f Pos(0.0f, 3.0f, -6.0f);
         Vector3f Target(0.0f, 0.0f, 1.0f);
         Vector3f Up(0.0, 1.0f, 0.0f);
 
@@ -111,7 +111,12 @@ public:
         m_pEffect->Enable();
 
         std::string str;
-        str.append("boblampclean.md5mesh");
+        // str.append("boblampclean.md5mesh");
+        // str.append("marcus.dae");
+        // str.append("ArmyPilot.dae");
+        // str.append("sf2arms.dae");
+        str.append("monkey.dae");
+
 
         m_pEffect->SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
         m_pEffect->SetDirectionalLight(m_directionalLight);
@@ -385,26 +390,6 @@ int main(int argc, char **argv) {
 
     SRANDOM;
 
-    // LOGI("in android_main: tutorial38: 3\n");
-
-    // Tutorial38* pApp = new Tutorial38();
-
-    // LOGI("in android_main: tutorial38: 4\n");
-
-    /* if (!pApp->Init()) {
-        return -1;
-    } */
-
-    // LOGI("in android_main: tutorial38: 5\n");
-
-    // pApp->Run();
-
-    // LOGI("in android_main: tutorial38: 6\n");
-
-    // delete pApp;
-
-    // LOGI("in android_main: tutorial38: 7\n");
-
     return 0;
 }
 
@@ -498,6 +483,7 @@ int init_display(struct engine *engine) {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
     glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
+    // glEnable(GL_DEPTH_TEST);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_TEXTURE_2D);

@@ -288,8 +288,15 @@ bool SkinnedMesh::InitMaterials(const aiScene* pScene, const string& Filename)
 
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
                 // Add by Davis: c++ string constuctor problem
+
+                char *ptr = Path.data;
+                if (strchr(Path.data, '/') != 0) {
+                    ptr = strrchr(Path.data, '/') + 1;
+                } else if (strchr(Path.data, '\\') != 0) {
+                    ptr = strrchr(Path.data, '\\') + 1;
+                }
                 string p;
-                p.append(Path.data);
+                p.append(ptr);
                 // string p(Path.data);
                 
                 if (p.substr(0, 2) == ".\\") {                    

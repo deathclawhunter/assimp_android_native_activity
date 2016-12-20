@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.4.1)
 set(distribution_DIR ${CMAKE_SOURCE_DIR}/../../../../distribution)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -v")
+set(CMAKE_C_FLAGS "-DMAGICKCORE_PNG_DELEGATE=1")
 set( CMAKE_VERBOSE_MAKEFILE on )
 
 add_library(lib_assimp SHARED IMPORTED)
@@ -50,6 +51,9 @@ file(GLOB FreeGlut_src
     "FreeGlut/*.c"
 )
 
+file(GLOB png_src
+    "png/*.c"
+)
 
 add_library(engine SHARED
             ${MagickCore_src}
@@ -60,6 +64,7 @@ add_library(engine SHARED
             ${magickwand_src}
             ${Magick_src}
             ${coder_src}
+            ${png_src}
              )
 
 target_include_directories(engine PRIVATE
@@ -69,6 +74,7 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/../app/src/main/cpp
                            ${distribution_DIR}/imagemagick/include/ImageMagick-6
                            ${distribution_DIR}/freeglut/include
+                           ${distribution_DIR}/png/include
                            ${CMAKE_SOURCE_DIR}/app
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 

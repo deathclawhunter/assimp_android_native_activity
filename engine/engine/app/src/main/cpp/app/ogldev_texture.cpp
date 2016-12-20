@@ -29,14 +29,14 @@ Texture::Texture(GLenum TextureTarget, const std::string& FileName)
 
 bool Texture::Load()
 {
-    //try {
+    try {
         m_image.read(m_fileName);
         m_image.write(&m_blob, "RGBA");
-    //}
-    //catch (Magick::Error& Error) {
-        //std::cout << "Error loading texture '" << m_fileName << "': " << Error.what() << std::endl;
-        //return false;
-    //}
+    }
+    catch (Magick::Error& Error) {
+        std::cout << "Error loading texture '" << m_fileName << "': " << Error.what() << std::endl;
+        return false;
+    }
 
     glGenTextures(1, &m_textureObj);
     glBindTexture(m_textureTarget, m_textureObj);
