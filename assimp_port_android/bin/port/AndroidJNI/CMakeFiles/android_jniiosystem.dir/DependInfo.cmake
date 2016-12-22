@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Volumes/Elements/proj/3D/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp" "/Volumes/Elements/proj/3D/bin/port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp" "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -25,16 +25,16 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/Volumes/Elements/Library/Android/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include"
   "/Volumes/Elements/Library/Android/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include"
   "/Volumes/Elements/Library/Android/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward"
-  "/Volumes/Elements/proj/3D/assimp/."
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/."
   "."
   "include"
-  "/Volumes/Elements/proj/3D/assimp/include"
-  "/Volumes/Elements/proj/3D/assimp/code/../contrib/rapidjson/include"
-  "/Volumes/Elements/proj/3D/assimp/code/../contrib"
-  "/Volumes/Elements/proj/3D/assimp/code/../contrib/unzip"
-  "/Volumes/Elements/proj/3D/assimp/code/../contrib/openddlparser/include"
-  "/Volumes/Elements/proj/3D/assimp/port/AndroidJNI/."
-  "/Volumes/Elements/proj/3D/assimp/port/AndroidJNI/./../.."
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib/rapidjson/include"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib/unzip"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib/openddlparser/include"
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/."
+  "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/./../.."
   )
 
 # Targets to which this target links.

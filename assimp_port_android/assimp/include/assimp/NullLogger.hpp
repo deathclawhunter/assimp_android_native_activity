@@ -45,6 +45,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INCLUDED_AI_NULLLOGGER_H
 #define INCLUDED_AI_NULLLOGGER_H
 
+#include <android/log.h>
+#define LOG_TAG "ASSIMP"
+
+#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "ASSIMP", __VA_ARGS__))
+#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "ASSIMP", __VA_ARGS__))
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+
+
 #include "Logger.hpp"
 namespace Assimp    {
 // ---------------------------------------------------------------------------
@@ -60,21 +68,26 @@ public:
     /** @brief  Logs a debug message */
     void OnDebug(const char* message) {
         (void)message; //this avoids compiler warnings
+
+        LOGI(message);
     }
 
     /** @brief  Logs an info message */
     void OnInfo(const char* message) {
         (void)message; //this avoids compiler warnings
+        LOGI(message);
     }
 
     /** @brief  Logs a warning message */
     void OnWarn(const char* message) {
         (void)message; //this avoids compiler warnings
+        LOGW(message);
     }
 
     /** @brief  Logs an error message */
     void OnError(const char* message) {
         (void)message; //this avoids compiler warnings
+        LOGE(message);
     }
 
     /** @brief  Detach a still attached stream from logger */

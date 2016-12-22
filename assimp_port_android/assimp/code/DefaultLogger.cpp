@@ -56,12 +56,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
 #include <stdio.h>
 
+
 #ifndef ASSIMP_BUILD_SINGLETHREADED
 #   include <thread>
 #   include <mutex>
 
 std::mutex loggerMutex;
 #endif
+
+
 
 namespace Assimp    {
 
@@ -269,6 +272,7 @@ void DefaultLogger::OnInfo( const char* message )
 	char msg[Size];
     ai_snprintf(msg, Size, "Info,  T%u: %s", GetThreadID(), message );
 
+    LOGI(msg);
     WriteToStreams( msg , Logger::Info );
 }
 
@@ -280,6 +284,7 @@ void DefaultLogger::OnWarn( const char* message )
 	char msg[Size];
 	ai_snprintf(msg, Size, "Warn,  T%u: %s", GetThreadID(), message );
 
+    LOGW(msg);
     WriteToStreams( msg, Logger::Warn );
 }
 
@@ -291,6 +296,7 @@ void DefaultLogger::OnError( const char* message )
 	char msg[ Size ];
     ai_snprintf(msg, Size, "Error, T%u: %s", GetThreadID(), message );
 
+    LOGE(msg);
     WriteToStreams( msg, Logger::Err );
 }
 

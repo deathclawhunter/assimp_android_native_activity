@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.4.1)
 # configure import libs
 set(distribution_DIR ${CMAKE_SOURCE_DIR}/../../../../distribution)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -v")
-set(CMAKE_C_FLAGS "-DMAGICKCORE_PNG_DELEGATE=1")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions -frtti -v -DLOCAL_ARM_MODE=arm -DASSIMP_BUILD_NO_IFC_IMPORTER -DASSIMP_BUILD_NO_IRRMESH_IMPORTER  -DASSIMP_BUILD_NO_IRR_IMPORTER -DASSIMP_BUILD_NO_C4D_IMPORTER")
+set(CMAKE_C_FLAGS "-DMAGICKCORE_PNG_DELEGATE=1 -frtti -DLOCAL_ARM_MODE=arm -DASSIMP_BUILD_NO_IFC_IMPORTER -DASSIMP_BUILD_NO_IRRMESH_IMPORTER  -DASSIMP_BUILD_NO_IRR_IMPORTER -DASSIMP_BUILD_NO_C4D_IMPORTER")
 set( CMAKE_VERBOSE_MAKEFILE on )
 
 add_library(lib_assimp SHARED IMPORTED)
@@ -55,6 +55,18 @@ file(GLOB png_src
     "png/*.c"
 )
 
+file(GLOB assimp_c_src
+    "assimp/*.c"
+)
+
+file(GLOB assimp_cxx_src
+    "assimp/*.cpp"
+)
+
+file(GLOB assimp_cc_src
+    "assimp/*.cc"
+)
+
 add_library(engine SHARED
             ${MagickCore_src}
             ${filters_src}
@@ -65,6 +77,9 @@ add_library(engine SHARED
             ${Magick_src}
             ${coder_src}
             ${png_src}
+#            ${assimp_c_src}
+#            ${assimp_cxx_src}
+#            ${assimp_cc_src}
              )
 
 target_include_directories(engine PRIVATE
@@ -76,15 +91,28 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/freeglut/include
                            ${distribution_DIR}/png/include
                            ${CMAKE_SOURCE_DIR}/app
+                           ${CMAKE_SOURCE_DIR}/assimp
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/unzip
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/zlib
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/Open3DGC
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/irrXML
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/openddlparser/include
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/poly2tri/poly2tri
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/poly2tri/poly2tri/common
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/poly2tri/poly2tri/sweep
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/rapidjson/include
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/ConvertUTF
+                           ${CMAKE_SOURCE_DIR}/assimp/contrib/clipper
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 target_link_libraries(engine
                       android
-                      lib_assimp
                       log
                       EGL
                       z
                       stdc++
                       lib_stlport
                       GLESv1_CM
+                      lib_assimp
                       GLESv2)

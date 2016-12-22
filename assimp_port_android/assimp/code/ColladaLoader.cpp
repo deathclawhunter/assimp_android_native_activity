@@ -143,6 +143,7 @@ const aiImporterDesc* ColladaLoader::GetInfo () const
 void ColladaLoader::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
 {
     mFileName = pFile;
+    DefaultLogger::get()->info("Collada: In InternReadFile");
 
     // clean all member arrays - just for safety, it should work even if we did not
     mMeshIndexByID.clear();
@@ -153,6 +154,8 @@ void ColladaLoader::InternReadFile( const std::string& pFile, aiScene* pScene, I
     mCameras.clear();
     mTextures.clear();
     mAnims.clear();
+    
+    DefaultLogger::get()->info("Collada: read file " + pFile);
 
     // parse the input file
     ColladaParser parser( pIOHandler, pFile);
@@ -168,8 +171,10 @@ void ColladaLoader::InternReadFile( const std::string& pFile, aiScene* pScene, I
     mLights.reserve(parser.mLightLibrary.size());
 
     // create the materials first, for the meshes to find
+    DefaultLogger::get()->info("Collada: Build material");
     BuildMaterials( parser, pScene);
 
+    DefaultLogger::get()->info("Collada: Build hierarchy");
     // build the node hierarchy from it
     pScene->mRootNode = BuildHierarchy( parser, parser.mRootNode);
 
@@ -675,6 +680,7 @@ aiMesh* ColladaLoader::CreateMesh( const ColladaParser& pParser, const Collada::
 
         // create containers to collect the weights for each bone
         size_t numBones = jointNames.mStrings.size();
+        LOGI("numBones = %d\n", numBones);
         std::vector<std::vector<aiVertexWeight> > dstBones( numBones);
 
         // build a temporary array of pointers to the start of each vertex's weights
@@ -1498,7 +1504,7 @@ aiString ColladaLoader::FindFilenameForEffectTexture( const ColladaParser& pPars
     if( imIt == pParser.mImageLibrary.end())
     {
         throw DeadlyImportError( format() <<
-            "Collada: Unable to resolve effect texture entry \"" << pName << "\", ended up at ID \"" << name << "\"." );
+            "Collada: UUUUnable to resolve effect texture entry \"" << pName << "\", ended up at ID \"" << name << "\"." );
     }
 
     aiString result;

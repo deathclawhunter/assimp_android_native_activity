@@ -43,10 +43,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 # Include any dependencies generated for this target.
 include test/CMakeFiles/unit.dir/depend.make
@@ -58,17 +58,17 @@ include test/CMakeFiles/unit.dir/progress.make
 include test/CMakeFiles/unit.dir/flags.make
 
 test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o: /Volumes/Elements/proj/3D/assimp/contrib/gtest/src/gtest-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o -c /Volumes/Elements/proj/3D/assimp/contrib/gtest/src/gtest-all.cc
+test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/gtest/src/gtest-all.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/gtest/src/gtest-all.cc
 
 test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/contrib/gtest/src/gtest-all.cc > CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/gtest/src/gtest-all.cc > CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.i
 
 test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/contrib/gtest/src/gtest-all.cc -o CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/gtest/src/gtest-all.cc -o CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.s
 
 test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o.requires:
 
@@ -82,17 +82,17 @@ test/CMakeFiles/unit.dir/__/contrib/gtest/src/gtest-all.cc.o.provides.build: tes
 
 
 test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o: /Volumes/Elements/proj/3D/assimp/test/unit/CCompilerTest.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/unit.dir/unit/CCompilerTest.c.o   -c /Volumes/Elements/proj/3D/assimp/test/unit/CCompilerTest.c
+test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/CCompilerTest.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/unit.dir/unit/CCompilerTest.c.o   -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/CCompilerTest.c
 
 test/CMakeFiles/unit.dir/unit/CCompilerTest.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/unit.dir/unit/CCompilerTest.c.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/CCompilerTest.c > CMakeFiles/unit.dir/unit/CCompilerTest.c.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/CCompilerTest.c > CMakeFiles/unit.dir/unit/CCompilerTest.c.i
 
 test/CMakeFiles/unit.dir/unit/CCompilerTest.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/unit.dir/unit/CCompilerTest.c.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/CCompilerTest.c -o CMakeFiles/unit.dir/unit/CCompilerTest.c.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/CCompilerTest.c -o CMakeFiles/unit.dir/unit/CCompilerTest.c.s
 
 test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o.requires:
 
@@ -106,17 +106,17 @@ test/CMakeFiles/unit.dir/unit/CCompilerTest.c.o.provides.build: test/CMakeFiles/
 
 
 test/CMakeFiles/unit.dir/unit/Main.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/Main.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/Main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/unit.dir/unit/Main.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/Main.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/Main.cpp
+test/CMakeFiles/unit.dir/unit/Main.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/Main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/unit.dir/unit/Main.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/Main.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/Main.cpp
 
 test/CMakeFiles/unit.dir/unit/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/Main.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/Main.cpp > CMakeFiles/unit.dir/unit/Main.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/Main.cpp > CMakeFiles/unit.dir/unit/Main.cpp.i
 
 test/CMakeFiles/unit.dir/unit/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/Main.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/Main.cpp -o CMakeFiles/unit.dir/unit/Main.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/Main.cpp -o CMakeFiles/unit.dir/unit/Main.cpp.s
 
 test/CMakeFiles/unit.dir/unit/Main.cpp.o.requires:
 
@@ -130,17 +130,17 @@ test/CMakeFiles/unit.dir/unit/Main.cpp.o.provides.build: test/CMakeFiles/unit.di
 
 
 test/CMakeFiles/unit.dir/__/code/Version.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/__/code/Version.cpp.o: /Volumes/Elements/proj/3D/assimp/code/Version.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/unit.dir/__/code/Version.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/__/code/Version.cpp.o -c /Volumes/Elements/proj/3D/assimp/code/Version.cpp
+test/CMakeFiles/unit.dir/__/code/Version.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/Version.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/unit.dir/__/code/Version.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/__/code/Version.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/Version.cpp
 
 test/CMakeFiles/unit.dir/__/code/Version.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/__/code/Version.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/code/Version.cpp > CMakeFiles/unit.dir/__/code/Version.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/Version.cpp > CMakeFiles/unit.dir/__/code/Version.cpp.i
 
 test/CMakeFiles/unit.dir/__/code/Version.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/__/code/Version.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/code/Version.cpp -o CMakeFiles/unit.dir/__/code/Version.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/Version.cpp -o CMakeFiles/unit.dir/__/code/Version.cpp.s
 
 test/CMakeFiles/unit.dir/__/code/Version.cpp.o.requires:
 
@@ -154,17 +154,17 @@ test/CMakeFiles/unit.dir/__/code/Version.cpp.o.provides.build: test/CMakeFiles/u
 
 
 test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/AssimpAPITest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/AssimpAPITest.cpp
+test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/AssimpAPITest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/AssimpAPITest.cpp
 
 test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/AssimpAPITest.cpp > CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/AssimpAPITest.cpp > CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.i
 
 test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/AssimpAPITest.cpp -o CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/AssimpAPITest.cpp -o CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.s
 
 test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o.requires:
 
@@ -178,17 +178,17 @@ test/CMakeFiles/unit.dir/unit/AssimpAPITest.cpp.o.provides.build: test/CMakeFile
 
 
 test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utBatchLoader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utBatchLoader.cpp
+test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBatchLoader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBatchLoader.cpp
 
 test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utBatchLoader.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utBatchLoader.cpp > CMakeFiles/unit.dir/unit/utBatchLoader.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBatchLoader.cpp > CMakeFiles/unit.dir/unit/utBatchLoader.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utBatchLoader.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utBatchLoader.cpp -o CMakeFiles/unit.dir/unit/utBatchLoader.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBatchLoader.cpp -o CMakeFiles/unit.dir/unit/utBatchLoader.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o.requires:
 
@@ -202,17 +202,17 @@ test/CMakeFiles/unit.dir/unit/utBatchLoader.cpp.o.provides.build: test/CMakeFile
 
 
 test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utBlenderIntermediate.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utBlenderIntermediate.cpp
+test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlenderIntermediate.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlenderIntermediate.cpp
 
 test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utBlenderIntermediate.cpp > CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlenderIntermediate.cpp > CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utBlenderIntermediate.cpp -o CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlenderIntermediate.cpp -o CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o.requires:
 
@@ -226,17 +226,17 @@ test/CMakeFiles/unit.dir/unit/utBlenderIntermediate.cpp.o.provides.build: test/C
 
 
 test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportAreaLight.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportAreaLight.cpp
+test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportAreaLight.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportAreaLight.cpp
 
 test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportAreaLight.cpp > CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportAreaLight.cpp > CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportAreaLight.cpp -o CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportAreaLight.cpp -o CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o.requires:
 
@@ -250,17 +250,17 @@ test/CMakeFiles/unit.dir/unit/utBlendImportAreaLight.cpp.o.provides.build: test/
 
 
 test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportMaterials.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportMaterials.cpp
+test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportMaterials.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportMaterials.cpp
 
 test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportMaterials.cpp > CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportMaterials.cpp > CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utBlendImportMaterials.cpp -o CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utBlendImportMaterials.cpp -o CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o.requires:
 
@@ -274,17 +274,17 @@ test/CMakeFiles/unit.dir/unit/utBlendImportMaterials.cpp.o.provides.build: test/
 
 
 test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportCamera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportCamera.cpp
+test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportCamera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportCamera.cpp
 
 test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportCamera.cpp > CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportCamera.cpp > CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportCamera.cpp -o CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportCamera.cpp -o CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o.requires:
 
@@ -298,17 +298,17 @@ test/CMakeFiles/unit.dir/unit/utColladaExportCamera.cpp.o.provides.build: test/C
 
 
 test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportLight.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportLight.cpp
+test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportLight.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportLight.cpp
 
 test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportLight.cpp > CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportLight.cpp > CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utColladaExportLight.cpp -o CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utColladaExportLight.cpp -o CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o.requires:
 
@@ -322,17 +322,17 @@ test/CMakeFiles/unit.dir/unit/utColladaExportLight.cpp.o.provides.build: test/CM
 
 
 test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utDefaultIOStream.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utDefaultIOStream.cpp
+test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utDefaultIOStream.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utDefaultIOStream.cpp
 
 test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utDefaultIOStream.cpp > CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utDefaultIOStream.cpp > CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utDefaultIOStream.cpp -o CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utDefaultIOStream.cpp -o CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o.requires:
 
@@ -346,17 +346,17 @@ test/CMakeFiles/unit.dir/unit/utDefaultIOStream.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utFastAtof.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFastAtof.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utFastAtof.cpp
+test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFastAtof.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFastAtof.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFastAtof.cpp
 
 test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utFastAtof.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utFastAtof.cpp > CMakeFiles/unit.dir/unit/utFastAtof.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFastAtof.cpp > CMakeFiles/unit.dir/unit/utFastAtof.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utFastAtof.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utFastAtof.cpp -o CMakeFiles/unit.dir/unit/utFastAtof.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFastAtof.cpp -o CMakeFiles/unit.dir/unit/utFastAtof.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o.requires:
 
@@ -370,17 +370,17 @@ test/CMakeFiles/unit.dir/unit/utFastAtof.cpp.o.provides.build: test/CMakeFiles/u
 
 
 test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utFindDegenerates.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utFindDegenerates.cpp
+test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindDegenerates.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindDegenerates.cpp
 
 test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utFindDegenerates.cpp > CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindDegenerates.cpp > CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utFindDegenerates.cpp -o CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindDegenerates.cpp -o CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o.requires:
 
@@ -394,17 +394,17 @@ test/CMakeFiles/unit.dir/unit/utFindDegenerates.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utFindInvalidData.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utFindInvalidData.cpp
+test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindInvalidData.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindInvalidData.cpp
 
 test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utFindInvalidData.cpp > CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindInvalidData.cpp > CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utFindInvalidData.cpp -o CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFindInvalidData.cpp -o CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o.requires:
 
@@ -418,17 +418,17 @@ test/CMakeFiles/unit.dir/unit/utFindInvalidData.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utFixInfacingNormals.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utFixInfacingNormals.cpp
+test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFixInfacingNormals.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFixInfacingNormals.cpp
 
 test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utFixInfacingNormals.cpp > CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFixInfacingNormals.cpp > CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utFixInfacingNormals.cpp -o CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utFixInfacingNormals.cpp -o CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o.requires:
 
@@ -442,17 +442,17 @@ test/CMakeFiles/unit.dir/unit/utFixInfacingNormals.cpp.o.provides.build: test/CM
 
 
 test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utGenNormals.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utGenNormals.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utGenNormals.cpp
+test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utGenNormals.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utGenNormals.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utGenNormals.cpp
 
 test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utGenNormals.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utGenNormals.cpp > CMakeFiles/unit.dir/unit/utGenNormals.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utGenNormals.cpp > CMakeFiles/unit.dir/unit/utGenNormals.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utGenNormals.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utGenNormals.cpp -o CMakeFiles/unit.dir/unit/utGenNormals.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utGenNormals.cpp -o CMakeFiles/unit.dir/unit/utGenNormals.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o.requires:
 
@@ -466,17 +466,17 @@ test/CMakeFiles/unit.dir/unit/utGenNormals.cpp.o.provides.build: test/CMakeFiles
 
 
 test/CMakeFiles/unit.dir/unit/utImporter.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utImporter.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utImporter.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object test/CMakeFiles/unit.dir/unit/utImporter.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utImporter.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utImporter.cpp
+test/CMakeFiles/unit.dir/unit/utImporter.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImporter.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object test/CMakeFiles/unit.dir/unit/utImporter.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utImporter.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImporter.cpp
 
 test/CMakeFiles/unit.dir/unit/utImporter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utImporter.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utImporter.cpp > CMakeFiles/unit.dir/unit/utImporter.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImporter.cpp > CMakeFiles/unit.dir/unit/utImporter.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utImporter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utImporter.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utImporter.cpp -o CMakeFiles/unit.dir/unit/utImporter.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImporter.cpp -o CMakeFiles/unit.dir/unit/utImporter.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utImporter.cpp.o.requires:
 
@@ -490,17 +490,17 @@ test/CMakeFiles/unit.dir/unit/utImporter.cpp.o.provides.build: test/CMakeFiles/u
 
 
 test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utImproveCacheLocality.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utImproveCacheLocality.cpp
+test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImproveCacheLocality.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImproveCacheLocality.cpp
 
 test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utImproveCacheLocality.cpp > CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImproveCacheLocality.cpp > CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utImproveCacheLocality.cpp -o CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utImproveCacheLocality.cpp -o CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o.requires:
 
@@ -514,17 +514,17 @@ test/CMakeFiles/unit.dir/unit/utImproveCacheLocality.cpp.o.provides.build: test/
 
 
 test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utIOSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIOSystem.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utIOSystem.cpp
+test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIOSystem.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOSystem.cpp
 
 test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utIOSystem.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utIOSystem.cpp > CMakeFiles/unit.dir/unit/utIOSystem.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOSystem.cpp > CMakeFiles/unit.dir/unit/utIOSystem.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utIOSystem.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utIOSystem.cpp -o CMakeFiles/unit.dir/unit/utIOSystem.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOSystem.cpp -o CMakeFiles/unit.dir/unit/utIOSystem.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o.requires:
 
@@ -538,17 +538,17 @@ test/CMakeFiles/unit.dir/unit/utIOSystem.cpp.o.provides.build: test/CMakeFiles/u
 
 
 test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utIOStreamBuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utIOStreamBuffer.cpp
+test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOStreamBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOStreamBuffer.cpp
 
 test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utIOStreamBuffer.cpp > CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOStreamBuffer.cpp > CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utIOStreamBuffer.cpp -o CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIOStreamBuffer.cpp -o CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o.requires:
 
@@ -562,17 +562,17 @@ test/CMakeFiles/unit.dir/unit/utIOStreamBuffer.cpp.o.provides.build: test/CMakeF
 
 
 test/CMakeFiles/unit.dir/unit/utIssues.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utIssues.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utIssues.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object test/CMakeFiles/unit.dir/unit/utIssues.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIssues.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utIssues.cpp
+test/CMakeFiles/unit.dir/unit/utIssues.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIssues.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object test/CMakeFiles/unit.dir/unit/utIssues.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utIssues.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIssues.cpp
 
 test/CMakeFiles/unit.dir/unit/utIssues.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utIssues.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utIssues.cpp > CMakeFiles/unit.dir/unit/utIssues.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIssues.cpp > CMakeFiles/unit.dir/unit/utIssues.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utIssues.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utIssues.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utIssues.cpp -o CMakeFiles/unit.dir/unit/utIssues.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utIssues.cpp -o CMakeFiles/unit.dir/unit/utIssues.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utIssues.cpp.o.requires:
 
@@ -586,17 +586,17 @@ test/CMakeFiles/unit.dir/unit/utIssues.cpp.o.provides.build: test/CMakeFiles/uni
 
 
 test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utJoinVertices.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utJoinVertices.cpp
+test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utJoinVertices.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utJoinVertices.cpp
 
 test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utJoinVertices.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utJoinVertices.cpp > CMakeFiles/unit.dir/unit/utJoinVertices.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utJoinVertices.cpp > CMakeFiles/unit.dir/unit/utJoinVertices.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utJoinVertices.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utJoinVertices.cpp -o CMakeFiles/unit.dir/unit/utJoinVertices.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utJoinVertices.cpp -o CMakeFiles/unit.dir/unit/utJoinVertices.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o.requires:
 
@@ -610,17 +610,17 @@ test/CMakeFiles/unit.dir/unit/utJoinVertices.cpp.o.provides.build: test/CMakeFil
 
 
 test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utLimitBoneWeights.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utLimitBoneWeights.cpp
+test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utLimitBoneWeights.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utLimitBoneWeights.cpp
 
 test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utLimitBoneWeights.cpp > CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utLimitBoneWeights.cpp > CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utLimitBoneWeights.cpp -o CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utLimitBoneWeights.cpp -o CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o.requires:
 
@@ -634,17 +634,17 @@ test/CMakeFiles/unit.dir/unit/utLimitBoneWeights.cpp.o.provides.build: test/CMak
 
 
 test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utMaterialSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utMaterialSystem.cpp
+test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMaterialSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMaterialSystem.cpp
 
 test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utMaterialSystem.cpp > CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMaterialSystem.cpp > CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utMaterialSystem.cpp -o CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMaterialSystem.cpp -o CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o.requires:
 
@@ -658,17 +658,17 @@ test/CMakeFiles/unit.dir/unit/utMaterialSystem.cpp.o.provides.build: test/CMakeF
 
 
 test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix3x3.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix3x3.cpp
+test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix3x3.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix3x3.cpp
 
 test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix3x3.cpp > CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix3x3.cpp > CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix3x3.cpp -o CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix3x3.cpp -o CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o.requires:
 
@@ -682,17 +682,17 @@ test/CMakeFiles/unit.dir/unit/utMatrix3x3.cpp.o.provides.build: test/CMakeFiles/
 
 
 test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix4x4.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix4x4.cpp
+test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix4x4.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix4x4.cpp
 
 test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix4x4.cpp > CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix4x4.cpp > CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utMatrix4x4.cpp -o CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utMatrix4x4.cpp -o CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o.requires:
 
@@ -706,17 +706,17 @@ test/CMakeFiles/unit.dir/unit/utMatrix4x4.cpp.o.provides.build: test/CMakeFiles/
 
 
 test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/SceneDiffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/SceneDiffer.cpp
+test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/SceneDiffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/SceneDiffer.cpp
 
 test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/SceneDiffer.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/SceneDiffer.cpp > CMakeFiles/unit.dir/unit/SceneDiffer.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/SceneDiffer.cpp > CMakeFiles/unit.dir/unit/SceneDiffer.cpp.i
 
 test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/SceneDiffer.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/SceneDiffer.cpp -o CMakeFiles/unit.dir/unit/SceneDiffer.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/SceneDiffer.cpp -o CMakeFiles/unit.dir/unit/SceneDiffer.cpp.s
 
 test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o.requires:
 
@@ -730,17 +730,17 @@ test/CMakeFiles/unit.dir/unit/SceneDiffer.cpp.o.provides.build: test/CMakeFiles/
 
 
 test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utObjImportExport.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utObjImportExport.cpp
+test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utObjImportExport.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utObjImportExport.cpp
 
 test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utObjImportExport.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utObjImportExport.cpp > CMakeFiles/unit.dir/unit/utObjImportExport.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utObjImportExport.cpp > CMakeFiles/unit.dir/unit/utObjImportExport.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utObjImportExport.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utObjImportExport.cpp -o CMakeFiles/unit.dir/unit/utObjImportExport.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utObjImportExport.cpp -o CMakeFiles/unit.dir/unit/utObjImportExport.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o.requires:
 
@@ -754,17 +754,17 @@ test/CMakeFiles/unit.dir/unit/utObjImportExport.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utPretransformVertices.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utPretransformVertices.cpp
+test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utPretransformVertices.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utPretransformVertices.cpp
 
 test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utPretransformVertices.cpp > CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utPretransformVertices.cpp > CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utPretransformVertices.cpp -o CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utPretransformVertices.cpp -o CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o.requires:
 
@@ -778,17 +778,17 @@ test/CMakeFiles/unit.dir/unit/utPretransformVertices.cpp.o.provides.build: test/
 
 
 test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComments.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComments.cpp
+test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComments.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComments.cpp
 
 test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utRemoveComments.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComments.cpp > CMakeFiles/unit.dir/unit/utRemoveComments.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComments.cpp > CMakeFiles/unit.dir/unit/utRemoveComments.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utRemoveComments.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComments.cpp -o CMakeFiles/unit.dir/unit/utRemoveComments.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComments.cpp -o CMakeFiles/unit.dir/unit/utRemoveComments.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o.requires:
 
@@ -802,17 +802,17 @@ test/CMakeFiles/unit.dir/unit/utRemoveComments.cpp.o.provides.build: test/CMakeF
 
 
 test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComponent.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComponent.cpp
+test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComponent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComponent.cpp
 
 test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComponent.cpp > CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComponent.cpp > CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveComponent.cpp -o CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveComponent.cpp -o CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o.requires:
 
@@ -826,17 +826,17 @@ test/CMakeFiles/unit.dir/unit/utRemoveComponent.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveRedundantMaterials.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveRedundantMaterials.cpp
+test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveRedundantMaterials.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveRedundantMaterials.cpp
 
 test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveRedundantMaterials.cpp > CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveRedundantMaterials.cpp > CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utRemoveRedundantMaterials.cpp -o CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utRemoveRedundantMaterials.cpp -o CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o.requires:
 
@@ -850,17 +850,17 @@ test/CMakeFiles/unit.dir/unit/utRemoveRedundantMaterials.cpp.o.provides.build: t
 
 
 test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utScenePreprocessor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utScenePreprocessor.cpp
+test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utScenePreprocessor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utScenePreprocessor.cpp
 
 test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utScenePreprocessor.cpp > CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utScenePreprocessor.cpp > CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utScenePreprocessor.cpp -o CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utScenePreprocessor.cpp -o CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o.requires:
 
@@ -874,17 +874,17 @@ test/CMakeFiles/unit.dir/unit/utScenePreprocessor.cpp.o.provides.build: test/CMa
 
 
 test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utSharedPPData.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utSharedPPData.cpp
+test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSharedPPData.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSharedPPData.cpp
 
 test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utSharedPPData.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utSharedPPData.cpp > CMakeFiles/unit.dir/unit/utSharedPPData.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSharedPPData.cpp > CMakeFiles/unit.dir/unit/utSharedPPData.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utSharedPPData.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utSharedPPData.cpp -o CMakeFiles/unit.dir/unit/utSharedPPData.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSharedPPData.cpp -o CMakeFiles/unit.dir/unit/utSharedPPData.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o.requires:
 
@@ -898,17 +898,17 @@ test/CMakeFiles/unit.dir/unit/utSharedPPData.cpp.o.provides.build: test/CMakeFil
 
 
 test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utStringUtils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utStringUtils.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utStringUtils.cpp
+test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utStringUtils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utStringUtils.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utStringUtils.cpp
 
 test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utStringUtils.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utStringUtils.cpp > CMakeFiles/unit.dir/unit/utStringUtils.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utStringUtils.cpp > CMakeFiles/unit.dir/unit/utStringUtils.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utStringUtils.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utStringUtils.cpp -o CMakeFiles/unit.dir/unit/utStringUtils.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utStringUtils.cpp -o CMakeFiles/unit.dir/unit/utStringUtils.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o.requires:
 
@@ -922,17 +922,17 @@ test/CMakeFiles/unit.dir/unit/utStringUtils.cpp.o.provides.build: test/CMakeFile
 
 
 test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utSortByPType.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSortByPType.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utSortByPType.cpp
+test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSortByPType.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSortByPType.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSortByPType.cpp
 
 test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utSortByPType.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utSortByPType.cpp > CMakeFiles/unit.dir/unit/utSortByPType.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSortByPType.cpp > CMakeFiles/unit.dir/unit/utSortByPType.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utSortByPType.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utSortByPType.cpp -o CMakeFiles/unit.dir/unit/utSortByPType.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSortByPType.cpp -o CMakeFiles/unit.dir/unit/utSortByPType.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o.requires:
 
@@ -946,17 +946,17 @@ test/CMakeFiles/unit.dir/unit/utSortByPType.cpp.o.provides.build: test/CMakeFile
 
 
 test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utSplitLargeMeshes.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utSplitLargeMeshes.cpp
+test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSplitLargeMeshes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSplitLargeMeshes.cpp
 
 test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utSplitLargeMeshes.cpp > CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSplitLargeMeshes.cpp > CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utSplitLargeMeshes.cpp -o CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utSplitLargeMeshes.cpp -o CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o.requires:
 
@@ -970,17 +970,17 @@ test/CMakeFiles/unit.dir/unit/utSplitLargeMeshes.cpp.o.provides.build: test/CMak
 
 
 test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utTargetAnimation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utTargetAnimation.cpp
+test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTargetAnimation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTargetAnimation.cpp
 
 test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utTargetAnimation.cpp > CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTargetAnimation.cpp > CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utTargetAnimation.cpp -o CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTargetAnimation.cpp -o CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o.requires:
 
@@ -994,17 +994,17 @@ test/CMakeFiles/unit.dir/unit/utTargetAnimation.cpp.o.provides.build: test/CMake
 
 
 test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utTextureTransform.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utTextureTransform.cpp
+test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTextureTransform.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTextureTransform.cpp
 
 test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utTextureTransform.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utTextureTransform.cpp > CMakeFiles/unit.dir/unit/utTextureTransform.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTextureTransform.cpp > CMakeFiles/unit.dir/unit/utTextureTransform.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utTextureTransform.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utTextureTransform.cpp -o CMakeFiles/unit.dir/unit/utTextureTransform.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTextureTransform.cpp -o CMakeFiles/unit.dir/unit/utTextureTransform.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o.requires:
 
@@ -1018,17 +1018,17 @@ test/CMakeFiles/unit.dir/unit/utTextureTransform.cpp.o.provides.build: test/CMak
 
 
 test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utTriangulate.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTriangulate.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utTriangulate.cpp
+test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTriangulate.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTriangulate.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTriangulate.cpp
 
 test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utTriangulate.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utTriangulate.cpp > CMakeFiles/unit.dir/unit/utTriangulate.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTriangulate.cpp > CMakeFiles/unit.dir/unit/utTriangulate.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utTriangulate.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utTriangulate.cpp -o CMakeFiles/unit.dir/unit/utTriangulate.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTriangulate.cpp -o CMakeFiles/unit.dir/unit/utTriangulate.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o.requires:
 
@@ -1042,17 +1042,17 @@ test/CMakeFiles/unit.dir/unit/utTriangulate.cpp.o.provides.build: test/CMakeFile
 
 
 test/CMakeFiles/unit.dir/unit/utTypes.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utTypes.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utTypes.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object test/CMakeFiles/unit.dir/unit/utTypes.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTypes.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utTypes.cpp
+test/CMakeFiles/unit.dir/unit/utTypes.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTypes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object test/CMakeFiles/unit.dir/unit/utTypes.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utTypes.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTypes.cpp
 
 test/CMakeFiles/unit.dir/unit/utTypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utTypes.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utTypes.cpp > CMakeFiles/unit.dir/unit/utTypes.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTypes.cpp > CMakeFiles/unit.dir/unit/utTypes.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utTypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utTypes.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utTypes.cpp -o CMakeFiles/unit.dir/unit/utTypes.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utTypes.cpp -o CMakeFiles/unit.dir/unit/utTypes.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utTypes.cpp.o.requires:
 
@@ -1066,17 +1066,17 @@ test/CMakeFiles/unit.dir/unit/utTypes.cpp.o.provides.build: test/CMakeFiles/unit
 
 
 test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utVertexTriangleAdjacency.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utVertexTriangleAdjacency.cpp
+test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVertexTriangleAdjacency.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVertexTriangleAdjacency.cpp
 
 test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utVertexTriangleAdjacency.cpp > CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVertexTriangleAdjacency.cpp > CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utVertexTriangleAdjacency.cpp -o CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVertexTriangleAdjacency.cpp -o CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o.requires:
 
@@ -1090,17 +1090,17 @@ test/CMakeFiles/unit.dir/unit/utVertexTriangleAdjacency.cpp.o.provides.build: te
 
 
 test/CMakeFiles/unit.dir/unit/utVersion.cpp.o: test/CMakeFiles/unit.dir/flags.make
-test/CMakeFiles/unit.dir/unit/utVersion.cpp.o: /Volumes/Elements/proj/3D/assimp/test/unit/utVersion.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object test/CMakeFiles/unit.dir/unit/utVersion.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utVersion.cpp.o -c /Volumes/Elements/proj/3D/assimp/test/unit/utVersion.cpp
+test/CMakeFiles/unit.dir/unit/utVersion.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVersion.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object test/CMakeFiles/unit.dir/unit/utVersion.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit.dir/unit/utVersion.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVersion.cpp
 
 test/CMakeFiles/unit.dir/unit/utVersion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit.dir/unit/utVersion.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/test/unit/utVersion.cpp > CMakeFiles/unit.dir/unit/utVersion.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVersion.cpp > CMakeFiles/unit.dir/unit/utVersion.cpp.i
 
 test/CMakeFiles/unit.dir/unit/utVersion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit.dir/unit/utVersion.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/test/unit/utVersion.cpp -o CMakeFiles/unit.dir/unit/utVersion.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/utVersion.cpp -o CMakeFiles/unit.dir/unit/utVersion.cpp.s
 
 test/CMakeFiles/unit.dir/unit/utVersion.cpp.o.requires:
 
@@ -1212,8 +1212,8 @@ test/unit: code/libassimp.so
 test/unit: /Volumes/Elements/Library/Android/ndk-bundle/platforms/android-9/arch-arm/usr/lib/libz.so
 test/unit: port/AndroidJNI/libandroid_jniiosystem.a
 test/unit: test/CMakeFiles/unit.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Linking CXX executable unit"
-	cd /Volumes/Elements/proj/3D/bin/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Linking CXX executable unit"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 test/CMakeFiles/unit.dir/build: test/unit
@@ -1268,10 +1268,10 @@ test/CMakeFiles/unit.dir/requires: test/CMakeFiles/unit.dir/unit/utVersion.cpp.o
 .PHONY : test/CMakeFiles/unit.dir/requires
 
 test/CMakeFiles/unit.dir/clean:
-	cd /Volumes/Elements/proj/3D/bin/test && $(CMAKE_COMMAND) -P CMakeFiles/unit.dir/cmake_clean.cmake
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test && $(CMAKE_COMMAND) -P CMakeFiles/unit.dir/cmake_clean.cmake
 .PHONY : test/CMakeFiles/unit.dir/clean
 
 test/CMakeFiles/unit.dir/depend:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Volumes/Elements/proj/3D/assimp /Volumes/Elements/proj/3D/assimp/test /Volumes/Elements/proj/3D/bin /Volumes/Elements/proj/3D/bin/test /Volumes/Elements/proj/3D/bin/test/CMakeFiles/unit.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test/CMakeFiles/unit.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : test/CMakeFiles/unit.dir/depend
 

@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/Elements/proj/3D/assimp
+# Install script for directory: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,20 +34,19 @@ endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "libassimp3.3.1-dev" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/assimp-3.3" TYPE FILE FILES
-    "/Volumes/Elements/proj/3D/bin/assimp-config.cmake"
-    "/Volumes/Elements/proj/3D/bin/assimp-config-version.cmake"
+    "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/assimp-config.cmake"
+    "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/assimp-config-version.cmake"
     )
 endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "libassimp3.3.1-dev" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/Volumes/Elements/proj/3D/bin/assimp.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/assimp.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Volumes/Elements/proj/3D/bin/code/cmake_install.cmake")
-  include("/Volumes/Elements/proj/3D/bin/tools/assimp_cmd/cmake_install.cmake")
-  include("/Volumes/Elements/proj/3D/bin/test/cmake_install.cmake")
+  include("/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/cmake_install.cmake")
+  include("/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test/cmake_install.cmake")
 
 endif()
 
@@ -59,5 +58,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Volumes/Elements/proj/3D/bin/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

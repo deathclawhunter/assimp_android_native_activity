@@ -48,10 +48,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,7 +114,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp3.3.1-dev\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-dev\" \"libassimp3.3.1-dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -124,9 +124,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles /Volumes/Elements/proj/3D/bin/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -194,19 +194,6 @@ android_jniiosystem/fast:
 .PHONY : android_jniiosystem/fast
 
 #=============================================================================
-# Target rules for targets named assimp_cmd
-
-# Build rule for target.
-assimp_cmd: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 assimp_cmd
-.PHONY : assimp_cmd
-
-# fast build rule for target.
-assimp_cmd/fast:
-	$(MAKE) -f tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build
-.PHONY : assimp_cmd/fast
-
-#=============================================================================
 # Target rules for targets named unit
 
 # Build rule for target.
@@ -234,7 +221,6 @@ help:
 	@echo "... list_install_components"
 	@echo "... assimp"
 	@echo "... android_jniiosystem"
-	@echo "... assimp_cmd"
 	@echo "... unit"
 .PHONY : help
 

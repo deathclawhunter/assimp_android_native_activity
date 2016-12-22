@@ -1,0 +1,11 @@
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/CMakeFiles/install/local.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/CMakeFiles/rebuild_cache.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/CMakeFiles/edit_cache.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/CMakeFiles/list_install_components.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/install/local.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/install/strip.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/install.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/assimp.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/list_install_components.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/rebuild_cache.dir
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/code/code/CMakeFiles/edit_cache.dir

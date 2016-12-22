@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/Elements/proj/3D/assimp/port/AndroidJNI
+# Install script for directory: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

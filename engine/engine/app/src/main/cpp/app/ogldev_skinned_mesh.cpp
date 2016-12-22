@@ -23,7 +23,8 @@ void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
     }
     
     // should never get here - more bones than we have space for
-    assert(0);
+    // assert(0);
+    return;
 }
 
 SkinnedMesh::SkinnedMesh()
@@ -83,7 +84,8 @@ bool SkinnedMesh::LoadMesh(const string& Filename)
         Ret = InitFromScene(m_pScene, Filename);
     }
     else {
-        printf("Error parsing '%s': '%s'\n", Filename.c_str(), m_Importer.GetErrorString());
+        LOGE("ASSIMP: import failed: %s\n", m_Importer.GetErrorString());
+        LOGE("Error parsing '%s': '%s'\n", Filename.c_str(), m_Importer.GetErrorString());
     }
 
     // Make sure the VAO is not changed from the outside
@@ -249,7 +251,8 @@ void SkinnedMesh::LoadBones(uint MeshIndex, const aiMesh* pMesh, vector<VertexBo
         else {
             BoneIndex = m_BoneMapping[BoneName];
         }                      
-        
+
+        LOGI("pMesh->mBones[i]->mNumWeights = %d\n", pMesh->mBones[i]->mNumWeights);
         for (uint j = 0 ; j < pMesh->mBones[i]->mNumWeights ; j++) {
             uint VertexID = m_Entries[MeshIndex].BaseVertex + pMesh->mBones[i]->mWeights[j].mVertexId;
             float Weight  = pMesh->mBones[i]->mWeights[j].mWeight;                   
@@ -347,7 +350,7 @@ void SkinnedMesh::Render()
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
 
-    LOGI("Entry size = %d\n", m_Entries.size());
+    // LOGI("Entry size = %d\n", m_Entries.size());
 
     for (uint i = 0 ; i < m_Entries.size(); i++) {
         const uint MaterialIndex = m_Entries[i].MaterialIndex;
@@ -532,6 +535,10 @@ void SkinnedMesh::ReadNodeHeirarchy(float AnimationTime, const aiNode* pNode, co
 
 void SkinnedMesh::BoneTransform(float TimeInSeconds, vector<Matrix4f>& Transforms)
 {
+    if (m_pScene->mAnimations == NULL) {
+        return; // no animation
+    }
+
     Matrix4f Identity;
     Identity.InitIdentity();
     

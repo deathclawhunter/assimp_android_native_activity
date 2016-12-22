@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/Elements/proj/3D/assimp/test
+# Install script for directory: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Volumes/Elements/proj/3D/bin/test/headercheck/cmake_install.cmake")
+  include("/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test/headercheck/cmake_install.cmake")
 
 endif()
 

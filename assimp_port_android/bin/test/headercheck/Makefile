@@ -48,10 +48,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -92,7 +92,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp3.3.1-dev\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-dev\" \"libassimp3.3.1-dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -124,14 +124,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles /Volumes/Elements/proj/3D/bin/test/headercheck/CMakeFiles/progress.marks
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/test/headercheck/CMakeFiles/progress.marks
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/clean
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,17 +141,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/preinstall
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/preinstall
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 test/headercheck/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

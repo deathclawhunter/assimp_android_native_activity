@@ -114,8 +114,8 @@ public:
         // str.append("boblampclean.md5mesh");
         // str.append("marcus.dae");
         // str.append("ArmyPilot.dae");
-        // str.append("sf2arms.dae");
-        str.append("monkey.dae");
+        str.append("sf2arms.dae");
+        // str.append("monkey.dae");
 
 
         m_pEffect->SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);

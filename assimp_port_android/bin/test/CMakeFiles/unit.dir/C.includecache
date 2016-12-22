@@ -2180,11 +2180,11 @@ bits/gthr-default.h
 
 /Volumes/Elements/Library/Android/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include/bits/os_defines.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/Compiler/pstdint.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/Compiler/pstdint.h
 stddef.h
 -
 limits.h
@@ -2204,79 +2204,79 @@ stdio.h
 string.h
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/anim.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/anim.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 quaternion.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/camera.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/camera.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/cexport.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/cexport.h
 assimp/config.h
 -
 assimp/types.h
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/cimport.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/cimport.h
 assimp/config.h
 -
 assimp/types.h
 -
 importerdesc.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/importerdesc.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/importerdesc.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/color4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/color4.h
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/color4.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/color4.inl
 color4.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/color4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/color4.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/config.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/config.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 assimp/config.h
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/importerdesc.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/importerdesc.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/light.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/light.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/material.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/material.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 material.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/material.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/material.inl
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/material.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/material.inl
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.h
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.inl
 matrix3x3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.h
 matrix4x4.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.h
 algorithm
 -
 cmath
@@ -2284,23 +2284,23 @@ cmath
 limits
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.h
 vector3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.h
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.inl
 matrix4x4.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.h
 matrix3x3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.h
 quaternion.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.h
 algorithm
 -
 limits
@@ -2308,15 +2308,15 @@ limits
 cmath
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/mesh.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/mesh.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/metadata.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/metadata.h
 assert.h
 -
 Compiler/pstdint.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/Compiler/pstdint.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/Compiler/pstdint.h
 limits.h
 -
 stdint.h
@@ -2324,47 +2324,47 @@ stdint.h
 string
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/postprocess.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/postprocess.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.inl
 quaternion.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.h
 cmath
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/scene.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/scene.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 texture.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/texture.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/texture.h
 mesh.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/mesh.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/mesh.h
 light.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/light.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/light.h
 camera.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/camera.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/camera.h
 material.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/material.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/material.h
 anim.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/anim.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/anim.h
 metadata.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/metadata.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/metadata.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/texture.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/texture.h
 types.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/types.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/types.h
 sys/types.h
 -
 stddef.h
@@ -2374,19 +2374,19 @@ string.h
 limits.h
 -
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 vector3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.h
 vector2.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector2.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector2.h
 color4.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/color4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/color4.h
 matrix3x3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.h
 matrix4x4.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.h
 quaternion.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.h
 cstring
 -
 new
@@ -2394,63 +2394,63 @@ new
 string
 -
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 vector2.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector2.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector2.inl
 vector3.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.inl
 color4.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/color4.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/color4.inl
 quaternion.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/quaternion.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/quaternion.inl
 matrix3x3.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix3x3.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix3x3.inl
 matrix4x4.inl
-/Volumes/Elements/proj/3D/assimp/include/assimp/matrix4x4.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/matrix4x4.inl
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector2.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector2.h
 cmath
 -
 math.h
 -
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector2.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector2.inl
 vector2.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector2.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector2.h
 cmath
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.h
 cmath
 -
 math.h
 -
 ./Compiler/pushpack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/pushpack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/pushpack1.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 ./Compiler/poppack1.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/./Compiler/poppack1.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/./Compiler/poppack1.h
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.inl
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.inl
 vector3.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/vector3.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/vector3.h
 cmath
 -
 
-/Volumes/Elements/proj/3D/assimp/include/assimp/version.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/version.h
 defs.h
-/Volumes/Elements/proj/3D/assimp/include/assimp/defs.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/include/assimp/defs.h
 
-/Volumes/Elements/proj/3D/assimp/test/unit/CCompilerTest.c
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/test/unit/CCompilerTest.c
 assimp/postprocess.h
 -
 assimp/scene.h

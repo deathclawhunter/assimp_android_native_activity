@@ -54,10 +54,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 #=============================================================================
 # Target rules for target CMakeFiles/uninstall.dir
@@ -66,14 +66,14 @@ CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
 CMakeFiles/uninstall.dir/all:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -118,7 +118,7 @@ code/preinstall: port/AndroidJNI/preinstall
 code/CMakeFiles/assimp.dir/all: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
 	$(MAKE) -f code/CMakeFiles/assimp.dir/build.make code/CMakeFiles/assimp.dir/depend
 	$(MAKE) -f code/CMakeFiles/assimp.dir/build.make code/CMakeFiles/assimp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78 "Built target assimp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80 "Built target assimp"
 .PHONY : code/CMakeFiles/assimp.dir/all
 
 # Include target in all.
@@ -128,9 +128,9 @@ all: code/CMakeFiles/assimp.dir/all
 
 # Build rule for subdir invocation for target.
 code/CMakeFiles/assimp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 78
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 80
 	$(MAKE) -f CMakeFiles/Makefile2 code/CMakeFiles/assimp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : code/CMakeFiles/assimp.dir/rule
 
 # Convenience name for target.
@@ -173,7 +173,7 @@ port/AndroidJNI/preinstall:
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all:
 	$(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/depend
 	$(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num= "Built target android_jniiosystem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num= "Built target android_jniiosystem"
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
 
 # Include target in all.
@@ -183,9 +183,9 @@ all: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
 
 # Build rule for subdir invocation for target.
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule
 
 # Convenience name for target.
@@ -200,62 +200,6 @@ port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/clean:
 
 # clean rule for target.
 clean: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory tools/assimp_cmd
-
-# Convenience name for "all" pass in the directory.
-tools/assimp_cmd/all: tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all
-
-.PHONY : tools/assimp_cmd/all
-
-# Convenience name for "clean" pass in the directory.
-tools/assimp_cmd/clean: tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/clean
-
-.PHONY : tools/assimp_cmd/clean
-
-# Convenience name for "preinstall" pass in the directory.
-tools/assimp_cmd/preinstall:
-
-.PHONY : tools/assimp_cmd/preinstall
-
-#=============================================================================
-# Target rules for target tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
-
-# All Build rule for target.
-tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all: code/CMakeFiles/assimp.dir/all
-tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
-	$(MAKE) -f tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/depend
-	$(MAKE) -f tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=79,80,81 "Built target assimp_cmd"
-.PHONY : tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all
-
-# Include target in all.
-all: tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 81
-	$(MAKE) -f CMakeFiles/Makefile2 tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
-.PHONY : tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/rule
-
-# Convenience name for target.
-assimp_cmd: tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/rule
-
-.PHONY : assimp_cmd
-
-# clean rule for target.
-tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/clean:
-	$(MAKE) -f tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/clean
-.PHONY : tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/clean
-
-# clean rule for target.
-clean: tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/clean
 
 .PHONY : clean
 
@@ -287,7 +231,7 @@ test/CMakeFiles/unit.dir/all: code/CMakeFiles/assimp.dir/all
 test/CMakeFiles/unit.dir/all: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/all
 	$(MAKE) -f test/CMakeFiles/unit.dir/build.make test/CMakeFiles/unit.dir/depend
 	$(MAKE) -f test/CMakeFiles/unit.dir/build.make test/CMakeFiles/unit.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100 "Built target unit"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100 "Built target unit"
 .PHONY : test/CMakeFiles/unit.dir/all
 
 # Include target in all.
@@ -297,9 +241,9 @@ all: test/CMakeFiles/unit.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/unit.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 97
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 100
 	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/unit.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : test/CMakeFiles/unit.dir/rule
 
 # Convenience name for target.

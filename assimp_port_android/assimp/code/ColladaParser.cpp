@@ -861,14 +861,17 @@ void ColladaParser::ReadControllerWeights( Collada::Controller& pController)
 // Reads the image library contents
 void ColladaParser::ReadImageLibrary()
 {
+    DefaultLogger::get()->info("Collada:ReadImageLibrary");
     if( mReader->isEmptyElement())
         return;
 
+    DefaultLogger::get()->info("Collada:ReadImageLibrary:not empty");
     while( mReader->read())
     {
         if( mReader->getNodeType() == irr::io::EXN_ELEMENT) {
             if( IsElement( "image"))
             {
+                DefaultLogger::get()->info("Collada:ReadImageLibrary:is image element");
                 // read ID. Another entry which is "optional" by design but obligatory in reality
                 int attrID = GetAttribute( "id");
                 std::string id = mReader->getAttributeValue( attrID);
@@ -880,6 +883,7 @@ void ColladaParser::ReadImageLibrary()
                 ReadImage( mImageLibrary[id]);
             } else
             {
+                DefaultLogger::get()->info("Collada:ReadImageLibrary: skip element");
                 // ignore the rest
                 SkipElement();
             }
@@ -899,13 +903,19 @@ void ColladaParser::ReadImage( Collada::Image& pImage)
 {
     while( mReader->read())
     {
+        
+        DefaultLogger::get()->info("Collada:ReadImage");
         if( mReader->getNodeType() == irr::io::EXN_ELEMENT){
             // Need to run different code paths here, depending on the Collada XSD version
             if (IsElement("image")) {
+                DefaultLogger::get()->info("Collada:ReadImage: ignore");
                 SkipElement();
             }
             else if(  IsElement( "init_from"))
             {
+                DefaultLogger::get()->info("Collada:ReadImage: init_from");
+                DefaultLogger::get()->info("Collada:ReadImage:init_from:" + pImage.mFileName);
+                LOGI("Collada:ReadImage:init_from: %s", pImage.mFileName.c_str());
                 if (mFormat == FV_1_4_n)
                 {
                     // FIX: C4D exporter writes empty <init_from/> tags
@@ -941,6 +951,8 @@ void ColladaParser::ReadImage( Collada::Image& pImage)
             }
             else if (mFormat == FV_1_5_n)
             {
+                DefaultLogger::get()->info("Collada:ReadImage: FV_1_5_n");
+                DefaultLogger::get()->info("Collada:ReadImage:FV_1_5_n:" + pImage.mFileName);
                 if( IsElement( "ref"))
                 {
                     // element content is filename - hopefully

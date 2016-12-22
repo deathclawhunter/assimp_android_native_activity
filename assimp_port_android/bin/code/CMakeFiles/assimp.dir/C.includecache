@@ -308,31 +308,31 @@ unixio.h
 zconf.h
 /Volumes/Elements/Library/Android/ndk-bundle/platforms/android-9/arch-arm/usr/include/zconf.h
 
-/Volumes/Elements/proj/3D/assimp/code/../contrib/zlib/zlib.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib/zlib/zlib.h
 zconf.h
-/Volumes/Elements/proj/3D/assimp/code/../contrib/zlib/zconf.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/code/../contrib/zlib/zconf.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/ConvertUTF/ConvertUTF.c
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/ConvertUTF/ConvertUTF.c
 ConvertUTF.h
-/Volumes/Elements/proj/3D/assimp/contrib/ConvertUTF/ConvertUTF.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/ConvertUTF/ConvertUTF.h
 stdio.h
 -
 
-/Volumes/Elements/proj/3D/assimp/contrib/ConvertUTF/ConvertUTF.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/ConvertUTF/ConvertUTF.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/./ioapi.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/./ioapi.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/./unzip.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/./unzip.h
 zlib.h
 -
 ../zlib/zlib.h
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/zlib/zlib.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/zlib/zlib.h
 ioapi.h
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/./ioapi.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/./ioapi.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/crypt.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/crypt.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/ioapi.c
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/ioapi.c
 stdio.h
 -
 stdlib.h
@@ -342,13 +342,13 @@ string.h
 zlib.h
 -
 ../zlib/zlib.h
-/Volumes/Elements/proj/3D/assimp/contrib/zlib/zlib.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/zlib/zlib.h
 ioapi.h
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/ioapi.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/ioapi.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/ioapi.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/ioapi.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/unzip.c
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/unzip.c
 stdio.h
 -
 stdlib.h
@@ -356,7 +356,7 @@ stdlib.h
 string.h
 -
 ./unzip.h
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/./unzip.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/./unzip.h
 stddef.h
 -
 string.h
@@ -366,9 +366,9 @@ stdlib.h
 errno.h
 -
 crypt.h
-/Volumes/Elements/proj/3D/assimp/contrib/unzip/crypt.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/unzip/crypt.h
 
-/Volumes/Elements/proj/3D/assimp/contrib/zlib/zlib.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/zlib/zlib.h
 zconf.h
-/Volumes/Elements/proj/3D/assimp/contrib/zlib/zconf.h
+/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/contrib/zlib/zconf.h
 

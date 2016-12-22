@@ -1,8 +1,8 @@
-IF(NOT EXISTS "/Volumes/Elements/proj/3D/bin/install_manifest.txt")
-  MESSAGE(FATAL_ERROR "Cannot find install manifest: \"/Volumes/Elements/proj/3D/bin/install_manifest.txt\"")
-ENDIF(NOT EXISTS "/Volumes/Elements/proj/3D/bin/install_manifest.txt")
+IF(NOT EXISTS "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/install_manifest.txt")
+  MESSAGE(FATAL_ERROR "Cannot find install manifest: \"/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/install_manifest.txt\"")
+ENDIF(NOT EXISTS "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/install_manifest.txt")
 
-FILE(READ "/Volumes/Elements/proj/3D/bin/install_manifest.txt" files)
+FILE(READ "/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/install_manifest.txt" files)
 STRING(REGEX REPLACE "\n" ";" files "${files}")
 FOREACH(file ${files})
   MESSAGE(STATUS "Uninstalling \"$ENV{DESTDIR}${file}\"")

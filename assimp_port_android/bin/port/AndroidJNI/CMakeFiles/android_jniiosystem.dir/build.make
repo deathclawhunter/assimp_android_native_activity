@@ -43,10 +43,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 # Include any dependencies generated for this target.
 include port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/depend.make
@@ -58,17 +58,17 @@ include port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/progress.make
 include port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/flags.make
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/flags.make
-port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o: /Volumes/Elements/proj/3D/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o"
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o -c /Volumes/Elements/proj/3D/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp
+port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o: /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o -c /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i"
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/3D/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp > CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp > CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s"
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/3D/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp -o CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && /Volumes/Elements/Library/Android/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI/AndroidJNIIOSystem.cpp -o CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o.requires:
 
@@ -91,9 +91,9 @@ android_jniiosystem_EXTERNAL_OBJECTS =
 port/AndroidJNI/libandroid_jniiosystem.a: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o
 port/AndroidJNI/libandroid_jniiosystem.a: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make
 port/AndroidJNI/libandroid_jniiosystem.a: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Volumes/Elements/proj/3D/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libandroid_jniiosystem.a"
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && $(CMAKE_COMMAND) -P CMakeFiles/android_jniiosystem.dir/cmake_clean_target.cmake
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/android_jniiosystem.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libandroid_jniiosystem.a"
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && $(CMAKE_COMMAND) -P CMakeFiles/android_jniiosystem.dir/cmake_clean_target.cmake
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/android_jniiosystem.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build: port/AndroidJNI/libandroid_jniiosystem.a
@@ -105,10 +105,10 @@ port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/requires: port/AndroidJNI/CMa
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/requires
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/clean:
-	cd /Volumes/Elements/proj/3D/bin/port/AndroidJNI && $(CMAKE_COMMAND) -P CMakeFiles/android_jniiosystem.dir/cmake_clean.cmake
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI && $(CMAKE_COMMAND) -P CMakeFiles/android_jniiosystem.dir/cmake_clean.cmake
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/clean
 
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/depend:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Volumes/Elements/proj/3D/assimp /Volumes/Elements/proj/3D/assimp/port/AndroidJNI /Volumes/Elements/proj/3D/bin /Volumes/Elements/proj/3D/bin/port/AndroidJNI /Volumes/Elements/proj/3D/bin/port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp/port/AndroidJNI /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/depend
 

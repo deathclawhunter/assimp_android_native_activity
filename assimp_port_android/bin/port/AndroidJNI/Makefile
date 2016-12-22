@@ -48,10 +48,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Volumes/Elements/proj/3D/assimp
+CMAKE_SOURCE_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/assimp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Volumes/Elements/proj/3D/bin
+CMAKE_BINARY_DIR = /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -92,7 +92,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp3.3.1-dev\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-dev\" \"libassimp3.3.1-dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -124,14 +124,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles /Volumes/Elements/proj/3D/bin/port/AndroidJNI/CMakeFiles/progress.marks
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/3D/bin/CMakeFiles 0
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/port/AndroidJNI/CMakeFiles/progress.marks
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/clean
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/clean
 .PHONY : clean
 
 # The main clean target
@@ -141,22 +141,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/preinstall
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/preinstall
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f CMakeFiles/Makefile2 port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule
 .PHONY : port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule
 
 # Convenience name for target.
@@ -166,7 +166,7 @@ android_jniiosystem: port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/rule
 
 # fast build rule for target.
 android_jniiosystem/fast:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build
 .PHONY : android_jniiosystem/fast
 
 AndroidJNIIOSystem.o: AndroidJNIIOSystem.cpp.o
@@ -175,7 +175,7 @@ AndroidJNIIOSystem.o: AndroidJNIIOSystem.cpp.o
 
 # target to build an object file
 AndroidJNIIOSystem.cpp.o:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.o
 .PHONY : AndroidJNIIOSystem.cpp.o
 
 AndroidJNIIOSystem.i: AndroidJNIIOSystem.cpp.i
@@ -184,7 +184,7 @@ AndroidJNIIOSystem.i: AndroidJNIIOSystem.cpp.i
 
 # target to preprocess a source file
 AndroidJNIIOSystem.cpp.i:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.i
 .PHONY : AndroidJNIIOSystem.cpp.i
 
 AndroidJNIIOSystem.s: AndroidJNIIOSystem.cpp.s
@@ -193,7 +193,7 @@ AndroidJNIIOSystem.s: AndroidJNIIOSystem.cpp.s
 
 # target to generate assembly for a file
 AndroidJNIIOSystem.cpp.s:
-	cd /Volumes/Elements/proj/3D/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(MAKE) -f port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/build.make port/AndroidJNI/CMakeFiles/android_jniiosystem.dir/AndroidJNIIOSystem.cpp.s
 .PHONY : AndroidJNIIOSystem.cpp.s
 
 # Help Target
@@ -223,6 +223,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Volumes/Elements/proj/3D/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Volumes/Elements/proj/assimp_with_native_activity/assimp_android_native_activity/assimp_port_android/bin && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
