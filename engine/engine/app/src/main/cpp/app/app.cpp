@@ -1,3 +1,5 @@
+#define LOG_TAG "ENGINE_APP"
+
 #include <math.h>
 #include <string>
 #include <android_native_app_glue.h>
@@ -15,10 +17,6 @@ using namespace std;
 
 #define WINDOW_WIDTH  1280
 #define WINDOW_HEIGHT 1024
-
-#define LOG_TAG "ENGINE_APP"
-
-#include "AppLog.h"
 
 #include "GLError.h"
 #include "app.h"
@@ -61,7 +59,7 @@ bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
     for (int i = 0; i < m_numSkinnedMesh; i++) {
 
         if (!m_pSkinnedEffect[i].Init()) {
-            printf("Error initializing the lighting technique\n");
+            LOGE("Error initializing the lighting technique\n");
             return false;
         }
 
@@ -110,8 +108,6 @@ void SceneEngine::renderScene() {
             m_pSkinnedEffect[j].SetBoneTransform(i, Transforms[i]);
         }
 
-        LOGI("m_pGameCamera->GetPos() = ");
-        m_pGameCamera->GetPos().Print();
         m_pSkinnedEffect[j].SetEyeWorldPos(m_pGameCamera->GetPos());
 
         Pipeline p;
@@ -119,18 +115,11 @@ void SceneEngine::renderScene() {
         p.SetPerspectiveProj(m_persProjInfo);
         p.Scale(0.1f, 0.1f, 0.1f);
 
-        LOGI("m_position = ");
-        m_position.Print();
         Vector3f Pos(m_position);
         p.WorldPos(Pos);
         p.Rotate(270.0f, 180.0f, 0.0f);
 
-        LOGI("p.GetWVPTrans() = ");
-        p.GetWVPTrans().Print();
         m_pSkinnedEffect[j].SetWVP(p.GetWVPTrans());
-
-        LOGI("p.GetWorldTrans() = ");
-        p.GetWorldTrans().Print();
         m_pSkinnedEffect[j].SetWorldMatrix(p.GetWorldTrans());
 
         /* glEnable(GL_BLEND);

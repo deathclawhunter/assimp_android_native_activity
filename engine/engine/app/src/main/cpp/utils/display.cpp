@@ -1,6 +1,3 @@
-#if 1
-
-
 #include "engine.h"
 
 using namespace std;
@@ -110,5 +107,3 @@ void terminate_display(struct engine *engine) {
     engine->context = EGL_NO_CONTEXT;
     engine->surface = EGL_NO_SURFACE;
 }
-
-#endif

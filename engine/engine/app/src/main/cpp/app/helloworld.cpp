@@ -1,4 +1,4 @@
-#if 1
+#define LOG_TAG "HELLO_WORLD"
 
 #include <math.h>
 #include <GLES/gl.h>
@@ -9,10 +9,6 @@
 #include "gl3stub.h"
 
 using namespace std;
-
-#define LOG_TAG "HELLO_WORLD"
-
-#include "AppLog.h"
 
 #include "GLError.h"
 
@@ -36,7 +32,7 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     GLuint ShaderObj = glCreateShader(ShaderType);
 
     if (ShaderObj == 0) {
-        fprintf(stderr, "Error creating shader type %d\n", ShaderType);
+        LOGE("Error creating shader type %d\n", ShaderType);
         return false;
     }
 
@@ -54,7 +50,6 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     if (!success) {
         GLchar InfoLog[1024];
         glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
-        fprintf(stderr, "Error compiling '%s': '%s'\n", pFilename, InfoLog);
         LOGI("Error compiling '%s': '%s'\n", pFilename, InfoLog);
         return false;
     }
@@ -65,17 +60,16 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
 }
 
 static void CreateVertexBuffer(HelloContext *pContext) {
+
+    glUseProgram(pContext->gProgram);
+
     Vector3f Vertices[4];
-    Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
-    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
-    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
-    Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f);
+    Vertices[0] = Vector3f(-1.0f, -1.0f, -1.0f);
+    Vertices[1] = Vector3f(1.0f, -1.0f, -1.0f);
+    Vertices[2] = Vector3f(0.0f, 1.0f, -1.0f);
+    Vertices[3] = Vector3f(-1.0f, 1.0f, -1.0f);
 
-    GLubyte Indices[] = { 0, 1, 3 };
-
-    int a = sizeof(Vertices);
-
-    printf("%d", a);
+    GLubyte Indices[] = { 0, 1, 2 };
 
     glGenBuffers(1, &pContext->m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, pContext->m_Buffers[0]);
@@ -92,11 +86,11 @@ static bool initShaders(HelloContext *pContext) {
 
     GLuint prog = glCreateProgram();
 
-    if (!addShader(prog, GL_VERTEX_SHADER, "static.vs")) {
+    if (!addShader(prog, GL_VERTEX_SHADER, "basicVertex.vs")) {
         return false;
     }
 
-    if (!addShader(prog, GL_FRAGMENT_SHADER, "static.fs")) {
+    if (!addShader(prog, GL_FRAGMENT_SHADER, "basicFragment.fs")) {
         return false;
     }
 
@@ -117,6 +111,8 @@ static bool initShaders(HelloContext *pContext) {
         return false;
     }
 
+    glUseProgram(prog);
+
     pContext->gvPositionHandle = glGetAttribLocation(prog, "Position");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
@@ -133,7 +129,6 @@ void* helloInit(int32_t width, int32_t height) {
 
     struct HelloContext* pContext = (struct HelloContext *) malloc(sizeof(struct HelloContext));
 
-    CreateVertexBuffer(pContext);
     if (initShaders(pContext)) {
 
         static float grey;
@@ -145,6 +140,8 @@ void* helloInit(int32_t width, int32_t height) {
         checkGlError("glClearColor");
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         checkGlError("glClear");
+
+        CreateVertexBuffer(pContext);
 
         return pContext;
     }
@@ -166,11 +163,9 @@ void helloDrawFrame(void *pContext) {
     glEnableVertexAttribArray(pHelloCtx->gvPositionHandle);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pHelloCtx->m_Buffers[1]);
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, 0);
+    glDrawElements(GL_TRIANGLES, 4, GL_UNSIGNED_BYTE, 0);
 }
 
 int32_t helloKeyHandler(void *pContext, AInputEvent *event) {
     return 1;
 }
-
-#endif

@@ -1,6 +1,3 @@
-#if 1
-
-
 #include <math.h>
 #include <GLES/gl.h>
 #include <GL/freeglut.h>
@@ -35,6 +32,4 @@ struct engine {
     void *pContext;
 };
 
-
-#endif
 

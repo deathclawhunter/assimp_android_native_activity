@@ -1,13 +1,11 @@
+#define LOG_TAG "OGLDEV_SKINNED_MESH"
+#include "AppLog.h"
+
 #include "ogldev_skinned_mesh.h"
 #include "gl3stub.h"
 #include "technique.h"
 #include "GLError.h"
 
-#define LOG_TAG "OGLDEV_SKINNED_MESH"
-
-#define LOGI(...) ((void)__android_log_print(ANDROID_LOG_INFO, "native-activity", __VA_ARGS__))
-#define LOGW(...) ((void)__android_log_print(ANDROID_LOG_WARN, "native-activity", __VA_ARGS__))
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
 {
@@ -286,6 +284,7 @@ bool SkinnedMesh::InitMaterials(const aiScene* pScene, const string& Filename)
             if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
                 // Add by Davis: c++ string constuctor problem
 
+                // change all path to current relative path
                 char *ptr = Path.data;
                 if (strchr(Path.data, '/') != 0) {
                     ptr = strrchr(Path.data, '/') + 1;
@@ -294,35 +293,25 @@ bool SkinnedMesh::InitMaterials(const aiScene* pScene, const string& Filename)
                 }
                 string p;
                 p.append(ptr);
-                // string p(Path.data);
-                
                 if (p.substr(0, 2) == ".\\") {                    
                     p = p.substr(2, p.size() - 2);
                 }
 
                 // Add by Davis: c++ string constuctor problem
                 string FullPath;
-                // FullPath.append(Dir);
-                // FullPath.append("/");
                 FullPath.append(p);
-
-                /* const char *t = FullPath.c_str();
-                FILE *fp = fopen(t, "rb");
-                if (fp != NULL) {
-                    fclose(fp);
-                } */
                     
                 // m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath.c_str());
                 m_Textures[i] = new Texture(GL_TEXTURE_2D, FullPath);
 
                 if (!m_Textures[i]->Load()) {
-                    printf("Error loading texture '%s'\n", FullPath.c_str());
+                    LOGE("Error loading texture '%s'\n", FullPath.c_str());
                     delete m_Textures[i];
                     m_Textures[i] = NULL;
                     Ret = false;
                 }
                 else {
-                    printf("%d - loaded texture '%s'\n", i, FullPath.c_str());
+                    LOGI("%d - loaded texture '%s'\n", i, FullPath.c_str());
                 }
             }
         }
@@ -363,8 +352,8 @@ void SkinnedMesh::Render()
                                  m_Entries[i].BaseVertex); */
 
 
-            glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
-                           (void *) (sizeof(uint) * m_Entries[i].BaseIndex));
+        glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT,
+                       (void *) (sizeof(uint) * m_Entries[i].BaseIndex));
 
     }
 

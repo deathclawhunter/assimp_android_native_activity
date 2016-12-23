@@ -1,12 +1,11 @@
-#if 1
+#define LOG_TAG "ENGINE_MAIN"
 
 #include "engine.h"
 
 using namespace std;
 
-#define HELLOWORLD 0
+#define HELLOWORLD 1 // Use to test basic shader
 
-#define LOG_TAG "ENGINE_MAIN"
 #include "AppLog.h"
 #include "GLError.h"
 
@@ -42,6 +41,7 @@ void draw_frame(struct engine *engine) {
                 grey = 0.0f;
             }
             glClearColor(grey, grey, grey, 1.0f);
+            checkGlError("glClearColor");
 
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
             engine->pContext = engine->pfInit(engine->width, engine->height);
@@ -151,5 +151,3 @@ void android_main(struct android_app *state) {
         draw_frame(&engine);
     }
 }
-
-#endif
