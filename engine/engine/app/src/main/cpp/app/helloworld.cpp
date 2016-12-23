@@ -19,6 +19,30 @@ struct HelloContext {
 };
 
 /**
+ * Test data for helloworld
+ *
+ * The indices is clockwise for now. Check display.cpp for
+ * implementation.
+ *
+ * Example for how to change face culling settings:
+ *
+ * // Enable culling front faces or back faces
+ * glEnable(GL_CULL_FACE);
+ * // Specify clockwise indexed are front face, clockwise is determined by the sequence in index buffer
+ * glFrontFace(GL_CW);
+ * // Cull the back face
+ * glCullFace(GL_BACK);
+ *
+ */
+static Vector3f Vertices[] = {
+    Vector3f(-1.0f, -1.0f, 0.0f),
+    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f),
+    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f),
+    Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f)
+};
+static GLubyte Indices[] = { 0, 2, 1 };
+
+/**
  * Simple example about how to use shader
  */
 
@@ -61,16 +85,6 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
 
 static void CreateVertexBuffer(HelloContext *pContext) {
 
-    glUseProgram(pContext->gProgram);
-
-    Vector3f Vertices[4];
-    Vertices[0] = Vector3f(-1.0f, -1.0f, -1.0f);
-    Vertices[1] = Vector3f(1.0f, -1.0f, -1.0f);
-    Vertices[2] = Vector3f(0.0f, 1.0f, -1.0f);
-    Vertices[3] = Vector3f(-1.0f, 1.0f, -1.0f);
-
-    GLubyte Indices[] = { 0, 1, 2 };
-
     glGenBuffers(1, &pContext->m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, pContext->m_Buffers[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
@@ -110,8 +124,6 @@ static bool initShaders(HelloContext *pContext) {
         LOGE("Invalid shader program: '%s'\n", ErrorLog);
         return false;
     }
-
-    glUseProgram(prog);
 
     pContext->gvPositionHandle = glGetAttribLocation(prog, "Position");
     checkGlError("glGetAttribLocation");
@@ -163,7 +175,7 @@ void helloDrawFrame(void *pContext) {
     glEnableVertexAttribArray(pHelloCtx->gvPositionHandle);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pHelloCtx->m_Buffers[1]);
-    glDrawElements(GL_TRIANGLES, 4, GL_UNSIGNED_BYTE, 0);
+    glDrawElements(GL_TRIANGLES, sizeof(Indices) / sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
 }
 
 int32_t helloKeyHandler(void *pContext, AInputEvent *event) {

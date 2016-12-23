@@ -18,8 +18,8 @@ void SkinnedMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight)
     }
     
     // should never get here - more bones than we have space for
-    // assert(0);
-    return;
+    assert(0);
+    // return;
 }
 
 SkinnedMesh::SkinnedMesh()
@@ -29,9 +29,6 @@ SkinnedMesh::SkinnedMesh()
     ZERO_MEM(m_Buffers);
     m_NumBones = 0;
     m_pScene = NULL;
-
-    LOGI("m_Textures = %x\n", (int) &m_Textures[0]);
-    LOGI("m_Textures.size = %d\n", m_Textures.size());
 }
 
 
@@ -150,21 +147,15 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
     glEnableVertexAttribArray(POSITION_LOCATION);
     glVertexAttribPointer(POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-    checkGlError("");
-
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[TEXCOORD_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * TexCoords.size(), &TexCoords[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(TEX_COORD_LOCATION);
     glVertexAttribPointer(TEX_COORD_LOCATION, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
-    checkGlError("");
-
    	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * Normals.size(), &Normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(NORMAL_LOCATION);
     glVertexAttribPointer(NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    checkGlError("");
 
    	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[BONE_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Bones[0]) * Bones.size(), &Bones[0], GL_STATIC_DRAW);
@@ -173,13 +164,9 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
     glVertexAttribPointer(BONE_ID_LOCATION, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)0);
     glEnableVertexAttribArray(BONE_WEIGHT_LOCATION);    
     glVertexAttribPointer(BONE_WEIGHT_LOCATION, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
-
-    checkGlError("");
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
-
-    checkGlError("");
 
     // return GLCheckError();
     return true;

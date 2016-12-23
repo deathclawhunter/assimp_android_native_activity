@@ -78,11 +78,16 @@ int init_display(struct engine *engine) {
 
     // Initialize GL state.
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    glEnable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     // glEnable(GL_DEPTH_TEST);
+
+    // Enable culling front faces or back faces
+    glEnable(GL_CULL_FACE);
+    // Specify clockwise indexed are front face, clockwise is determined by the sequence in index buffer
     glFrontFace(GL_CW);
+    // Cull the back face
     glCullFace(GL_BACK);
+
     glEnable(GL_TEXTURE_2D);
     glViewport(0, 0, w, h);
 

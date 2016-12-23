@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define HELLOWORLD 1 // Use to test basic shader
+#define HELLOWORLD 0 // Use to test basic shader
 
 #include "AppLog.h"
 #include "GLError.h"
