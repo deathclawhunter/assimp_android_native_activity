@@ -160,7 +160,7 @@ void _android_main(struct android_app* app) {
     char progname[5] = "self";
     char* argv[] = {progname, NULL};
     fgDisplay.pDisplay.app = app;
-    main(1, argv);
+    // main(1, argv);
     /* FreeGLUT will exit() by itself if
        GLUT_ACTION_ON_WINDOW_CLOSE == GLUT_ACTION_EXIT */
   }

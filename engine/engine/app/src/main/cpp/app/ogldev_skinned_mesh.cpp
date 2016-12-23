@@ -1,10 +1,7 @@
 #include "ogldev_skinned_mesh.h"
 #include "gl3stub.h"
-#include <string>
 #include "technique.h"
-
-#include <android/log.h>
-#include <android_native_app_glue.h>
+#include "GLError.h"
 
 #define LOG_TAG "OGLDEV_SKINNED_MESH"
 
@@ -34,6 +31,9 @@ SkinnedMesh::SkinnedMesh()
     ZERO_MEM(m_Buffers);
     m_NumBones = 0;
     m_pScene = NULL;
+
+    LOGI("m_Textures = %x\n", (int) &m_Textures[0]);
+    LOGI("m_Textures.size = %d\n", m_Textures.size());
 }
 
 
@@ -150,17 +150,23 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
   	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[POS_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Positions[0]) * Positions.size(), &Positions[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(POSITION_LOCATION);
-    glVertexAttribPointer(POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);    
+    glVertexAttribPointer(POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    checkGlError("");
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[TEXCOORD_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * TexCoords.size(), &TexCoords[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(TEX_COORD_LOCATION);
     glVertexAttribPointer(TEX_COORD_LOCATION, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
+    checkGlError("");
+
    	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * Normals.size(), &Normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(NORMAL_LOCATION);
     glVertexAttribPointer(NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    checkGlError("");
 
    	glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[BONE_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Bones[0]) * Bones.size(), &Bones[0], GL_STATIC_DRAW);
@@ -169,11 +175,16 @@ bool SkinnedMesh::InitFromScene(const aiScene* pScene, const string& Filename)
     glVertexAttribPointer(BONE_ID_LOCATION, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)0);
     glEnableVertexAttribArray(BONE_WEIGHT_LOCATION);    
     glVertexAttribPointer(BONE_WEIGHT_LOCATION, 4, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (const GLvoid*)16);
+
+    checkGlError("");
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * Indices.size(), &Indices[0], GL_STATIC_DRAW);
 
-    return GLCheckError();
+    checkGlError("");
+
+    // return GLCheckError();
+    return true;
 }
 
 
@@ -213,26 +224,11 @@ void SkinnedMesh::InitMesh(uint MeshIndex,
 
 void SkinnedMesh::LoadBones(uint MeshIndex, const aiMesh* pMesh, vector<VertexBoneData>& Bones)
 {
-    /* std::map<char *, int> myMap;
-    myMap.clear();
-    myMap["AAAAAA"] = 12;
-    // myMap.insert(std::pair<string, int>(stra, 12));
-    myMap["BBBBBB"] = 222;
-    //  myMap.insert(std::pair<string, int>(strb, 222));
-    myMap["CCCCCC"] = 121; */
-
-
-    // m_BoneMapping.clear();
-
     for (uint i = 0 ; i < pMesh->mNumBones ; i++) {
-
-        // m_BoneMapping["BBBBB"] = 12;
 
         uint BoneIndex = 0;
         // Add by Davis : it seems std::map does not work for STL string on Android, char* will do the work.
         char *BoneName = pMesh->mBones[i]->mName.data;
-
-        // m_BoneMapping["CCCCCC"] = 12;
         
         if (m_BoneMapping.empty() || m_BoneMapping.find(BoneName) == m_BoneMapping.end()) {
 
@@ -242,8 +238,6 @@ void SkinnedMesh::LoadBones(uint MeshIndex, const aiMesh* pMesh, vector<VertexBo
 	        BoneInfo bi;			
 			m_BoneInfo.push_back(bi);
             m_BoneInfo[BoneIndex].BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
-
-            // m_BoneMapping["DDDDDD"] = 12;
 
 
             m_BoneMapping[BoneName] = BoneIndex;

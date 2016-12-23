@@ -33,6 +33,9 @@
 
 #include "ogldev_util.h"
 
+#define LOG_TAG "MATH"
+#include "AppLog.h"
+
 #define ToRadian(x) (float)(((x) * M_PI / 180.0f))
 #define ToDegree(x) (float)(((x) * 180.0f / M_PI))
 
@@ -129,7 +132,7 @@ struct Vector3f
 
     void Print() const
     {
-        printf("(%.02f, %.02f, %.02f)", x, y, z);
+        LOGI("(%.02f, %.02f, %.02f)\n", x, y, z);
     }
 };
 
@@ -344,7 +347,7 @@ public:
     void Print() const
     {
         for (int i = 0 ; i < 4 ; i++) {
-            printf("%f %f %f %f\n", m[i][0], m[i][1], m[i][2], m[i][3]);
+            LOGI("%f %f %f %f\n", m[i][0], m[i][1], m[i][2], m[i][3]);
         }       
     }
     

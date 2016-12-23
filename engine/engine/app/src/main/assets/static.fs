@@ -123,16 +123,16 @@ void main()
 //    In.Normal   = normalize(Normal0);
 //    In.WorldPos = WorldPos0;
   
-//    vec4 TotalLight = CalcDirectionalLight(In);                                         
+//    vec4 TotalLight = CalcDirectionalLight(In);
                                                                                             
-//    for (int i = 0 ; i < gNumPointLights ; i++) {                                           
-//        TotalLight += CalcPointLight(gPointLights[i], In);                              
-//    }                                                                                       
+//    for (int i = 0 ; i < gNumPointLights ; i++) {
+//        TotalLight += CalcPointLight(gPointLights[i], In);
+//    }
                                                                                             
-//    for (int i = 0 ; i < gNumSpotLights ; i++) {                                            
-//        TotalLight += CalcSpotLight(gSpotLights[i], In);                                
-//    }                                                                                       
+//    for (int i = 0 ; i < gNumSpotLights ; i++) {
+//        TotalLight += CalcSpotLight(gSpotLights[i], In);
+//    }
                                                                                             
-//    gl_FragColor = texture(gColorMap, In.TexCoord.xy) * TotalLight;
-    gl_FragColor = vec4(.5, 1.0, .5, 1.0);
+//    gl_FragColor = texture2D(gColorMap, In.TexCoord.xy) * TotalLight;
+    gl_FragColor = vec4(1,0,1,1);
 }

@@ -60,7 +60,7 @@ void OgldevApp::RenderFPS()
     ZERO_MEM(text);        
     SNPRINTF(text, sizeof(text), "FPS: %d", m_fps);
 
-/* #ifndef WIN32
+/* TODO: #ifndef WIN32
     m_fontRenderer.RenderText(10, 10, text);        
 #endif */
 }

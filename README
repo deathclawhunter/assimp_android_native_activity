@@ -2,8 +2,8 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
+Need to support static mesh rendering. It seems does not work for now.
 Need to enable switching between different models
-Need to enable debug inside ASSIMP
 The models draw from COLLADA files seems wrong in z-order
 COLLADA import will fail after exported from Blender 2.77
 It seems the lighting system is not working properly.
@@ -13,6 +13,8 @@ Need to add frame rate control
 
 DONE
 ===========
+Re-engineered part of the code as a start to introduce multiple model support.
+DONE Need to enable debug inside ASSIMP, it is done by correcting the build path. But there are still remain some paths are very tedius to correct. I have to change CMakeCache.txt to control most of them. To fix all of them need deep dive into CMake which is not current priority.
 DONE Add new test files for COLLADA file format
 DONE Add PNG support in ImageMagick++
 DONE by supporting COLLADA files format which can be easily export from Blender, Need to add blender animation plugin to assimp so that I can load animation from blender or compatible file format

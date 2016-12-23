@@ -55,16 +55,24 @@ file(GLOB png_src
     "png/*.c"
 )
 
-file(GLOB assimp_c_src
-    "assimp/*.c"
+#file(GLOB assimp_c_src
+#    "assimp/*.c"
+#)
+
+#file(GLOB assimp_cxx_src
+#    "assimp/*.cpp"
+#)
+
+#file(GLOB assimp_cc_src
+#    "assimp/*.cc"
+#)
+
+file(GLOB utils_src
+    "utils/*.c"
 )
 
-file(GLOB assimp_cxx_src
-    "assimp/*.cpp"
-)
-
-file(GLOB assimp_cc_src
-    "assimp/*.cc"
+file(GLOB utils_xx_src
+    "utils/*.cpp"
 )
 
 add_library(engine SHARED
@@ -77,6 +85,8 @@ add_library(engine SHARED
             ${Magick_src}
             ${coder_src}
             ${png_src}
+            ${utils_src}
+            ${utils_xx_src}
 #            ${assimp_c_src}
 #            ${assimp_cxx_src}
 #            ${assimp_cc_src}
@@ -91,6 +101,7 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/freeglut/include
                            ${distribution_DIR}/png/include
                            ${CMAKE_SOURCE_DIR}/app
+                           ${CMAKE_SOURCE_DIR}/utils
                            ${CMAKE_SOURCE_DIR}/assimp
                            ${CMAKE_SOURCE_DIR}/assimp/contrib
                            ${CMAKE_SOURCE_DIR}/assimp/contrib/unzip
