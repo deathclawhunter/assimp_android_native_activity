@@ -1,35 +1,22 @@
-/*
-        Copyright 2011 Etay Meiri
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-#ifndef SKINNING_TECHNIQUE_H
-#define	SKINNING_TECHNIQUE_H
+#ifndef STATIC_TECHNIQUE_H
+#define	STATIC_TECHNIQUE_H
 
 #include "technique.h"
 #include "lighting_technique.h"
 #include "ogldev_math_3d.h"
 
-class SkinningTechnique : public Technique {
+/**
+ * TODO: create a parent class for both skinned_technique and static_technique and
+ * move those common code into one class
+ */
+
+class StaticTechnique : public Technique {
 public:
 
     static const uint MAX_POINT_LIGHTS = 2;
     static const uint MAX_SPOT_LIGHTS = 2;
-    static const uint MAX_BONES = 100;
 
-    SkinningTechnique();
+    StaticTechnique();
 
     virtual bool Init();
 
@@ -42,7 +29,6 @@ public:
     void SetEyeWorldPos(const Vector3f& EyeWorldPos);
     void SetMatSpecularIntensity(float Intensity);
     void SetMatSpecularPower(float Power);
-    void SetBoneTransform(uint Index, const Matrix4f& Transform);
 
 private:
     
@@ -87,9 +73,7 @@ private:
             GLuint Exp;
         } Atten;
     } m_spotLightsLocation[MAX_SPOT_LIGHTS];
-    
-    GLuint m_boneLocation[MAX_BONES];
 };
 
 
-#endif	/* SKINNING_TECHNIQUE_H */
+#endif	/* STATIC_TECHNIQUE_H */

@@ -75,6 +75,26 @@ bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
         }
     }
 
+    m_numStaticMesh = min(MAX_NUM_STATIC_MESHES, numStaticMesh);
+    for (int i = 0; i < m_numStaticMesh; i++) {
+
+        if (!m_pStaticEffect[i].Init()) {
+            LOGE("Error initializing the lighting technique\n");
+            return false;
+        }
+
+        m_pStaticEffect[i].Enable();
+        m_pStaticEffect[i].SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
+        m_pStaticEffect[i].SetDirectionalLight(m_directionalLight);
+        m_pStaticEffect[i].SetMatSpecularIntensity(0.0f);
+        m_pStaticEffect[i].SetMatSpecularPower(0);
+
+        if (!m_staticMesh[i].LoadMesh(staticMesh[i])) {
+            LOGE("fail to load mesh %s\n", staticMesh[i].c_str());
+            return false;
+        }
+    }
+
     static float grey;
     grey += 0.01f;
     if (grey > 1.0f) {
@@ -90,11 +110,7 @@ bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
     return true;
 }
 
-void SceneEngine::renderScene() {
-    CalcFPS();
-
-    m_pGameCamera->OnRender();
-
+void SceneEngine::drawSkinnedMeshes() {
     for (int j = 0; j < m_numSkinnedMesh; j++) {
         m_pSkinnedEffect[j].Enable();
 
@@ -129,6 +145,37 @@ void SceneEngine::renderScene() {
 
         m_skinnedMesh[j].Render();
     }
+}
+
+void SceneEngine::drawStaticMeshes() {
+    for (int j = 0; j < m_numStaticMesh; j++) {
+        m_pStaticEffect[j].Enable();
+
+        m_pStaticEffect[j].SetEyeWorldPos(m_pGameCamera->GetPos());
+
+        Pipeline p;
+        p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
+        p.SetPerspectiveProj(m_persProjInfo);
+        p.Scale(0.1f, 0.1f, 0.1f);
+
+        Vector3f Pos(m_position);
+        p.WorldPos(Pos);
+        p.Rotate(270.0f, 180.0f, 0.0f);
+
+        m_pStaticEffect[j].SetWVP(p.GetWVPTrans());
+        m_pStaticEffect[j].SetWorldMatrix(p.GetWorldTrans());
+
+        m_staticMesh[j].Render();
+    }
+}
+
+void SceneEngine::renderScene() {
+    CalcFPS();
+
+    m_pGameCamera->OnRender();
+
+    drawStaticMeshes();
+    drawSkinnedMeshes();
 
     RenderFPS();
 }
@@ -164,14 +211,14 @@ void* appInit(int32_t w, int32_t h) {
     SceneEngine *pApp = new SceneEngine();
 
     std::string str[1];
-    str[0].append("boblampclean.md5mesh");
+    // str[0].append("boblampclean.md5mesh");
     // str[1].append("marcus.dae");
     // str.append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str.append("monkey.dae");
-    // str[0].append("untitled.dae");
+    str[0].append("untitled.dae");
 
-    if (pApp->Init(NULL, 0, str, 1, w, h)) {
+    if (pApp->Init(str, 1, NULL, 0, w, h)) {
         return pApp;
     }
 

@@ -12,12 +12,14 @@
 #include "skinning_technique.h"
 #include "ogldev_glut_backend.h"
 #include "ogldev_skinned_mesh.h"
+#include "static_mesh.h"
+#include "static_technique.h"
 
 using namespace std;
 
 // cap for meshes in a scene
 #define MAX_NUM_SKINNED_MESHES 5
-// TODO: #define MAX_NUM_STATIC_MESHES 20
+#define MAX_NUM_STATIC_MESHES 20
 
 class SceneEngine : public ICallbacks, public OgldevApp {
 public:
@@ -46,14 +48,18 @@ public:
 
 private:
     SkinningTechnique m_pSkinnedEffect[MAX_NUM_SKINNED_MESHES];
-    // StaticTechnique m_pStaticEffect[MAX_NUM_STATIC_MESHES];
+    StaticTechnique m_pStaticEffect[MAX_NUM_STATIC_MESHES];
     Camera *m_pGameCamera;
     DirectionalLight m_directionalLight;
     SkinnedMesh m_skinnedMesh[MAX_NUM_SKINNED_MESHES];
     int m_numSkinnedMesh;
-    // StaticMesh m_staticMesh[MAX_NUM_STATIC_MESHES]; // Most likely those static mesh will never change
+    StaticMesh m_staticMesh[MAX_NUM_STATIC_MESHES]; // Most likely those static mesh will never change
+    int m_numStaticMesh;
     Vector3f m_position;
     PersProjInfo m_persProjInfo;
+
+    void drawSkinnedMeshes();
+    void drawStaticMeshes();
 public:
     float getTouchX();
     void setTouchX(float touchX);
