@@ -2,8 +2,7 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-Need to support static mesh rendering. It seems does not work for now.
-Need to enable switching between different models
+Need to enable switching between different models, some meshes work fine, some not. Seems the mesh may conflict with each other in current renderer code. Need to figure out why.
 The models draw from COLLADA files seems wrong in z-order
 COLLADA import will fail after exported from Blender 2.77
 It seems the lighting system is not working properly.
@@ -13,6 +12,7 @@ Need to add frame rate control
 
 DONE
 ===========
+DONE Need to support static mesh rendering. It seems does not work for now.
 Re-engineered part of the code as a start to introduce multiple model support.
 DONE Need to enable debug inside ASSIMP, it is done by correcting the build path. But there are still remain some paths are very tedius to correct. I have to change CMakeCache.txt to control most of them. To fix all of them need deep dive into CMake which is not current priority.
 DONE Add new test files for COLLADA file format
@@ -28,6 +28,13 @@ FIXED by pre calculate in index buffer. Reference to OpenGL API dev notes. The t
 
 Notes
 ===========
+Blender export problem
+----------------
+The cycles renderer cannot export texture correctly, need to swtich back to use blender built-in renderer. Maybe it is not worth for now to develop a python script to export texture for cycles, because cycles seems not designed for game assets developing anyway.
+
+Also, the mesh is too small when display on the phone. It seems the mesh need to be scale up to 10-20 times big. Maybe a python script will help.
+
+
 std::string
 ----------------
 This class seems does not work well on Android. If we use 'string a = "bb";', the class will contain malformed characters rather than "bb". It results vary problems in the code. I have to split it into: 'string a; a.append("bb");'.

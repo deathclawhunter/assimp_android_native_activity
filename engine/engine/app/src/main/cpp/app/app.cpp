@@ -112,6 +112,7 @@ bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
 
 void SceneEngine::drawSkinnedMeshes() {
     for (int j = 0; j < m_numSkinnedMesh; j++) {
+
         m_pSkinnedEffect[j].Enable();
 
         vector<Matrix4f> Transforms;
@@ -210,15 +211,16 @@ void* appInit(int32_t w, int32_t h) {
 
     SceneEngine *pApp = new SceneEngine();
 
-    std::string str[1];
-    // str[0].append("boblampclean.md5mesh");
+    std::string str[2];
+    str[0].append("boblampclean.md5mesh");
     // str[1].append("marcus.dae");
-    // str.append("ArmyPilot.dae");
+    // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
-    // str.append("monkey.dae");
-    str[0].append("untitled.dae");
+    // str[0].append("monkey.dae");
+    // str[0].append("untitled.dae");
+    str[1].append("untitled2.dae");
 
-    if (pApp->Init(str, 1, NULL, 0, w, h)) {
+    if (pApp->Init(str, 2, NULL, 0, w, h)) {
         return pApp;
     }
 
