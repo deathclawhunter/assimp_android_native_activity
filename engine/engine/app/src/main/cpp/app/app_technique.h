@@ -1,22 +1,18 @@
-#ifndef STATIC_TECHNIQUE_H
-#define	STATIC_TECHNIQUE_H
+#ifndef APP_TECHNIQUE_H
+#define	APP_TECHNIQUE_H
 
 #include "technique.h"
 #include "lighting_technique.h"
 #include "ogldev_math_3d.h"
 
-/**
- * TODO: create a parent class for both skinned_technique and static_technique and
- * move those common code into one class
- */
-
-class StaticTechnique : public Technique {
+class AppTechnique : public Technique {
 public:
 
     static const uint MAX_POINT_LIGHTS = 2;
     static const uint MAX_SPOT_LIGHTS = 2;
+    static const uint MAX_BONES = 100;
 
-    StaticTechnique();
+    AppTechnique();
 
     virtual bool Init();
 
@@ -29,6 +25,7 @@ public:
     void SetEyeWorldPos(const Vector3f& EyeWorldPos);
     void SetMatSpecularIntensity(float Intensity);
     void SetMatSpecularPower(float Power);
+    void SetBoneTransform(uint Index, const Matrix4f& Transform);
 
 private:
     
@@ -72,8 +69,10 @@ private:
             GLuint Linear;
             GLuint Exp;
         } Atten;
-    } m_spotLightsLocation[MAX_SPOT_LIGHTS];
+    } m_SpotLightsLocation[MAX_SPOT_LIGHTS];
+    
+    GLuint m_BoneLocation[MAX_BONES];
 };
 
 
-#endif	/* STATIC_TECHNIQUE_H */
+#endif	/* APP_TECHNIQUE_H */

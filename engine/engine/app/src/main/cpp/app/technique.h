@@ -23,14 +23,18 @@
 // #include <GL/glew.h>
 #include <GLES/gl.h>
 
-#define POSITION_LOCATION    0
+/**
+ * Davis: Should not hard code the attribute locations
+ * when come to multiple shader case
+ */
+/*#define POSITION_LOCATION    0
 #define TEX_COORD_LOCATION   1
 #define NORMAL_LOCATION      2
 #define BONE_ID_LOCATION     3
 #define BONE_WEIGHT_LOCATION 4
 #define MESH_LOCATION 5 // Add by Davis
 #define TEST_VB_LOCATION 6 // Add by Davis
-#define TEST_INDEX_LOCATION 7 // Add by Davis
+#define TEST_INDEX_LOCATION 7 // Add by Davis*/
 
 class Technique
 {
@@ -44,6 +48,15 @@ public:
 
     void Enable();
 
+    /**
+     * Fixed atttibute location
+     */
+    static const int POSITION_LOCATION = 0;
+    static const int TEXCOORD_LOCATION = 1;
+    static const int NORMAL_LOCATION = 2;
+    static const int BONE_LOCATION = 3;
+    static const int WEIGHT_LOCATION = 4;
+
 protected:
 
     bool AddShader(GLenum ShaderType, const char* pFilename);
@@ -54,12 +67,12 @@ protected:
     
     GLint GetProgramParam(GLint param);
     
-    GLuint m_shaderProg;
+    GLuint m_ShaderProg;
     
 private:
 
     typedef std::list<GLuint> ShaderObjList;
-    ShaderObjList m_shaderObjList;
+    ShaderObjList m_ShaderObjList;
 };
 
 #endif	/* TECHNIQUE_H */

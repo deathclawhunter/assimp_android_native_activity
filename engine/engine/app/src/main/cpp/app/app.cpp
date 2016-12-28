@@ -9,9 +9,9 @@
 #include "ogldev_camera.h"
 #include "ogldev_pipeline.h"
 #include "texture.h"
-#include "skinning_technique.h"
+#include "app_technique.h"
 #include "ogldev_glut_backend.h"
-#include "ogldev_skinned_mesh.h"
+#include "app_mesh.h"
 
 using namespace std;
 
@@ -25,72 +25,47 @@ extern int scroll(float touchX, float lastTouchX);
 
 SceneEngine::SceneEngine() {
     m_pGameCamera = NULL;
-    m_directionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
-    m_directionalLight.AmbientIntensity = 0.55f;
-    m_directionalLight.DiffuseIntensity = 0.9f;
-    m_directionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
+    m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
+    m_DirectionalLight.AmbientIntensity = 0.55f;
+    m_DirectionalLight.DiffuseIntensity = 0.9f;
+    m_DirectionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
 
-    m_persProjInfo.FOV = 60.0f;
-    m_persProjInfo.Height = WINDOW_WIDTH;
-    m_persProjInfo.Width = WINDOW_HEIGHT;
-    m_persProjInfo.zNear = 1.0f;
-    m_persProjInfo.zFar = 100.0f;
+    m_PersProjInfo.FOV = 60.0f;
+    m_PersProjInfo.Height = WINDOW_WIDTH;
+    m_PersProjInfo.Width = WINDOW_HEIGHT;
+    m_PersProjInfo.zNear = 1.0f;
+    m_PersProjInfo.zFar = 100.0f;
 
-    m_position = Vector3f(0.0f, 0.0f, 6.0f);
+    m_Position = Vector3f(0.0f, 0.0f, 6.0f);
 }
 
 SceneEngine::~SceneEngine() {
     SAFE_DELETE(m_pGameCamera);
 }
 
-bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
-          string skinnedMesh[], int numSkinnedMesh,
-          int w, int h) {
+bool SceneEngine::Init(string mesh[], int numMesh, int w, int h) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
     Vector3f Up(0.0, 1.0f, 0.0f);
 
-    m_persProjInfo.Width = w;
-    m_persProjInfo.Height = h;
+    m_PersProjInfo.Width = w;
+    m_PersProjInfo.Height = h;
 
     m_pGameCamera = new Camera(w, h, Pos, Target, Up);
-
-    m_numSkinnedMesh = min(MAX_NUM_SKINNED_MESHES, numSkinnedMesh);
-    for (int i = 0; i < m_numSkinnedMesh; i++) {
-
-        if (!m_pSkinnedEffect[i].Init()) {
-            LOGE("Error initializing the lighting technique\n");
-            return false;
-        }
-
-        m_pSkinnedEffect[i].Enable();
-        m_pSkinnedEffect[i].SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
-        m_pSkinnedEffect[i].SetDirectionalLight(m_directionalLight);
-        m_pSkinnedEffect[i].SetMatSpecularIntensity(0.0f);
-        m_pSkinnedEffect[i].SetMatSpecularPower(0);
-
-        if (!m_skinnedMesh[i].LoadMesh(skinnedMesh[i])) {
-            LOGE("fail to load mesh %s\n", skinnedMesh[i].c_str());
-            return false;
-        }
+    if (!m_Renderer.Init()) {
+        LOGE("Error initializing the lighting technique\n");
+        return false;
     }
+    m_Renderer.Enable();
+    m_Renderer.SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
+    m_Renderer.SetDirectionalLight(m_DirectionalLight);
+    m_Renderer.SetMatSpecularIntensity(0.0f);
+    m_Renderer.SetMatSpecularPower(0);
 
-    m_numStaticMesh = min(MAX_NUM_STATIC_MESHES, numStaticMesh);
-    for (int i = 0; i < m_numStaticMesh; i++) {
-
-        if (!m_pStaticEffect[i].Init()) {
-            LOGE("Error initializing the lighting technique\n");
-            return false;
-        }
-
-        m_pStaticEffect[i].Enable();
-        m_pStaticEffect[i].SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
-        m_pStaticEffect[i].SetDirectionalLight(m_directionalLight);
-        m_pStaticEffect[i].SetMatSpecularIntensity(0.0f);
-        m_pStaticEffect[i].SetMatSpecularPower(0);
-
-        if (!m_staticMesh[i].LoadMesh(staticMesh[i])) {
-            LOGE("fail to load mesh %s\n", staticMesh[i].c_str());
+    m_NumMesh = min(MAX_NUM_MESHES, numMesh);
+    for (int i = 0; i < m_NumMesh; i++) {
+        if (!m_Meshes[i].LoadMesh(mesh[i])) {
+            LOGE("fail to load mesh %s\n", mesh[i].c_str());
             return false;
         }
     }
@@ -110,73 +85,46 @@ bool SceneEngine::Init(string staticMesh[], int numStaticMesh,
     return true;
 }
 
-void SceneEngine::drawSkinnedMeshes() {
-    for (int j = 0; j < m_numSkinnedMesh; j++) {
-
-        m_pSkinnedEffect[j].Enable();
-
-        vector<Matrix4f> Transforms;
-
-        float RunningTime = GetRunningTime();
-
-        m_skinnedMesh[j].BoneTransform(RunningTime, Transforms);
-
-        for (uint i = 0; i < Transforms.size(); i++) {
-            m_pSkinnedEffect[j].SetBoneTransform(i, Transforms[i]);
-        }
-
-        m_pSkinnedEffect[j].SetEyeWorldPos(m_pGameCamera->GetPos());
-
-        Pipeline p;
-        p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
-        p.SetPerspectiveProj(m_persProjInfo);
-        p.Scale(0.1f, 0.1f, 0.1f);
-
-        Vector3f Pos(m_position);
-        p.WorldPos(Pos);
-        p.Rotate(270.0f, 180.0f, 0.0f);
-
-        m_pSkinnedEffect[j].SetWVP(p.GetWVPTrans());
-        m_pSkinnedEffect[j].SetWorldMatrix(p.GetWorldTrans());
-
-        /* glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
-        glDepthMask(false);
-        glDepthFunc(GL_EQUAL); */
-
-        m_skinnedMesh[j].Render();
-    }
-}
-
-void SceneEngine::drawStaticMeshes() {
-    for (int j = 0; j < m_numStaticMesh; j++) {
-        m_pStaticEffect[j].Enable();
-
-        m_pStaticEffect[j].SetEyeWorldPos(m_pGameCamera->GetPos());
-
-        Pipeline p;
-        p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
-        p.SetPerspectiveProj(m_persProjInfo);
-        p.Scale(0.1f, 0.1f, 0.1f);
-
-        Vector3f Pos(m_position);
-        p.WorldPos(Pos);
-        p.Rotate(270.0f, 180.0f, 0.0f);
-
-        m_pStaticEffect[j].SetWVP(p.GetWVPTrans());
-        m_pStaticEffect[j].SetWorldMatrix(p.GetWorldTrans());
-
-        m_staticMesh[j].Render();
-    }
-}
-
 void SceneEngine::renderScene() {
     CalcFPS();
 
     m_pGameCamera->OnRender();
 
-    drawStaticMeshes();
-    drawSkinnedMeshes();
+    m_Renderer.SetEyeWorldPos(m_pGameCamera->GetPos());
+
+    Pipeline p;
+    p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
+    p.SetPerspectiveProj(m_PersProjInfo);
+    p.Scale(0.1f, 0.1f, 0.1f);
+
+    Vector3f Pos(m_Position);
+    p.WorldPos(Pos);
+    p.Rotate(270.0f, 180.0f, 0.0f);
+
+    m_Renderer.SetWVP(p.GetWVPTrans());
+    m_Renderer.SetWorldMatrix(p.GetWorldTrans());
+
+    /* glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    glDepthMask(false);
+    glDepthFunc(GL_EQUAL); */
+
+    for (int j = 0; j < m_NumMesh; j++) {
+
+        vector<Matrix4f> Transforms;
+        if (m_Meshes[j].NumBones() > 0) {
+            float RunningTime = GetRunningTime();
+            m_Meshes[j].BoneTransform(RunningTime, Transforms);
+        } else {
+            // use identity bone for static mesh
+            Transforms.resize(1);
+            Transforms[0].InitIdentity();
+        }
+        for (uint i = 0; i < Transforms.size(); i++) {
+            m_Renderer.SetBoneTransform(i, Transforms[i]);
+        }
+        m_Meshes[j].Render();
+    }
 
     RenderFPS();
 }
@@ -211,16 +159,16 @@ void* appInit(int32_t w, int32_t h) {
 
     SceneEngine *pApp = new SceneEngine();
 
-    std::string str[2];
+    std::string str[3];
     str[0].append("boblampclean.md5mesh");
-    // str[1].append("marcus.dae");
+    str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
-    // str[0].append("untitled.dae");
-    str[1].append("untitled2.dae");
+    str[2].append("untitled.dae");
+    // str[1].append("untitled2.dae");
 
-    if (pApp->Init(str, 2, NULL, 0, w, h)) {
+    if (pApp->Init(str, 3, w, h)) {
         return pApp;
     }
 
