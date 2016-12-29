@@ -21,8 +21,6 @@ using namespace std;
 #include "GLError.h"
 #include "app.h"
 
-extern int scroll(float touchX, float lastTouchX);
-
 SceneEngine::SceneEngine() {
     m_pGameCamera = NULL;
     m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -31,8 +29,9 @@ SceneEngine::SceneEngine() {
     m_DirectionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
 
     m_PersProjInfo.FOV = 60.0f;
-    m_PersProjInfo.Height = WINDOW_WIDTH;
-    m_PersProjInfo.Width = WINDOW_HEIGHT;
+    m_PersProjInfo.Height = WINDOW_HEIGHT;
+    m_PersProjInfo.Width = WINDOW_WIDTH;
+    CalculateCenterOfRightHalf();
     m_PersProjInfo.zNear = 1.0f;
     m_PersProjInfo.zFar = 100.0f;
 
@@ -43,6 +42,11 @@ SceneEngine::~SceneEngine() {
     SAFE_DELETE(m_pGameCamera);
 }
 
+void SceneEngine::CalculateCenterOfRightHalf() {
+    m_RCenterX = m_PersProjInfo.Width * 3.0f / 4.0f;
+    m_RCenterY = m_PersProjInfo.Height / 2.0f;
+}
+
 bool SceneEngine::Init(string mesh[], int numMesh, int w, int h) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
@@ -51,11 +55,15 @@ bool SceneEngine::Init(string mesh[], int numMesh, int w, int h) {
     m_PersProjInfo.Width = w;
     m_PersProjInfo.Height = h;
 
+    // calculate center point of right half of the screen
+    CalculateCenterOfRightHalf();
+
     m_pGameCamera = new Camera(w, h, Pos, Target, Up);
     if (!m_Renderer.Init()) {
         LOGE("Error initializing the lighting technique\n");
         return false;
     }
+    m_pGameCamera->SetStep(GAME_STEP_SCALE);
     m_Renderer.Enable();
     m_Renderer.SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
     m_Renderer.SetDirectionalLight(m_DirectionalLight);
@@ -129,20 +137,47 @@ void SceneEngine::renderScene() {
     RenderFPS();
 }
 
-float SceneEngine::getTouchX() {
-    return touchX;
+OGLDEV_KEY SceneEngine::ConvertKey(float x, float y) {
+
+    float diffX, diffY, ratioX, ratioY;
+
+    diffX = m_RCenterX - x;
+    diffY = m_RCenterY - y;
+    ratioX = diffX / m_PersProjInfo.Width;
+    ratioY = diffY / m_PersProjInfo.Height;
+    LOGI("m_RCenterX = %f, m_RCenterY = %f\n", m_RCenterX, m_RCenterY);
+
+    if (abs(diffX) > MINIMAL_MOVE_DIFF && abs(ratioX) > abs(ratioY)) {
+        if (diffX > 0) {
+            LOGI("LEFT");
+            return OGLDEV_KEY_LEFT;
+        } else {
+            LOGI("RIGHT");
+            return OGLDEV_KEY_RIGHT;
+        }
+    } else if (abs(diffY) > MINIMAL_MOVE_DIFF && abs(ratioY) > abs(ratioX)) {
+
+        if (ENABLE_UP_N_DOWN) {
+            if (diffY > 0) {
+                LOGI("UP");
+                return OGLDEV_KEY_UP;
+            } else {
+                LOGI("DOWN");
+                return OGLDEV_KEY_DOWN;
+            }
+        }
+    }
+
+    return OGLDEV_KEY_UNDEFINED;
 }
 
-void SceneEngine::setTouchX(float touchX) {
-    SceneEngine::touchX = touchX;
+void SceneEngine::ResetMouse() {
+    m_pGameCamera->ResetMouse();
 }
 
-float SceneEngine::getTouchY() {
-    return touchY;
-}
-
-void SceneEngine::setTouchY(float touchY) {
-    SceneEngine::touchY = touchY;
+float SceneEngine::DistToCenter(float x, float y) {
+    // simple algorithm to calculate right half or left half screen was pressed
+    return abs(x - m_RCenterX) + abs(y - m_RCenterY);
 }
 
 /**
@@ -159,16 +194,16 @@ void* appInit(int32_t w, int32_t h) {
 
     SceneEngine *pApp = new SceneEngine();
 
-    std::string str[3];
-    str[0].append("boblampclean.md5mesh");
-    str[1].append("marcus.dae");
+    std::string str[1];
+    // str[0].append("boblampclean.md5mesh");
+    // str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
-    str[2].append("untitled.dae");
+    str[0].append("untitled.dae");
     // str[1].append("untitled2.dae");
 
-    if (pApp->Init(str, 3, w, h)) {
+    if (pApp->Init(str, 1, w, h)) {
         return pApp;
     }
 
@@ -179,21 +214,33 @@ void* appInit(int32_t w, int32_t h) {
 int32_t appKeyHandler(void *pContext, AInputEvent *event) {
     SceneEngine *engine = (SceneEngine *) pContext;
     int32_t action = AMotionEvent_getAction(event);
-    if (action == AMOTION_EVENT_ACTION_MOVE) {
-        float touchX = AMotionEvent_getX(event, 0);
-        float touchY = AMotionEvent_getY(event, 0);
+    size_t count = AMotionEvent_getPointerCount(event);
+    if (count == 1) { // single finger touch
+        if (action == AMOTION_EVENT_ACTION_MOVE) {
+            float touchX = AMotionEvent_getX(event, 0);
+            float touchY = AMotionEvent_getY(event, 0);
 
-        int scrollFlag = scroll(touchX, engine->getTouchX());
-        if (scrollFlag == 0) {
-            // LOGI("scroll left\n");
-            engine->KeyboardCB(OGLDEV_KEY_LEFT, OGLDEV_KEY_STATE_PRESS);
-        } else if (scrollFlag == 1) {
-            // LOGI("scroll right\n");
-            engine->KeyboardCB(OGLDEV_KEY_RIGHT, OGLDEV_KEY_STATE_PRESS);
+            engine->PassiveMouseCB(touchX, touchY);
+        } else if (action == AMOTION_EVENT_ACTION_UP) {
+            LOGI("Reset mouse");
+            engine->ResetMouse();
         }
+    } else if (count == 2) {
+        if (action == AMOTION_EVENT_ACTION_MOVE) {
+            float touch2X = AMotionEvent_getX(event, 1);
+            float touch2Y = AMotionEvent_getY(event, 1);
 
-        engine->setTouchX(touchX);
-        engine->setTouchY(touchY);
+            float touch1X = AMotionEvent_getX(event, 0);
+            float touch1Y = AMotionEvent_getY(event, 0);
+
+            if (engine->DistToCenter(touch1X, touch1Y) >
+                engine->DistToCenter(touch2X, touch2Y)) {
+                engine->PassiveKeyCB(touch2X, touch2Y);
+            } else {
+                engine->PassiveKeyCB(touch1X, touch1Y);
+            }
+        }
     }
+
     return 1;
 }

@@ -34,9 +34,19 @@ public:
     }
 
 
-    virtual void PassiveMouseCB(int x, int y) {
+    void PassiveMouseCB(int x, int y) {
         m_pGameCamera->OnMouse(x, y);
     }
+
+    OGLDEV_KEY ConvertKey(float x, float y);
+
+    void PassiveKeyCB(float x, float y) {
+        m_pGameCamera->OnKeyboard(ConvertKey(x, y));
+    }
+
+    void ResetMouse();
+
+    float DistToCenter(float x, float y);
 
 private:
     AppTechnique m_Renderer;
@@ -46,12 +56,11 @@ private:
     int m_NumMesh;
     Vector3f m_Position;
     PersProjInfo m_PersProjInfo;
-public:
-    float getTouchX();
-    void setTouchX(float touchX);
-    float getTouchY();
-    void setTouchY(float touchY);
+    float m_RCenterX, m_RCenterY; // Center point of right half of the screen
 
 private:
-    float touchX, touchY;
+    const float MINIMAL_MOVE_DIFF = 0.1f;
+    const bool ENABLE_UP_N_DOWN = true; // In mobile game, we disable up and down
+    void CalculateCenterOfRightHalf();
+    const float GAME_STEP_SCALE = 0.5f;
 };

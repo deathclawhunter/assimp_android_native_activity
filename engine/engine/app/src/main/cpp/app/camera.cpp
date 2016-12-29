@@ -30,6 +30,7 @@ Camera::Camera(int WindowWidth, int WindowHeight)
     m_target       = Vector3f(0.0f, 0.0f, 1.0f);
     m_target.Normalize();
     m_up           = Vector3f(0.0f, 1.0f, 0.0f);
+    m_StepScale = STEP_SCALE;
 
     Init();
 }
@@ -87,6 +88,7 @@ void Camera::Init()
     m_OnRightEdge = false;
     m_mousePos.x  = m_windowWidth / 2;
     m_mousePos.y  = m_windowHeight / 2;
+    m_ResetFlag = true;
 
    // glutWarpPointer(m_mousePos.x, m_mousePos.y);
 }
@@ -100,14 +102,14 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key)
 
     case OGLDEV_KEY_UP:
         {
-            m_pos += (m_target * STEP_SCALE);
+            m_pos += (m_target * m_StepScale);
             Ret = true;
         }
         break;
 
     case OGLDEV_KEY_DOWN:
         {
-            m_pos -= (m_target * STEP_SCALE);
+            m_pos -= (m_target * m_StepScale);
             Ret = true;
         }
         break;
@@ -116,7 +118,7 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key)
         {
             Vector3f Left = m_target.Cross(m_up);
             Left.Normalize();
-            Left *= STEP_SCALE;
+            Left *= m_StepScale;
             m_pos += Left;
             Ret = true;
         }
@@ -126,22 +128,26 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key)
         {
             Vector3f Right = m_up.Cross(m_target);
             Right.Normalize();
-            Right *= STEP_SCALE;
+            Right *= m_StepScale;
             m_pos += Right;
             Ret = true;
         }
         break;
         
     case OGLDEV_KEY_PAGE_UP:
-        m_pos.y += STEP_SCALE;
+        m_pos.y += m_StepScale;
         break;
     
     case OGLDEV_KEY_PAGE_DOWN:
-        m_pos.y -= STEP_SCALE;
+        m_pos.y -= m_StepScale;
         break;
     
     default:
         break;            
+    }
+
+    if (Ret) {
+        Update();
     }
 
     return Ret;
@@ -150,9 +156,10 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key)
 
 void Camera::OnMouse(int x, int y)
 {
-    const int DeltaX = x - m_mousePos.x;
-    const int DeltaY = y - m_mousePos.y;
+    const int DeltaX = m_ResetFlag ? 0 : x - m_mousePos.x;
+    const int DeltaY = m_ResetFlag ? 0 : y - m_mousePos.y;
 
+    m_ResetFlag = false;
     m_mousePos.x = x;
     m_mousePos.y = y;
 
@@ -243,6 +250,10 @@ void Camera::Update()
     m_up.Normalize();
 }
 
+void Camera::ResetMouse() {
+    m_ResetFlag = true;
+}
+
 
 /* void Camera::AddToATB(TwBar* bar)
 {
@@ -250,3 +261,9 @@ void Camera::Update()
     TwAddVarRW(bar, "Position", TW_TYPE_OGLDEV_VECTOR3F, (void*)&m_pos, NULL);
     TwAddVarRO(bar, "Direction", TW_TYPE_DIR3F, &m_target, " axisz=-z ");
 } */
+
+void Camera::SetStep(float step) {
+    m_StepScale = step;
+}
+
+

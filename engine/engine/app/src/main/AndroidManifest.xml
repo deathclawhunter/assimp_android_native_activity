@@ -18,6 +18,7 @@
         android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <activity
             android:name="com.example.engine.MainActivity"
+            android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -25,7 +26,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

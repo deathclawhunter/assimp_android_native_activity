@@ -30,6 +30,8 @@ public:
 
     Camera(int WindowWidth, int WindowHeight, const Vector3f& Pos, const Vector3f& Target, const Vector3f& Up);
 
+    void ResetMouse();
+
     bool OnKeyboard(OGLDEV_KEY Key);
 
     void OnMouse(int x, int y);
@@ -50,7 +52,9 @@ public:
     {
         return m_up;
     }
-    
+
+    void SetStep(float step);
+
     // void AddToATB(TwBar* bar);
 
 private:
@@ -68,12 +72,16 @@ private:
     float m_AngleH;
     float m_AngleV;
 
+    float m_StepScale;
+
     bool m_OnUpperEdge;
     bool m_OnLowerEdge;
     bool m_OnLeftEdge;
     bool m_OnRightEdge;
 
     Vector2i m_mousePos;
+
+    bool m_ResetFlag;
 };
 
 #endif	/* CAMERA_H */

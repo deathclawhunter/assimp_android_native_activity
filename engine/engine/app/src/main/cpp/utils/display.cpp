@@ -64,17 +64,19 @@ int init_display(struct engine *engine) {
     eglQuerySurface(display, surface, EGL_WIDTH, &w);
     eglQuerySurface(display, surface, EGL_HEIGHT, &h);
 
-    if (w > h) {
-        w = h;
-    } else {
-        h = w;
-    }
-
     engine->display = display;
     engine->context = context;
     engine->surface = surface;
+    /* if (w >= h) {
+        engine->width = w;
+        engine->height = h;
+    } else {
+        engine->width = h;
+        engine->height = w;
+    } */
     engine->width = w;
     engine->height = h;
+
 
     // Initialize GL state.
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
