@@ -15,6 +15,30 @@ add_library(lib_stlport SHARED IMPORTED)
 set_target_properties(lib_stlport PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/system/lib/${ANDROID_ABI}/libstlport_shared.so)
 
+add_library(lib_avutil SHARED IMPORTED)
+set_target_properties(lib_avutil PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libavutil-55.so)
+
+add_library(lib_swresample SHARED IMPORTED)
+set_target_properties(lib_swresample PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libswresample-2.so)
+
+add_library(lib_avcodec SHARED IMPORTED)
+set_target_properties(lib_avcodec PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libavcodec-57.so)
+
+add_library(lib_avformat SHARED IMPORTED)
+set_target_properties(lib_avformat PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libavformat-57.so)
+
+add_library(lib_swscale SHARED IMPORTED)
+set_target_properties(lib_swscale PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libswscale-4.so)
+
+add_library(lib_avfilter SHARED IMPORTED)
+set_target_properties(lib_avfilter PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libavfilter-6.so)
+
 # build application's shared lib
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
@@ -100,6 +124,7 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/imagemagick/include/ImageMagick-6
                            ${distribution_DIR}/freeglut/include
                            ${distribution_DIR}/png/include
+                           ${distribution_DIR}/ffmpeg/include
                            ${CMAKE_SOURCE_DIR}/app
                            ${CMAKE_SOURCE_DIR}/utils
                            ${CMAKE_SOURCE_DIR}/assimp
@@ -118,6 +143,12 @@ target_include_directories(engine PRIVATE
                            ${ANDROID_NDK}/sources/android/native_app_glue)
 
 target_link_libraries(engine
+                      lib_avutil
+                      lib_swresample
+                      lib_avcodec
+                      lib_avformat
+                      lib_swscale
+                      lib_avfilter
                       android
                       log
                       EGL

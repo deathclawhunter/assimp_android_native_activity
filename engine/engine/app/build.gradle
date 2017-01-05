@@ -32,7 +32,7 @@ android {
     sourceSets {
         main {
             // let gradle pack the shared library into apk
-            jniLibs.srcDirs = ['../distribution/assimp/lib', '../distribution/system/lib']
+            jniLibs.srcDirs = ['../distribution/assimp/lib', '../distribution/system/lib', '../distribution/ffmpeg/lib']
         }
     }
     externalNativeBuild {
