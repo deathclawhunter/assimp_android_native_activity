@@ -12,7 +12,9 @@ Need to add frame rate control
 
 DONE
 ===========
-Added basic navigation methods.
+Added H264 decoder
+Added ffmpeg
+Added basic navigation methods. (One finger rotation, two fingers move)
 DONE by integrate static shader and rigged shader into one shader, see Bone transformation problem and multiple shader problem in notes: Need to enable switching between different models, some meshes work fine, some not. Seems the mesh may conflict with each other in current renderer code. Need to figure out why.
 DONE Need to support static mesh rendering. It seems does not work for now.
 Re-engineered part of the code as a start to introduce multiple model support.
