@@ -7,9 +7,20 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include <utils/GLError.h>
 #include "AppLog.h"
 #include "gl3stub.h"
 #include "YUV420P_Player.h"
+
+
+static vec3 Vertices[] = {
+        vec3(-1.0f, -1.0f, 0.0f),
+        Vertices[1] = vec3(1.0f, -1.0f, 0.0f),
+        Vertices[2] = vec3(0.0f, 1.0f, 0.0f),
+        Vertices[3] = vec3(-1.0f, 1.0f, 0.0f),
+        Vertices[4] = vec3(1.0f, 1.0f, 0.0f),
+};
+static GLubyte Indices[] = { 0, 2, 1, 0, 3, 2, 1, 2, 4 };
 
 
 YUV420P_Player::YUV420P_Player()
@@ -17,14 +28,14 @@ YUV420P_Player::YUV420P_Player()
         ,vid_h(0)
         ,win_w(0)
         ,win_h(0)
-        ,vao(0)
+        // ,vao(0)
         ,y_tex(0)
         ,u_tex(0)
         ,v_tex(0)
         ,vert(0)
         ,frag(0)
         ,prog(0)
-        ,u_pos(-1)
+        // ,u_pos(-1)
         ,textures_created(false)
         ,shader_created(false)
         ,y_pixels(NULL)
@@ -61,7 +72,20 @@ bool YUV420P_Player::setup(int vidW, int vidH) {
     }
 
     // TODO: Need to remove glGenVertexArrays()
-    glGenVertexArrays(1, &vao);
+    // glGenVertexArrays(1, &vao);
+
+    vec3 Vertices[3];
+    Vertices[0] = vec3(-1.0f, -1.0f, 0.0f);
+    Vertices[1] = vec3(1.0f, -1.0f, 0.0f);
+    Vertices[2] = vec3(0.0f, 1.0f, 0.0f);
+
+    glGenBuffers(1, &m_Buffers[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &m_Buffers[1]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 
     return true;
 }
@@ -145,7 +169,12 @@ bool YUV420P_Player::setupShader() {
     glUniform1i(glGetUniformLocation(prog, "u_tex"), 1);
     glUniform1i(glGetUniformLocation(prog, "v_tex"), 2);
 
-    u_pos = glGetUniformLocation(prog, "draw_pos");
+    // u_pos = glGetUniformLocation(prog, "draw_pos");
+
+    gvPositionHandle = glGetAttribLocation(prog, "Position");
+    checkGlError("glGetAttribLocation");
+    LOGI("glGetAttribLocation(\"Position\") = %d\n",
+         gvPositionHandle);
 
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
@@ -194,10 +223,12 @@ void YUV420P_Player::draw(int x, int y, int w, int h) {
         h = vid_h;
     }
 
-    glBindVertexArray(vao);
+    // glBindVertexArray(vao);
     glUseProgram(prog);
 
-    glUniform4f(u_pos, x, y, w, h);
+    // glUniform4f(u_pos, x, y, w, h);
+
+    glClear(GL_COLOR_BUFFER_BIT);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, y_tex);
@@ -208,7 +239,12 @@ void YUV420P_Player::draw(int x, int y, int w, int h) {
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, v_tex);
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
+    glVertexAttribPointer(gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(gvPositionHandle);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
+    glDrawElements(GL_TRIANGLES, sizeof(Indices) / sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
 }
 
 void YUV420P_Player::resize(int winW, int winH) {

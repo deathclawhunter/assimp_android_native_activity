@@ -2,6 +2,9 @@
 // Created by Davis Z on 1/5/17.
 //
 
+#define TAG "H264_DECODER"
+#include "AppLog.h"
+
 #include "H264_Decoder.h"
 
 H264_Decoder::H264_Decoder(h264_decoder_callback frameCallback, void* user)
@@ -51,7 +54,7 @@ bool H264_Decoder::load(const char *filepath, float fps) {
 
     codec = avcodec_find_decoder(AV_CODEC_ID_H264);
     if(!codec) {
-        printf("Error: cannot find the h264 codec: %s\n", filepath);
+        LOGE("Error: cannot find the h264 codec: %s\n", filepath);
         return false;
     }
 
@@ -62,14 +65,14 @@ bool H264_Decoder::load(const char *filepath, float fps) {
     }
 
     if(avcodec_open2(codec_context, codec, NULL) < 0) {
-        printf("Error: could not open codec.\n");
+        LOGE("Error: could not open codec.\n");
         return false;
     }
 
     fp = fopen(filepath, "rb");
 
     if(!fp) {
-        printf("Error: cannot open: %s\n", filepath);
+        LOGE("Error: cannot open: %s\n", filepath);
         return false;
     }
 
@@ -77,7 +80,7 @@ bool H264_Decoder::load(const char *filepath, float fps) {
     parser = av_parser_init(AV_CODEC_ID_H264);
 
     if(!parser) {
-        printf("Erorr: cannot create H264 parser.\n");
+        LOGE("Erorr: cannot create H264 parser.\n");
         return false;
     }
 
@@ -85,6 +88,8 @@ bool H264_Decoder::load(const char *filepath, float fps) {
         frame_delay = (1.0f/fps) * 1000ull * 1000ull * 1000ull;
         frame_timeout = rx_hrtime() + frame_delay;
     }
+
+    player.setup(960, 540);
 
     // kickoff reading...
     readBuffer();
@@ -147,7 +152,7 @@ void H264_Decoder::decodeFrame(uint8_t* data, int size) {
 
     len = avcodec_decode_video2(codec_context, picture, &got_picture, &pkt);
     if(len < 0) {
-        printf("Error while decoding a frame.\n");
+        LOGE("Error while decoding a frame.\n");
     }
 
     if(got_picture == 0) {
@@ -157,6 +162,14 @@ void H264_Decoder::decodeFrame(uint8_t* data, int size) {
     ++frame;
 
     if(cb_frame) {
+
+        if (frame == 50) {
+            player.setYPixels(picture->data[0], picture->linesize[0]);
+            player.setUPixels(picture->data[1], picture->linesize[1]);
+            player.setVPixels(picture->data[2], picture->linesize[2]);
+            player.draw(0, 0, 960, 540);
+        }
+
         cb_frame(DEC_STATUS_FRAME, picture, &pkt, cb_user);
     }
 }
@@ -177,7 +190,10 @@ bool H264_Decoder::update(bool& needsMoreBytes) {
     needsMoreBytes = false;
 
     if(!fp) {
-        printf("Cannot update .. file not opened...\n");
+        LOGE("Cannot update .. file not opened...\n");
+        if (cb_frame != NULL) {
+            (*cb_frame)(DEC_STATUS_ERROR_OPEN_FILE, NULL, NULL, cb_user);
+        }
         return false;
     }
 

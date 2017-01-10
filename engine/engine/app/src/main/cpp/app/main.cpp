@@ -10,6 +10,7 @@ using namespace std;
 #include "GLError.h"
 #include "H264_Decoder.h"
 #include "libavutil/pixfmt.h"
+#include "YUV420P_Player.h"
 
 
 extern "C" {
@@ -30,6 +31,85 @@ void terminate_display(struct engine *engine);
 
 #define INBUF_SIZE 4096
 
+bool DecodeDone = false;
+int frameCount = 0;
+
+static void h264_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt, void* user) {
+    if (status != DEC_STATUS_FRAME) {
+        DecodeDone = true;
+        return;
+    }
+    // LOGI("Got frame: %x, %x\n", frame, pkt);
+    // LOGI("Got frame: %d, %d\n", frame->width, frame->height);
+
+    LOGI("============== Y ============");
+    for (int i = 0; i < 10; i++) {
+        LOGI("0x%x", frame->data[0][i]);
+    }
+
+    LOGI("============== U ============");
+    for (int i = 0; i < 10; i++) {
+        LOGI("0x%x", frame->data[1][i]);
+    }
+
+    LOGI("============== V ============");
+    for (int i = 0; i < 10; i++) {
+        LOGI("0x%x", frame->data[2][i]);
+    }
+
+    switch (frame->pict_type) {
+        case AV_PICTURE_TYPE_NONE:
+            LOGI("AV_PICTURE_TYPE_NONE");
+            break;
+        case AV_PICTURE_TYPE_I:
+            LOGI("AV_PICTURE_TYPE_I");
+            break;
+        case AV_PICTURE_TYPE_B:
+            LOGI("AV_PICTURE_TYPE_B");
+            break;
+        case AV_PICTURE_TYPE_S:
+            LOGI("AV_PICTURE_TYPE_S");
+            break;
+        case AV_PICTURE_TYPE_SI:
+            LOGI("AV_PICTURE_TYPE_SI");
+            break;
+        case AV_PICTURE_TYPE_SP:
+            LOGI("AV_PICTURE_TYPE_SP");
+        case AV_PICTURE_TYPE_BI:
+            LOGI("AV_PICTURE_TYPE_BI");
+            break;
+        case AV_PICTURE_TYPE_P:
+            LOGI("AV_PICTURE_TYPE_P");
+            break;
+        default:
+            LOGI("AV_PICTURE_TYPE_ unknown %d", frame->pict_type);
+            break;
+    }
+
+    uint8_t *out_buffer=(uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_YUV420P,
+                                                                 frame->width, frame->height));
+
+    int filled = avpicture_fill((AVPicture *) frame, out_buffer, AV_PIX_FMT_YUV420P, frame->width, frame->height);
+    // LOGI("filled = %d\n", filled);
+
+    LOGI("frame %d\n", frameCount++);
+
+    av_free(out_buffer);
+}
+
+static void decode_h264(const char *filePath) {
+
+    H264_Decoder decoder(h264_callback, NULL);
+    bool ret = decoder.load(filePath, 30.0f);
+    LOGI("load %s = %b\n", filePath, ret);
+    do {
+        ret = decoder.readFrame();
+        // LOGI("readFrame %s = %b\n", filePath, ret);
+        if (DecodeDone) {
+            break;
+        }
+    } while (true);
+}
 
 /**
  * Just the current frame in the display.
@@ -59,12 +139,15 @@ void draw_frame(struct engine *engine) {
             glClearColor(grey, grey, grey, 1.0f);
             checkGlError("glClearColor");
 
+            // decode_h264("0001-0010.avi");
+            decode_h264("0000-0100.avi");
+
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
-            engine->pContext = engine->pfInit(engine->width, engine->height);
+            // engine->pContext = engine->pfInit(engine->width, engine->height);
             engine->initialized = true;
         }
     } else {
-        engine->pfDrawFrame(engine->pContext);
+        // engine->pfDrawFrame(engine->pContext);
         eglSwapBuffers(engine->display, engine->surface);
     }
 }
@@ -126,40 +209,6 @@ void initPlugins(struct engine *engine) {
 }
 #endif
 
-bool DecodeDone = false;
-int frameCount = 0;
-
-static void h264_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt, void* user) {
-    if (status == DEC_STATUS_FINISH) {
-        DecodeDone = true;
-        return;
-    }
-    // LOGI("Got frame: %x, %x\n", frame, pkt);
-    // LOGI("Got frame: %d, %d\n", frame->width, frame->height);
-
-    uint8_t *out_buffer=(uint8_t *) av_malloc(avpicture_get_size(AV_PIX_FMT_YUV420P,
-                                                                 frame->width, frame->height));
-
-    int filled = avpicture_fill((AVPicture *) frame, out_buffer, AV_PIX_FMT_YUV420P, frame->width, frame->height);
-    // LOGI("filled = %d\n", filled);
-
-    LOGI("frame %d\n", frameCount++);
-
-    av_free(out_buffer);
-}
-
-static void decode_h264(const char *filePath) {
-    H264_Decoder decoder(h264_callback, NULL);
-    bool ret = decoder.load(filePath, 30.0f);
-    LOGI("load %s = %b\n", filePath, ret);
-    do {
-        ret = decoder.readFrame();
-        // LOGI("readFrame %s = %b\n", filePath, ret);
-        if (DecodeDone) {
-            break;
-        }
-    } while (true);
-}
 /*
  * Video encoding example
  */
@@ -465,7 +514,6 @@ void android_main(struct android_app *state) {
     // video_encode_example("test.mpg", AV_CODEC_ID_MPEG1VIDEO);
     // video_decode_example("test%02d.pgm", "test.mpg");
     // video_decode_example("test%02d.pgm", "0000-0100.mp4");
-    decode_h264("0000-0100.avi");
 
     // Read all pending events.
     while (1) {

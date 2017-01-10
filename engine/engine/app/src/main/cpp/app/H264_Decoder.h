@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include "YUV420P_Player.h"
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -38,6 +39,7 @@ extern "C" {
 
 enum H264_DECODER_STATUS {
     DEC_STATUS_FRAME,
+    DEC_STATUS_ERROR_OPEN_FILE,
     DEC_STATUS_FINISH
 };
 
@@ -71,6 +73,9 @@ public:
     uint64_t frame_timeout;                                                                /* timeout when we need to parse a new frame */
     uint64_t frame_delay;                                                                  /* delay between frames (in ns) */
     std::vector<uint8_t> buffer;                                                           /* buffer we use to keep track of read/unused bitstream data */
+
+
+    YUV420P_Player player;
 };
 
 #endif

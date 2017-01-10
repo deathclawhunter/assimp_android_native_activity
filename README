@@ -2,16 +2,18 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
+Render animation and sound in the demo.
+ - Video decoding and rendering start to work in demo, need to figure out how to coordinate between decoding and rendering, it seems always render the last frame.
+
+Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
-COLLADA import will fail after exported from Blender 2.77
 It seems the lighting system is not working properly.
-Need to check if I can reuse FreeGlut framework
-Need to add gaming control to existing input handler
-Need to add frame rate control
 
 DONE
 ===========
+Seem OK for now. Need to add frame rate control
+DONE by adding basic navigation system. Need to add gaming control to existing input handler
 Added H264 decoder
 Added ffmpeg
 Added basic navigation methods. (One finger rotation, two fingers move)
@@ -29,6 +31,12 @@ Temporaily FIXED by calling exit() when destroying display object. The resource 
 FIXED by remove the clearColor() call There is a flash between frames.
 FIXED by maintain a proper W/H ratio. The model is stretched.
 FIXED by pre calculate in index buffer. Reference to OpenGL API dev notes. The texture seems not proper.
+
+WILL NOT FIX
+===========
+COLLADA import will fail after exported from Blender 2.77, the reason is the bone number exceeded the limit. Given we are creating simple demo, no complicated object or animation expected. I can live with that. 
+Need to check if I can reuse FreeGlut framework, the answer is YES we can, but it is just a matter of time vs gain. I would live without FreeGlut for this demo.
+
 
 Notes
 ===========
