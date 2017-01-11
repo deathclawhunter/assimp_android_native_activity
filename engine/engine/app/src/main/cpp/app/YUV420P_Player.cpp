@@ -9,7 +9,6 @@
 #include <string.h>
 #include <utils/GLError.h>
 #include "AppLog.h"
-#include "gl3stub.h"
 #include "YUV420P_Player.h"
 
 
@@ -20,7 +19,7 @@ static vec3 Vertices[] = {
         Vertices[3] = vec3(-1.0f, 1.0f, 0.0f),
         Vertices[4] = vec3(1.0f, 1.0f, 0.0f),
 };
-static GLubyte Indices[] = { 0, 2, 1, 0, 3, 2, 1, 2, 4 };
+static GLubyte Indices[] = { 0, 2, 1, 1, 2, 4, 0, 3, 2};
 
 
 YUV420P_Player::YUV420P_Player()
@@ -50,12 +49,12 @@ bool YUV420P_Player::setup(int vidW, int vidH) {
     vid_h = vidH;
 
     if(!vid_w || !vid_h) {
-        printf("Invalid texture size.\n");
+        LOGE("Invalid texture size.\n");
         return false;
     }
 
     if(y_pixels || u_pixels || v_pixels) {
-        printf("Already setup the YUV420P_Player.\n");
+        LOGI("Already setup the YUV420P_Player.\n");
         return false;
     }
 
@@ -73,11 +72,6 @@ bool YUV420P_Player::setup(int vidW, int vidH) {
 
     // TODO: Need to remove glGenVertexArrays()
     // glGenVertexArrays(1, &vao);
-
-    vec3 Vertices[3];
-    Vertices[0] = vec3(-1.0f, -1.0f, 0.0f);
-    Vertices[1] = vec3(1.0f, -1.0f, 0.0f);
-    Vertices[2] = vec3(0.0f, 1.0f, 0.0f);
 
     glGenBuffers(1, &m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
@@ -138,7 +132,7 @@ bool YUV420P_Player::setupShader() {
     GLchar ErrorLog[1024] = {0};
 
     if(shader_created) {
-        printf("Already creatd the shader.\n");
+        LOGW("Already creatd the shader.\n");
         return false;
     }
 
@@ -186,7 +180,7 @@ bool YUV420P_Player::setupShader() {
 bool YUV420P_Player::setupTextures() {
 
     if(textures_created) {
-        printf("Textures already created.\n");
+        LOGW("Textures already created.\n");
         return false;
     }
 
@@ -228,7 +222,7 @@ void YUV420P_Player::draw(int x, int y, int w, int h) {
 
     // glUniform4f(u_pos, x, y, w, h);
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    // glClear(GL_COLOR_BUFFER_BIT);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, y_tex);

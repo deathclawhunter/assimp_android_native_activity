@@ -241,7 +241,7 @@ struct Quaternion
 
     void Normalize();
 
-    Quaternion Conjugate();  
+    Quaternion Conjugate();
     
     Vector3f ToDegrees();
  };

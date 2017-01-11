@@ -2,12 +2,12 @@
 // Created by Davis Z on 1/5/17.
 //
 
-#define TAG "H264_DECODER"
+#define LOG_TAG "H264_DECODER"
 #include "AppLog.h"
 
 #include "H264_Decoder.h"
 
-H264_Decoder::H264_Decoder(h264_decoder_callback frameCallback, void* user)
+H264_Decoder::H264_Decoder(IH264CallBack *frameCallback, void* user)
         :codec(NULL)
         ,codec_context(NULL)
         ,parser(NULL)
@@ -85,11 +85,9 @@ bool H264_Decoder::load(const char *filepath, float fps) {
     }
 
     if(fps > 0.0001f) {
-        frame_delay = (1.0f/fps) * 1000ull * 1000ull * 1000ull;
+        frame_delay = (1.0f/fps) * 1000ull;
         frame_timeout = rx_hrtime() + frame_delay;
     }
-
-    player.setup(960, 540);
 
     // kickoff reading...
     readBuffer();
@@ -100,7 +98,7 @@ bool H264_Decoder::load(const char *filepath, float fps) {
 uint64_t H264_Decoder::rx_hrtime() {
     timeval t;
     gettimeofday(&t, NULL);
-    uint64_t ret = t.tv_sec * 1000 * 1000 + t.tv_usec * 1000; // to nano
+    uint64_t ret = t.tv_sec * 1000 + t.tv_usec / 1000; // to nano
     return ret;
 }
 
@@ -108,6 +106,7 @@ bool H264_Decoder::readFrame() {
 
     uint64_t now = rx_hrtime();
     if(now < frame_timeout) {
+        LOGW("now = %llu vs frame_timeout = %llu\n", now, frame_timeout);
         return false;
     }
 
@@ -117,7 +116,7 @@ bool H264_Decoder::readFrame() {
         if(needs_more) {
             if (readBuffer() <= 0) {
                 if(cb_frame) {
-                    cb_frame(DEC_STATUS_FINISH, NULL, NULL, cb_user);
+                    cb_frame->h264_decoder_callback(DEC_STATUS_FINISH, NULL, NULL);
                 }
                 return false;
             }
@@ -128,7 +127,8 @@ bool H264_Decoder::readFrame() {
     if(frame_timeout == 0 && frame_delay == 0) {
         double fps = av_q2d(codec_context->time_base);
         if(fps > 0.0) {
-            frame_delay = fps * 1000ull * 1000ull * 1000ull;
+            // frame_delay = fps * 1000ull * 1000ull * 1000ull;
+            frame_delay = fps * 1000ull;
         }
     }
 
@@ -161,16 +161,9 @@ void H264_Decoder::decodeFrame(uint8_t* data, int size) {
 
     ++frame;
 
-    if(cb_frame) {
+    if (cb_frame) {
 
-        if (frame == 50) {
-            player.setYPixels(picture->data[0], picture->linesize[0]);
-            player.setUPixels(picture->data[1], picture->linesize[1]);
-            player.setVPixels(picture->data[2], picture->linesize[2]);
-            player.draw(0, 0, 960, 540);
-        }
-
-        cb_frame(DEC_STATUS_FRAME, picture, &pkt, cb_user);
+        cb_frame->h264_decoder_callback(DEC_STATUS_FRAME, picture, &pkt);
     }
 }
 
@@ -192,7 +185,7 @@ bool H264_Decoder::update(bool& needsMoreBytes) {
     if(!fp) {
         LOGE("Cannot update .. file not opened...\n");
         if (cb_frame != NULL) {
-            (*cb_frame)(DEC_STATUS_ERROR_OPEN_FILE, NULL, NULL, cb_user);
+            cb_frame->h264_decoder_callback(DEC_STATUS_ERROR_OPEN_FILE, NULL, NULL);
         }
         return false;
     }

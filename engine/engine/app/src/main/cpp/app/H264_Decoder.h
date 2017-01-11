@@ -30,7 +30,6 @@
 #include <stdlib.h>
 #include <string>
 #include <vector>
-#include "YUV420P_Player.h"
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -43,12 +42,16 @@ enum H264_DECODER_STATUS {
     DEC_STATUS_FINISH
 };
 
-typedef void(*h264_decoder_callback)(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt, void* user);         /* the decoder callback, which will be called when we have decoded a frame */
+class IH264CallBack {
+    public:
+        virtual void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt) = 0;         /* the decoder callback, which will be called when we have decoded a frame */
+};
+typedef
 
 class H264_Decoder {
 
 public:
-    H264_Decoder(h264_decoder_callback frameCallback, void* user);                         /* pass in a callback function that is called whenever we decoded a video frame, make sure to call `readFrame()` repeatedly */
+    H264_Decoder(IH264CallBack *frameCallback, void* user);                         /* pass in a callback function that is called whenever we decoded a video frame, make sure to call `readFrame()` repeatedly */
     ~H264_Decoder();                                                                       /* d'tor, cleans up the allocated objects and closes the codec context */
     bool load(const char *filepath, float fps = 0.0f);                                     /* load a video file which is encoded with x264 */
     bool readFrame();                                                                      /* read a frame if necessary */
@@ -68,14 +71,11 @@ public:
     uint8_t inbuf[H264_INBUF_SIZE + FF_INPUT_BUFFER_PADDING_SIZE];                         /* used to read chunks from the file */
     FILE* fp;                                                                              /* file pointer to the file from which we read the h264 data */
     int frame;                                                                             /* the number of decoded frames */
-    h264_decoder_callback cb_frame;                                                        /* the callback function which will receive the frame/packet data */
+    IH264CallBack *cb_frame;                                                        /* the callback function which will receive the frame/packet data */
     void* cb_user;                                                                         /* the void* with user data that is passed into the set callback */
     uint64_t frame_timeout;                                                                /* timeout when we need to parse a new frame */
     uint64_t frame_delay;                                                                  /* delay between frames (in ns) */
     std::vector<uint8_t> buffer;                                                           /* buffer we use to keep track of read/unused bitstream data */
-
-
-    YUV420P_Player player;
 };
 
 #endif

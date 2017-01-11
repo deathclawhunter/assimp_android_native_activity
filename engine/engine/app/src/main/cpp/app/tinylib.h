@@ -1161,7 +1161,7 @@ Matrix4<T>& Matrix4<T>::lookat(Vec3<T> pos, Vec3<T> target, Vec3<T> up) {
 
 /*
 
-  Quaternion class, handy tool for 3D rotations.
+  TQuaternion class, handy tool for 3D rotations.
   ==============================================
 
   - When using quaternions for rotations you need to use 
@@ -1183,14 +1183,14 @@ Matrix4<T>& Matrix4<T>::lookat(Vec3<T> pos, Vec3<T> target, Vec3<T> up) {
     product for vectors: it yields another quaternion and it is not
     commutative.
   
-  - Quaternion multiplication can be used to concatenate multiple
+  - TQuaternion multiplication can be used to concatenate multiple
     rotations, just like matrix multiplication.  Multiplications of
     matrices always read from right to left (inside out).
 
    Resources
    ---------:
    [0]   Intel, http://software.intel.com/sites/default/files/m/d/4/1/d/8/293748.pdf
-         "From Quaternion to Matrix and Back", J.M.P. van Waveren, 27th feb. 2005, id software
+         "From TQuaternion to Matrix and Back", J.M.P. van Waveren, 27th feb. 2005, id software
    [1]   Irrlicht: http://irrlicht.sourceforge.net/
    [2]   Quaternions, Ken Shoemake, ftp://ftp.cis.upenn.edu/pub/graphics/shoemake/quatut.ps.Z
    [3]   Game Engine Physics Development, Ian Millington, https://github.com/idmillington/cyclone-physics/tree/master/src
@@ -1210,32 +1210,32 @@ float sin_zero_half_pi(float a);
 /* ---------------------------------------------------------------------------- */
 
 template<class T>
-class Quaternion {
+class TQuaternion {
  public:
-  Quaternion(T x = 0, T y = 0, T z = 0, T w = 1);
-  Quaternion(const Quaternion<T>& q);
-  Quaternion(Matrix4<T>& m);
+  TQuaternion(T x = 0, T y = 0, T z = 0, T w = 1);
+  TQuaternion(const TQuaternion<T>& q);
+  TQuaternion(Matrix4<T>& m);
   void set(const T xx, const T yy, const T zz, const T ww);
   void normalize();
   T length();
   T lengthSquared();
-  T dot(Quaternion<T>& other);
+  T dot(TQuaternion<T>& other);
   void identity();
   void inverse();
   void toMat4(Matrix4<T>& m);
   Matrix4<T> getMat4();
   void fromMat4(Matrix4<T>& m);
   void fromAngleAxis(const T radians, const T xx, const T yy, const T zz);
-  void multiply(const Quaternion<T>& q);
-  void multiply(const Quaternion<T>& q1, const Quaternion<T>& q2, Quaternion<T>* dst);
+  void multiply(const TQuaternion<T>& q);
+  void multiply(const TQuaternion<T>& q1, const TQuaternion<T>& q2, TQuaternion<T>* dst);
   Vec3<T> transform(const Vec3<T>& v) const;
-  void lerp(const Quaternion<T>& q1, const Quaternion<T>& q2, T t, Quaternion<T>* dst);
-  static void slerp(const Quaternion<T>& from, const Quaternion<T>& to, T t, Quaternion<T>& result);
+  void lerp(const TQuaternion<T>& q1, const TQuaternion<T>& q2, T t, TQuaternion<T>* dst);
+  static void slerp(const TQuaternion<T>& from, const TQuaternion<T>& to, T t, TQuaternion<T>& result);
   void print();
 
   Vec3<T> operator*(const Vec3<T>& v) const;
-  Quaternion<T> operator*(const Quaternion<T>& other) const;
-  Quaternion<T>& operator*=(const Quaternion<T>& other);
+  TQuaternion<T> operator*(const TQuaternion<T>& other) const;
+  TQuaternion<T>& operator*=(const TQuaternion<T>& other);
 
  public:
   T x;
@@ -1247,7 +1247,7 @@ class Quaternion {
 /* ---------------------------------------------------------------------------- */
   
 template<class T>
-Quaternion<T>::Quaternion(T x, T y, T z, T w)
+TQuaternion<T>::TQuaternion(T x, T y, T z, T w)
   :x(x)
   ,y(y)
   ,z(z)
@@ -1256,12 +1256,12 @@ Quaternion<T>::Quaternion(T x, T y, T z, T w)
 }
   
 template<class T>
-inline Quaternion<T>::Quaternion(Matrix4<T>& m) {
+inline TQuaternion<T>::TQuaternion(Matrix4<T>& m) {
   fromMat4(m);
 }
 
 template<class T>
-inline Quaternion<T>::Quaternion(const Quaternion<T>& q)
+inline TQuaternion<T>::TQuaternion(const TQuaternion<T>& q)
 :x(q.x)
 ,y(q.y)
   ,z(q.z)
@@ -1270,7 +1270,7 @@ inline Quaternion<T>::Quaternion(const Quaternion<T>& q)
 }
   
 template<class T>
-inline void Quaternion<T>::set(const T xx, const T yy, const T zz, const T ww) {
+inline void TQuaternion<T>::set(const T xx, const T yy, const T zz, const T ww) {
   x = xx;
   y = yy;
   z = zz;
@@ -1278,7 +1278,7 @@ inline void Quaternion<T>::set(const T xx, const T yy, const T zz, const T ww) {
 }
   
 template<class T>
-inline void Quaternion<T>::normalize() {
+inline void TQuaternion<T>::normalize() {
   T n = x * x + y * y + z * z + w * w;
   if(n == 1.0) {
     return;
@@ -1297,22 +1297,22 @@ inline void Quaternion<T>::normalize() {
 }
   
 template<class T>
-inline T Quaternion<T>::length() {
+inline T TQuaternion<T>::length() {
   return sqrt(lengthSquared());
 }
 
 template<class T>
-inline T Quaternion<T>::lengthSquared() {
+inline T TQuaternion<T>::lengthSquared() {
   return (x * x) + (y * y) + (z * z) + (w * w);
 }
 
 template<class T>
-inline T Quaternion<T>::dot(Quaternion<T>& other) {
+inline T TQuaternion<T>::dot(TQuaternion<T>& other) {
   return (x * other.x) + (y * other.y) + (z * other.z) + (w * other.w);
 }
 
 template<class T>
-inline void Quaternion<T>::identity() {
+inline void TQuaternion<T>::identity() {
   x = 0.0f;
   y = 0.0f;
   z = 0.0f;
@@ -1320,7 +1320,7 @@ inline void Quaternion<T>::identity() {
 }
 
 template<class T>
-inline void Quaternion<T>::inverse() {
+inline void TQuaternion<T>::inverse() {
   T n = x * x + y * y + z * z + w * w;
   if(n == 1.0f) {
     x = -x;
@@ -1342,7 +1342,7 @@ inline void Quaternion<T>::inverse() {
 
 // @see [0], the { } sections are hints for compiler optimization
 template<class T>
-inline void Quaternion<T>::toMat4(Matrix4<T>& m) {
+inline void TQuaternion<T>::toMat4(Matrix4<T>& m) {
 
   T x2 = x + x;
   T y2 = y + y;
@@ -1381,7 +1381,7 @@ inline void Quaternion<T>::toMat4(Matrix4<T>& m) {
 }
   
 template<class T>
-inline Matrix4<T> Quaternion<T>::getMat4() {
+inline Matrix4<T> TQuaternion<T>::getMat4() {
   Matrix4<T> m;
   toMat4(m);
   return m;
@@ -1389,7 +1389,7 @@ inline Matrix4<T> Quaternion<T>::getMat4() {
 
 // @see [0]
 template<class T>
-inline void Quaternion<T>::fromMat4(Matrix4<T>& m) {
+inline void TQuaternion<T>::fromMat4(Matrix4<T>& m) {
     
   if(m[0] + m[5] + m[10] > 0.0f) {
     T t = +m[0] + m[5] + m[10] + 1.0f;
@@ -1426,7 +1426,7 @@ inline void Quaternion<T>::fromMat4(Matrix4<T>& m) {
 }
 
 template<class T>
-inline void Quaternion<T>::fromAngleAxis(const T radians, const T xx, const T yy, const T zz) {
+inline void TQuaternion<T>::fromAngleAxis(const T radians, const T xx, const T yy, const T zz) {
   const T ha = 0.5 * radians;
   const T s = sin(ha);
   w = cos(ha);
@@ -1436,14 +1436,14 @@ inline void Quaternion<T>::fromAngleAxis(const T radians, const T xx, const T yy
 }
 
 template<class T>
-inline void Quaternion<T>::multiply(const Quaternion<T>& q) {
+inline void TQuaternion<T>::multiply(const TQuaternion<T>& q) {
   multiply(*this, q, this);
 }
 
 template<class T>
-inline void Quaternion<T>::multiply(const Quaternion<T>& q1, const Quaternion<T>& q2, Quaternion<T>* dst) {
+inline void TQuaternion<T>::multiply(const TQuaternion<T>& q1, const TQuaternion<T>& q2, TQuaternion<T>* dst) {
 
-  printf("Quaternion::multiply is probably wrong!!!!!! Check!!! \n");
+  printf("TQuaternion::multiply is probably wrong!!!!!! Check!!! \n");
   T xx = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
   T yy = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x; 
   T zz = q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.x; /* This line needs to be checked! */
@@ -1456,7 +1456,7 @@ inline void Quaternion<T>::multiply(const Quaternion<T>& q1, const Quaternion<T>
 }
 
 template<class T>
-inline Vec3<T> Quaternion<T>::transform(const Vec3<T>& v) const {
+inline Vec3<T> TQuaternion<T>::transform(const Vec3<T>& v) const {
     
   T m = (2.0 * x * v.x + y * v.y + z * v.z);
   T c = 2.0 * w;
@@ -1470,7 +1470,7 @@ inline Vec3<T> Quaternion<T>::transform(const Vec3<T>& v) const {
 }
 
 template<class T>
-inline void Quaternion<T>::lerp(const Quaternion<T>& q1, const Quaternion<T>& q2, T t, Quaternion<T>* dst) {
+inline void TQuaternion<T>::lerp(const TQuaternion<T>& q1, const TQuaternion<T>& q2, T t, TQuaternion<T>* dst) {
     
   if(t == 0.0) {
     memcpy(&dst->x, &q1.x, sizeof(T) * 4);
@@ -1489,7 +1489,7 @@ inline void Quaternion<T>::lerp(const Quaternion<T>& q1, const Quaternion<T>& q2
 }
 
 template<class T>
-inline void Quaternion<T>::slerp(const Quaternion<T>& from, const Quaternion<T>& to, T t, Quaternion<T>& result) {
+inline void TQuaternion<T>::slerp(const TQuaternion<T>& from, const TQuaternion<T>& to, T t, TQuaternion<T>& result) {
     
   if(t <= 0.0) {
     memcpy(&result.x, &from.x, sizeof(T) * 4);
@@ -1521,25 +1521,25 @@ inline void Quaternion<T>::slerp(const Quaternion<T>& from, const Quaternion<T>&
 }
 
 template<class T>
-inline Quaternion<T> Quaternion<T>::operator*(const Quaternion<T>& other) const {
-  Quaternion<T> result(*this);
+inline TQuaternion<T> TQuaternion<T>::operator*(const TQuaternion<T>& other) const {
+  TQuaternion<T> result(*this);
   result.multiply(other);
   return result;
 }
 
 template<class T>
-inline Vec3<T> Quaternion<T>::operator*(const Vec3<T>& v) const {
+inline Vec3<T> TQuaternion<T>::operator*(const Vec3<T>& v) const {
   return transform(v);
 }
 
 template<class T>
-inline Quaternion<T>& Quaternion<T>::operator*=(const Quaternion<T>& other) {
+inline TQuaternion<T>& TQuaternion<T>::operator*=(const TQuaternion<T>& other) {
   multiply(other);
   return *this;
 }
 
 template<class T>
-inline void Quaternion<T>::print() {
+inline void TQuaternion<T>::print() {
   printf("%f, %f, %f, %f\n", x, y, z, w);
 }
   
@@ -1596,7 +1596,7 @@ inline float atan_positive(float y, float x) {
 
 /* ---------------------------------------------------------------------------- */
   
-typedef Quaternion<float> quat;
+typedef TQuaternion<float> quat;
 
 
 /* **************************************************************************** */

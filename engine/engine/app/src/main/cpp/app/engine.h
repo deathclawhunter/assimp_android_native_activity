@@ -8,6 +8,7 @@
 
 #include "texture.h"
 #include "gl3stub.h"
+#include "plugin.h"
 
 struct engine {
     struct android_app *app;
@@ -18,18 +19,21 @@ struct engine {
     int32_t width;
     int32_t height;
 
-    int32_t touchX;
-    int32_t touchY;
+    //int32_t touchX;
+    //int32_t touchY;
 
     bool initialized = false;
 
     // engine app plugin callbacks
-    void* (*pfInit)(int32_t width, int32_t height);
-    void (*pfDrawFrame)(void *pContext);
-    int32_t (*pfKeyHandler)(void *pContext, AInputEvent *event);
+    // void* (*pfInit)(int32_t width, int32_t height);
+    // void (*pfDrawFrame)(void *pContext);
+    // int32_t (*pfKeyHandler)(void *pContext, AInputEvent *event);
+
+    // TODO: should be replaced by a plugin manager
+    IPlugin *m_Plugins = NULL;
 
     // private data storage for engine app plugins
-    void *pContext;
+    // void *pContext;
 };
 
 
