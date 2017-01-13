@@ -19,14 +19,14 @@ using namespace std;
 
 #define INBUF_SIZE 4096
 
-VideoEngine::VideoEngine() {
+VideoPlugin::VideoPlugin() {
     decoder = new H264_Decoder(this, NULL);
     player = new YUV420P_Player();
 }
 
-VideoEngine::~VideoEngine() {
+VideoPlugin::~VideoPlugin() {
 
-    LOGI("VideoEngine destructor called");
+    LOGI("VideoPlugin destructor called");
 
     delete decoder;
     delete player;
@@ -36,7 +36,7 @@ VideoEngine::~VideoEngine() {
     if (v != NULL) av_free(v);
 }
 
-bool VideoEngine::Init(int32_t width, int32_t height) {
+bool VideoPlugin::Init(int32_t width, int32_t height) {
 
     avcodec_register_all();
 
@@ -122,11 +122,11 @@ bool VideoEngine::Init(int32_t width, int32_t height) {
     return true;
 }
 
-bool VideoEngine::Draw() {
+bool VideoPlugin::Draw() {
     return decoder->readFrame();
 }
 
-void VideoEngine::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt) {
+void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt) {
     if (status != DEC_STATUS_FRAME) {
         return;
     }
@@ -191,11 +191,11 @@ void VideoEngine::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* fra
 }
 
 // TODO: add video control later
-int32_t VideoEngine::KeyHandler(AInputEvent *event) {
+int32_t VideoPlugin::KeyHandler(AInputEvent *event) {
     return 1;
 }
 
-void VideoEngine::PrintFrame(AVFrame *frame) {
+void VideoPlugin::PrintFrame(AVFrame *frame) {
     LOGI("============== Y ============");
     for (int i = 0; i < 10; i++) {
         LOGI("0x%x", frame->data[0][i]);

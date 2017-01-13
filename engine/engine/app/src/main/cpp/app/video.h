@@ -16,15 +16,18 @@ using namespace std;
 #define MAX_WIN_WIDTH 960;
 #define MAX_WIN_HEIGHT 960;
 
-class VideoEngine : public IPlugin, IH264CallBack {
+class VideoPlugin : public IPlugin, IH264CallBack {
 public:
 
-    VideoEngine();
-    ~VideoEngine();
+    VideoPlugin();
+    ~VideoPlugin();
 
+    // Plugin API
     bool Init(int32_t width, int32_t height);
     bool Draw();
     int32_t KeyHandler(AInputEvent *event);
+
+    // H264 decoder API
     void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt);
 
 private:

@@ -9,17 +9,24 @@
 #include "texture.h"
 #include "ogldev_glut_backend.h"
 #include "app_technique.h"
+#include "plugin.h"
+#include "app_mesh.h"
 
 using namespace std;
 
 // cap for meshes in a scene
 #define MAX_NUM_MESHES 10
 
-class SceneEngine : public ICallbacks, public OgldevApp {
+class ScenePlugin : public ICallbacks, public OgldevApp, public IPlugin {
 public:
 
-    SceneEngine();
-    ~SceneEngine();
+    // Plugin API
+    bool Init(int32_t width, int32_t height);
+    bool Draw();
+    int32_t KeyHandler(AInputEvent *event);
+
+    ScenePlugin();
+    ~ScenePlugin();
     bool Init(string mesh[], int numMesh, int w, int h);
     void renderScene();
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State) {

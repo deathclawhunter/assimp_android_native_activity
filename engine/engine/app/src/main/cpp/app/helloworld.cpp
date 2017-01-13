@@ -7,46 +7,17 @@
 
 #include "ogldev_camera.h"
 #include "gl3stub.h"
+#include "helloworld.h"
 
 using namespace std;
 
 #include "GLError.h"
 
-struct HelloContext {
-    GLuint gProgram;
-    GLuint gvPositionHandle;
-    GLuint m_Buffers[2];
-};
-
-/**
- * Test data for helloworld
- *
- * The indices is clockwise for now. Check display.cpp for
- * implementation.
- *
- * Example for how to change face culling settings:
- *
- * // Enable culling front faces or back faces
- * glEnable(GL_CULL_FACE);
- * // Specify clockwise indexed are front face, clockwise is determined by the sequence in index buffer
- * glFrontFace(GL_CW);
- * // Cull the back face
- * glCullFace(GL_BACK);
- *
- */
-static Vector3f Vertices[] = {
-    Vector3f(-1.0f, -1.0f, 0.0f),
-    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f),
-    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f),
-    Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f)
-};
-static GLubyte Indices[] = { 0, 2, 1 };
-
 /**
  * Simple example about how to use shader
  */
 
-static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
+bool HelloWorldPlugin::addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     string s;
 
     if (!ReadFile(pFilename, s)) {
@@ -83,65 +54,91 @@ static bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     return true;
 }
 
-static void CreateVertexBuffer(HelloContext *pContext) {
+void HelloWorldPlugin::CreateVertexBuffer() {
 
-    glGenBuffers(1, &pContext->m_Buffers[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, pContext->m_Buffers[0]);
+    /**
+     * Test data for helloworld
+     *
+     * The indices is clockwise for now. Check display.cpp for
+     * implementation.
+     *
+     * Example for how to change face culling settings:
+     *
+     * // Enable culling front faces or back faces
+     * glEnable(GL_CULL_FACE);
+     * // Specify clockwise indexed are front face, clockwise is determined by the sequence in index buffer
+     * glFrontFace(GL_CW);
+     * // Cull the back face
+     * glCullFace(GL_BACK);
+     *
+     */
+    Vector3f Vertices[] = {
+            Vector3f(-1.0f, -1.0f, 0.0f),
+            Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f),
+            Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f),
+            Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f)
+    };
+    GLubyte Indices[] = { 0, 2, 1 };
+
+    glGenBuffers(1, &m_Buffers[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &pContext->m_Buffers[1]);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pContext->m_Buffers[1]);
+    glGenBuffers(1, &m_Buffers[1]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+
+    numOfElements = sizeof(Indices) / sizeof(Indices[0]);
 }
 
-static bool initShaders(HelloContext *pContext) {
+bool HelloWorldPlugin::initShaders() {
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
 
-    GLuint prog = glCreateProgram();
+    gProgram = glCreateProgram();
 
-    if (!addShader(prog, GL_VERTEX_SHADER, "basicVertex.vs")) {
+    if (!addShader(gProgram, GL_VERTEX_SHADER, "basicVertex.vs")) {
         return false;
     }
 
-    if (!addShader(prog, GL_FRAGMENT_SHADER, "basicFragment.fs")) {
+    if (!addShader(gProgram, GL_FRAGMENT_SHADER, "basicFragment.fs")) {
         return false;
     }
 
-    glLinkProgram(prog);
+    glLinkProgram(gProgram);
 
-    glGetProgramiv(prog, GL_LINK_STATUS, &Success);
+    glGetProgramiv(gProgram, GL_LINK_STATUS, &Success);
     if (Success == 0) {
-        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
+        glGetProgramInfoLog(gProgram, sizeof(ErrorLog), NULL, ErrorLog);
         LOGE("Error linking shader program: '%s'\n", ErrorLog);
         return false;
     }
 
-    glValidateProgram(prog);
-    glGetProgramiv(prog, GL_VALIDATE_STATUS, &Success);
+    glValidateProgram(gProgram);
+    glGetProgramiv(gProgram, GL_VALIDATE_STATUS, &Success);
     if (!Success) {
-        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
+        glGetProgramInfoLog(gProgram, sizeof(ErrorLog), NULL, ErrorLog);
         LOGE("Invalid shader program: '%s'\n", ErrorLog);
         return false;
     }
 
-    pContext->gvPositionHandle = glGetAttribLocation(prog, "Position");
+    glUseProgram(gProgram);
+
+    gvPositionHandle = glGetAttribLocation(gProgram, "Position");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
-          pContext->gvPositionHandle);
+          gvPositionHandle);
 
-    pContext->gProgram = prog;
+    CreateVertexBuffer();
 
     return true;
 }
 
-void* helloInit(int32_t width, int32_t height) {
+bool HelloWorldPlugin::Init(int32_t width, int32_t height) {
 
     LOGI("in helloInit\n");
 
-    struct HelloContext* pContext = (struct HelloContext *) malloc(sizeof(struct HelloContext));
-
-    if (initShaders(pContext)) {
+    if (initShaders()) {
 
         static float grey;
         grey += 0.01f;
@@ -153,31 +150,28 @@ void* helloInit(int32_t width, int32_t height) {
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         checkGlError("glClear");
 
-        CreateVertexBuffer(pContext);
-
-        return pContext;
+        return true;
     }
     LOGE("fail to initialize shader\n");
-    free(pContext);
 
-    return NULL;
+    return false;
 }
 
-void helloDrawFrame(void *pContext) {
+bool HelloWorldPlugin::Draw() {
 
-    struct HelloContext *pHelloCtx = (struct HelloContext *) pContext;
-
-    glUseProgram(pHelloCtx->gProgram);
+    glUseProgram(gProgram);
     checkGlError("glUseProgram");
 
-    glBindBuffer(GL_ARRAY_BUFFER, pHelloCtx->m_Buffers[0]);
-    glVertexAttribPointer(pHelloCtx->gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(pHelloCtx->gvPositionHandle);
+    glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
+    glVertexAttribPointer(gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(gvPositionHandle);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pHelloCtx->m_Buffers[1]);
-    glDrawElements(GL_TRIANGLES, sizeof(Indices) / sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
+    glDrawElements(GL_TRIANGLES, numOfElements, GL_UNSIGNED_BYTE, 0);
+
+    return true;
 }
 
-int32_t helloKeyHandler(void *pContext, AInputEvent *event) {
+int32_t HelloWorldPlugin::KeyHandler(AInputEvent *event) {
     return 1;
 }

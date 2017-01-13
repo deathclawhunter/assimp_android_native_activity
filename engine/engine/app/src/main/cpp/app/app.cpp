@@ -21,7 +21,7 @@ using namespace std;
 #include "GLError.h"
 #include "app.h"
 
-SceneEngine::SceneEngine() {
+ScenePlugin::ScenePlugin() {
     m_pGameCamera = NULL;
     m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
     m_DirectionalLight.AmbientIntensity = 0.55f;
@@ -38,16 +38,16 @@ SceneEngine::SceneEngine() {
     m_Position = Vector3f(0.0f, 0.0f, 6.0f);
 }
 
-SceneEngine::~SceneEngine() {
+ScenePlugin::~ScenePlugin() {
     SAFE_DELETE(m_pGameCamera);
 }
 
-void SceneEngine::CalculateCenterOfRightHalf() {
+void ScenePlugin::CalculateCenterOfRightHalf() {
     m_RCenterX = m_PersProjInfo.Width * 3.0f / 4.0f;
     m_RCenterY = m_PersProjInfo.Height / 2.0f;
 }
 
-bool SceneEngine::Init(string mesh[], int numMesh, int w, int h) {
+bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
     Vector3f Up(0.0, 1.0f, 0.0f);
@@ -93,7 +93,7 @@ bool SceneEngine::Init(string mesh[], int numMesh, int w, int h) {
     return true;
 }
 
-void SceneEngine::renderScene() {
+void ScenePlugin::renderScene() {
     CalcFPS();
 
     m_pGameCamera->OnRender();
@@ -137,7 +137,7 @@ void SceneEngine::renderScene() {
     RenderFPS();
 }
 
-OGLDEV_KEY SceneEngine::ConvertKey(float x, float y) {
+OGLDEV_KEY ScenePlugin::ConvertKey(float x, float y) {
 
     float diffX, diffY, ratioX, ratioY;
 
@@ -171,31 +171,20 @@ OGLDEV_KEY SceneEngine::ConvertKey(float x, float y) {
     return OGLDEV_KEY_UNDEFINED;
 }
 
-void SceneEngine::ResetMouse() {
+void ScenePlugin::ResetMouse() {
     m_pGameCamera->ResetMouse();
 }
 
-float SceneEngine::DistToCenter(float x, float y) {
+float ScenePlugin::DistToCenter(float x, float y) {
     // simple algorithm to calculate right half or left half screen was pressed
     return abs(x - m_RCenterX) + abs(y - m_RCenterY);
 }
 
-/**
- * Callbacks for main
- */
-void appDrawFrame(void *pContext) {
-    SceneEngine *pApp = (SceneEngine *) pContext;
-    pApp->renderScene();
-}
-
-void* appInit(int32_t w, int32_t h) {
-
+bool ScenePlugin::Init(int32_t width, int32_t height) {
     LOGI("in App init:\n");
 
-    SceneEngine *pApp = new SceneEngine();
-
-    std::string str[1];
-    // str[0].append("boblampclean.md5mesh");
+    std::string str[2];
+    str[1].append("boblampclean.md5mesh");
     // str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
@@ -203,16 +192,19 @@ void* appInit(int32_t w, int32_t h) {
     str[0].append("untitled.dae");
     // str[1].append("untitled2.dae");
 
-    if (pApp->Init(str, 1, w, h)) {
-        return pApp;
+    if (Init(str, 2, width, height)) {
+        return true;
     }
 
-    delete(pApp);
-    return NULL;
+    return false;
 }
 
-int32_t appKeyHandler(void *pContext, AInputEvent *event) {
-    SceneEngine *engine = (SceneEngine *) pContext;
+bool ScenePlugin::Draw() {
+    renderScene();
+    return true;
+}
+
+int32_t ScenePlugin::KeyHandler(AInputEvent *event) {
     int32_t action = AMotionEvent_getAction(event);
     size_t count = AMotionEvent_getPointerCount(event);
     if (count == 1) { // single finger touch
@@ -220,10 +212,10 @@ int32_t appKeyHandler(void *pContext, AInputEvent *event) {
             float touchX = AMotionEvent_getX(event, 0);
             float touchY = AMotionEvent_getY(event, 0);
 
-            engine->PassiveMouseCB(touchX, touchY);
+            PassiveMouseCB(touchX, touchY);
         } else if (action == AMOTION_EVENT_ACTION_UP) {
             LOGI("Reset mouse");
-            engine->ResetMouse();
+            ResetMouse();
         }
     } else if (count == 2) {
         if (action == AMOTION_EVENT_ACTION_MOVE) {
@@ -233,11 +225,11 @@ int32_t appKeyHandler(void *pContext, AInputEvent *event) {
             float touch1X = AMotionEvent_getX(event, 0);
             float touch1Y = AMotionEvent_getY(event, 0);
 
-            if (engine->DistToCenter(touch1X, touch1Y) >
-                engine->DistToCenter(touch2X, touch2Y)) {
-                engine->PassiveKeyCB(touch2X, touch2Y);
+            if (DistToCenter(touch1X, touch1Y) >
+                DistToCenter(touch2X, touch2Y)) {
+                PassiveKeyCB(touch2X, touch2Y);
             } else {
-                engine->PassiveKeyCB(touch1X, touch1Y);
+                PassiveKeyCB(touch1X, touch1Y);
             }
         }
     }

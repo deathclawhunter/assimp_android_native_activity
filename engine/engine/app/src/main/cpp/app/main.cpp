@@ -7,6 +7,8 @@ using namespace std;
 #include "AppLog.h"
 #include "GLError.h"
 #include "video.h"
+#include "helloworld.h"
+#include "app.h"
 
 extern "C" {
     void extract_assets(struct android_app *app);
@@ -131,8 +133,13 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
 
 void initPlugins(struct engine *engine) {
 
-    VideoEngine *ve = new VideoEngine();
+    VideoPlugin *ve = new VideoPlugin();
     engine->m_Plugins = ve;
+    HelloWorldPlugin *helloWorld = new HelloWorldPlugin();
+    ve->next = helloWorld;
+    /* ScenePlugin *scene = new ScenePlugin();
+    helloWorld->next = scene; */
+
 }
 
 /**

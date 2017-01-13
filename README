@@ -3,6 +3,8 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 TODO
 ===========
 Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
+ - Converted existing scene, helloworld, video into plugins
+ - helloworld and video can run simultaneously.
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
 It seems the lighting system is not working properly.
