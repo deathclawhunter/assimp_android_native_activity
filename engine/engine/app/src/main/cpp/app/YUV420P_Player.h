@@ -35,10 +35,18 @@
 static const char* YUV420P_VS = ""
 
         "attribute vec4 Position;"
+        "uniform float ScaleFactorX;"
+        "uniform float ScaleFactorY;"
+        "uniform float OffsetX;"
+        "uniform float OffsetY;"
         "varying vec2 v_coord; "
         "void main() {"
         "    gl_Position = Position;"
-        "    v_coord = vec2(Position.x, Position.y);"
+        /**
+         * From -1,-1 -> 1,1 map to 0,0 -> 2,2
+         * Then use scale factor to fit video
+         */
+        "    v_coord = vec2((Position.x + OffsetX) * ScaleFactorX, (Position.y + OffsetY) * ScaleFactorY);"
         "}";
         /* // "#version 330\n"
         ""
@@ -104,7 +112,7 @@ class YUV420P_Player {
 
 public:
     YUV420P_Player();
-    bool setup(int w, int h);
+    bool setup(int w, int h, int winW, int winH);
     void setYPixels(uint8_t* pixels, int stride);
     void setUPixels(uint8_t* pixels, int stride);
     void setVPixels(uint8_t* pixels, int stride);

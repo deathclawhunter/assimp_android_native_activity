@@ -12,6 +12,7 @@
 #include "YUV420P_Player.h"
 
 
+#if 1
 static vec3 Vertices[] = {
         vec3(-1.0f, -1.0f, 0.0f),
         Vertices[1] = vec3(1.0f, -1.0f, 0.0f),
@@ -19,8 +20,42 @@ static vec3 Vertices[] = {
         Vertices[3] = vec3(-1.0f, 1.0f, 0.0f),
         Vertices[4] = vec3(1.0f, 1.0f, 0.0f),
 };
-static GLubyte Indices[] = { 0, 2, 1, 1, 2, 4, 0, 3, 2};
+//static GLubyte Indices[] = { 0, 2, 1, 1, 2, 4, 0, 3, 2};
 
+/**
+ * How phone screen (portrait) layout looks like in opengl es:
+ *
+ * 0 (-1, -1)                3 (-1, 1)
+ *     =========================
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     |                       |
+ *     =========================
+ * 1 (1, -1)                4 (1, 1)
+ *
+ */
+static GLubyte Indices[] = { 0, 4, 1, 0, 3, 4};
+#else // Only display in the center
+static vec3 Vertices[] = {
+        vec3(-0.5f, -0.5f, 0.0f),
+        Vertices[1] = vec3(-0.5f, 0.5f, 0.0f),
+        Vertices[2] = vec3(0.5f, -0.5f, 0.0f),
+        Vertices[3] = vec3(0.5f, 0.5f, 0.0f)
+};
+static GLubyte Indices[] = { 0, 3, 2, 0, 1, 3};
+#endif
 
 YUV420P_Player::YUV420P_Player()
         :vid_w(0)
@@ -43,10 +78,12 @@ YUV420P_Player::YUV420P_Player()
 {
 }
 
-bool YUV420P_Player::setup(int vidW, int vidH) {
+bool YUV420P_Player::setup(int vidW, int vidH, int winW, int winH) {
 
     vid_w = vidW;
     vid_h = vidH;
+    win_w = winW;
+    win_h = winH;
 
     if(!vid_w || !vid_h) {
         LOGE("Invalid texture size.\n");
@@ -170,9 +207,53 @@ bool YUV420P_Player::setupShader() {
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
          gvPositionHandle);
 
+
+    GLuint ScaleFactorX = glGetUniformLocation(prog, "ScaleFactorX");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"ScaleFactorX\") = %d\n",
+         ScaleFactorX);
+
+    GLuint ScaleFactorY = glGetUniformLocation(prog, "ScaleFactorY");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"ScaleFactorY\") = %d\n",
+         ScaleFactorY);
+
+    GLuint OffsetX = glGetUniformLocation(prog, "OffsetX");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"OffsetX\") = %d\n",
+         ScaleFactorX);
+
+    GLuint OffsetY = glGetUniformLocation(prog, "OffsetY");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"OffsetY\") = %d\n",
+         ScaleFactorY);
+
+    // by now window width and window height should already know
+    // also video width and video height also know
+    // step 1: fit video into UV map
+    // UV is 0,0 to 1,1, uv_f is the scaling factor
+    // based on video size when it comes to UV map
+    float uv_x, uv_y, uv;
+
+    uv = vid_w > vid_h ? vid_w : vid_h;
+    uv_x = (float) vid_w / uv;
+    uv_y = (float) vid_h / uv;
+
+    // vertex position mapping to UV map should be
+    float scaleX = 0.5;
+    float scaleY = 0.5;
+    glUniform1f(ScaleFactorX, scaleX);
+    glUniform1f(ScaleFactorY, scaleY);
+
+    float offsetX = 1.0;
+    float offsetY = 1.0;
+
+    glUniform1f(OffsetX, offsetX);
+    glUniform1f(OffsetY, offsetY);
+
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
-    resize(viewport[2], viewport[3]);
+    // resize(viewport[2], viewport[3]);
 
     return true;
 }
@@ -195,6 +276,7 @@ bool YUV420P_Player::setupTextures() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, vid_w/2, vid_h/2, 0, GL_RED, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
     glGenTextures(1, &v_tex);
     glBindTexture(GL_TEXTURE_2D, v_tex);

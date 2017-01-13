@@ -19,13 +19,6 @@ using namespace std;
 
 #define INBUF_SIZE 4096
 
-/**
- * TODO: the width and height will cause crash if it does not
- * TODO: match the YUV arrays inside AVFrame in ffmpeg callback
- */
-#define VIDEO_WIDTH 960
-#define VIDEO_HEIGHT 540
-
 VideoEngine::VideoEngine() {
     decoder = new H264_Decoder(this, NULL);
     player = new YUV420P_Player();
@@ -37,6 +30,10 @@ VideoEngine::~VideoEngine() {
 
     delete decoder;
     delete player;
+
+    if (y != NULL) av_free(y);
+    if (u != NULL) av_free(u);
+    if (v != NULL) av_free(v);
 }
 
 bool VideoEngine::Init(int32_t width, int32_t height) {
@@ -47,8 +44,77 @@ bool VideoEngine::Init(int32_t width, int32_t height) {
         LOGE("fail to load video");
         return false;
     }
+/*
+    if (videoWidth > videoHeight) {
+        winWidth = videoWidth;
+        winHeight = videoWidth * height / width;
+        if (winHeight < videoHeight) {
+            winHeight = videoHeight;
+            winWidth = videoHeight * width / height;
+        }
+    } else {
+        winHeight = videoHeight;
+        winWidth = videoHeight * width / height;
+        if (winWidth < videoWidth) {
+            winWidth = videoWidth;
+            winHeight = videoWidth * height / width;
+        }
+    }
+    */
 
-    if (!player->setup(VIDEO_WIDTH, VIDEO_HEIGHT)) {
+    /* winWidth = 2560;
+    winHeight = 1440; */
+
+    while (width > maxWidth || height > maxHeight) {
+        width >>= 1;
+        height >>= 1;
+    }
+    winWidth = width;
+    winHeight = height;
+    if (videoWidth > winWidth) {
+        winWidth = videoWidth;
+    }
+    if (videoHeight > winHeight) {
+        winHeight = videoHeight;
+    }
+
+    if (videoWidth > winWidth || videoHeight > winHeight) {
+        // need scale down
+        float fScaleW = (float) videoWidth / (float) winWidth;
+        float fScaleH = (float) videoHeight / (float) winHeight;
+
+        if (fScaleW > fScaleH) {
+            scaleFactor = fScaleW;
+        } else {
+            scaleFactor = fScaleH;
+        }
+
+        scaleDown = true;
+    } else {
+        // need scale up
+        float fScaleW = (float) winWidth / (float) videoWidth;
+        float fScaleH = (float) winHeight / (float) videoHeight;
+
+        if (fScaleW > fScaleH) {
+            scaleFactor = fScaleH;
+        } else {
+            scaleFactor = fScaleW;
+        }
+
+        scaleDown = false;
+    }
+
+    int len = winWidth * winHeight;
+    y = (uint8_t *) av_malloc(len);
+    memset(y, 0, len); // prefilled with black
+    len = winWidth * winHeight >> 2;
+    u = (uint8_t *) av_malloc(len);
+    memset(u, 128, len); // prefilled with black
+    v = (uint8_t *) av_malloc(len);
+    memset(v, 128, len); // prefilled with black
+
+    // if (!player->setup(VIDEO_WIDTH, VIDEO_HEIGHT, width, height)) {
+    if (!player->setup(winWidth, winHeight, width, height)) {
         LOGE("fail to setup player");
         return false;
     }
@@ -65,15 +131,63 @@ void VideoEngine::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* fra
         return;
     }
 
+    frameCount++;
+
     PrintFrame(frame);
 
     // TODO: need to add mapping code here to map the video frame to actual screen resolution
     // otherwise, we have to use fixed video size, since setYPixels() is using the width and
     // height to access the frame data. Any mismatch will cause invalid address access issue.
-    player->setYPixels(frame->data[0], frame->linesize[0]);
-    player->setUPixels(frame->data[1], frame->linesize[1]);
-    player->setVPixels(frame->data[2], frame->linesize[2]);
-    player->draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+    // Y len vid_w * vid_h
+    // U len vid_w * 0.5 * vid_h * 0.5
+    // v len vid_w * 0.5 * vid_h * 0.5
+
+    if (!scaleDown) { // TODO: support clip and scale down
+        /* Cb and Cr */
+        int halfVideoWidth = videoWidth * scaleFactor >> 1;
+        int halfWinHeight = winHeight >> 1;
+        int halfWinWidth = winWidth >> 1;
+        int startHeight = (winHeight - videoHeight * scaleFactor) >> 1;
+        int startWidth = (winWidth - videoWidth * scaleFactor) >> 1;
+        int endHeight = startHeight + videoHeight * scaleFactor;
+        int startHalfWidth = (halfWinWidth - halfVideoWidth) >> 1;
+        int n = frame->linesize[0] * scaleFactor;
+        int n1 = frame->linesize[1] * scaleFactor;
+        int n2 = frame->linesize[2] * scaleFactor;
+        for (int i = startHeight; i < endHeight; i++) {
+            // Y
+            int base = i * winWidth + startWidth;
+            int frameBase = (i - startHeight) / scaleFactor * frame->linesize[0] + frame->linesize[0] - 1;
+            for (int j = 0; j < n; j++) {
+                y[base + j] = frame->data[0][frameBase - j / scaleFactor];
+            }
+
+            if (i >= halfWinHeight) { // u, v is half of y
+                continue;
+            }
+
+            // U
+            base = i * halfWinWidth + startHalfWidth;
+            frameBase = (i - startHeight) / scaleFactor * frame->linesize[1] + frame->linesize[1] - 1;
+            for (int j = 0; j < n1; j++) {
+                u[base + j] = frame->data[1][frameBase - j / scaleFactor];
+            }
+
+            // V
+            // TODO: potentially can be combined with U
+            frameBase = (i - startHeight) / scaleFactor * frame->linesize[2] + frame->linesize[2] - 1;
+            for (int j = 0; j < n2; j++) {
+                v[base + j] = frame->data[2][frameBase - j / scaleFactor];
+            }
+        }
+    }
+
+    player->setYPixels(y, winWidth);
+    player->setUPixels(u, winWidth / 2);
+    player->setVPixels(v, winWidth / 2);
+    player->draw(0, 0, 0, 0);
+
+    return;
 }
 
 // TODO: add video control later

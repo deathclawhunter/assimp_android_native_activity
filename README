@@ -2,9 +2,6 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-Render animation and sound in the demo.
- - Video decoding and rendering start to work in demo, need to figure out how to coordinate between decoding and rendering, it seems always render the last frame.
-
 Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
@@ -12,6 +9,9 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Render animation and sound in the demo.
+ - Video decoding and rendering start to work in demo, need to figure out how to coordinate between decoding and rendering, it seems always render the last frame.
+ - Able to play full screen video now. Can add clip and scale down video later. For demo, just scale up and screen fit is OK.
 Seem OK for now. Need to add frame rate control
 DONE by adding basic navigation system. Need to add gaming control to existing input handler
 Added H264 decoder
