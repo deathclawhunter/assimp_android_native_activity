@@ -24,10 +24,11 @@ public:
     bool Init(int32_t width, int32_t height);
     bool Draw();
     int32_t KeyHandler(AInputEvent *event);
+    IPlugin::PLUGIN_STATUS status();
 
     ScenePlugin();
     ~ScenePlugin();
-    bool Init(string mesh[], int numMesh, int w, int h);
+    bool Init(string mesh[], int numMesh, string hudMesh[], int numHudMesh, int w, int h);
     void renderScene();
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State) {
         switch (OgldevKey) {
@@ -64,10 +65,13 @@ private:
     Vector3f m_Position;
     PersProjInfo m_PersProjInfo;
     float m_RCenterX, m_RCenterY; // Center point of right half of the screen
+    Matrix4f m_OrthogonalMatrix;
+    bool m_OrthoMatrixInitialized = false;
 
 private:
     const float MINIMAL_MOVE_DIFF = 0.1f;
     const bool ENABLE_UP_N_DOWN = true; // In mobile game, we disable up and down
     void CalculateCenterOfRightHalf();
     const float GAME_STEP_SCALE = 0.5f;
+    IPlugin::PLUGIN_STATUS sceneStatus;
 };

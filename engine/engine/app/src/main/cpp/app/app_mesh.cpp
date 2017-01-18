@@ -537,3 +537,11 @@ const aiNodeAnim *AppMesh::FindNodeAnim(const aiAnimation *pAnimation, const str
 
     return NULL;
 }
+
+bool AppMesh::IsHudMesh() {
+    return m_isHudMesh;
+}
+
+void AppMesh::SetHudMesh(bool HudMesh) {
+    m_isHudMesh = HudMesh;
+}

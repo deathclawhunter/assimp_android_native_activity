@@ -2,15 +2,16 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
- - Converted existing scene, helloworld, video into plugins
- - helloworld and video can run simultaneously.
+Need to add sound system
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
 It seems the lighting system is not working properly.
 
 DONE
 ===========
+Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
+ - Converted existing scene, helloworld, video into plugins
+ - helloworld and video can run simultaneously.
 Render animation and sound in the demo.
  - Video decoding and rendering start to work in demo, need to figure out how to coordinate between decoding and rendering, it seems always render the last frame.
  - Able to play full screen video now. Can add clip and scale down video later. For demo, just scale up and screen fit is OK.
@@ -42,6 +43,27 @@ Need to check if I can reuse FreeGlut framework, the answer is YES we can, but i
 
 Notes
 ===========
+Game flow control
+----------------
+Since in this demo, I am not currently planning to add game script support. That means the gaming flow will be controlled in a less flexible way. Like plugin status.
+
+Plugin status are a bunch of status to tell the pipe line if the plugin need to be drawn, or need to be initialized or termiated. A special plugin status added for app scene class is initialize later - PLUGIN_STATUS_INITIALIZE_LATER. It indicates the pipe line to initialize this particular plugin after all previous plugins finished. The reason is that it seems the video plugin conflicts with scene plugin. Keep in mind the plugins are processed in the sequence of the orders that they are in the plugin linked list, in first come first serve manner.
+
+Maybe I should dig into to see if I can remove the initialize later flag. But again it is not critical for now for this demo. 
+
+
+HUD layer
+----------------
+Orthogonal matrix is one way to implement the HUD layer. Shortcut to implement this in this demo is using the first matrix as HUD matrix, which means as long as the HUD mesh place correctly with the first matrix (without any camera movement). We use this matrix as our HUD instead of searching how to implement a orthogonal transform for HUD meshes.
+
+So given this solution, a flag added to mesh class - IsHudMesh. And Init() of AppMesh has been changed into accept two arrays, one is for regular meshes, one is for HUD meshes. In our rendering process, instead of using WVP matrix, we are using HUD matrix for HUD meshes.
+
+
+glpixelstorei()
+----------------
+If next using multiple shaders across different program, glpixelstorei() should be carefully taken care. Since it will change the way opengl interpret the texture across all programs and shaders.
+
+
 Bone transformation problem
 ----------------
 Sine rigged mesh will need bone transformation, while static mesh does not. It will cause the static mesh to be transformed by uninitialized bone matrix. The solution is to initialize the bone buffer for static mesh in a way that the final transformation leads to a identity matrix. Concrete solution is that initialize the ID buffer for every single vertex to point to gBone[0], and let weight[0] = 1, rest of weights to be 0, so that:
@@ -59,7 +81,7 @@ Blender export problem
 ----------------
 The cycles renderer cannot export texture correctly, need to swtich back to use blender built-in renderer. Maybe it is not worth for now to develop a python script to export texture for cycles, because cycles seems not designed for game assets developing anyway.
 
-Also, the mesh is too small when display on the phone. It seems the mesh need to be scale up to 10-20 times big. Maybe a python script will help.
+Also, the mesh is too small when display on the phone. It seems the mesh need to be scale up to 10-20 times big depends on current mesh transformation matrix in the code. More importantly, the scaling has to be applied in edit mode since the code does not pick up the scaling factors at all. Maybe a python script will help.
 
 
 std::string

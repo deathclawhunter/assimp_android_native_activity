@@ -34,19 +34,19 @@
 
 static const char* YUV420P_VS = ""
 
-        "attribute vec4 Position;"
+        "attribute vec4 YUVPosition;"
         "uniform float ScaleFactorX;"
         "uniform float ScaleFactorY;"
         "uniform float OffsetX;"
         "uniform float OffsetY;"
         "varying vec2 v_coord; "
         "void main() {"
-        "    gl_Position = Position;"
+        "    gl_Position = YUVPosition;"
         /**
          * From -1,-1 -> 1,1 map to 0,0 -> 2,2
          * Then use scale factor to fit video
          */
-        "    v_coord = vec2((Position.x + OffsetX) * ScaleFactorX, (Position.y + OffsetY) * ScaleFactorY);"
+        "    v_coord = vec2((YUVPosition.x + OffsetX) * ScaleFactorX, (YUVPosition.y + OffsetY) * ScaleFactorY);"
         "}";
         /* // "#version 330\n"
         ""
@@ -118,6 +118,7 @@ public:
     void setVPixels(uint8_t* pixels, int stride);
     void draw(int x, int y, int w = 0, int h = 0);
     void resize(int winW, int winH);
+    void tearDown();
 
 private:
     bool setupTextures();
@@ -127,6 +128,7 @@ private:
     GLuint rx_create_shader(GLenum ShaderType, const char *s);
 
 public:
+    GLint origStride;
     int vid_w;
     int vid_h;
     int win_w;

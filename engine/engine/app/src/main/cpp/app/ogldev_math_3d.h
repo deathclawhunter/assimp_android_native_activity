@@ -346,9 +346,11 @@ public:
     
     void Print() const
     {
+        LOGI("------------------------------");
         for (int i = 0 ; i < 4 ; i++) {
             LOGI("%f %f %f %f\n", m[i][0], m[i][1], m[i][2], m[i][3]);
-        }       
+        }
+        LOGI("------------------------------");
     }
     
     float Determinant() const;

@@ -36,6 +36,11 @@
 %
 */
 
+
+#define LOG_TAG "Constitute"
+
+#include "AppLog.h"
+
 /*
   Include declarations.
 */
@@ -394,12 +399,17 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
   PolicyRights
     rights;
 
+  LOGI("====================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+
   /*
     Determine image type from filename prefix or suffix (e.g. image.jpg).
   */
   assert(image_info != (ImageInfo *) NULL);
   assert(image_info->signature == MagickCoreSignature);
   assert(image_info->filename != (char *) NULL);
+
+  LOGI("====================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx%s", image_info->filename);
+
   if (image_info->debug != MagickFalse)
     (void) LogMagickEvent(TraceEvent,GetMagickModule(),"%s",
       image_info->filename);
@@ -417,6 +427,8 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
       (void) ThrowMagickException(exception,GetMagickModule(),PolicyError,
         "NotAuthorized","`%s'",read_info->filename);
       read_info=DestroyImageInfo(read_info);
+
+      LOGI("====================xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxNotAuthorized");
       return((Image *) NULL);
     }
   /*
@@ -455,6 +467,7 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
         {
           read_info=DestroyImageInfo(read_info);
           image=DestroyImage(image);
+          LOGI("====================MagickFalse");
           return((Image *) NULL);
         }
       if (IsBlobSeekable(image) == MagickFalse)
@@ -469,6 +482,7 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
               (void) CloseBlob(image);
               read_info=DestroyImageInfo(read_info);
               image=DestroyImage(image);
+              LOGI("====================ImageToFile");
               return((Image *) NULL);
             }
           read_info->temporary=MagickTrue;
@@ -512,6 +526,7 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
           if (read_info->temporary != MagickFalse)
             (void) RelinquishUniqueFileResource(read_info->filename);
           read_info=DestroyImageInfo(read_info);
+          LOGI("====================NoDecodeDelegateForThisImageFormat");
           return((Image *) NULL);
         }
       /*
@@ -521,6 +536,7 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
       if (image == (Image *) NULL)
         {
           read_info=DestroyImageInfo(read_info);
+          LOGI("====================AcquireImage");
           return((Image *) NULL);
         }
       (void) CopyMagickString(image->filename,read_info->filename,
@@ -540,13 +556,16 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
       if ((magick_info == (const MagickInfo *) NULL) ||
           (GetImageDecoder(magick_info) == (DecodeImageHandler *) NULL))
         {
-          if (IsPathAccessible(read_info->filename) != MagickFalse)
+          if (IsPathAccessible(read_info->filename) != MagickFalse) {
             (void) ThrowMagickException(exception,GetMagickModule(),
               MissingDelegateError,"NoDecodeDelegateForThisImageFormat","`%s'",
               read_info->magick);
-          else
+            LOGI("====================NoDecodeDelegateForThisImageFormat");
+          } else {
             ThrowFileException(exception,FileOpenError,"UnableToOpenFile",
-              read_info->filename);
+                               read_info->filename);
+            LOGI("====================UnableToOpenFile");
+          }
           read_info=DestroyImageInfo(read_info);
           return((Image *) NULL);
         }
@@ -566,6 +585,7 @@ MagickExport Image *ReadImage(const ImageInfo *image_info,
   if (image == (Image *) NULL)
     {
       read_info=DestroyImageInfo(read_info);
+      LOGI("====================CopyMagickString");
       return(image);
     }
   if (exception->severity >= ErrorException)

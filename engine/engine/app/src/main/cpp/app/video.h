@@ -26,6 +26,7 @@ public:
     bool Init(int32_t width, int32_t height);
     bool Draw();
     int32_t KeyHandler(AInputEvent *event);
+    IPlugin::PLUGIN_STATUS status();
 
     // H264 decoder API
     void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt);
@@ -46,6 +47,8 @@ private:
 
     int maxWidth = MAX_WIN_WIDTH;
     int maxHeight = MAX_WIN_HEIGHT;
+
+    PLUGIN_STATUS playStatus;
 
 private:
     void PrintFrame(AVFrame *frame);

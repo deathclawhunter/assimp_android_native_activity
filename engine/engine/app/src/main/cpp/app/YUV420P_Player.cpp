@@ -196,15 +196,14 @@ bool YUV420P_Player::setupShader() {
     }
 
     glUseProgram(prog);
+
     glUniform1i(glGetUniformLocation(prog, "y_tex"), 0);
     glUniform1i(glGetUniformLocation(prog, "u_tex"), 1);
     glUniform1i(glGetUniformLocation(prog, "v_tex"), 2);
 
-    // u_pos = glGetUniformLocation(prog, "draw_pos");
-
-    gvPositionHandle = glGetAttribLocation(prog, "Position");
+    gvPositionHandle = glGetAttribLocation(prog, "YUVPosition");
     checkGlError("glGetAttribLocation");
-    LOGI("glGetAttribLocation(\"Position\") = %d\n",
+    LOGI("glGetAttribLocation(\"YUVPosition\") = %d\n",
          gvPositionHandle);
 
 
@@ -233,11 +232,6 @@ bool YUV420P_Player::setupShader() {
     // step 1: fit video into UV map
     // UV is 0,0 to 1,1, uv_f is the scaling factor
     // based on video size when it comes to UV map
-    float uv_x, uv_y, uv;
-
-    uv = vid_w > vid_h ? vid_w : vid_h;
-    uv_x = (float) vid_w / uv;
-    uv_y = (float) vid_h / uv;
 
     // vertex position mapping to UV map should be
     float scaleX = 0.5;
@@ -250,10 +244,6 @@ bool YUV420P_Player::setupShader() {
 
     glUniform1f(OffsetX, offsetX);
     glUniform1f(OffsetY, offsetY);
-
-    GLint viewport[4];
-    glGetIntegerv(GL_VIEWPORT, viewport);
-    // resize(viewport[2], viewport[3]);
 
     return true;
 }
@@ -283,6 +273,11 @@ bool YUV420P_Player::setupTextures() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, vid_w/2, vid_h/2, 0, GL_RED, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glGetIntegerv(GL_UNPACK_ROW_LENGTH, &origStride);
+    LOGI("Original stride is %d\n", origStride);
 
     textures_created = true;
     return true;
@@ -321,19 +316,8 @@ void YUV420P_Player::draw(int x, int y, int w, int h) {
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
     glDrawElements(GL_TRIANGLES, sizeof(Indices) / sizeof(Indices[0]), GL_UNSIGNED_BYTE, 0);
-}
 
-void YUV420P_Player::resize(int winW, int winH) {
-    assert(winW > 0 && winH > 0);
-
-    win_w = winW;
-    win_h = winH;
-
-    pm.identity();
-    pm.ortho(0, win_w, win_h, 0, 0.0, 100.0f);
-
-    glUseProgram(prog);
-    glUniformMatrix4fv(glGetUniformLocation(prog, "u_pm"), 1, GL_FALSE, pm.ptr());
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void YUV420P_Player::setYPixels(uint8_t* pixels, int stride) {
@@ -342,6 +326,8 @@ void YUV420P_Player::setYPixels(uint8_t* pixels, int stride) {
     glBindTexture(GL_TEXTURE_2D, y_tex);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, stride);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, vid_w, vid_h, GL_RED, GL_UNSIGNED_BYTE, pixels);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void YUV420P_Player::setUPixels(uint8_t* pixels, int stride) {
@@ -350,6 +336,8 @@ void YUV420P_Player::setUPixels(uint8_t* pixels, int stride) {
     glBindTexture(GL_TEXTURE_2D, u_tex);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, stride);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, vid_w/2, vid_h/2, GL_RED, GL_UNSIGNED_BYTE, pixels);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void YUV420P_Player::setVPixels(uint8_t* pixels, int stride) {
@@ -358,5 +346,11 @@ void YUV420P_Player::setVPixels(uint8_t* pixels, int stride) {
     glBindTexture(GL_TEXTURE_2D, v_tex);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, stride);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, vid_w/2, vid_h/2, GL_RED, GL_UNSIGNED_BYTE, pixels);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void YUV420P_Player::tearDown() {
+    glPixelStorei(GL_UNPACK_ROW_LENGTH, origStride);
 }
 

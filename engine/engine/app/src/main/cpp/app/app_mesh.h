@@ -33,6 +33,9 @@ public:
 
     void BoneTransform(float TimeInSeconds, vector<Matrix4f> &Transforms);
 
+    bool IsHudMesh();
+    void SetHudMesh(bool HudMesh);
+
 private:
 #define NUM_BONES_PER_VEREX 4
 
@@ -144,6 +147,8 @@ private:
 
     const aiScene *m_pScene;
     Assimp::Importer m_Importer;
+
+    bool m_isHudMesh = false; // by default is NOT HUD mesh
 };
 
 

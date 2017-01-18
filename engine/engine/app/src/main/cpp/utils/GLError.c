@@ -1,5 +1,3 @@
-#if 1
-
 #include "GLError.h"
 #include "AppLog.h"
 
@@ -14,5 +12,4 @@ void checkGlError(const char *op) {
     }
 }
 
-#endif
 

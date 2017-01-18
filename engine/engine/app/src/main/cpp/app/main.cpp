@@ -7,8 +7,9 @@ using namespace std;
 #include "AppLog.h"
 #include "GLError.h"
 #include "video.h"
-#include "helloworld.h"
 #include "app.h"
+
+#define HELLOWORD 0
 
 extern "C" {
     void extract_assets(struct android_app *app);
@@ -48,39 +49,77 @@ void draw_frame(struct engine *engine) {
             // decode_h264("0000-0100.avi");
 
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
-            // engine->pContext = engine->pfInit(engine->width, engine->height);
             engine->initialized = true;
 
             IPlugin *plugin = engine->m_Plugins;
             IPlugin *prev = plugin; // use for unlink
             while (plugin != NULL) {
-                if (!plugin->Init(engine->width, engine->height)) {
+                if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_RIGHT_NOW &&
+                    !plugin->Init(engine->width, engine->height)) {
                     if (prev != plugin) {
                         prev->next = plugin->next; // unlink from the list if fail to initialize
+                        delete plugin;
+                        plugin = prev->next;
+                    } else {
+                        engine->m_Plugins = plugin->next;
+                        delete plugin;
+                        plugin = engine->m_Plugins;
+                        prev = engine->m_Plugins;
                     }
-
-                    prev = plugin;
-                    plugin = plugin->next;
-
-                    delete plugin;
                 } else {
-
                     prev = plugin;
                     plugin = plugin->next;
                 }
             }
         }
     } else {
-        // engine->pfDrawFrame(engine->pContext);
         bool update = false;
         IPlugin *plugin = engine->m_Plugins;
+        IPlugin *prev = plugin; // use for unlink
         while (plugin != NULL) {
+
+            if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_LATER) {
+                if (!plugin->Init(engine->width, engine->height)) {
+                    if (prev != plugin) {
+                        prev->next = plugin->next; // unlink from the list if fail to initialize
+                        delete plugin;
+                        plugin = prev->next;
+                    } else {
+                        engine->m_Plugins = plugin->next;
+                        delete plugin;
+                        plugin = engine->m_Plugins;
+                        prev = engine->m_Plugins;
+                    }
+
+                    continue; // continue to next plugin if fail to initialize
+                }
+            }
+
             if (update) {
                 plugin->Draw();
             } else {
                 update = plugin->Draw();
             }
-            plugin = plugin->next;
+
+            if (plugin->status() == IPlugin::PLUGIN_STATUS_FINISHED) {
+                if (prev != plugin) {
+                    prev->next = plugin->next; // unlink from the list if fail to initialize
+                    delete plugin;
+                    plugin = prev->next;
+                } else {
+                    engine->m_Plugins = plugin->next;
+                    delete plugin;
+                    plugin = engine->m_Plugins;
+                    prev = plugin;
+                }
+            } else if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
+                break;
+            } else if (plugin->status() == IPlugin::PLUGIN_STATUS_NEXT) {
+                prev = plugin;
+                plugin = plugin->next;
+            } else {
+                // undefined
+            }
         }
         if (update) {
             eglSwapBuffers(engine->display, engine->surface);
@@ -97,6 +136,10 @@ int32_t app_input_handler(struct android_app *app, AInputEvent *event) {
         IPlugin *plugin = engine->m_Plugins;
         while (plugin != NULL) {
             plugin->KeyHandler(event);
+
+            if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
+                break;
+            }
             plugin = plugin->next;
         }
 
@@ -131,14 +174,20 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
     }
 }
 
+#include "helloworld.h"
+
 void initPlugins(struct engine *engine) {
 
+#if HELLOWORD
+    HelloWorldPlugin *helloWorld = new HelloWorldPlugin();
+    engine->m_Plugins = helloWorld;
+#else
     VideoPlugin *ve = new VideoPlugin();
     engine->m_Plugins = ve;
-    HelloWorldPlugin *helloWorld = new HelloWorldPlugin();
-    ve->next = helloWorld;
-    /* ScenePlugin *scene = new ScenePlugin();
-    helloWorld->next = scene; */
+    ScenePlugin *scene = new ScenePlugin();
+    ve->next = scene;
+
+#endif
 
 }
 

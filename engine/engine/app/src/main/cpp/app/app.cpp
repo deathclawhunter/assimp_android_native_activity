@@ -20,6 +20,7 @@ using namespace std;
 
 #include "GLError.h"
 #include "app.h"
+#include "plugin.h"
 
 ScenePlugin::ScenePlugin() {
     m_pGameCamera = NULL;
@@ -36,6 +37,7 @@ ScenePlugin::ScenePlugin() {
     m_PersProjInfo.zFar = 100.0f;
 
     m_Position = Vector3f(0.0f, 0.0f, 6.0f);
+    sceneStatus = PLUGIN_STATUS_INIT_LATER;
 }
 
 ScenePlugin::~ScenePlugin() {
@@ -47,7 +49,7 @@ void ScenePlugin::CalculateCenterOfRightHalf() {
     m_RCenterY = m_PersProjInfo.Height / 2.0f;
 }
 
-bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
+bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudMesh, int w, int h) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
     Vector3f Up(0.0, 1.0f, 0.0f);
@@ -61,6 +63,7 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
     m_pGameCamera = new Camera(w, h, Pos, Target, Up);
     if (!m_Renderer.Init()) {
         LOGE("Error initializing the lighting technique\n");
+        sceneStatus = PLUGIN_STATUS_INIT_FAIL;
         return false;
     }
     m_pGameCamera->SetStep(GAME_STEP_SCALE);
@@ -70,11 +73,26 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
     m_Renderer.SetMatSpecularIntensity(0.0f);
     m_Renderer.SetMatSpecularPower(0);
 
-    m_NumMesh = min(MAX_NUM_MESHES, numMesh);
+    if (numMesh + numHudMesh >= MAX_NUM_MESHES) {
+        LOGE("exceeded max mesh count %d", numMesh + numHudMesh);
+        return false;
+    }
+
+    m_NumMesh = min(MAX_NUM_MESHES, numMesh + numHudMesh);
     for (int i = 0; i < m_NumMesh; i++) {
-        if (!m_Meshes[i].LoadMesh(mesh[i])) {
-            LOGE("fail to load mesh %s\n", mesh[i].c_str());
-            return false;
+        if (i < numMesh) {
+            if (!m_Meshes[i].LoadMesh(mesh[i])) {
+                LOGE("fail to load mesh %s\n", mesh[i].c_str());
+                sceneStatus = PLUGIN_STATUS_INIT_FAIL;
+                return false;
+            }
+        } else {
+            if (!m_Meshes[i].LoadMesh(hudMesh[i - numMesh])) {
+                LOGE("fail to load hud mesh %s\n", hudMesh[i - numMesh].c_str());
+                sceneStatus = PLUGIN_STATUS_INIT_FAIL;
+                return false;
+            }
+            m_Meshes[i].SetHudMesh(true);
         }
     }
 
@@ -90,6 +108,9 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
     /* if (!m_fontRenderer.InitFontRenderer()) {
         return false;
     } */
+
+    sceneStatus = PLUGIN_STATUS_LOOP_ME;
+
     return true;
 }
 
@@ -109,8 +130,20 @@ void ScenePlugin::renderScene() {
     p.WorldPos(Pos);
     p.Rotate(270.0f, 180.0f, 0.0f);
 
-    m_Renderer.SetWVP(p.GetWVPTrans());
+    Matrix4f wvp = p.GetWVPTrans();
+    m_Renderer.SetWVP(wvp);
     m_Renderer.SetWorldMatrix(p.GetWorldTrans());
+
+    /**
+     * This is NOT real orthogonal matrix, since OpenGL ES does not support
+     * Ortho API, we cache our first matrix as 2D transform matrix,
+     * therefore, for 2D elements it will always use this matrix no matter
+     * how camera moves. This is a faked orthogonal transform, but it works.
+     */
+    if (!m_OrthoMatrixInitialized) {
+        m_OrthogonalMatrix = wvp;
+        m_OrthoMatrixInitialized = true;
+    }
 
     /* glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
@@ -130,6 +163,9 @@ void ScenePlugin::renderScene() {
         }
         for (uint i = 0; i < Transforms.size(); i++) {
             m_Renderer.SetBoneTransform(i, Transforms[i]);
+        }
+        if (m_Meshes[j].IsHudMesh()) {
+            m_Renderer.SetWVP(m_OrthogonalMatrix);
         }
         m_Meshes[j].Render();
     }
@@ -190,9 +226,12 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
     str[0].append("untitled.dae");
+
+    std::string str2[1];
+    str2[0].append("menu.dae");
     // str[1].append("untitled2.dae");
 
-    if (Init(str, 2, width, height)) {
+    if (Init(str, 2, str2, 1, width, height)) {
         return true;
     }
 
@@ -235,4 +274,8 @@ int32_t ScenePlugin::KeyHandler(AInputEvent *event) {
     }
 
     return 1;
+}
+
+IPlugin::PLUGIN_STATUS ScenePlugin::status() {
+    return sceneStatus; // this is mainloop scene, so return loop me always
 }

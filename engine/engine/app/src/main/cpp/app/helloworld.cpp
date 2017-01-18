@@ -140,6 +140,8 @@ bool HelloWorldPlugin::Init(int32_t width, int32_t height) {
 
     if (initShaders()) {
 
+        my_status = PLUGIN_STATUS_NEXT;
+
         static float grey;
         grey += 0.01f;
         if (grey > 1.0f) {
@@ -160,7 +162,7 @@ bool HelloWorldPlugin::Init(int32_t width, int32_t height) {
 bool HelloWorldPlugin::Draw() {
 
     glUseProgram(gProgram);
-    checkGlError("glUseProgram");
+    checkGlError("HelloWorldPlugin::glUseProgram");
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
     glVertexAttribPointer(gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -174,4 +176,8 @@ bool HelloWorldPlugin::Draw() {
 
 int32_t HelloWorldPlugin::KeyHandler(AInputEvent *event) {
     return 1;
+}
+
+IPlugin::PLUGIN_STATUS HelloWorldPlugin::status() {
+    return my_status; // example of never finish a plugin
 }

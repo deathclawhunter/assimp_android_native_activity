@@ -106,7 +106,7 @@ bool H264_Decoder::readFrame() {
 
     uint64_t now = rx_hrtime();
     if(now < frame_timeout) {
-        LOGW("now = %llu vs frame_timeout = %llu\n", now, frame_timeout);
+        // LOGW("now = %llu vs frame_timeout = %llu\n", now, frame_timeout);
         return false;
     }
 
