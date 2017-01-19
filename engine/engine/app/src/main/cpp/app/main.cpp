@@ -8,6 +8,7 @@ using namespace std;
 #include "GLError.h"
 #include "video.h"
 #include "app.h"
+#include "PluginManager.h"
 
 #define HELLOWORD 0
 
@@ -51,77 +52,10 @@ void draw_frame(struct engine *engine) {
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
             engine->initialized = true;
 
-            IPlugin *plugin = engine->m_Plugins;
-            IPlugin *prev = plugin; // use for unlink
-            while (plugin != NULL) {
-                if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_RIGHT_NOW &&
-                    !plugin->Init(engine->width, engine->height)) {
-                    if (prev != plugin) {
-                        prev->next = plugin->next; // unlink from the list if fail to initialize
-                        delete plugin;
-                        plugin = prev->next;
-                    } else {
-                        engine->m_Plugins = plugin->next;
-                        delete plugin;
-                        plugin = engine->m_Plugins;
-                        prev = engine->m_Plugins;
-                    }
-                } else {
-                    prev = plugin;
-                    plugin = plugin->next;
-                }
-            }
+            PluginManager::GetInstance()->Init(engine->width, engine->height);
         }
     } else {
-        bool update = false;
-        IPlugin *plugin = engine->m_Plugins;
-        IPlugin *prev = plugin; // use for unlink
-        while (plugin != NULL) {
-
-            if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_LATER) {
-                if (!plugin->Init(engine->width, engine->height)) {
-                    if (prev != plugin) {
-                        prev->next = plugin->next; // unlink from the list if fail to initialize
-                        delete plugin;
-                        plugin = prev->next;
-                    } else {
-                        engine->m_Plugins = plugin->next;
-                        delete plugin;
-                        plugin = engine->m_Plugins;
-                        prev = engine->m_Plugins;
-                    }
-
-                    continue; // continue to next plugin if fail to initialize
-                }
-            }
-
-            if (update) {
-                plugin->Draw();
-            } else {
-                update = plugin->Draw();
-            }
-
-            if (plugin->status() == IPlugin::PLUGIN_STATUS_FINISHED) {
-                if (prev != plugin) {
-                    prev->next = plugin->next; // unlink from the list if fail to initialize
-                    delete plugin;
-                    plugin = prev->next;
-                } else {
-                    engine->m_Plugins = plugin->next;
-                    delete plugin;
-                    plugin = engine->m_Plugins;
-                    prev = plugin;
-                }
-            } else if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
-                break;
-            } else if (plugin->status() == IPlugin::PLUGIN_STATUS_NEXT) {
-                prev = plugin;
-                plugin = plugin->next;
-            } else {
-                // undefined
-            }
-        }
-        if (update) {
+        if (PluginManager::GetInstance()->Draw()) {
             eglSwapBuffers(engine->display, engine->surface);
         }
     }
@@ -132,18 +66,7 @@ void draw_frame(struct engine *engine) {
  */
 int32_t app_input_handler(struct android_app *app, AInputEvent *event) {
     if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-        struct engine *engine = (struct engine *) app->userData;
-        IPlugin *plugin = engine->m_Plugins;
-        while (plugin != NULL) {
-            plugin->KeyHandler(event);
-
-            if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
-                break;
-            }
-            plugin = plugin->next;
-        }
-
-        return 1;
+        return PluginManager::GetInstance()->KeyHandler(event);
     }
 
     return 0;
@@ -183,13 +106,11 @@ void initPlugins(struct engine *engine) {
     HelloWorldPlugin *helloWorld = new HelloWorldPlugin();
     engine->m_Plugins = helloWorld;
 #else
-    /* VideoPlugin *ve = new VideoPlugin();
-    engine->m_Plugins = ve;
-    ScenePlugin *scene = new ScenePlugin();
-    ve->next = scene; */
-
-    AudioPlugin *ap = new AudioPlugin();
-    engine->m_Plugins = ap;
+    // Should be controlled by script, hard code right now for demo
+    // sequence matters, check dev notes for game flow control
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC, new AudioPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO, new VideoPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
 #endif
 
 }

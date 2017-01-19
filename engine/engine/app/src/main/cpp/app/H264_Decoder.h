@@ -17,7 +17,7 @@
   necessary. It will also make sure that it will read enough data from the buffer/file
   when there is not enough data in the buffer.
 
-  `readFrame()` will trigger calls to the given `h264_decoder_callback` that you pass
+  `ReadFrame()` will trigger calls to the given `h264_decoder_callback` that you pass
   to the constructor.
 
  */
@@ -51,7 +51,7 @@ typedef
 class H264_Decoder {
 
 public:
-    H264_Decoder(IH264CallBack *frameCallback, void* user);                         /* pass in a callback function that is called whenever we decoded a video frame, make sure to call `readFrame()` repeatedly */
+    H264_Decoder(IH264CallBack *frameCallback, void* user);                         /* pass in a callback function that is called whenever we decoded a video frame, make sure to call `ReadFrame()` repeatedly */
     ~H264_Decoder();                                                                       /* d'tor, cleans up the allocated objects and closes the codec context */
     bool load(const char *filepath, float fps = 0.0f);                                     /* load a video file which is encoded with x264 */
     bool readFrame();                                                                      /* read a frame if necessary */

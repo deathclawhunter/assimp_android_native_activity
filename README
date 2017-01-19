@@ -2,14 +2,15 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
-Need to add sound system
- - Hello has been played.
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
 It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added plugin manager to simplify the main.cpp.
+Need to add sound system
+ - Hello has been played.
 Need to support multiple render content plugins at the same time like: UI frame, Animation, Video, Audio so on so forth.
  - Converted existing scene, helloworld, video into plugins
  - helloworld and video can run simultaneously.
@@ -44,6 +45,11 @@ Need to check if I can reuse FreeGlut framework, the answer is YES we can, but i
 
 Notes
 ===========
+Sound system
+----------------
+Eventually, I choose to use default Android native audio API instead using ffmpeg to sync the audio frames vs video frames given this is a simple demo. But the decoding of ffmpeg audio has been experimented successfully. Playing sound in ffmpeg is doable.
+
+
 Game flow control
 ----------------
 Since in this demo, I am not currently planning to add game script support. That means the gaming flow will be controlled in a less flexible way. Like plugin status.

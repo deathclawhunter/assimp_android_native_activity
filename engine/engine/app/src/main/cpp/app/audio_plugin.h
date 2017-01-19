@@ -25,7 +25,9 @@ extern "C"
 
 using namespace std;
 
-
+/**
+ * A simple audio player for gaming
+ */
 class AudioPlugin : public IPlugin {
 
 public:
@@ -35,17 +37,21 @@ public:
     int32_t KeyHandler(AInputEvent *event);
     IPlugin::PLUGIN_STATUS status();
 
-    void ReleaseResampleBuf(void);
+    AudioPlugin();
+    ~AudioPlugin();
 
 private:
-    void PrintAudioFrameInfo(const AVCodecContext* codecContext, const AVFrame* frame);
     void CreateAudioEngine();
-    short* CreateResampledBuf(uint32_t srcRate, unsigned *size);
-    void CreateBufferQueueAudioPlayer(jint sampleRate, jint bufSize);
-    bool Play();
-    bool EnableReverb(bool enabled);
+    bool CreateAssetAudioPlayer(const char *filename);
+    void PlayingAssetAudioPlayer(bool isPlaying);
 
 private:
+
+    PLUGIN_STATUS pluginStatus;
+
+    AVFrame* frame;
+    AVFormatContext* formatContext;
+    AVCodecContext* codecContext;
 
     // engine interfaces
     SLObjectItf engineObject = NULL;
@@ -55,24 +61,9 @@ private:
     SLObjectItf outputMixObject = NULL;
     SLEnvironmentalReverbItf outputMixEnvironmentalReverb = NULL;
 
-// buffer queue player interfaces
-    SLObjectItf bqPlayerObject = NULL;
-    SLPlayItf bqPlayerPlay;
-    SLEffectSendItf bqPlayerEffectSend;
-    SLMuteSoloItf bqPlayerMuteSolo;
-    SLVolumeItf bqPlayerVolume;
-    SLmilliHertz bqPlayerSampleRate = 0;
-
     // aux effect on the output mix, used by the buffer queue player
     const SLEnvironmentalReverbSettings reverbSettings =
             SL_I3DL2_ENVIRONMENT_PRESET_STONECORRIDOR;
-
-// URI player interfaces
-    SLObjectItf uriPlayerObject = NULL;
-    SLPlayItf uriPlayerPlay;
-    SLSeekItf uriPlayerSeek;
-    SLMuteSoloItf uriPlayerMuteSolo;
-    SLVolumeItf uriPlayerVolume;
 
 // file descriptor player interfaces
     SLObjectItf fdPlayerObject = NULL;
@@ -81,21 +72,6 @@ private:
     SLMuteSoloItf fdPlayerMuteSolo;
     SLVolumeItf fdPlayerVolume;
 
-// recorder interfaces
-    SLObjectItf recorderObject = NULL;
-    SLRecordItf recorderRecord;
-    SLAndroidSimpleBufferQueueItf recorderBufferQueue;
-
-    short *resampleBuf = NULL;
-
-    int bqPlayerBufSize;
-
-public:
-    SLAndroidSimpleBufferQueueItf bqPlayerBufferQueue;
-    // pointer and size of the next player buffer to enqueue, and number of remaining buffers
-    short *nextBuffer;
-    unsigned nextSize;
-    int nextCount;
 };
 
 
