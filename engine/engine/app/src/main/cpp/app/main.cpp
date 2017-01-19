@@ -175,6 +175,7 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
 }
 
 #include "helloworld.h"
+#include "audio_plugin.h"
 
 void initPlugins(struct engine *engine) {
 
@@ -182,11 +183,13 @@ void initPlugins(struct engine *engine) {
     HelloWorldPlugin *helloWorld = new HelloWorldPlugin();
     engine->m_Plugins = helloWorld;
 #else
-    VideoPlugin *ve = new VideoPlugin();
+    /* VideoPlugin *ve = new VideoPlugin();
     engine->m_Plugins = ve;
     ScenePlugin *scene = new ScenePlugin();
-    ve->next = scene;
+    ve->next = scene; */
 
+    AudioPlugin *ap = new AudioPlugin();
+    engine->m_Plugins = ap;
 #endif
 
 }

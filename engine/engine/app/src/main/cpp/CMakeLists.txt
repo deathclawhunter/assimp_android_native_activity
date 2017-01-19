@@ -157,4 +157,5 @@ target_link_libraries(engine
                       lib_stlport
                       GLESv1_CM
                       lib_assimp
-                      GLESv2)
+                      GLESv2
+                      OpenSLES)

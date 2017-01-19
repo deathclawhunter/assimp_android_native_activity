@@ -3,6 +3,7 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 TODO
 ===========
 Need to add sound system
+ - Hello has been played.
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
 It seems the lighting system is not working properly.
