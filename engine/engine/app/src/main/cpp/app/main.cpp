@@ -46,9 +46,6 @@ void draw_frame(struct engine *engine) {
             glClearColor(grey, grey, grey, 1.0f);
             checkGlError("glClearColor");
 
-            // decode_h264("0001-0010.avi");
-            // decode_h264("0000-0100.avi");
-
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
             engine->initialized = true;
 

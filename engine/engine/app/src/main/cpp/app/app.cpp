@@ -145,11 +145,6 @@ void ScenePlugin::renderScene() {
         m_OrthoMatrixInitialized = true;
     }
 
-    /* glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ONE);
-    glDepthMask(false);
-    glDepthFunc(GL_EQUAL); */
-
     for (int j = 0; j < m_NumMesh; j++) {
 
         vector<Matrix4f> Transforms;
@@ -166,6 +161,8 @@ void ScenePlugin::renderScene() {
         }
         if (m_Meshes[j].IsHudMesh()) {
             m_Renderer.SetWVP(m_OrthogonalMatrix);
+        } else {
+            m_Renderer.SetWVP(wvp);
         }
         m_Meshes[j].Render();
     }

@@ -35,6 +35,7 @@ public:
 
     bool IsHudMesh();
     void SetHudMesh(bool HudMesh);
+    Vector4f* GetBoundingBox();
 
 private:
 #define NUM_BONES_PER_VEREX 4
@@ -149,6 +150,8 @@ private:
     Assimp::Importer m_Importer;
 
     bool m_isHudMesh = false; // by default is NOT HUD mesh
+    // simple box bound
+    Vector4f m_BoundingBox[2];
 };
 
 

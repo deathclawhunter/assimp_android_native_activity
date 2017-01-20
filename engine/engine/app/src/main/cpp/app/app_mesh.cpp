@@ -132,6 +132,37 @@ bool AppMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
         }
     }
 
+    Vector3f minVertex, maxVertex;
+    for (uint i = 0; i < Positions.size(); i++) {
+        Vector3f vertex = Positions[i];
+
+        if (i == 0) {
+            minVertex = vertex;
+            maxVertex = vertex;
+        } else {
+            if (vertex.x < minVertex.x) {
+                minVertex.x = vertex.x;
+            } else if (vertex.x > maxVertex.x) {
+                maxVertex.x = vertex.x;
+            }
+
+            if (vertex.y < minVertex.y) {
+                minVertex.y = vertex.y;
+            } else if (vertex.y > maxVertex.y) {
+                maxVertex.y = vertex.y;
+            }
+
+            if (vertex.z < minVertex.z) {
+                minVertex.z = vertex.z;
+            } else if (vertex.z > maxVertex.z) {
+                maxVertex.z = vertex.z;
+            }
+        }
+    }
+
+    m_BoundingBox[0] = Vector4f(minVertex.x, minVertex.y, minVertex.z, 1.0f);
+    m_BoundingBox[1] = Vector4f(maxVertex.x, maxVertex.y, maxVertex.z, 1.0f);
+
     if (!InitMaterials(pScene, Filename)) {
         return false;
     }
@@ -544,4 +575,8 @@ bool AppMesh::IsHudMesh() {
 
 void AppMesh::SetHudMesh(bool HudMesh) {
     m_isHudMesh = HudMesh;
+}
+
+Vector4f* AppMesh::GetBoundingBox() {
+    return m_BoundingBox;
 }
