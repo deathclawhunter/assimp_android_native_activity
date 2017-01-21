@@ -21,6 +21,7 @@ using namespace std;
 #include "GLError.h"
 #include "app.h"
 #include "plugin.h"
+#include "oct.h"
 
 ScenePlugin::ScenePlugin() {
     m_pGameCamera = NULL;
@@ -38,10 +39,13 @@ ScenePlugin::ScenePlugin() {
 
     m_Position = Vector3f(0.0f, 0.0f, 6.0f);
     sceneStatus = PLUGIN_STATUS_INIT_LATER;
+
+    m_Oct = new Octree(256);
 }
 
 ScenePlugin::~ScenePlugin() {
     SAFE_DELETE(m_pGameCamera);
+    SAFE_DELETE(m_Oct);
 }
 
 void ScenePlugin::CalculateCenterOfRightHalf() {
@@ -145,6 +149,8 @@ void ScenePlugin::renderScene() {
         m_OrthoMatrixInitialized = true;
     }
 
+    m_Oct->SetTransform(wvp);
+    m_Oct->Purge();
     for (int j = 0; j < m_NumMesh; j++) {
 
         vector<Matrix4f> Transforms;
@@ -164,7 +170,24 @@ void ScenePlugin::renderScene() {
         } else {
             m_Renderer.SetWVP(wvp);
         }
+
+#if DEBUG_POSITION
+        m_Meshes[j].Simulate(Transforms, wvp);
+        vector<Vector3f> result = m_Meshes[j].GetEndPositions();
+        Vector3f bound[2];
+        GetBound(result, bound);
+
+        LOGI(">>>>>>>>>>>>>>>>>>>>>>>> bound in shader");
+        bound[0].Print();
+        bound[1].Print();
+        LOGI(">>>>>>>>>>>>>>>>>>>>>>>> end of bound in shader");
+
+        m_Oct->AddMesh(&m_Meshes[j]);
+
         m_Meshes[j].Render();
+#else
+        m_Meshes[j].Render();
+#endif
     }
 
     RenderFPS();
@@ -217,18 +240,18 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     LOGI("in App init:\n");
 
     std::string str[2];
-    str[1].append("boblampclean.md5mesh");
+    // str[1].append("boblampclean.md5mesh");
     // str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
     str[0].append("untitled.dae");
 
-    std::string str2[1];
-    str2[0].append("menu.dae");
+    // std::string str2[1];
+    // str2[0].append("menu.dae");
     // str[1].append("untitled2.dae");
 
-    if (Init(str, 2, str2, 1, width, height)) {
+    if (Init(str, 1, NULL, 0, width, height)) {
         return true;
     }
 
@@ -275,4 +298,35 @@ int32_t ScenePlugin::KeyHandler(AInputEvent *event) {
 
 IPlugin::PLUGIN_STATUS ScenePlugin::status() {
     return sceneStatus; // this is mainloop scene, so return loop me always
+}
+
+void ScenePlugin::GetBound(vector<Vector3f> ary, Vector3f* ret) {
+    ret[0] = ary[0];
+    ret[1] = ary[0];
+
+    for (int i = 1; i < ary.size(); i++) {
+        if (ary[i].x < ret[0].x) {
+            ret[0].x = ary[i].x;
+        }
+
+        if (ary[i].y < ret[0].y) {
+            ret[0].y = ary[i].y;
+        }
+
+        if (ary[i].z < ret[0].z) {
+            ret[0].z = ary[i].z;
+        }
+
+        if (ary[i].x > ret[1].x) {
+            ret[1].x = ary[i].x;
+        }
+
+        if (ary[i].y > ret[1].y) {
+            ret[1].y = ary[i].y;
+        }
+
+        if (ary[i].z > ret[1].z) {
+            ret[1].z = ary[i].z;
+        }
+    }
 }

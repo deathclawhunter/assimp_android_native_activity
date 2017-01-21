@@ -326,6 +326,32 @@ public:
 
         return Ret;
     }
+
+    inline Matrix4f operator+(const Matrix4f& Right) const
+    {
+        Matrix4f Ret;
+
+        for (unsigned int i = 0 ; i < 4 ; i++) {
+            for (unsigned int j = 0 ; j < 4 ; j++) {
+                Ret.m[i][j] = m[i][j] + Right.m[i][j];
+            }
+        }
+
+        return Ret;
+    }
+
+    inline Matrix4f operator*(float Right) const
+    {
+        Matrix4f Ret;
+
+        for (unsigned int i = 0 ; i < 4 ; i++) {
+            for (unsigned int j = 0 ; j < 4 ; j++) {
+                Ret.m[i][j] = m[i][j] * Right;
+            }
+        }
+
+        return Ret;
+    }
     
     Vector4f operator*(const Vector4f& v) const
     {

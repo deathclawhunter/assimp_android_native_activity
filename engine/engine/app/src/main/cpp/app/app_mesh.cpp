@@ -79,11 +79,13 @@ bool AppMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
     m_Entries.resize(pScene->mNumMeshes);
     m_Textures.resize(pScene->mNumMaterials);
 
+#if !DEBUG_POSITION
     vector<Vector3f> Positions;
-    vector<Vector3f> Normals;
-    vector<Vector2f> TexCoords;
     vector<VertexBoneData> Bones;
     vector<uint> Indices;
+#endif
+    vector<Vector3f> Normals;
+    vector<Vector2f> TexCoords;
 
     uint NumVertices = 0;
     uint NumIndices = 0;
@@ -162,6 +164,10 @@ bool AppMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
 
     m_BoundingBox[0] = Vector4f(minVertex.x, minVertex.y, minVertex.z, 1.0f);
     m_BoundingBox[1] = Vector4f(maxVertex.x, maxVertex.y, maxVertex.z, 1.0f);
+
+#if DEBUG_POSITION
+    EndPositions.resize(Positions.size());
+#endif
 
     if (!InitMaterials(pScene, Filename)) {
         return false;
@@ -334,6 +340,30 @@ bool AppMesh::InitMaterials(const aiScene *pScene, const string &Filename) {
 
     return Ret;
 }
+
+
+#if DEBUG_POSITION
+void AppMesh::Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
+
+    for (int i = 0; i < Indices.size(); i++) {
+        Vector3f pos = Positions[Indices[i]];
+        Matrix4f BoneTransform = BoneTransforms[int(Bones[i].IDs[0])] * Bones[i].Weights[0];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[1])] * Bones[i].Weights[1];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[2])] * Bones[i].Weights[2];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[3])] * Bones[i].Weights[3];
+        Vector4f _pos = BoneTransform * Vector4f(pos.x, pos.y, pos.z, 1.0);
+        _pos = WVP * _pos;
+
+        // _pos.Print(true);
+
+        EndPositions[Indices[i]] = Vector3f(_pos.x, _pos.y, _pos.z);
+    }
+}
+
+vector<Vector3f> AppMesh::GetEndPositions() {
+    return EndPositions;
+}
+#endif
 
 
 void AppMesh::Render() {

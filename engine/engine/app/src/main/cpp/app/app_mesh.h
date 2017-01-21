@@ -14,6 +14,8 @@
 
 using namespace std;
 
+#define DEBUG_POSITION 1
+
 /**
  * Universal mesh for rigged and static meshes
  */
@@ -152,6 +154,17 @@ private:
     bool m_isHudMesh = false; // by default is NOT HUD mesh
     // simple box bound
     Vector4f m_BoundingBox[2];
+
+#if DEBUG_POSITION
+    vector<Vector3f> Positions;
+    vector<VertexBoneData> Bones;
+    vector<uint> Indices;
+
+    vector<Vector3f> EndPositions;
+public:
+    void Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP);
+    vector<Vector3f> GetEndPositions();
+#endif
 };
 
 

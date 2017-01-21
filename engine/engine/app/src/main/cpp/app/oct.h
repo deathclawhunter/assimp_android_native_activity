@@ -14,6 +14,8 @@ public:
     int y;
     int z;
 
+    Vector3i() {}
+
     Vector3i(Vector3i& other) {
         this->x = other.x;
         this->y = other.y;
@@ -29,6 +31,7 @@ public:
 
 class Cube {
 public:
+    void Init(Vector3i& start, int dim, Matrix4f& transform);
     Cube(Vector3i& start, int dim, Matrix4f& transform);
     Cube(int x, int y, int z, int dim, Matrix4f& transform);
     ~Cube();
@@ -37,7 +40,7 @@ public:
     void AddMesh(AppMesh* mesh);
 
     Cube* m_Children[8] = {0};
-    Vector3i m_CubeStartPoint = {0};
+    Vector3i m_CubeStartPoint;
 
     /**
      * Indicate when to release this node if it is empty
@@ -65,10 +68,15 @@ private:
 
 class Octree {
 public:
-    Octree();
     ~Octree();
+    Octree(int dim);
+    void SetTransform(Matrix4f& transform);
+    void AddMesh(AppMesh* mesh);
+    void Purge();
 private:
-    Cube* tree;
+    Cube* m_Tree;
+    int m_Dimension;
+    Matrix4f m_Transform;
 };
 
 

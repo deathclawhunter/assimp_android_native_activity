@@ -11,6 +11,7 @@
 #include "app_technique.h"
 #include "plugin.h"
 #include "app_mesh.h"
+#include "oct.h"
 
 using namespace std;
 
@@ -74,4 +75,9 @@ private:
     void CalculateCenterOfRightHalf();
     const float GAME_STEP_SCALE = 0.5f;
     IPlugin::PLUGIN_STATUS sceneStatus;
+    Octree* m_Oct = NULL;
+
+#if DEBUG_POSITION
+    void GetBound(vector<Vector3f> ary, Vector3f* ret);
+#endif
 };

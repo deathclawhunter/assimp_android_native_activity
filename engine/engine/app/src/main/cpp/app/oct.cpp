@@ -1,16 +1,22 @@
 #include "oct.h"
 
-Cube::Cube(Vector3i& start, int dim, Matrix4f& transform) {
+void Cube::Init(Vector3i& start, int dim, Matrix4f& transform) {
     // initialize boundary
     m_CubeStartPoint = start;
     m_Dimension = dim;
     m_Transform = transform;
+    for (int i = 0; i < 8; i++) {
+        m_Children[i] = NULL;
+    }
+}
+
+Cube::Cube(Vector3i& start, int dim, Matrix4f& transform) {
+    Init(start, dim, transform);
 }
 
 Cube::Cube(int x, int y, int z, int dim, Matrix4f& transform) {
     Vector3i start(x, y, z);
-
-    Cube(start, dim, transform);
+    Init(start, dim, transform);
 }
 
 Cube::~Cube() {
@@ -74,7 +80,7 @@ void Cube::GetMeshBound(AppMesh* mesh, Vector3i* result) {
             }
 
             if ((int) tmp[i].z < result[0].z) {
-                result[0].x = (int) tmp[i].x;
+                result[0].z = (int) tmp[i].z;
             }
 
             if ((int) tmp[i].x > result[1].x) {
@@ -104,6 +110,11 @@ void Cube::Insert(AppMesh *mesh) {
 
     Vector3i meshBounds[2];
     GetMeshBound(mesh, meshBounds);
+
+    LOGI(">>>>>>>>>>>>>>>>>>>>>>>> mesh bound");
+    LOGI("%d, %d, %d", meshBounds[0].x, meshBounds[0].y, meshBounds[0].z);
+    LOGI("%d, %d, %d", meshBounds[1].x, meshBounds[1].y, meshBounds[1].z);
+    LOGI(">>>>>>>>>>>>>>>>>>>>>>>> end mesh bound");
     Insert(mesh, meshBounds);
 }
 
@@ -117,21 +128,25 @@ void Cube::Insert(AppMesh *mesh, Vector3i *meshBounds) {
     if (Contains(m_CubeStartPoint.x, m_CubeStartPoint.y, m_CubeStartPoint.z, dim, meshBounds)) {
         if (m_Children[0] == NULL) {
             m_Children[0] = new Cube(m_CubeStartPoint, dim, m_Transform);
+            m_Children[0]->m_Parent = this;
         }
         m_Children[0]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x + dim, m_CubeStartPoint.y, m_CubeStartPoint.z, dim, meshBounds)) {
         if (m_Children[1] == NULL) {
             m_Children[1] = new Cube(m_CubeStartPoint.x + dim, m_CubeStartPoint.y, m_CubeStartPoint.z, dim, m_Transform);
+            m_Children[1]->m_Parent = this;
         }
         m_Children[1]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x + dim, m_CubeStartPoint.y, m_CubeStartPoint.z + dim, dim, meshBounds)) {
         if (m_Children[2] == NULL) {
             m_Children[2] = new Cube(m_CubeStartPoint.x + dim, m_CubeStartPoint.y, m_CubeStartPoint.z + dim, dim, m_Transform);
+            m_Children[2]->m_Parent = this;
         }
         m_Children[2]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x, m_CubeStartPoint.y, m_CubeStartPoint.z + dim, dim, meshBounds)) {
         if (m_Children[3] == NULL) {
             m_Children[3] = new Cube(m_CubeStartPoint.x, m_CubeStartPoint.y, m_CubeStartPoint.z + dim, dim, m_Transform);
+            m_Children[3]->m_Parent = this;
         }
         m_Children[3]->Insert(mesh, meshBounds);
     }
@@ -140,21 +155,25 @@ void Cube::Insert(AppMesh *mesh, Vector3i *meshBounds) {
     else if (Contains(m_CubeStartPoint.x, m_CubeStartPoint.y + dim, m_CubeStartPoint.z, dim, meshBounds)) {
         if (m_Children[4] == NULL) {
             m_Children[4] = new Cube(m_CubeStartPoint.x, m_CubeStartPoint.y + dim, m_CubeStartPoint.z, dim, m_Transform);
+            m_Children[4]->m_Parent = this;
         }
         m_Children[4]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x + dim, m_CubeStartPoint.y + dim, m_CubeStartPoint.z, dim, meshBounds)) {
         if (m_Children[5] == NULL) {
             m_Children[5] = new Cube(m_CubeStartPoint.x + dim, m_CubeStartPoint.y + dim, m_CubeStartPoint.z, dim, m_Transform);
+            m_Children[5]->m_Parent = this;
         }
         m_Children[5]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x + dim, m_CubeStartPoint.y + dim, m_CubeStartPoint.z + dim, dim, meshBounds)) {
         if (m_Children[6] == NULL) {
             m_Children[6] = new Cube(m_CubeStartPoint.x + dim, m_CubeStartPoint.y + dim, m_CubeStartPoint.z + dim, dim, m_Transform);
+            m_Children[6]->m_Parent = this;
         }
         m_Children[6]->Insert(mesh, meshBounds);
     } else if (Contains(m_CubeStartPoint.x, m_CubeStartPoint.y + dim, m_CubeStartPoint.z + dim, dim, meshBounds)) {
         if (m_Children[7] == NULL) {
             m_Children[7] = new Cube(m_CubeStartPoint.x, m_CubeStartPoint.y + dim, m_CubeStartPoint.z + dim, dim, m_Transform);
+            m_Children[7]->m_Parent = this;
         }
         m_Children[7]->Insert(mesh, meshBounds);
     } else {
@@ -177,10 +196,35 @@ void Cube::AddMesh(AppMesh* mesh) {
     }
 
     AppMesh **tmp = (AppMesh **) malloc(sizeof(AppMesh*) * (m_MeshCount + ALLOC_STEP));
+    m_MeshCount += ALLOC_STEP;
     if (m_Meshes != NULL) {
         memcpy(tmp, m_Meshes, sizeof(AppMesh*) * m_MeshPointer);
         free(m_Meshes);
     }
     m_Meshes = tmp;
     m_Meshes[m_MeshPointer++] = mesh;
+}
+
+Octree::Octree(int dim) {
+    m_Dimension = dim;
+    m_Tree = NULL;
+}
+
+void Octree::SetTransform(Matrix4f &transform) {
+    m_Transform = transform;
+}
+
+void Octree::AddMesh(AppMesh* mesh) {
+    if (m_Tree == NULL) {
+        m_Tree = new Cube(0, 0, 0, m_Dimension, m_Transform);
+    }
+    m_Tree->Insert(mesh);
+}
+
+Octree::~Octree() {
+    Purge();
+}
+
+void Octree::Purge() {
+    SAFE_DELETE(m_Tree);
 }
