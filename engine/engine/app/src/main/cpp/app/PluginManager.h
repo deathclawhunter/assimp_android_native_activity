@@ -7,7 +7,8 @@ public:
     enum PLUGIN_TYPES {
         PLUGIN_TYPE_START_MUSIC,
         PLUGIN_TYPE_START_VIDEO,
-        PLUGIN_TYPE_SCENE
+        PLUGIN_TYPE_SCENE,
+        PLUGIN_TYPE_HUD
     };
 
     static PluginManager* GetInstance();
