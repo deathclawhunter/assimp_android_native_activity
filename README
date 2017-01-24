@@ -2,7 +2,9 @@ This is a backup for assimp port to Android and demo app that can call assimp fr
 
 TODO
 ===========
+Need to figure out why Factor variable in CalcInterpolatedPosition() sometime becomes negative.
 Need to support collision detection
+Need to test multiple animation switch for the same mesh
 Need to support dynamic attribute in shader instead of fixed attribute
 Need to start import demo assets into test engine
 The models draw from COLLADA files seems wrong in z-order
@@ -10,6 +12,8 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Enabled separated HUD plugin instead of using in-scene plugin which is confusing.
+Figured out how to export blender animation to this engine. See notes.
 Added plugin manager to simplify the main.cpp.
 Need to add sound system
  - Hello has been played.
@@ -47,6 +51,23 @@ Need to check if I can reuse FreeGlut framework, the answer is YES we can, but i
 
 Notes
 ===========
+Export animation
+----------------
+The author tool is Blender 2.7. I believe the reason is that either Blender does not export Bone animation correctly or assimp importer does not fully support Collada animation especially Bone animation. So here are the tricks to make it work:
+
+1. Scale
+As mentioned in previous note, the size need to be scaled up in order to see it in current coordinate system and default transformation. However, more importantly, all scale, rotation, position change should be applied before export by Ctrl-A on the objects.
+
+2. Parent
+The way I setup the animation is parenting the object to armature by choosing Bone option when the Ctrl-P popup comes. Thus I do not have to worry about the weight as such, because the Bone is designed for mechanics items like: robot arm. However, this approach defintely does not work very well with current implementation. After exporting the Collada file, I found the tag "library_controller" is missing, which will leads to that the engine does not draw animation later. To resolve it, I have to choose auto weight instead of Bone option when Ctrl-P popup comes. And YES, this will generate "library_controller" tag.
+
+3. Texture
+The texture is quite tricky one. You have to apply texture before you start animate the objects (apply armature). Otherwise the texture is just not appearing in material tag.
+
+4. Export menu
+By default the animation is not checked for exporting. I have to explicitly specify export everything animation, and texture.
+
+
 Sound system
 ----------------
 Eventually, I choose to use default Android native audio API instead using ffmpeg to sync the audio frames vs video frames given this is a simple demo. But the decoding of ffmpeg audio has been experimented successfully. Playing sound in ffmpeg is doable.

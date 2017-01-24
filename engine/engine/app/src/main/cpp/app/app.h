@@ -29,7 +29,12 @@ public:
 
     ScenePlugin();
     ~ScenePlugin();
+
+#if ENABLE_IN_SCENE_HUD
     bool Init(string mesh[], int numMesh, string hudMesh[], int numHudMesh, int w, int h);
+#else
+    bool Init(string mesh[], int numMesh, int w, int h);
+#endif
     void renderScene();
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State) {
         switch (OgldevKey) {
@@ -61,13 +66,11 @@ private:
     AppTechnique m_Renderer;
     Camera *m_pGameCamera;
     DirectionalLight m_DirectionalLight;
-    AppMesh m_Meshes[MAX_NUM_MESHES];
+    AppMesh* m_Meshes[MAX_NUM_MESHES] = {0};
     int m_NumMesh;
     Vector3f m_Position;
     PersProjInfo m_PersProjInfo;
     float m_RCenterX, m_RCenterY; // Center point of right half of the screen
-    Matrix4f m_OrthogonalMatrix;
-    bool m_OrthoMatrixInitialized = false;
 
 private:
     const float MINIMAL_MOVE_DIFF = 0.1f;
@@ -78,6 +81,8 @@ private:
     Octree* m_Oct = NULL;
 
 #if DEBUG_POSITION
+    Matrix4f m_OrthogonalMatrix;
+    bool m_OrthoMatrixInitialized = false;
     void GetBound(vector<Vector3f> ary, Vector3f* ret);
 #endif
 };

@@ -1,23 +1,18 @@
-#define LOG_TAG "HELLO_WORLD"
+#define LOG_TAG "HUD"
 
-#include <math.h>
-#include <GLES/gl.h>
+#include "HUD.h"
+#include "AppLog.h"
+#include "GLError.h"
+#include "ogldev_math_3d.h"
 #include <string>
-#include <android_native_app_glue.h>
-
-#include "ogldev_camera.h"
-#include "gl3stub.h"
-#include "helloworld.h"
 
 using namespace std;
-
-#include "GLError.h"
 
 /**
  * Simple example about how to use shader
  */
 
-bool HelloWorldPlugin::addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
+bool HUDPlugin::addShader(GLuint prog, GLenum ShaderType, const char *pFilename) {
     string s;
 
     if (!ReadFile(pFilename, s)) {
@@ -54,7 +49,7 @@ bool HelloWorldPlugin::addShader(GLuint prog, GLenum ShaderType, const char *pFi
     return true;
 }
 
-void HelloWorldPlugin::CreateVertexBuffer() {
+void HUDPlugin::CreateVertexBuffer() {
 
     /**
      * Test data for helloworld
@@ -113,53 +108,53 @@ void HelloWorldPlugin::CreateVertexBuffer() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
 
-    numOfElements = sizeof(Indices) / sizeof(Indices[0]);
+    m_NumOfElements = sizeof(Indices) / sizeof(Indices[0]);
 }
 
-bool HelloWorldPlugin::initShaders() {
+bool HUDPlugin::initShaders() {
     GLint Success = 0;
     GLchar ErrorLog[1024] = {0};
 
-    gProgram = glCreateProgram();
+    m_Program = glCreateProgram();
 
-    if (!addShader(gProgram, GL_VERTEX_SHADER, "basicVertex.vs")) {
+    if (!addShader(m_Program, GL_VERTEX_SHADER, "hudVertex.vs")) {
         return false;
     }
 
-    if (!addShader(gProgram, GL_FRAGMENT_SHADER, "basicFragment.fs")) {
+    if (!addShader(m_Program, GL_FRAGMENT_SHADER, "hudFragment.fs")) {
         return false;
     }
 
-    glLinkProgram(gProgram);
+    glLinkProgram(m_Program);
 
-    glGetProgramiv(gProgram, GL_LINK_STATUS, &Success);
+    glGetProgramiv(m_Program, GL_LINK_STATUS, &Success);
     if (Success == 0) {
-        glGetProgramInfoLog(gProgram, sizeof(ErrorLog), NULL, ErrorLog);
+        glGetProgramInfoLog(m_Program, sizeof(ErrorLog), NULL, ErrorLog);
         LOGE("Error linking shader program: '%s'\n", ErrorLog);
         return false;
     }
 
-    glValidateProgram(gProgram);
-    glGetProgramiv(gProgram, GL_VALIDATE_STATUS, &Success);
+    glValidateProgram(m_Program);
+    glGetProgramiv(m_Program, GL_VALIDATE_STATUS, &Success);
     if (!Success) {
-        glGetProgramInfoLog(gProgram, sizeof(ErrorLog), NULL, ErrorLog);
+        glGetProgramInfoLog(m_Program, sizeof(ErrorLog), NULL, ErrorLog);
         LOGE("Invalid shader program: '%s'\n", ErrorLog);
         return false;
     }
 
-    glUseProgram(gProgram);
+    glUseProgram(m_Program);
 
-    gvPositionHandle = glGetAttribLocation(gProgram, "Position");
+    m_AttrPosition = glGetAttribLocation(m_Program, "Position");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
-          gvPositionHandle);
+          m_AttrPosition);
 
     CreateVertexBuffer();
 
     return true;
 }
 
-bool HelloWorldPlugin::Init(int32_t width, int32_t height) {
+bool HUDPlugin::Init(int32_t width, int32_t height) {
 
     LOGI("in helloInit\n");
 
@@ -184,25 +179,25 @@ bool HelloWorldPlugin::Init(int32_t width, int32_t height) {
     return false;
 }
 
-bool HelloWorldPlugin::Draw() {
+bool HUDPlugin::Draw() {
 
-    glUseProgram(gProgram);
+    glUseProgram(m_Program);
     checkGlError("HelloWorldPlugin::glUseProgram");
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
-    glVertexAttribPointer(gvPositionHandle, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(gvPositionHandle);
+    glVertexAttribPointer(m_AttrPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_AttrPosition);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[1]);
-    glDrawElements(GL_TRIANGLES, numOfElements, GL_UNSIGNED_BYTE, 0);
+    glDrawElements(GL_TRIANGLES, m_NumOfElements, GL_UNSIGNED_BYTE, 0);
 
     return true;
 }
 
-int32_t HelloWorldPlugin::KeyHandler(AInputEvent *event) {
+int32_t HUDPlugin::KeyHandler(AInputEvent *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS HelloWorldPlugin::status() {
+IPlugin::PLUGIN_STATUS HUDPlugin::status() {
     return my_status; // example of never finish a plugin
 }

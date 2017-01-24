@@ -51,11 +51,11 @@ public:
     /**
      * Fixed atttibute location
      */
-    static const int POSITION_LOCATION = 0;
+    /* static const int POSITION_LOCATION = 0;
     static const int TEXCOORD_LOCATION = 1;
     static const int NORMAL_LOCATION = 2;
     static const int BONE_LOCATION = 3;
-    static const int WEIGHT_LOCATION = 4;
+    static const int WEIGHT_LOCATION = 4; */
 
 protected:
 

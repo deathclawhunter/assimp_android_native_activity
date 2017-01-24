@@ -124,6 +124,8 @@ int32_t PluginManager::KeyHandler(AInputEvent *event) {
         }
         plugin = plugin->next;
     }
+
+    return 1;
 }
 
 IPlugin::PLUGIN_STATUS PluginManager::status() {

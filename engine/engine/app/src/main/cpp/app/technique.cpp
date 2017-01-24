@@ -100,14 +100,14 @@ bool Technique::AddShader(GLenum ShaderType, const char *pFilename) {
         # layout (location = 4) in vec4 Weights;
         attribute vec4 Weights;
      */
-    if (ShaderType == GL_VERTEX_SHADER) {
+    // if (ShaderType == GL_VERTEX_SHADER) {
 
-        glBindAttribLocation(m_ShaderProg, POSITION_LOCATION, "Position");
+        /* glBindAttribLocation(m_ShaderProg, POSITION_LOCATION, "Position");
         glBindAttribLocation(m_ShaderProg, TEXCOORD_LOCATION, "TexCoord");
         glBindAttribLocation(m_ShaderProg, NORMAL_LOCATION, "Normal");
         glBindAttribLocation(m_ShaderProg, BONE_LOCATION, "BoneIDs");
-        glBindAttribLocation(m_ShaderProg, WEIGHT_LOCATION, "Weights");
-    }
+        glBindAttribLocation(m_ShaderProg, WEIGHT_LOCATION, "Weights"); */
+    // }
 
     glCompileShader(ShaderObj);
 

@@ -46,6 +46,10 @@ ScenePlugin::ScenePlugin() {
 ScenePlugin::~ScenePlugin() {
     SAFE_DELETE(m_pGameCamera);
     SAFE_DELETE(m_Oct);
+
+    for (int i = 0; i < m_NumMesh; i++) {
+        SAFE_DELETE(m_Meshes[i]);
+    }
 }
 
 void ScenePlugin::CalculateCenterOfRightHalf() {
@@ -53,7 +57,11 @@ void ScenePlugin::CalculateCenterOfRightHalf() {
     m_RCenterY = m_PersProjInfo.Height / 2.0f;
 }
 
+#if ENABLE_IN_SCENE_HUD
 bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudMesh, int w, int h) {
+#else
+bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
+#endif
     Vector3f Pos(0.0f, 3.0f, -1.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
     Vector3f Up(0.0, 1.0f, 0.0f);
@@ -77,27 +85,39 @@ bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudM
     m_Renderer.SetMatSpecularIntensity(0.0f);
     m_Renderer.SetMatSpecularPower(0);
 
+#if ENABLE_IN_SCENE_HUD
     if (numMesh + numHudMesh >= MAX_NUM_MESHES) {
         LOGE("exceeded max mesh count %d", numMesh + numHudMesh);
         return false;
     }
 
     m_NumMesh = min(MAX_NUM_MESHES, numMesh + numHudMesh);
+#else
+    m_NumMesh = min(MAX_NUM_MESHES, numMesh);
+#endif
     for (int i = 0; i < m_NumMesh; i++) {
+#if ENABLE_IN_SCENE_HUD
         if (i < numMesh) {
-            if (!m_Meshes[i].LoadMesh(mesh[i])) {
+#endif
+            m_Meshes[i] = new AppMesh(&m_Renderer);
+            if (!m_Meshes[i]->LoadMesh(mesh[i])) {
                 LOGE("fail to load mesh %s\n", mesh[i].c_str());
                 sceneStatus = PLUGIN_STATUS_INIT_FAIL;
                 return false;
+#if ENABLE_IN_SCENE_HUD
             }
-        } else {
-            if (!m_Meshes[i].LoadMesh(hudMesh[i - numMesh])) {
+#endif
+        }
+#if ENABLE_IN_SCENE_HUD
+        else {
+            if (!m_Meshes[i]->LoadMesh(hudMesh[i - numMesh])) {
                 LOGE("fail to load hud mesh %s\n", hudMesh[i - numMesh].c_str());
                 sceneStatus = PLUGIN_STATUS_INIT_FAIL;
                 return false;
             }
-            m_Meshes[i].SetHudMesh(true);
+            m_Meshes[i]->SetHudMesh(true);
         }
+#endif
     }
 
     static float grey;
@@ -113,13 +133,15 @@ bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudM
         return false;
     } */
 
-    sceneStatus = PLUGIN_STATUS_LOOP_ME;
+    sceneStatus = PLUGIN_STATUS_NEXT;
 
     return true;
 }
 
 void ScenePlugin::renderScene() {
     CalcFPS();
+
+    m_Renderer.Enable();
 
     m_pGameCamera->OnRender();
 
@@ -138,6 +160,7 @@ void ScenePlugin::renderScene() {
     m_Renderer.SetWVP(wvp);
     m_Renderer.SetWorldMatrix(p.GetWorldTrans());
 
+#if ENABLE_IN_SCENE_HUD
     /**
      * This is NOT real orthogonal matrix, since OpenGL ES does not support
      * Ortho API, we cache our first matrix as 2D transform matrix,
@@ -148,15 +171,16 @@ void ScenePlugin::renderScene() {
         m_OrthogonalMatrix = wvp;
         m_OrthoMatrixInitialized = true;
     }
+#endif
 
     m_Oct->SetTransform(wvp);
     m_Oct->Purge();
     for (int j = 0; j < m_NumMesh; j++) {
 
         vector<Matrix4f> Transforms;
-        if (m_Meshes[j].NumBones() > 0) {
+        if (m_Meshes[j]->NumBones() > 0) {
             float RunningTime = GetRunningTime();
-            m_Meshes[j].BoneTransform(RunningTime, Transforms);
+            m_Meshes[j]->BoneTransform(RunningTime, Transforms);
         } else {
             // use identity bone for static mesh
             Transforms.resize(1);
@@ -165,15 +189,19 @@ void ScenePlugin::renderScene() {
         for (uint i = 0; i < Transforms.size(); i++) {
             m_Renderer.SetBoneTransform(i, Transforms[i]);
         }
-        if (m_Meshes[j].IsHudMesh()) {
+#if ENABLE_IN_SCENE_HUD
+        if (m_Meshes[j]->IsHudMesh()) {
             m_Renderer.SetWVP(m_OrthogonalMatrix);
         } else {
+#endif
             m_Renderer.SetWVP(wvp);
+#if ENABLE_IN_SCENE_HUD
         }
+#endif
 
 #if DEBUG_POSITION
-        m_Meshes[j].Simulate(Transforms, wvp);
-        vector<Vector3f> result = m_Meshes[j].GetEndPositions();
+        m_Meshes[j]->Simulate(Transforms, wvp);
+        vector<Vector3f> result = m_Meshes[j]->GetEndPositions();
         Vector3f bound[2];
         GetBound(result, bound);
 
@@ -182,11 +210,11 @@ void ScenePlugin::renderScene() {
         bound[1].Print();
         LOGI(">>>>>>>>>>>>>>>>>>>>>>>> end of bound in shader");
 
-        m_Oct->AddMesh(&m_Meshes[j]);
+        m_Oct->AddMesh(m_Meshes[j]);
 
-        m_Meshes[j].Render();
+        m_Meshes[j]->Render();
 #else
-        m_Meshes[j].Render();
+        m_Meshes[j]->Render();
 #endif
     }
 
@@ -240,18 +268,24 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     LOGI("in App init:\n");
 
     std::string str[2];
-    // str[1].append("boblampclean.md5mesh");
+    // str[0].append("boblampclean.md5mesh");
+    str[0].append("mech1_animated.dae");
+    // str[0].append("mech1_animated.fbx");
     // str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
-    str[0].append("untitled.dae");
+    // str[0].append("untitled.dae");
 
     // std::string str2[1];
     // str2[0].append("menu.dae");
     // str[1].append("untitled2.dae");
 
+#if ENABLE_IN_SCENE_HUD
     if (Init(str, 1, NULL, 0, width, height)) {
+#else
+    if (Init(str, 1, width, height)) {
+#endif
         return true;
     }
 
@@ -267,17 +301,22 @@ int32_t ScenePlugin::KeyHandler(AInputEvent *event) {
     int32_t action = AMotionEvent_getAction(event);
     size_t count = AMotionEvent_getPointerCount(event);
     if (count == 1) { // single finger touch
+
         if (action == AMOTION_EVENT_ACTION_MOVE) {
+
             float touchX = AMotionEvent_getX(event, 0);
             float touchY = AMotionEvent_getY(event, 0);
 
             PassiveMouseCB(touchX, touchY);
         } else if (action == AMOTION_EVENT_ACTION_UP) {
+
             LOGI("Reset mouse");
             ResetMouse();
         }
     } else if (count == 2) {
+
         if (action == AMOTION_EVENT_ACTION_MOVE) {
+
             float touch2X = AMotionEvent_getX(event, 1);
             float touch2Y = AMotionEvent_getY(event, 1);
 
@@ -286,6 +325,7 @@ int32_t ScenePlugin::KeyHandler(AInputEvent *event) {
 
             if (DistToCenter(touch1X, touch1Y) >
                 DistToCenter(touch2X, touch2Y)) {
+
                 PassiveKeyCB(touch2X, touch2Y);
             } else {
                 PassiveKeyCB(touch1X, touch1Y);
@@ -300,6 +340,7 @@ IPlugin::PLUGIN_STATUS ScenePlugin::status() {
     return sceneStatus; // this is mainloop scene, so return loop me always
 }
 
+#if DEBUG_POSITION
 void ScenePlugin::GetBound(vector<Vector3f> ary, Vector3f* ret) {
     ret[0] = ary[0];
     ret[1] = ary[0];
@@ -330,3 +371,6 @@ void ScenePlugin::GetBound(vector<Vector3f> ary, Vector3f* ret) {
         }
     }
 }
+
+#endif
+

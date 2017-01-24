@@ -21,10 +21,11 @@ void AppMesh::VertexBoneData::AddBoneData(uint BoneID, float Weight) {
     // return;
 }
 
-AppMesh::AppMesh() {
+AppMesh::AppMesh(AppTechnique* render) {
     ZERO_MEM(m_Buffers);
     m_NumBones = 0;
     m_pScene = NULL;
+    m_Render = render;
 }
 
 
@@ -177,27 +178,27 @@ bool AppMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[POS_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Positions[0]) * Positions.size(), &Positions[0],
                  GL_STATIC_DRAW);
-    glEnableVertexAttribArray(Technique::POSITION_LOCATION);
-    glVertexAttribPointer(Technique::POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrPositionLocation);
+    glVertexAttribPointer(m_Render->m_AttrPositionLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[TEXCOORD_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * TexCoords.size(), &TexCoords[0],
                  GL_STATIC_DRAW);
-    glEnableVertexAttribArray(Technique::TEXCOORD_LOCATION);
-    glVertexAttribPointer(Technique::TEXCOORD_LOCATION, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrTexcoordLocation);
+    glVertexAttribPointer(m_Render->m_AttrTexcoordLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[NORMAL_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * Normals.size(), &Normals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(Technique::NORMAL_LOCATION);
-    glVertexAttribPointer(Technique::NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrNormalLocation);
+    glVertexAttribPointer(m_Render->m_AttrNormalLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[BONE_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Bones[0]) * Bones.size(), &Bones[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(Technique::BONE_LOCATION);
-    glVertexAttribPointer(Technique::BONE_LOCATION, 4, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(m_Render->m_AttrBoneLocation);
+    glVertexAttribPointer(m_Render->m_AttrBoneLocation, 4, GL_FLOAT, GL_FALSE,
                           sizeof(VertexBoneData), (const GLvoid *) 0);
-    glEnableVertexAttribArray(Technique::WEIGHT_LOCATION);
-    glVertexAttribPointer(Technique::WEIGHT_LOCATION, 4, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(m_Render->m_AttrWeightLocation);
+    glVertexAttribPointer(m_Render->m_AttrWeightLocation, 4, GL_FLOAT, GL_FALSE,
                           sizeof(VertexBoneData), (const GLvoid *) 16);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
@@ -347,16 +348,19 @@ void AppMesh::Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
 
     for (int i = 0; i < Indices.size(); i++) {
         Vector3f pos = Positions[Indices[i]];
-        Matrix4f BoneTransform = BoneTransforms[int(Bones[i].IDs[0])] * Bones[i].Weights[0];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[1])] * Bones[i].Weights[1];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[2])] * Bones[i].Weights[2];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[i].IDs[3])] * Bones[i].Weights[3];
+        Matrix4f BoneTransform = BoneTransforms[int(Bones[Indices[i]].IDs[0])] * Bones[Indices[i]].Weights[0];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[1])] * Bones[Indices[i]].Weights[1];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[2])] * Bones[Indices[i]].Weights[2];
+        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[3])] * Bones[Indices[i]].Weights[3];
+        // BoneTransform.Print();
         Vector4f _pos = BoneTransform * Vector4f(pos.x, pos.y, pos.z, 1.0);
+        // Vector4f _pos = Vector4f(pos.x, pos.y, pos.z, 1.0);
         _pos = WVP * _pos;
 
         // _pos.Print(true);
 
         EndPositions[Indices[i]] = Vector3f(_pos.x, _pos.y, _pos.z);
+        // EndPositions[Indices[i]] = pos;
     }
 }
 
@@ -369,23 +373,23 @@ vector<Vector3f> AppMesh::GetEndPositions() {
 void AppMesh::Render() {
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[POS_VB]);
-    glEnableVertexAttribArray(Technique::POSITION_LOCATION);
-    glVertexAttribPointer(Technique::POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrPositionLocation);
+    glVertexAttribPointer(m_Render->m_AttrPositionLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[TEXCOORD_VB]);
-    glEnableVertexAttribArray(Technique::TEXCOORD_LOCATION);
-    glVertexAttribPointer(Technique::TEXCOORD_LOCATION, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrTexcoordLocation);
+    glVertexAttribPointer(m_Render->m_AttrTexcoordLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[NORMAL_VB]);
-    glEnableVertexAttribArray(Technique::NORMAL_LOCATION);
-    glVertexAttribPointer(Technique::NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(m_Render->m_AttrNormalLocation);
+    glVertexAttribPointer(m_Render->m_AttrNormalLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[BONE_VB]);
-    glEnableVertexAttribArray(Technique::BONE_LOCATION);
-    glVertexAttribPointer(Technique::BONE_LOCATION, 4, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(m_Render->m_AttrBoneLocation);
+    glVertexAttribPointer(m_Render->m_AttrBoneLocation, 4, GL_FLOAT, GL_FALSE,
                           sizeof(VertexBoneData), (const GLvoid *) 0);
-    glEnableVertexAttribArray(Technique::WEIGHT_LOCATION);
-    glVertexAttribPointer(Technique::WEIGHT_LOCATION, 4, GL_FLOAT, GL_FALSE,
+    glEnableVertexAttribArray(m_Render->m_AttrWeightLocation);
+    glVertexAttribPointer(m_Render->m_AttrWeightLocation, 4, GL_FLOAT, GL_FALSE,
                           sizeof(VertexBoneData), (const GLvoid *) 16);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Buffers[INDEX_BUFFER]);
@@ -465,7 +469,14 @@ void AppMesh::CalcInterpolatedPosition(aiVector3D &Out, float AnimationTime,
                                pNodeAnim->mPositionKeys[PositionIndex].mTime);
     float Factor =
             (AnimationTime - (float) pNodeAnim->mPositionKeys[PositionIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
+    // FIXME: this factor sometimes is negative
+    // assert(Factor >= 0.0f && Factor <= 1.0f);
+    if (Factor < 0.0f) {
+        LOGW("Position factor becomes negative: %f", Factor);
+        LOGW("Animation Time = %f, pNodeAnim->mPositionKeys[PositionIndex].mTime = %f, DeltaTime = %f",
+             AnimationTime, pNodeAnim->mPositionKeys[PositionIndex].mTime, DeltaTime);
+    }
+    Factor = abs(Factor);
     const aiVector3D &Start = pNodeAnim->mPositionKeys[PositionIndex].mValue;
     const aiVector3D &End = pNodeAnim->mPositionKeys[NextPositionIndex].mValue;
     aiVector3D Delta = End - Start;
@@ -488,7 +499,8 @@ void AppMesh::CalcInterpolatedRotation(aiQuaternion &Out, float AnimationTime,
                                pNodeAnim->mRotationKeys[RotationIndex].mTime);
     float Factor =
             (AnimationTime - (float) pNodeAnim->mRotationKeys[RotationIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
+    //assert(Factor >= 0.0f && Factor <= 1.0f);
+    Factor = abs(Factor);
     const aiQuaternion &StartRotationQ = pNodeAnim->mRotationKeys[RotationIndex].mValue;
     const aiQuaternion &EndRotationQ = pNodeAnim->mRotationKeys[NextRotationIndex].mValue;
     aiQuaternion::Interpolate(Out, StartRotationQ, EndRotationQ, Factor);
@@ -510,7 +522,8 @@ void AppMesh::CalcInterpolatedScaling(aiVector3D &Out, float AnimationTime,
                                pNodeAnim->mScalingKeys[ScalingIndex].mTime);
     float Factor =
             (AnimationTime - (float) pNodeAnim->mScalingKeys[ScalingIndex].mTime) / DeltaTime;
-    assert(Factor >= 0.0f && Factor <= 1.0f);
+    // assert(Factor >= 0.0f && Factor <= 1.0f);
+    Factor = abs(Factor);
     const aiVector3D &Start = pNodeAnim->mScalingKeys[ScalingIndex].mValue;
     const aiVector3D &End = pNodeAnim->mScalingKeys[NextScalingIndex].mValue;
     aiVector3D Delta = End - Start;
@@ -599,6 +612,7 @@ const aiNodeAnim *AppMesh::FindNodeAnim(const aiAnimation *pAnimation, const str
     return NULL;
 }
 
+#if ENABLE_IN_SCENE_HUD
 bool AppMesh::IsHudMesh() {
     return m_isHudMesh;
 }
@@ -606,7 +620,22 @@ bool AppMesh::IsHudMesh() {
 void AppMesh::SetHudMesh(bool HudMesh) {
     m_isHudMesh = HudMesh;
 }
+#endif
 
 Vector4f* AppMesh::GetBoundingBox() {
     return m_BoundingBox;
+}
+
+bool AppMesh::NeedCalcBoundary() {
+    bool Need = false;
+    if (m_SimulationCount == SIMULATION_FREQUENCY) {
+        Need = true;
+    }
+    if (m_SimulationCount == SIMULATION_FREQUENCY) {
+        m_SimulationCount = 0;
+    } else {
+        m_SimulationCount++;
+    }
+
+    return Need;
 }

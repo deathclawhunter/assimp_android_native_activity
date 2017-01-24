@@ -11,17 +11,24 @@
 #include "ogldev_util.h"
 #include "ogldev_math_3d.h"
 #include "ogldev_texture.h"
+#include "technique.h"
+#include "app_technique.h"
 
 using namespace std;
 
-#define DEBUG_POSITION 1
+#define DEBUG_POSITION 0
+
+/**
+ * TODO: Keep in scenen HUD mesh code for now. Maybe need to remove as a whole later
+ */
+#define ENABLE_IN_SCENE_HUD 0
 
 /**
  * Universal mesh for rigged and static meshes
  */
 class AppMesh {
 public:
-    AppMesh();
+    AppMesh(AppTechnique* render);
 
     ~AppMesh();
 
@@ -35,12 +42,26 @@ public:
 
     void BoneTransform(float TimeInSeconds, vector<Matrix4f> &Transforms);
 
+#if ENABLE_IN_SCENE_HUD
     bool IsHudMesh();
     void SetHudMesh(bool HudMesh);
+#endif
+
     Vector4f* GetBoundingBox();
 
+    /**
+     * Used for optimize calculation of boundaries, allowing define different
+     * frequency based on mesh types
+     */
+    bool NeedCalcBoundary();
+
 private:
-#define NUM_BONES_PER_VEREX 4
+    #define NUM_BONES_PER_VEREX 4
+
+    AppTechnique* m_Render = NULL;
+
+    const int SIMULATION_FREQUENCY = 100; // Calculate the boundary of animated object every 100 frames
+    int m_SimulationCount = 0;
 
     struct BoneInfo {
         Matrix4f BoneOffset;
@@ -151,7 +172,9 @@ private:
     const aiScene *m_pScene;
     Assimp::Importer m_Importer;
 
+#if ENABLE_IN_SCENE_HUD
     bool m_isHudMesh = false; // by default is NOT HUD mesh
+#endif
     // simple box bound
     Vector4f m_BoundingBox[2];
 

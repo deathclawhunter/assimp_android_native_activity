@@ -143,6 +143,12 @@ bool AppTechnique::Init() {
         m_BoneLocation[i] = GetUniformLocation(Name);
     }
 
+    m_AttrPositionLocation = glGetAttribLocation(m_ShaderProg, "Position");
+    m_AttrTexcoordLocation = glGetAttribLocation(m_ShaderProg, "TexCoord");
+    m_AttrNormalLocation = glGetAttribLocation(m_ShaderProg, "Normal");
+    m_AttrBoneLocation = glGetAttribLocation(m_ShaderProg, "BoneIDs");
+    m_AttrWeightLocation = glGetAttribLocation(m_ShaderProg, "Weights");
+
     return true;
 }
 

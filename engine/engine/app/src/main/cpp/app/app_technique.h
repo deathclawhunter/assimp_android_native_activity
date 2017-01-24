@@ -72,6 +72,13 @@ private:
     } m_SpotLightsLocation[MAX_SPOT_LIGHTS];
     
     GLuint m_BoneLocation[MAX_BONES];
+
+public:
+    GLint m_AttrPositionLocation;
+    GLint m_AttrTexcoordLocation;
+    GLint m_AttrNormalLocation;
+    GLint m_AttrBoneLocation;
+    GLint m_AttrWeightLocation;
 };
 
 
