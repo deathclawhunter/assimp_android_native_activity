@@ -16,14 +16,22 @@ public:
 private:
     GLuint m_Program;
     GLuint m_AttrPosition;
+    GLuint m_UnifColorCoord;
+    GLuint m_UnifGlobalTime;
     GLuint m_Buffers[2];
     GLsizei m_NumOfElements = 0;
     PLUGIN_STATUS my_status = PLUGIN_STATUS_INIT_RIGHT_NOW;
+    int m_width, m_height;
+
+    int m_Frame;
+    uint64_t m_FrameTimeout;
+    uint64_t m_FrameDelay;
 
 private:
     bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename);
     void CreateVertexBuffer();
     bool initShaders();
+    uint64_t rx_hrtime();
 
 };
 

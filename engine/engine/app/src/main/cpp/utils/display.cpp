@@ -93,6 +93,10 @@ int init_display(struct engine *engine) {
     glEnable(GL_TEXTURE_2D);
     glViewport(0, 0, w, h);
 
+    // Enable alpha
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
     return 0;
 }
 

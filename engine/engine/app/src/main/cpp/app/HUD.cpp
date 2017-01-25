@@ -52,8 +52,6 @@ bool HUDPlugin::addShader(GLuint prog, GLenum ShaderType, const char *pFilename)
 void HUDPlugin::CreateVertexBuffer() {
 
     /**
-     * Test data for helloworld
-     *
      * The indices is clockwise for now. Check display.cpp for
      * implementation.
      *
@@ -96,9 +94,10 @@ void HUDPlugin::CreateVertexBuffer() {
             Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f),
             Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f),
             Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f),
-            Vertices[4] = Vector3f(0.0f, -1.0f, 0.0f)
+            Vertices[4] = Vector3f(0.0f, -1.0f, 0.0f),
+            Vertices[5] = Vector3f(1.0f, 1.0f, 0.0f)
     };
-    GLubyte Indices[] = { 0, 2, 4 };
+    GLubyte Indices[] = { 0, 5, 1, 0, 3, 5 };
 
     glGenBuffers(1, &m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
@@ -149,6 +148,18 @@ bool HUDPlugin::initShaders() {
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
           m_AttrPosition);
 
+    m_UnifColorCoord = glGetUniformLocation(m_Program, "iResolution");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"iResolution\") = %d\n",
+         m_UnifColorCoord);
+
+    m_UnifGlobalTime = glGetUniformLocation(m_Program, "iGlobalTime");
+    checkGlError("glGetUniformLocation");
+    LOGI("glGetUniformLocation(\"iGlobalTime\") = %d\n",
+         m_UnifGlobalTime);
+
+    glUniform2f(m_UnifColorCoord, m_width, m_height);
+
     CreateVertexBuffer();
 
     return true;
@@ -156,8 +167,10 @@ bool HUDPlugin::initShaders() {
 
 bool HUDPlugin::Init(int32_t width, int32_t height) {
 
-    LOGI("in helloInit\n");
+    LOGI("in HUD init\n");
 
+    m_width = width;
+    m_height = height;
     if (initShaders()) {
 
         my_status = PLUGIN_STATUS_NEXT;
@@ -172,6 +185,14 @@ bool HUDPlugin::Init(int32_t width, int32_t height) {
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         checkGlError("glClear");
 
+        m_Frame = 1;
+
+#define FPS 30.0
+        if(FPS > 0.0001f) {
+            m_FrameDelay = (1.0f/FPS) * 1000ull;
+            m_FrameTimeout = rx_hrtime() + m_FrameDelay;
+        }
+
         return true;
     }
     LOGE("fail to initialize shader\n");
@@ -179,10 +200,32 @@ bool HUDPlugin::Init(int32_t width, int32_t height) {
     return false;
 }
 
+// TODO: put to time.cpp
+uint64_t HUDPlugin::rx_hrtime() {
+    timeval t;
+    gettimeofday(&t, NULL);
+    uint64_t ret = t.tv_sec * 1000 + t.tv_usec / 1000; // to nano
+    return ret;
+}
+
 bool HUDPlugin::Draw() {
 
     glUseProgram(m_Program);
-    checkGlError("HelloWorldPlugin::glUseProgram");
+    checkGlError("HUDPlugin::glUseProgram");
+
+    uint64_t now = rx_hrtime();
+    if(now < m_FrameTimeout) {
+        // LOGW("now = %llu vs frame_timeout = %llu\n", now, frame_timeout);
+        // return false;
+
+    } else {
+        m_Frame++;
+        if(m_FrameDelay > 0) {
+            m_FrameTimeout = rx_hrtime() + m_FrameDelay;
+        }
+    }
+
+    glUniform1f(m_UnifGlobalTime, (GLfloat) m_Frame);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
     glVertexAttribPointer(m_AttrPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
