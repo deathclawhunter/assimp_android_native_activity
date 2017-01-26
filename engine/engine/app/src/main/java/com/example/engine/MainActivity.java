@@ -43,6 +43,8 @@ public class MainActivity extends NativeActivity implements ActivityCompat.OnReq
         System.loadLibrary("swscale-4");
         System.loadLibrary("avfilter-6");
 
+        // System.loadLibrary("ft2");
+
         /* AudioManager myAudioMgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         String nativeParam = myAudioMgr.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
         int sampleRate = Integer.parseInt(nativeParam);

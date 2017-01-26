@@ -1,5 +1,6 @@
 #include "GLError.h"
 #include "AppLog.h"
+#include <string.h>
 
 void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -11,5 +12,7 @@ void checkGlError(const char *op) {
         LOGI("after %s() glError (0x%x)\n", op, error);
     }
 }
+
+
 
 

@@ -39,6 +39,19 @@ add_library(lib_avfilter SHARED IMPORTED)
 set_target_properties(lib_avfilter PROPERTIES IMPORTED_LOCATION
     ${distribution_DIR}/ffmpeg/lib/${ANDROID_ABI}/libavfilter-6.so)
 
+# add_library(lib_freetype SHARED IMPORTED)
+# set_target_properties(lib_freetype PROPERTIES IMPORTED_LOCATION
+#    ${distribution_DIR}/freetype/lib/${ANDROID_ABI}/libft2.so)
+
+add_library(lib_freetype STATIC IMPORTED)
+set_target_properties(lib_freetype PROPERTIES IMPORTED_LOCATION
+    ${distribution_DIR}/freetype/lib/${ANDROID_ABI}/libfreetype2-static.a)
+
+#add_library(lib_gcc STATIC IMPORTED)
+#set_target_properties(lib_gcc PROPERTIES IMPORTED_LOCATION
+#    ${distribution_DIR}/gcc/lib/${ANDROID_ABI}/libgcc.a)
+
+
 # build application's shared lib
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
@@ -79,6 +92,7 @@ file(GLOB png_src
     "png/*.c"
 )
 
+
 #file(GLOB assimp_c_src
 #    "assimp/*.c"
 #)
@@ -111,6 +125,7 @@ add_library(engine SHARED
             ${png_src}
             ${utils_src}
             ${utils_xx_src}
+            ${freetype_src}
 #            ${assimp_c_src}
 #            ${assimp_cxx_src}
 #            ${assimp_cc_src}
@@ -125,6 +140,7 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/freeglut/include
                            ${distribution_DIR}/png/include
                            ${distribution_DIR}/ffmpeg/include
+                           ${distribution_DIR}/freetype/include
                            ${CMAKE_SOURCE_DIR}/app
                            ${CMAKE_SOURCE_DIR}/utils
                            ${CMAKE_SOURCE_DIR}/assimp
@@ -158,4 +174,6 @@ target_link_libraries(engine
                       GLESv1_CM
                       lib_assimp
                       GLESv2
-                      OpenSLES)
+                      OpenSLES
+                      gcc
+                      lib_freetype)
