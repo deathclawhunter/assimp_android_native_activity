@@ -134,15 +134,13 @@ bool TextPlugin::Init(int32_t width, int32_t height) {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        glActiveTexture(GL_TEXTURE0);
         glGenTextures(1, &m_Tex);
-        glBindTexture(GL_TEXTURE_2D, m_Tex);
+        // glBindTexture(GL_TEXTURE_2D, m_Tex);
         glUniform1i(m_UnifTex, 0);
 
-        GLuint vbo;
-        glGenBuffers(1, &vbo);
+        glGenBuffers(1, &m_VBO);
         glEnableVertexAttribArray(m_AttrCoord);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glVertexAttribPointer(m_AttrCoord, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
         return true;
@@ -193,6 +191,13 @@ void TextPlugin::RenderText(const char *text, float x, float y, float sx, float 
 
 bool TextPlugin::Draw() {
 
+    glUseProgram(m_Program);
+
+    glEnableVertexAttribArray(m_AttrCoord);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+    glVertexAttribPointer(m_AttrCoord, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_Tex);
 
     /* Backup texture settings */

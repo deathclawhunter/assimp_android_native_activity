@@ -28,6 +28,7 @@ private:
     FT_Face m_Face;
     FT_GlyphSlot m_G;
     GLuint m_Tex;
+    GLuint m_VBO;
 
 private:
     bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename);
