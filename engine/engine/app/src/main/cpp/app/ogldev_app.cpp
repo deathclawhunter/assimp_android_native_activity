@@ -40,13 +40,11 @@ OgldevApp::OgldevApp()
 }
 
 
-
-void OgldevApp::CalcFPS()
-{
+void OgldevApp::CalcFPS() {
     m_frameCount++;
 
     long long time = GetCurrentTimeMillis();
-    
+
     if (time - m_frameTime >= 1000) {
         m_frameTime = time;
         m_fps = m_frameCount;
@@ -54,10 +52,9 @@ void OgldevApp::CalcFPS()
     }
 }
 
-void OgldevApp::RenderFPS()
-{
+void OgldevApp::RenderFPS() {
     char text[32];
-    ZERO_MEM(text);        
+    ZERO_MEM(text);
     SNPRINTF(text, sizeof(text), "FPS: %d", m_fps);
 
 /* TODO: #ifndef WIN32
@@ -65,8 +62,7 @@ void OgldevApp::RenderFPS()
 #endif */
 }
 
-float OgldevApp::GetRunningTime()
-{
-    float RunningTime = (float)((double)GetCurrentTimeMillis() - (double)m_startTime) / 1000.0f;
+float OgldevApp::GetRunningTime() {
+    float RunningTime = (float) ((double) GetCurrentTimeMillis() - (double) m_startTime) / 1000.0f;
     return RunningTime;
 }

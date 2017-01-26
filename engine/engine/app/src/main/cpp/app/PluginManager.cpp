@@ -10,7 +10,7 @@ PluginManager::PluginManager() {
 
 }
 
-PluginManager* PluginManager::GetInstance() {
+PluginManager *PluginManager::GetInstance() {
 
     static PluginManager *m_Instance = NULL;
 
@@ -22,11 +22,11 @@ PluginManager* PluginManager::GetInstance() {
 }
 
 
-IPlugin* PluginManager::GetPlugin(PLUGIN_TYPES type) {
+IPlugin *PluginManager::GetPlugin(PLUGIN_TYPES type) {
     return (IPlugin *) m_PluginMap[type];
 }
 
-bool PluginManager::AddPlugin(PLUGIN_TYPES type, IPlugin* plugin) {
+bool PluginManager::AddPlugin(PLUGIN_TYPES type, IPlugin *plugin) {
 
     if (m_Plugins == NULL) {
         m_Plugins = plugin;
@@ -36,8 +36,8 @@ bool PluginManager::AddPlugin(PLUGIN_TYPES type, IPlugin* plugin) {
 
     // do not handle duplicated plugin error, should be avoided in coding stage
 
-    IPlugin* next = m_Plugins;
-    IPlugin* last = m_Plugins;
+    IPlugin *next = m_Plugins;
+    IPlugin *last = m_Plugins;
     while (next) {
         last = next;
         next = next->next;

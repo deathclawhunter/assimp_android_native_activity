@@ -17,36 +17,35 @@ AudioPlugin::~AudioPlugin() {
     avcodec_close(codecContext);
 }
 
-void AudioPlugin::CreateAudioEngine()
-{
+void AudioPlugin::CreateAudioEngine() {
     SLresult result;
 
     // create engine
     result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // realize the engine
     result = (*engineObject)->Realize(engineObject, SL_BOOLEAN_FALSE);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the engine interface, which is needed in order to create other objects
     result = (*engineObject)->GetInterface(engineObject, SL_IID_ENGINE, &engineEngine);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // create output mix, with environmental reverb specified as a non-required interface
     const SLInterfaceID ids[1] = {SL_IID_ENVIRONMENTALREVERB};
     const SLboolean req[1] = {SL_BOOLEAN_FALSE};
     result = (*engineEngine)->CreateOutputMix(engineEngine, &outputMixObject, 1, ids, req);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // realize the output mix
     result = (*outputMixObject)->Realize(outputMixObject, SL_BOOLEAN_FALSE);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the environmental reverb interface
     // this could fail if the environmental reverb effect is not available,
@@ -57,15 +56,14 @@ void AudioPlugin::CreateAudioEngine()
     if (SL_RESULT_SUCCESS == result) {
         result = (*outputMixEnvironmentalReverb)->SetEnvironmentalReverbProperties(
                 outputMixEnvironmentalReverb, &reverbSettings);
-        (void)result;
+        (void) result;
     }
     // ignore unsuccessful result codes for environmental reverb, as it is optional for this example
 
 }
 
 // create asset audio player
-bool AudioPlugin::CreateAssetAudioPlayer(const char *filename)
-{
+bool AudioPlugin::CreateAssetAudioPlayer(const char *filename) {
     SLresult result;
 
     int fd = open(filename, O_RDONLY);
@@ -96,44 +94,43 @@ bool AudioPlugin::CreateAssetAudioPlayer(const char *filename)
     result = (*engineEngine)->CreateAudioPlayer(engineEngine, &fdPlayerObject, &audioSrc, &audioSnk,
                                                 3, ids, req);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // realize the player
     result = (*fdPlayerObject)->Realize(fdPlayerObject, SL_BOOLEAN_FALSE);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the play interface
     result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_PLAY, &fdPlayerPlay);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the seek interface
     result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_SEEK, &fdPlayerSeek);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the mute/solo interface
     result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_MUTESOLO, &fdPlayerMuteSolo);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // get the volume interface
     result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_VOLUME, &fdPlayerVolume);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     // enable whole file looping
     result = (*fdPlayerSeek)->SetLoop(fdPlayerSeek, SL_BOOLEAN_TRUE, 0, SL_TIME_UNKNOWN);
     assert(SL_RESULT_SUCCESS == result);
-    (void)result;
+    (void) result;
 
     return JNI_TRUE;
 }
 
 // set the playing state for the asset audio player
-void AudioPlugin::PlayingAssetAudioPlayer(bool isPlaying)
-{
+void AudioPlugin::PlayingAssetAudioPlayer(bool isPlaying) {
     SLresult result;
 
     // make sure the asset audio player was created
@@ -141,9 +138,10 @@ void AudioPlugin::PlayingAssetAudioPlayer(bool isPlaying)
 
         // set the player's state
         result = (*fdPlayerPlay)->SetPlayState(fdPlayerPlay, isPlaying ?
-                                                             SL_PLAYSTATE_PLAYING : SL_PLAYSTATE_PAUSED);
+                                                             SL_PLAYSTATE_PLAYING
+                                                                       : SL_PLAYSTATE_PAUSED);
         assert(SL_RESULT_SUCCESS == result);
-        (void)result;
+        (void) result;
     }
 
 }

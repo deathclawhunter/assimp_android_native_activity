@@ -1,7 +1,5 @@
 #include "engine.h"
 
-using namespace std;
-
 #define LOG_TAG "ENGINE_DISPLAY"
 #include "AppLog.h"
 
@@ -96,6 +94,11 @@ int init_display(struct engine *engine) {
     // Enable alpha
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+
+    GLint texUnits = 0;
+    glGetIntegerv(GL_MAX_TEXTURE_UNITS, &texUnits);
+    LOGI("Maximum texture units : %d", texUnits);
 
     return 0;
 }

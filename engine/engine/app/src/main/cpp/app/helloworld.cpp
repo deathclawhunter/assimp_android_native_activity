@@ -103,7 +103,7 @@ void HelloWorldPlugin::CreateVertexBuffer() {
             Vertices[3] = Vector3f(-1.0f, 1.0f, 0.0f),
             Vertices[4] = Vector3f(0.0f, -1.0f, 0.0f)
     };
-    GLubyte Indices[] = { 0, 2, 4 };
+    GLubyte Indices[] = {0, 2, 4};
 
     glGenBuffers(1, &m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
@@ -152,7 +152,7 @@ bool HelloWorldPlugin::initShaders() {
     gvPositionHandle = glGetAttribLocation(gProgram, "Position");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"Position\") = %d\n",
-          gvPositionHandle);
+         gvPositionHandle);
 
     CreateVertexBuffer();
 

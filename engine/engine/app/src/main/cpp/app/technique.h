@@ -17,27 +17,12 @@
 */
 
 #ifndef TECHNIQUE_H
-#define	TECHNIQUE_H
+#define    TECHNIQUE_H
 
 #include <list>
-// #include <GL/glew.h>
 #include <GLES/gl.h>
 
-/**
- * Davis: Should not hard code the attribute locations
- * when come to multiple shader case
- */
-/*#define POSITION_LOCATION    0
-#define TEX_COORD_LOCATION   1
-#define NORMAL_LOCATION      2
-#define BONE_ID_LOCATION     3
-#define BONE_WEIGHT_LOCATION 4
-#define MESH_LOCATION 5 // Add by Davis
-#define TEST_VB_LOCATION 6 // Add by Davis
-#define TEST_INDEX_LOCATION 7 // Add by Davis*/
-
-class Technique
-{
+class Technique {
 public:
 
     Technique();
@@ -48,27 +33,22 @@ public:
 
     void Enable();
 
-    /**
-     * Fixed atttibute location
-     */
-    /* static const int POSITION_LOCATION = 0;
-    static const int TEXCOORD_LOCATION = 1;
-    static const int NORMAL_LOCATION = 2;
-    static const int BONE_LOCATION = 3;
-    static const int WEIGHT_LOCATION = 4; */
-
 protected:
 
-    bool AddShader(GLenum ShaderType, const char* pFilename);
+    bool AddShader(GLenum ShaderType, const char *pFilename);
+
+    bool AddShaderFromString(GLenum ShaderType, const char *s);
 
     bool Finalize();
 
-    GLint GetUniformLocation(const char* pUniformName);
-    
+    GLint GetUniformLocation(const char *pUniformName);
+
     GLint GetProgramParam(GLint param);
-    
+
+    GLint GetAttributeLocation(const char *pAttriName);
+
     GLuint m_ShaderProg;
-    
+
 private:
 
     typedef std::list<GLuint> ShaderObjList;

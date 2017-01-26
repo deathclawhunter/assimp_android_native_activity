@@ -77,6 +77,7 @@ bool ReadFile(const char* pFileName, string& outFile) {
             readStr = ReadLine(f1, buf, BUFSIZ);
             int len = strlen(buf);
             if (len > 0) {
+                // Support single line comments
                 if (len >= 2 && buf[0] == '/' && buf[1] == '/') {
                     continue;
                 }

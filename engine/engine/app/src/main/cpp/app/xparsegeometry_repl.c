@@ -47,20 +47,17 @@ from The Open Group.
  */
 
 static int
-ReadInteger(char *string, char **NextString)
-{
+ReadInteger(char *string, char **NextString) {
     register int Result = 0;
     int Sign = 1;
 
     if (*string == '+')
         string++;
-    else if (*string == '-')
-    {
+    else if (*string == '-') {
         string++;
         Sign = -1;
     }
-    for (; (*string >= '0') && (*string <= '9'); string++)
-    {
+    for (; (*string >= '0') && (*string <= '9'); string++) {
         Result = (Result * 10) + (*string - '0');
     }
     *NextString = string;
@@ -70,12 +67,12 @@ ReadInteger(char *string, char **NextString)
         return -Result;
 }
 
-int XParseGeometry (
-    const char *string,
-    int *x,
-    int *y,
-    unsigned int *width,    /* RETURN */
-    unsigned int *height)    /* RETURN */
+int XParseGeometry(
+        const char *string,
+        int *x,
+        int *y,
+        unsigned int *width,    /* RETURN */
+        unsigned int *height)    /* RETURN */
 {
     int mask = NoValue;
     register char *strind;
@@ -83,12 +80,12 @@ int XParseGeometry (
     int tempX = 0, tempY = 0;
     char *nextCharacter;
 
-    if ( (string == NULL) || (*string == '\0'))
-      return mask;
+    if ((string == NULL) || (*string == '\0'))
+        return mask;
     if (*string == '=')
         string++;  /* ignore possible '=' at beg of geometry spec */
 
-    strind = (char *)string;
+    strind = (char *) string;
     if (*strind != '+' && *strind != '-' && *strind != 'x') {
         tempWidth = ReadInteger(strind, &nextCharacter);
         if (strind == nextCharacter)
@@ -115,8 +112,7 @@ int XParseGeometry (
             strind = nextCharacter;
             mask |= XNegative;
         }
-        else
-        {
+        else {
             strind++;
             tempX = ReadInteger(strind, &nextCharacter);
             if (strind == nextCharacter)
@@ -133,8 +129,7 @@ int XParseGeometry (
                 strind = nextCharacter;
                 mask |= YNegative;
             }
-            else
-            {
+            else {
                 strind++;
                 tempY = ReadInteger(strind, &nextCharacter);
                 if (strind == nextCharacter)

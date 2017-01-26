@@ -31,6 +31,7 @@
 #include <GLES/gl.h>
 #include "math.h"
 #include "tinylib.h"
+#include "technique.h"
 
 static const char* YUV420P_VS = ""
 
@@ -108,7 +109,7 @@ static const char* YUV420P_FS = ""
         "}"
         "";
 
-class YUV420P_Player {
+class YUV420P_Player : Technique {
 
 public:
     YUV420P_Player();
@@ -124,26 +125,16 @@ private:
     bool setupTextures();
     bool setupShader();
 
-    GLuint rx_create_program(GLuint shader1, GLuint shader2);
-    GLuint rx_create_shader(GLenum ShaderType, const char *s);
-
 public:
     GLint origStride;
     int vid_w;
     int vid_h;
     int win_w;
     int win_h;
-    // Does not support vertex buffer
-    // GLuint vao;
     GLuint m_Buffers[2];
-    // GLuint buffer;
     GLuint y_tex;
     GLuint u_tex;
     GLuint v_tex;
-    GLuint vert;
-    GLuint frag;
-    GLuint prog;
-    // GLint u_pos;
     bool textures_created;
     bool shader_created;
     uint8_t* y_pixels;

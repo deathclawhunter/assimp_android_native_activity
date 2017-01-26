@@ -3,43 +3,36 @@
 //
 
 #define LOG_TAG "H264_DECODER"
+
 #include "AppLog.h"
 
 #include "H264_Decoder.h"
 
-H264_Decoder::H264_Decoder(IH264CallBack *frameCallback, void* user)
-        :codec(NULL)
-        ,codec_context(NULL)
-        ,parser(NULL)
-        ,fp(NULL)
-        ,frame(0)
-        ,cb_frame(frameCallback)
-        ,cb_user(user)
-        ,frame_timeout(0)
-        ,frame_delay(0)
-{
+H264_Decoder::H264_Decoder(IH264CallBack *frameCallback, void *user)
+        : codec(NULL), codec_context(NULL), parser(NULL), fp(NULL), frame(0),
+          cb_frame(frameCallback), cb_user(user), frame_timeout(0), frame_delay(0) {
     avcodec_register_all();
 }
 
 H264_Decoder::~H264_Decoder() {
 
-    if(parser) {
+    if (parser) {
         av_parser_close(parser);
         parser = NULL;
     }
 
-    if(codec_context) {
+    if (codec_context) {
         avcodec_close(codec_context);
         av_free(codec_context);
         codec_context = NULL;
     }
 
-    if(picture) {
+    if (picture) {
         av_free(picture);
         picture = NULL;
     }
 
-    if(fp) {
+    if (fp) {
         fclose(fp);
         fp = NULL;
     }
@@ -53,25 +46,25 @@ H264_Decoder::~H264_Decoder() {
 bool H264_Decoder::load(const char *filepath, float fps) {
 
     codec = avcodec_find_decoder(AV_CODEC_ID_H264);
-    if(!codec) {
+    if (!codec) {
         LOGE("Error: cannot find the h264 codec: %s\n", filepath);
         return false;
     }
 
     codec_context = avcodec_alloc_context3(codec);
 
-    if(codec->capabilities & CODEC_CAP_TRUNCATED) {
+    if (codec->capabilities & CODEC_CAP_TRUNCATED) {
         codec_context->flags |= CODEC_FLAG_TRUNCATED;
     }
 
-    if(avcodec_open2(codec_context, codec, NULL) < 0) {
+    if (avcodec_open2(codec_context, codec, NULL) < 0) {
         LOGE("Error: could not open codec.\n");
         return false;
     }
 
     fp = fopen(filepath, "rb");
 
-    if(!fp) {
+    if (!fp) {
         LOGE("Error: cannot open: %s\n", filepath);
         return false;
     }
@@ -79,13 +72,13 @@ bool H264_Decoder::load(const char *filepath, float fps) {
     picture = av_frame_alloc();
     parser = av_parser_init(AV_CODEC_ID_H264);
 
-    if(!parser) {
+    if (!parser) {
         LOGE("Erorr: cannot create H264 parser.\n");
         return false;
     }
 
-    if(fps > 0.0001f) {
-        frame_delay = (1.0f/fps) * 1000ull;
+    if (fps > 0.0001f) {
+        frame_delay = (1.0f / fps) * 1000ull;
         frame_timeout = rx_hrtime() + frame_delay;
     }
 
@@ -105,17 +98,17 @@ uint64_t H264_Decoder::rx_hrtime() {
 bool H264_Decoder::readFrame() {
 
     uint64_t now = rx_hrtime();
-    if(now < frame_timeout) {
+    if (now < frame_timeout) {
         // LOGW("now = %llu vs frame_timeout = %llu\n", now, frame_timeout);
         return false;
     }
 
     bool needs_more = false;
 
-    while(!update(needs_more)) {
-        if(needs_more) {
+    while (!update(needs_more)) {
+        if (needs_more) {
             if (readBuffer() <= 0) {
-                if(cb_frame) {
+                if (cb_frame) {
                     cb_frame->h264_decoder_callback(DEC_STATUS_FINISH, NULL, NULL);
                 }
                 return false;
@@ -124,22 +117,22 @@ bool H264_Decoder::readFrame() {
     }
 
     // it may take some 'reads' before we can set the fps
-    if(frame_timeout == 0 && frame_delay == 0) {
+    if (frame_timeout == 0 && frame_delay == 0) {
         double fps = av_q2d(codec_context->time_base);
-        if(fps > 0.0) {
+        if (fps > 0.0) {
             // frame_delay = fps * 1000ull * 1000ull * 1000ull;
             frame_delay = fps * 1000ull;
         }
     }
 
-    if(frame_delay > 0) {
+    if (frame_delay > 0) {
         frame_timeout = rx_hrtime() + frame_delay;
     }
 
     return true;
 }
 
-void H264_Decoder::decodeFrame(uint8_t* data, int size) {
+void H264_Decoder::decodeFrame(uint8_t *data, int size) {
 
     AVPacket pkt;
     int got_picture = 0;
@@ -151,11 +144,11 @@ void H264_Decoder::decodeFrame(uint8_t* data, int size) {
     pkt.size = size;
 
     len = avcodec_decode_video2(codec_context, picture, &got_picture, &pkt);
-    if(len < 0) {
+    if (len < 0) {
         LOGE("Error while decoding a frame.\n");
     }
 
-    if(got_picture == 0) {
+    if (got_picture == 0) {
         return;
     }
 
@@ -169,20 +162,20 @@ void H264_Decoder::decodeFrame(uint8_t* data, int size) {
 
 int H264_Decoder::readBuffer() {
 
-    int bytes_read = (int)fread(inbuf, 1, H264_INBUF_SIZE, fp);
+    int bytes_read = (int) fread(inbuf, 1, H264_INBUF_SIZE, fp);
 
-    if(bytes_read) {
+    if (bytes_read) {
         std::copy(inbuf, inbuf + bytes_read, std::back_inserter(buffer));
     }
 
     return bytes_read;
 }
 
-bool H264_Decoder::update(bool& needsMoreBytes) {
+bool H264_Decoder::update(bool &needsMoreBytes) {
 
     needsMoreBytes = false;
 
-    if(!fp) {
+    if (!fp) {
         LOGE("Cannot update .. file not opened...\n");
         if (cb_frame != NULL) {
             cb_frame->h264_decoder_callback(DEC_STATUS_ERROR_OPEN_FILE, NULL, NULL);
@@ -190,22 +183,22 @@ bool H264_Decoder::update(bool& needsMoreBytes) {
         return false;
     }
 
-    if(buffer.size() == 0) {
+    if (buffer.size() == 0) {
         needsMoreBytes = true;
         return false;
     }
 
-    uint8_t* data = NULL;
+    uint8_t *data = NULL;
     int size = 0;
     int len = av_parser_parse2(parser, codec_context, &data, &size,
                                &buffer[0], buffer.size(), 0, 0, AV_NOPTS_VALUE);
 
-    if(size == 0 && len >= 0) {
+    if (size == 0 && len >= 0) {
         needsMoreBytes = true;
         return false;
     }
 
-    if(len) {
+    if (len) {
         decodeFrame(&buffer[0], size);
         buffer.erase(buffer.begin(), buffer.begin() + len);
         return true;

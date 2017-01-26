@@ -60,6 +60,7 @@ void ScenePlugin::CalculateCenterOfRightHalf() {
 #if ENABLE_IN_SCENE_HUD
 bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudMesh, int w, int h) {
 #else
+
 bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
 #endif
     Vector3f Pos(0.0f, 3.0f, -1.0f);
@@ -99,11 +100,11 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
 #if ENABLE_IN_SCENE_HUD
         if (i < numMesh) {
 #endif
-            m_Meshes[i] = new AppMesh(&m_Renderer);
-            if (!m_Meshes[i]->LoadMesh(mesh[i])) {
-                LOGE("fail to load mesh %s\n", mesh[i].c_str());
-                sceneStatus = PLUGIN_STATUS_INIT_FAIL;
-                return false;
+        m_Meshes[i] = new AppMesh(&m_Renderer);
+        if (!m_Meshes[i]->LoadMesh(mesh[i])) {
+            LOGE("fail to load mesh %s\n", mesh[i].c_str());
+            sceneStatus = PLUGIN_STATUS_INIT_FAIL;
+            return false;
 #if ENABLE_IN_SCENE_HUD
             }
 #endif
@@ -194,7 +195,7 @@ void ScenePlugin::renderScene() {
             m_Renderer.SetWVP(m_OrthogonalMatrix);
         } else {
 #endif
-            m_Renderer.SetWVP(wvp);
+        m_Renderer.SetWVP(wvp);
 #if ENABLE_IN_SCENE_HUD
         }
 #endif

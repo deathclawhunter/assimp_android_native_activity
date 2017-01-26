@@ -28,7 +28,7 @@ using namespace std;
  */
 class AppMesh {
 public:
-    AppMesh(AppTechnique* render);
+    AppMesh(AppTechnique *render);
 
     ~AppMesh();
 
@@ -47,7 +47,7 @@ public:
     void SetHudMesh(bool HudMesh);
 #endif
 
-    Vector4f* GetBoundingBox();
+    Vector4f *GetBoundingBox();
 
     /**
      * Used for optimize calculation of boundaries, allowing define different
@@ -56,9 +56,9 @@ public:
     bool NeedCalcBoundary();
 
 private:
-    #define NUM_BONES_PER_VEREX 4
+#define NUM_BONES_PER_VEREX 4
 
-    AppTechnique* m_Render = NULL;
+    AppTechnique *m_Render = NULL;
 
     const int SIMULATION_FREQUENCY = 100; // Calculate the boundary of animated object every 100 frames
     int m_SimulationCount = 0;

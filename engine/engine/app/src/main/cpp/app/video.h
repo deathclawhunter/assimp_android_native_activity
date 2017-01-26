@@ -20,16 +20,20 @@ class VideoPlugin : public IPlugin, IH264CallBack {
 public:
 
     VideoPlugin();
+
     ~VideoPlugin();
 
     // Plugin API
     bool Init(int32_t width, int32_t height);
+
     bool Draw();
+
     int32_t KeyHandler(AInputEvent *event);
+
     IPlugin::PLUGIN_STATUS status();
 
     // H264 decoder API
-    void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt);
+    void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame *frame, AVPacket *pkt);
 
 private:
     H264_Decoder *decoder;

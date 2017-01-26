@@ -50,6 +50,7 @@ Technique::~Technique() {
 
 
 bool Technique::Init() {
+
     m_ShaderProg = glCreateProgram();
 
     if (m_ShaderProg == 0) {
@@ -59,6 +60,40 @@ bool Technique::Init() {
     }
 
     return true;
+}
+
+bool Technique::AddShaderFromString(GLenum ShaderType, const char *s) {
+
+    GLuint ShaderObj = glCreateShader(ShaderType);
+
+    if (ShaderObj == 0) {
+        LOGE("Error creating shader type %d\n", ShaderType);
+        return ShaderObj;
+    }
+
+    m_ShaderObjList.push_back(ShaderObj);
+
+    const GLchar *p[1];
+    p[0] = s;
+    GLint Lengths[1] = {(GLint) strlen(s)};
+
+    glShaderSource(ShaderObj, 1, p, Lengths);
+
+    glCompileShader(ShaderObj);
+
+    GLint success;
+    glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
+
+    if (!success) {
+        GLchar InfoLog[1024];
+        glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
+        LOGI("Error compiling '%s'\n", InfoLog);
+        return false;
+    }
+
+    glAttachShader(m_ShaderProg, ShaderObj);
+
+    return ShaderObj;
 }
 
 // Use this method to add shaders to the program. When finished - call finalize()
@@ -85,39 +120,14 @@ bool Technique::AddShader(GLenum ShaderType, const char *pFilename) {
 
     glShaderSource(ShaderObj, 1, p, Lengths);
 
-    // Add by Davis - port to GL es 2.0
-    // void glBindAttribLocation(GLuint program​, GLuint index​, const GLchar *name​);
-    // TODO: need to modulize the code a little bit here
-    /* main_shader.vs
-        # layout (location = 0) in vec3 Position;
-        attribute vec3 Position
-        # layout (location = 1) in vec2 TexCoord;
-        attribute vec2 TexCoord
-        # layout (location = 2) in vec3 Normal;
-        attribute vec3 Normal;
-        # layout (location = 3) in ivec4 BoneIDs;
-        attribute ivec4 BoneIDs;
-        # layout (location = 4) in vec4 Weights;
-        attribute vec4 Weights;
-     */
-    // if (ShaderType == GL_VERTEX_SHADER) {
-
-        /* glBindAttribLocation(m_ShaderProg, POSITION_LOCATION, "Position");
-        glBindAttribLocation(m_ShaderProg, TEXCOORD_LOCATION, "TexCoord");
-        glBindAttribLocation(m_ShaderProg, NORMAL_LOCATION, "Normal");
-        glBindAttribLocation(m_ShaderProg, BONE_LOCATION, "BoneIDs");
-        glBindAttribLocation(m_ShaderProg, WEIGHT_LOCATION, "Weights"); */
-    // }
-
     glCompileShader(ShaderObj);
 
     GLint success;
     glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
-
     if (!success) {
         GLchar InfoLog[1024];
         glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
-        LOGI("Error compiling '%s': '%s'\n", pFilename, InfoLog);
+        LOGE("Error compiling '%s': '%s'\n", pFilename, InfoLog);
         return false;
     }
 
@@ -147,7 +157,7 @@ bool Technique::Finalize() {
     if (!Success) {
         glGetProgramInfoLog(m_ShaderProg, sizeof(ErrorLog), NULL, ErrorLog);
         LOGE("Invalid shader program: '%s'\n", ErrorLog);
-        //   return false;
+        return false;
     }
 
     // Delete the intermediate shader objects that have been added to the program
@@ -169,13 +179,24 @@ void Technique::Enable() {
 
 
 GLint Technique::GetUniformLocation(const char *pUniformName) {
-    GLuint Location = glGetUniformLocation(m_ShaderProg, pUniformName);
+    GLint Location = glGetUniformLocation(m_ShaderProg, pUniformName);
 
     if (Location == INVALID_UNIFORM_LOCATION) {
         LOGE("Warning! Unable to get the location of uniform '%s'\n", pUniformName);
     }
 
     return Location;
+}
+
+GLint Technique::GetAttributeLocation(const char *pAttriName) {
+    GLint ret = glGetAttribLocation(m_ShaderProg, pAttriName);
+
+    if (ret == -1) {
+        checkGlError("glGetAttribLocation");
+    }
+    LOGI("glGetAttribLocation(\"%s\") = %d\n", pAttriName, ret);
+
+    return ret;
 }
 
 GLint Technique::GetProgramParam(GLint param) {

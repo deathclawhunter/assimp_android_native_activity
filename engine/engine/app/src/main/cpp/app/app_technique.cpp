@@ -1,11 +1,5 @@
-#include <limits.h>
-#include <string>
 #include <GLES2/gl2.h>
-
-
 #include "app_technique.h"
-
-using namespace std;
 
 AppTechnique::AppTechnique() {
 }
@@ -143,11 +137,11 @@ bool AppTechnique::Init() {
         m_BoneLocation[i] = GetUniformLocation(Name);
     }
 
-    m_AttrPositionLocation = glGetAttribLocation(m_ShaderProg, "Position");
-    m_AttrTexcoordLocation = glGetAttribLocation(m_ShaderProg, "TexCoord");
-    m_AttrNormalLocation = glGetAttribLocation(m_ShaderProg, "Normal");
-    m_AttrBoneLocation = glGetAttribLocation(m_ShaderProg, "BoneIDs");
-    m_AttrWeightLocation = glGetAttribLocation(m_ShaderProg, "Weights");
+    m_AttrPositionLocation = GetAttributeLocation("Position");
+    m_AttrTexcoordLocation = GetAttributeLocation("TexCoord");
+    m_AttrNormalLocation = GetAttributeLocation("Normal");
+    m_AttrBoneLocation = GetAttributeLocation("BoneIDs");
+    m_AttrWeightLocation = GetAttributeLocation("Weights");
 
     return true;
 }
@@ -231,6 +225,5 @@ void AppTechnique::SetSpotLights(unsigned int NumLights, const SpotLight *pLight
 
 void AppTechnique::SetBoneTransform(uint Index, const Matrix4f &Transform) {
     assert(Index < MAX_BONES);
-    //Transform.Print();
     glUniformMatrix4fv(m_BoneLocation[Index], 1, GL_TRUE, (const GLfloat *) Transform);
 }

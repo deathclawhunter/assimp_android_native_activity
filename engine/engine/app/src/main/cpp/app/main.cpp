@@ -13,9 +13,11 @@ using namespace std;
 #define HELLOWORD 0
 
 extern "C" {
-    void extract_assets(struct android_app *app);
+void extract_assets(struct android_app *app);
 }
+
 int init_display(struct engine *engine);
+
 void terminate_display(struct engine *engine);
 
 /**
@@ -107,8 +109,10 @@ void initPlugins(struct engine *engine) {
 #else
     // Should be controlled by script, hard code right now for demo
     // sequence matters, check dev notes for game flow control
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC, new AudioPlugin());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO, new VideoPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
+                                            new AudioPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO,
+                                            new VideoPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());

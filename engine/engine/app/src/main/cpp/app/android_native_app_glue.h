@@ -93,11 +93,11 @@ struct android_poll_source {
     int32_t id;
 
     /* // The android_app this ident is associated with. */
-    struct android_app* app;
+    struct android_app *app;
 
     /* // Function to call to perform the standard processing of data from */
     /* // this source. */
-    void (*process)(struct android_app* app, struct android_poll_source* source);
+    void (*process)(struct android_app *app, struct android_poll_source *source);
 };
 
 /**
@@ -111,22 +111,22 @@ struct android_poll_source {
 struct android_app {
     /* // The application can place a pointer to its own state object */
     /* // here if it likes. */
-    void* userData;
+    void *userData;
 
     /* // Fill this in with the function to process main app commands (APP_CMD_*) */
-    void (*onAppCmd)(struct android_app* app, int32_t cmd);
+    void (*onAppCmd)(struct android_app *app, int32_t cmd);
 
     /* // Fill this in with the function to process input events.  At this point */
     /* // the event has already been pre-dispatched, and it will be finished upon */
     /* // return.  Return 1 if you have handled the event, 0 for any default */
     /* // dispatching. */
-    int32_t (*onInputEvent)(struct android_app* app, AInputEvent* event);
+    int32_t (*onInputEvent)(struct android_app *app, AInputEvent *event);
 
     /* // The ANativeActivity object instance that this app is running in. */
-    ANativeActivity* activity;
+    ANativeActivity *activity;
 
     /* // The current configuration the app is running in. */
-    AConfiguration* config;
+    AConfiguration *config;
 
     /* // This is the last instance's saved state, as provided at creation time. */
     /* // It is NULL if there was no state.  You can use this as you need; the */
@@ -136,18 +136,18 @@ struct android_app {
     /* // at which point they will be initialized to NULL and you can malloc your */
     /* // state and place the information here.  In that case the memory will be */
     /* // freed for you later. */
-    void* savedState;
+    void *savedState;
     size_t savedStateSize;
 
     /* // The ALooper associated with the app's thread. */
-    ALooper* looper;
+    ALooper *looper;
 
     /* // When non-NULL, this is the input queue from which the app will */
     /* // receive user input events. */
-    AInputQueue* inputQueue;
+    AInputQueue *inputQueue;
 
     /* // When non-NULL, this is the window surface that the app can draw in. */
-    ANativeWindow* window;
+    ANativeWindow *window;
 
     /* // Current content rectangle of the window; this is the area where the */
     /* // window's content should be placed to be seen by the user. */
@@ -179,8 +179,8 @@ struct android_app {
     int stateSaved;
     int destroyed;
     int redrawNeeded;
-    AInputQueue* pendingInputQueue;
-    ANativeWindow* pendingWindow;
+    AInputQueue *pendingInputQueue;
+    ANativeWindow *pendingWindow;
     ARect pendingContentRect;
 };
 
@@ -192,7 +192,7 @@ enum {
      * These can be retrieved and processed with android_app_read_cmd()
      * and android_app_exec_cmd().
      */
-    LOOPER_ID_MAIN = 1,
+            LOOPER_ID_MAIN = 1,
 
     /**
      * Looper data ID of events coming from the AInputQueue of the
@@ -201,12 +201,12 @@ enum {
      * android_poll_source structure.  These can be read via the inputQueue
      * object of android_app.
      */
-    LOOPER_ID_INPUT = 2,
+            LOOPER_ID_INPUT = 2,
 
     /**
      * Start of user-defined ALooper identifiers.
      */
-    LOOPER_ID_USER = 3
+            LOOPER_ID_USER = 3
 };
 
 enum {
@@ -215,14 +215,14 @@ enum {
      * this command, android_app->inputQueue will be updated to the new queue
      * (or NULL).
      */
-    APP_CMD_INPUT_CHANGED,
+            APP_CMD_INPUT_CHANGED,
 
     /**
      * Command from main thread: a new ANativeWindow is ready for use.  Upon
      * receiving this command, android_app->window will contain the new window
      * surface.
      */
-    APP_CMD_INIT_WINDOW,
+            APP_CMD_INIT_WINDOW,
 
     /**
      * Command from main thread: the existing ANativeWindow needs to be
@@ -230,60 +230,60 @@ enum {
      * contains the existing window; after calling android_app_exec_cmd
      * it will be set to NULL.
      */
-    APP_CMD_TERM_WINDOW,
+            APP_CMD_TERM_WINDOW,
 
     /**
      * Command from main thread: the current ANativeWindow has been resized.
      * Please redraw with its new size.
      */
-    APP_CMD_WINDOW_RESIZED,
+            APP_CMD_WINDOW_RESIZED,
 
     /**
      * Command from main thread: the system needs that the current ANativeWindow
      * be redrawn.  You should redraw the window before handing this to
      * android_app_exec_cmd() in order to avoid transient drawing glitches.
      */
-    APP_CMD_WINDOW_REDRAW_NEEDED,
+            APP_CMD_WINDOW_REDRAW_NEEDED,
 
     /**
      * Command from main thread: the content area of the window has changed,
      * such as from the soft input window being shown or hidden.  You can
      * find the new content rect in android_app::contentRect.
      */
-    APP_CMD_CONTENT_RECT_CHANGED,
+            APP_CMD_CONTENT_RECT_CHANGED,
 
     /**
      * Command from main thread: the app's activity window has gained
      * input focus.
      */
-    APP_CMD_GAINED_FOCUS,
+            APP_CMD_GAINED_FOCUS,
 
     /**
      * Command from main thread: the app's activity window has lost
      * input focus.
      */
-    APP_CMD_LOST_FOCUS,
+            APP_CMD_LOST_FOCUS,
 
     /**
      * Command from main thread: the current device configuration has changed.
      */
-    APP_CMD_CONFIG_CHANGED,
+            APP_CMD_CONFIG_CHANGED,
 
     /**
      * Command from main thread: the system is running low on memory.
      * Try to reduce your memory use.
      */
-    APP_CMD_LOW_MEMORY,
+            APP_CMD_LOW_MEMORY,
 
     /**
      * Command from main thread: the app's activity has been started.
      */
-    APP_CMD_START,
+            APP_CMD_START,
 
     /**
      * Command from main thread: the app's activity has been resumed.
      */
-    APP_CMD_RESUME,
+            APP_CMD_RESUME,
 
     /**
      * Command from main thread: the app should generate a new saved state
@@ -292,44 +292,44 @@ enum {
      * the size in android_app.savedStateSize.  The will be freed for you
      * later.
      */
-    APP_CMD_SAVE_STATE,
+            APP_CMD_SAVE_STATE,
 
     /**
      * Command from main thread: the app's activity has been paused.
      */
-    APP_CMD_PAUSE,
+            APP_CMD_PAUSE,
 
     /**
      * Command from main thread: the app's activity has been stopped.
      */
-    APP_CMD_STOP,
+            APP_CMD_STOP,
 
     /**
      * Command from main thread: the app's activity is being destroyed,
      * and waiting for the app thread to clean up and exit before proceeding.
      */
-    APP_CMD_DESTROY
+            APP_CMD_DESTROY
 };
 
 /**
  * Call when ALooper_pollAll() returns LOOPER_ID_MAIN, reading the next
  * app command message.
  */
-int8_t android_app_read_cmd(struct android_app* android_app);
+int8_t android_app_read_cmd(struct android_app *android_app);
 
 /**
  * Call with the command returned by android_app_read_cmd() to do the
  * initial pre-processing of the given command.  You can perform your own
  * actions for the command after calling this function.
  */
-void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd);
+void android_app_pre_exec_cmd(struct android_app *android_app, int8_t cmd);
 
 /**
  * Call with the command returned by android_app_read_cmd() to do the
  * final post-processing of the given command.  You must have done your own
  * actions for the command before calling this function.
  */
-void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd);
+void android_app_post_exec_cmd(struct android_app *android_app, int8_t cmd);
 
 /**
  * Dummy function you can call to ensure glue code isn't stripped.
@@ -340,9 +340,9 @@ void app_dummy();
  * This is the function that application code must implement, representing
  * the main entry to the app.
  */
-extern void android_main(struct android_app* app);
+extern void android_main(struct android_app *app);
 
-/* static  */void android_app_write_cmd(struct android_app* android_app, int8_t cmd);
+/* static  */void android_app_write_cmd(struct android_app *android_app, int8_t cmd);
 
 #ifdef __cplusplus
 }

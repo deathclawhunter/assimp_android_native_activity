@@ -6,7 +6,6 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <string.h>
 #include <utils/GLError.h>
 #include "AppLog.h"
 #include "YUV420P_Player.h"
@@ -66,9 +65,6 @@ YUV420P_Player::YUV420P_Player()
         ,y_tex(0)
         ,u_tex(0)
         ,v_tex(0)
-        ,vert(0)
-        ,frag(0)
-        ,prog(0)
         // ,u_pos(-1)
         ,textures_created(false)
         ,shader_created(false)
@@ -107,9 +103,6 @@ bool YUV420P_Player::setup(int vidW, int vidH, int winW, int winH) {
         return false;
     }
 
-    // TODO: Need to remove glGenVertexArrays()
-    // glGenVertexArrays(1, &vao);
-
     glGenBuffers(1, &m_Buffers[0]);
     glBindBuffer(GL_ARRAY_BUFFER, m_Buffers[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
@@ -121,108 +114,57 @@ bool YUV420P_Player::setup(int vidW, int vidH, int winW, int winH) {
     return true;
 }
 
-GLuint YUV420P_Player::rx_create_shader(GLenum ShaderType, const char *s) {
-
-    GLuint ShaderObj = glCreateShader(ShaderType);
-
-    if (ShaderObj == 0) {
-        LOGE("Error creating shader type %d\n", ShaderType);
-        return ShaderObj;
-    }
-
-    const GLchar *p[1];
-    p[0] = s;
-    GLint Lengths[1] = {(GLint) strlen(s)};
-
-    glShaderSource(ShaderObj, 1, p, Lengths);
-
-    glCompileShader(ShaderObj);
-
-    GLint success;
-    glGetShaderiv(ShaderObj, GL_COMPILE_STATUS, &success);
-
-    if (!success) {
-        GLchar InfoLog[1024];
-        glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
-        LOGI("Error compiling '%s'\n", InfoLog);
-        return 0;
-    }
-
-    return ShaderObj;
-}
-
-
-
-GLuint YUV420P_Player::rx_create_program(GLuint shader1, GLuint shader2) {
-
-    GLuint prog = glCreateProgram();
-
-    glAttachShader(prog, shader1);
-    glAttachShader(prog, shader2);
-
-    return prog;
-}
-
 bool YUV420P_Player::setupShader() {
-
-    GLint Success = 0;
-    GLchar ErrorLog[1024] = {0};
 
     if(shader_created) {
         LOGW("Already creatd the shader.\n");
         return false;
     }
 
-    vert = rx_create_shader(GL_VERTEX_SHADER, YUV420P_VS);
-    frag = rx_create_shader(GL_FRAGMENT_SHADER, YUV420P_FS);
-    prog = rx_create_program(vert, frag);
-
-    glLinkProgram(prog);
-    // rx_print_shader_link_info(prog);
-
-    glGetProgramiv(prog, GL_LINK_STATUS, &Success);
-    if (Success == 0) {
-        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
-        LOGE("Error linking shader program: '%s'\n", ErrorLog);
+    if (!Technique::Init()) {
         return false;
     }
 
-    glValidateProgram(prog);
-    glGetProgramiv(prog, GL_VALIDATE_STATUS, &Success);
-    if (!Success) {
-        glGetProgramInfoLog(prog, sizeof(ErrorLog), NULL, ErrorLog);
-        LOGE("Invalid shader program: '%s'\n", ErrorLog);
+    if (!Technique::AddShaderFromString(GL_VERTEX_SHADER, YUV420P_VS)) {
         return false;
     }
 
-    glUseProgram(prog);
+    if (!Technique::AddShaderFromString(GL_FRAGMENT_SHADER, YUV420P_FS)) {
+        return false;
+    }
 
-    glUniform1i(glGetUniformLocation(prog, "y_tex"), 0);
-    glUniform1i(glGetUniformLocation(prog, "u_tex"), 1);
-    glUniform1i(glGetUniformLocation(prog, "v_tex"), 2);
+    if (!Technique::Finalize()) {
+        return false;
+    }
 
-    gvPositionHandle = glGetAttribLocation(prog, "YUVPosition");
+    Technique::Enable();
+
+    glUniform1i(GetUniformLocation("y_tex"), 0);
+    glUniform1i(GetUniformLocation("u_tex"), 1);
+    glUniform1i(GetUniformLocation("v_tex"), 2);
+
+    gvPositionHandle = GetAttributeLocation("YUVPosition");
     checkGlError("glGetAttribLocation");
     LOGI("glGetAttribLocation(\"YUVPosition\") = %d\n",
          gvPositionHandle);
 
 
-    GLuint ScaleFactorX = glGetUniformLocation(prog, "ScaleFactorX");
+    GLuint ScaleFactorX = GetUniformLocation("ScaleFactorX");
     checkGlError("glGetUniformLocation");
     LOGI("glGetUniformLocation(\"ScaleFactorX\") = %d\n",
          ScaleFactorX);
 
-    GLuint ScaleFactorY = glGetUniformLocation(prog, "ScaleFactorY");
+    GLuint ScaleFactorY = GetUniformLocation("ScaleFactorY");
     checkGlError("glGetUniformLocation");
     LOGI("glGetUniformLocation(\"ScaleFactorY\") = %d\n",
          ScaleFactorY);
 
-    GLuint OffsetX = glGetUniformLocation(prog, "OffsetX");
+    GLuint OffsetX = GetUniformLocation("OffsetX");
     checkGlError("glGetUniformLocation");
     LOGI("glGetUniformLocation(\"OffsetX\") = %d\n",
          ScaleFactorX);
 
-    GLuint OffsetY = glGetUniformLocation(prog, "OffsetY");
+    GLuint OffsetY = GetUniformLocation("OffsetY");
     checkGlError("glGetUniformLocation");
     LOGI("glGetUniformLocation(\"OffsetY\") = %d\n",
          ScaleFactorY);
@@ -276,6 +218,7 @@ bool YUV420P_Player::setupTextures() {
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
+    // Backup texture parameters
     glGetIntegerv(GL_UNPACK_ROW_LENGTH, &origStride);
     LOGI("Original stride is %d\n", origStride);
 
@@ -294,12 +237,7 @@ void YUV420P_Player::draw(int x, int y, int w, int h) {
         h = vid_h;
     }
 
-    // glBindVertexArray(vao);
-    glUseProgram(prog);
-
-    // glUniform4f(u_pos, x, y, w, h);
-
-    // glClear(GL_COLOR_BUFFER_BIT);
+    Technique::Enable();
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, y_tex);

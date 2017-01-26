@@ -18,8 +18,11 @@ class HelloWorldPlugin : public IPlugin {
 public:
     // Plugin API
     bool Init(int32_t width, int32_t height);
+
     bool Draw();
+
     int32_t KeyHandler(AInputEvent *event);
+
     IPlugin::PLUGIN_STATUS status();
 
 private:
@@ -31,7 +34,9 @@ private:
 
 private:
     bool addShader(GLuint prog, GLenum ShaderType, const char *pFilename);
+
     void CreateVertexBuffer();
+
     bool initShaders();
 
 };

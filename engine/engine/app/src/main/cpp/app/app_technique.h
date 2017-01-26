@@ -1,5 +1,5 @@
 #ifndef APP_TECHNIQUE_H
-#define	APP_TECHNIQUE_H
+#define    APP_TECHNIQUE_H
 
 #include "technique.h"
 #include "lighting_technique.h"
@@ -16,19 +16,28 @@ public:
 
     virtual bool Init();
 
-    void SetWVP(const Matrix4f& WVP);
-    void SetWorldMatrix(const Matrix4f& WVP);
+    void SetWVP(const Matrix4f &WVP);
+
+    void SetWorldMatrix(const Matrix4f &WVP);
+
     void SetColorTextureUnit(uint TextureUnit);
-    void SetDirectionalLight(const DirectionalLight& Light);
-    void SetPointLights(uint NumLights, const PointLight* pLights);
-    void SetSpotLights(uint NumLights, const SpotLight* pLights);
-    void SetEyeWorldPos(const Vector3f& EyeWorldPos);
+
+    void SetDirectionalLight(const DirectionalLight &Light);
+
+    void SetPointLights(uint NumLights, const PointLight *pLights);
+
+    void SetSpotLights(uint NumLights, const SpotLight *pLights);
+
+    void SetEyeWorldPos(const Vector3f &EyeWorldPos);
+
     void SetMatSpecularIntensity(float Intensity);
+
     void SetMatSpecularPower(float Power);
-    void SetBoneTransform(uint Index, const Matrix4f& Transform);
+
+    void SetBoneTransform(uint Index, const Matrix4f &Transform);
 
 private:
-    
+
     GLuint m_WVPLocation;
     GLuint m_WorldMatrixLocation;
     GLuint m_colorTextureLocation;
@@ -70,7 +79,7 @@ private:
             GLuint Exp;
         } Atten;
     } m_SpotLightsLocation[MAX_SPOT_LIGHTS];
-    
+
     GLuint m_BoneLocation[MAX_BONES];
 
 public:

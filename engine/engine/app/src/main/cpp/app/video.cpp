@@ -107,7 +107,7 @@ bool VideoPlugin::Draw() {
     return decoder->readFrame();
 }
 
-void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* frame, AVPacket* pkt) {
+void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame *frame, AVPacket *pkt) {
     if (status != DEC_STATUS_FRAME) {
 
         if (status == DEC_STATUS_FINISH) {
@@ -143,7 +143,8 @@ void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* fra
         for (int i = startHeight; i < endHeight; i++) {
             // Y
             int base = i * winWidth + startWidth;
-            int frameBase = (i - startHeight) / scaleFactor * frame->linesize[0] + frame->linesize[0] - 1;
+            int frameBase =
+                    (i - startHeight) / scaleFactor * frame->linesize[0] + frame->linesize[0] - 1;
             for (int j = 0; j < n; j++) {
                 y[base + j] = frame->data[0][frameBase - j / scaleFactor];
             }
@@ -154,14 +155,16 @@ void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame* fra
 
             // U
             base = i * halfWinWidth + startHalfWidth;
-            frameBase = (i - startHeight) / scaleFactor * frame->linesize[1] + frame->linesize[1] - 1;
+            frameBase =
+                    (i - startHeight) / scaleFactor * frame->linesize[1] + frame->linesize[1] - 1;
             for (int j = 0; j < n1; j++) {
                 u[base + j] = frame->data[1][frameBase - j / scaleFactor];
             }
 
             // V
             // TODO: potentially can be combined with U
-            frameBase = (i - startHeight) / scaleFactor * frame->linesize[2] + frame->linesize[2] - 1;
+            frameBase =
+                    (i - startHeight) / scaleFactor * frame->linesize[2] + frame->linesize[2] - 1;
             for (int j = 0; j < n2; j++) {
                 v[base + j] = frame->data[2][frameBase - j / scaleFactor];
             }
