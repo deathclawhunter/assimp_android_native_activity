@@ -97,6 +97,7 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
 #include "helloworld.h"
 #include "audio_plugin.h"
 #include "HUD.h"
+#include "text.h"
 
 void initPlugins(struct engine *engine) {
 
@@ -106,10 +107,11 @@ void initPlugins(struct engine *engine) {
 #else
     // Should be controlled by script, hard code right now for demo
     // sequence matters, check dev notes for game flow control
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC, new AudioPlugin());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO, new VideoPlugin());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC, new AudioPlugin());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO, new VideoPlugin());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
 #endif
 
 }
@@ -155,5 +157,7 @@ void android_main(struct android_app *state) {
         draw_frame(&engine);
     }
 }
+
+
 
 
