@@ -7,11 +7,12 @@
 #include "ogldev_camera.h"
 #include "ogldev_pipeline.h"
 #include "texture.h"
-#include "ogldev_glut_backend.h"
 #include "app_technique.h"
 #include "plugin.h"
 #include "app_mesh.h"
 #include "oct.h"
+#include "AppCamera.h"
+#include "ogldev_glut_backend.h"
 
 using namespace std;
 
@@ -51,19 +52,19 @@ public:
                 GLUTBackendLeaveMainLoop();
                 break;
             default:
-                m_pGameCamera->OnKeyboard(OgldevKey);
+                AppCamera::GetInstance()->OnKeyboard(OgldevKey);
         }
     }
 
 
     void PassiveMouseCB(int x, int y) {
-        m_pGameCamera->OnMouse(x, y);
+        AppCamera::GetInstance()->OnMouse(x, y);
     }
 
     OGLDEV_KEY ConvertKey(float x, float y);
 
     void PassiveKeyCB(float x, float y) {
-        m_pGameCamera->OnKeyboard(ConvertKey(x, y));
+        AppCamera::GetInstance()->OnKeyboard(ConvertKey(x, y));
     }
 
     void ResetMouse();
@@ -72,20 +73,18 @@ public:
 
 private:
     AppTechnique m_Renderer;
-    Camera *m_pGameCamera;
     DirectionalLight m_DirectionalLight;
     AppMesh *m_Meshes[MAX_NUM_MESHES] = {0};
     int m_NumMesh;
     Vector3f m_Position;
-    PersProjInfo m_PersProjInfo;
     float m_RCenterX, m_RCenterY; // Center point of right half of the screen
+    int m_width, m_height;
 
 private:
     const float MINIMAL_MOVE_DIFF = 0.1f;
     const bool ENABLE_UP_N_DOWN = true; // In mobile game, we disable up and down
-    void CalculateCenterOfRightHalf();
+    void CalculateCenterOfRightHalf(int width, int height);
 
-    const float GAME_STEP_SCALE = 0.5f;
     IPlugin::PLUGIN_STATUS sceneStatus;
     Octree *m_Oct = NULL;
 

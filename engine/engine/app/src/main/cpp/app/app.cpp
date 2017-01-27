@@ -15,27 +15,14 @@
 
 using namespace std;
 
-#define WINDOW_WIDTH  1280
-#define WINDOW_HEIGHT 1024
-
 #include "GLError.h"
 #include "app.h"
-#include "plugin.h"
-#include "oct.h"
 
 ScenePlugin::ScenePlugin() {
-    m_pGameCamera = NULL;
     m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
     m_DirectionalLight.AmbientIntensity = 0.55f;
     m_DirectionalLight.DiffuseIntensity = 0.9f;
     m_DirectionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
-
-    m_PersProjInfo.FOV = 60.0f;
-    m_PersProjInfo.Height = WINDOW_HEIGHT;
-    m_PersProjInfo.Width = WINDOW_WIDTH;
-    CalculateCenterOfRightHalf();
-    m_PersProjInfo.zNear = 1.0f;
-    m_PersProjInfo.zFar = 100.0f;
 
     m_Position = Vector3f(0.0f, 0.0f, 6.0f);
     sceneStatus = PLUGIN_STATUS_INIT_LATER;
@@ -44,7 +31,6 @@ ScenePlugin::ScenePlugin() {
 }
 
 ScenePlugin::~ScenePlugin() {
-    SAFE_DELETE(m_pGameCamera);
     SAFE_DELETE(m_Oct);
 
     for (int i = 0; i < m_NumMesh; i++) {
@@ -52,9 +38,9 @@ ScenePlugin::~ScenePlugin() {
     }
 }
 
-void ScenePlugin::CalculateCenterOfRightHalf() {
-    m_RCenterX = m_PersProjInfo.Width * 3.0f / 4.0f;
-    m_RCenterY = m_PersProjInfo.Height / 2.0f;
+void ScenePlugin::CalculateCenterOfRightHalf(int width, int height) {
+    m_RCenterX = width * 3.0f / 4.0f;
+    m_RCenterY = height / 2.0f;
 }
 
 #if ENABLE_IN_SCENE_HUD
@@ -63,23 +49,18 @@ bool ScenePlugin::Init(string mesh[], int numMesh, string hudMesh[], int numHudM
 
 bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
 #endif
-    Vector3f Pos(0.0f, 3.0f, -1.0f);
-    Vector3f Target(0.0f, 0.0f, 1.0f);
-    Vector3f Up(0.0, 1.0f, 0.0f);
 
-    m_PersProjInfo.Width = w;
-    m_PersProjInfo.Height = h;
-
+    m_width = w;
+    m_height = h;
     // calculate center point of right half of the screen
-    CalculateCenterOfRightHalf();
+    CalculateCenterOfRightHalf(w, h);
 
-    m_pGameCamera = new Camera(w, h, Pos, Target, Up);
+    AppCamera::GetInstance(w, h); // initialize camera
     if (!m_Renderer.Init()) {
         LOGE("Error initializing the lighting technique\n");
         sceneStatus = PLUGIN_STATUS_INIT_FAIL;
         return false;
     }
-    m_pGameCamera->SetStep(GAME_STEP_SCALE);
     m_Renderer.Enable();
     m_Renderer.SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
     m_Renderer.SetDirectionalLight(m_DirectionalLight);
@@ -144,13 +125,15 @@ void ScenePlugin::renderScene() {
 
     m_Renderer.Enable();
 
-    m_pGameCamera->OnRender();
+    AppCamera::GetInstance()->OnRender();
 
-    m_Renderer.SetEyeWorldPos(m_pGameCamera->GetPos());
+    m_Renderer.SetEyeWorldPos(AppCamera::GetInstance()->GetPos());
 
     Pipeline p;
-    p.SetCamera(m_pGameCamera->GetPos(), m_pGameCamera->GetTarget(), m_pGameCamera->GetUp());
-    p.SetPerspectiveProj(m_PersProjInfo);
+    p.SetCamera(AppCamera::GetInstance()->GetPos(),
+                AppCamera::GetInstance()->GetTarget(),
+                AppCamera::GetInstance()->GetUp());
+    p.SetPerspectiveProj(AppCamera::GetInstance()->GetPersProjInfo());
     p.Scale(0.1f, 0.1f, 0.1f);
 
     Vector3f Pos(m_Position);
@@ -228,8 +211,8 @@ OGLDEV_KEY ScenePlugin::ConvertKey(float x, float y) {
 
     diffX = m_RCenterX - x;
     diffY = m_RCenterY - y;
-    ratioX = diffX / m_PersProjInfo.Width;
-    ratioY = diffY / m_PersProjInfo.Height;
+    ratioX = diffX / m_width;
+    ratioY = diffY / m_height;
     LOGI("m_RCenterX = %f, m_RCenterY = %f\n", m_RCenterX, m_RCenterY);
 
     if (abs(diffX) > MINIMAL_MOVE_DIFF && abs(ratioX) > abs(ratioY)) {
@@ -257,7 +240,7 @@ OGLDEV_KEY ScenePlugin::ConvertKey(float x, float y) {
 }
 
 void ScenePlugin::ResetMouse() {
-    m_pGameCamera->ResetMouse();
+    AppCamera::GetInstance()->ResetMouse();
 }
 
 float ScenePlugin::DistToCenter(float x, float y) {

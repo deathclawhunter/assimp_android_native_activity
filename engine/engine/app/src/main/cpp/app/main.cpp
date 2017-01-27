@@ -51,6 +51,10 @@ void draw_frame(struct engine *engine) {
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
             engine->initialized = true;
 
+            // Initialize game camera
+            AppCamera::GetInstance(engine->width, engine->height);
+
+            // Initialize pulgins
             PluginManager::GetInstance()->Init(engine->width, engine->height);
         }
     } else {
@@ -100,6 +104,7 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
 #include "audio_plugin.h"
 #include "HUD.h"
 #include "text.h"
+#include "skybox.h"
 
 void initPlugins(struct engine *engine) {
 
@@ -109,13 +114,15 @@ void initPlugins(struct engine *engine) {
 #else
     // Should be controlled by script, hard code right now for demo
     // sequence matters, check dev notes for game flow control
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
+    /* PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
                                             new AudioPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO,
                                             new VideoPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin()); */
+
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new SkyBox());
 #endif
 
 }
