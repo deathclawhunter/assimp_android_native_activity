@@ -68,31 +68,32 @@ bool InteractivePlugin::Init(int32_t width, int32_t height) {
     return true;
 }
 
-int32_t InteractivePlugin::KeyHandler(AInputEvent *event) {
-    int32_t action = AMotionEvent_getAction(event);
-    size_t count = AMotionEvent_getPointerCount(event);
-    if (count == 1) { // single finger touch
+int32_t InteractivePlugin::KeyHandler(InputData *event) {
 
-        if (action == AMOTION_EVENT_ACTION_MOVE) {
+    if (event->m_ButtonCount == 1) { // single finger touch
 
-            float touchX = AMotionEvent_getX(event, 0);
-            float touchY = AMotionEvent_getY(event, 0);
+        if (event->m_ButtonType == IPlugin::ACTION_TYPE_MOVE) {
+
+            float touchX = event->m_X0;
+            float touchY = event->m_Y0;
+
+            LOGI("x = %f, y = %f", touchX, touchY);
 
             PassiveMouseCB(touchX, touchY);
-        } else if (action == AMOTION_EVENT_ACTION_UP) {
+        } else if (event->m_ButtonType == IPlugin::ACTION_TYPE_UP) {
 
             LOGI("Reset mouse");
             ResetMouse();
         }
-    } else if (count == 2) {
+    } else if (event->m_ButtonCount == 2) {
 
-        if (action == AMOTION_EVENT_ACTION_MOVE) {
+        if (event->m_ButtonType == IPlugin::ACTION_TYPE_MOVE) {
 
-            float touch2X = AMotionEvent_getX(event, 1);
-            float touch2Y = AMotionEvent_getY(event, 1);
+            float touch2X = event->m_X1;
+            float touch2Y = event->m_Y1;
 
-            float touch1X = AMotionEvent_getX(event, 0);
-            float touch1Y = AMotionEvent_getY(event, 0);
+            float touch1X = event->m_X0;
+            float touch1Y = event->m_Y0;
 
             if (DistToCenter(touch1X, touch1Y) >
                 DistToCenter(touch2X, touch2Y)) {

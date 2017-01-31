@@ -7,14 +7,20 @@
 #include "GL3Stub.h"
 
 struct engine {
-    struct android_app *app;
+    struct android_app *m_App;
 
-    EGLDisplay display;
-    EGLSurface surface;
-    EGLContext context;
-    int32_t width;
-    int32_t height;
-    bool initialized = false;
+    EGLDisplay m_Display;
+    EGLSurface m_Surface;
+    EGLContext m_Context;
+    int32_t m_Width;
+    int32_t m_Height;
+    bool m_Initialized = false;
+
+    ASensorManager *m_SensorManager;
+    const ASensor *m_AccelerometerSensor;
+    ASensorEventQueue *m_SensorEventQueue;
+
+    float m_X, m_Y;
 };
 
 

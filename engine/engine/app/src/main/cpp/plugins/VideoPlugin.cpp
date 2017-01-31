@@ -180,7 +180,7 @@ void VideoPlugin::h264_decoder_callback(H264_DECODER_STATUS status, AVFrame *fra
 }
 
 // TODO: add video control later
-int32_t VideoPlugin::KeyHandler(AInputEvent *event) {
+int32_t VideoPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 

@@ -144,6 +144,7 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key) {
 void Camera::OnMouse(int x, int y) {
     const int DeltaX = m_ResetFlag ? 0 : x - m_mousePos.x;
     const int DeltaY = m_ResetFlag ? 0 : y - m_mousePos.y;
+    // const int DeltaY = 0;
 
     m_ResetFlag = false;
     m_mousePos.x = x;

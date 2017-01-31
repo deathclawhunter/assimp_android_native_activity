@@ -76,7 +76,7 @@ public:
 
     bool Draw();
 
-    int32_t KeyHandler(AInputEvent *event);
+    int32_t KeyHandler(InputData *event);
 
     IPlugin::PLUGIN_STATUS status();
 

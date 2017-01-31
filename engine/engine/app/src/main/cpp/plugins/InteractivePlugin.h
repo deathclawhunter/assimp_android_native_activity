@@ -15,7 +15,7 @@ public:
     // Plugin API
     bool Init(int32_t width, int32_t height);
 
-    int32_t KeyHandler(AInputEvent *event);
+    int32_t KeyHandler(InputData *event);
 
     virtual void KeyboardCB(OGLDEV_KEY OgldevKey, OGLDEV_KEY_STATE State) {
         switch (OgldevKey) {
@@ -28,7 +28,6 @@ public:
                 AppCamera::GetInstance()->OnKeyboard(OgldevKey);
         }
     }
-
 
     void PassiveMouseCB(int x, int y) {
         AppCamera::GetInstance()->OnMouse(x, y);

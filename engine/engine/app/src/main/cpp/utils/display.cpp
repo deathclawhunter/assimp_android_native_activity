@@ -7,7 +7,7 @@
  * Initialize an EGL context for the current display.
  * TODO tidy this up, currently it's mostly Google example code
  */
-int init_display(struct engine *engine) {
+int InitDisplay(struct engine *engine) {
 
     // Setup OpenGL ES 2
     // http://stackoverflow.com/questions/11478957/how-do-i-create-an-opengl-es-2-context-in-a-native-activity
@@ -46,9 +46,9 @@ int init_display(struct engine *engine) {
      * ANativeWindow buffers to match, using EGL_NATIVE_VISUAL_ID. */
     eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
 
-    ANativeWindow_setBuffersGeometry(engine->app->window, 0, 0, format);
+    ANativeWindow_setBuffersGeometry(engine->m_App->window, 0, 0, format);
 
-    surface = eglCreateWindowSurface(display, config, engine->app->window, NULL);
+    surface = eglCreateWindowSurface(display, config, engine->m_App->window, NULL);
 
     context = eglCreateContext(display, config, NULL, attribList);
 
@@ -62,11 +62,11 @@ int init_display(struct engine *engine) {
     eglQuerySurface(display, surface, EGL_WIDTH, &w);
     eglQuerySurface(display, surface, EGL_HEIGHT, &h);
 
-    engine->display = display;
-    engine->context = context;
-    engine->surface = surface;
-    engine->width = w;
-    engine->height = h;
+    engine->m_Display = display;
+    engine->m_Context = context;
+    engine->m_Surface = surface;
+    engine->m_Width = w;
+    engine->m_Height = h;
 
 
     // Initialize GL state.
@@ -98,18 +98,18 @@ int init_display(struct engine *engine) {
 /**
  * Tear down the EGL context currently associated with the display.
  */
-void terminate_display(struct engine *engine) {
-    if (engine->display != EGL_NO_DISPLAY) {
-        eglMakeCurrent(engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-        if (engine->context != EGL_NO_CONTEXT) {
-            eglDestroyContext(engine->display, engine->context);
+void TerminateDisplay(struct engine *engine) {
+    if (engine->m_Display != EGL_NO_DISPLAY) {
+        eglMakeCurrent(engine->m_Display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        if (engine->m_Context != EGL_NO_CONTEXT) {
+            eglDestroyContext(engine->m_Display, engine->m_Context);
         }
-        if (engine->surface != EGL_NO_SURFACE) {
-            eglDestroySurface(engine->display, engine->surface);
+        if (engine->m_Surface != EGL_NO_SURFACE) {
+            eglDestroySurface(engine->m_Display, engine->m_Surface);
         }
-        eglTerminate(engine->display);
+        eglTerminate(engine->m_Display);
     }
-    engine->display = EGL_NO_DISPLAY;
-    engine->context = EGL_NO_CONTEXT;
-    engine->surface = EGL_NO_SURFACE;
+    engine->m_Display = EGL_NO_DISPLAY;
+    engine->m_Context = EGL_NO_CONTEXT;
+    engine->m_Surface = EGL_NO_SURFACE;
 }

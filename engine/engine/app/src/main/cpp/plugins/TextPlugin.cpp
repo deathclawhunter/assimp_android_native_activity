@@ -181,7 +181,7 @@ bool TextPlugin::Draw() {
     return true;
 }
 
-int32_t TextPlugin::KeyHandler(AInputEvent *event) {
+int32_t TextPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 

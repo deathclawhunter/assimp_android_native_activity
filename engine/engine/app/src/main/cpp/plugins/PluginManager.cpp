@@ -107,7 +107,7 @@ bool PluginManager::Draw() {
     return update;
 }
 
-int32_t PluginManager::KeyHandler(AInputEvent *event) {
+int32_t PluginManager::KeyHandler(InputData *event) {
     IPlugin *plugin = m_Plugins;
     while (plugin != NULL) {
 

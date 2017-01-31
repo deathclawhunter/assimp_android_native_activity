@@ -6,9 +6,22 @@
 
 class IPlugin {
 public:
+    enum ACTION_TYPE {
+        ACTION_TYPE_MOVE,
+        ACTION_TYPE_UP
+    };
+    typedef struct InputData_struct {
+        float m_X0;
+        float m_Y0;
+        float m_X1;
+        float m_Y1;
+        int m_ButtonCount;
+        ACTION_TYPE m_ButtonType;
+    } InputData;
+
     virtual bool Init(int32_t width, int32_t height) = 0;
     virtual bool Draw() = 0;
-    virtual int32_t KeyHandler(AInputEvent *event) = 0;
+    virtual int32_t KeyHandler(InputData *event) = 0;
     enum PLUGIN_STATUS {
         PLUGIN_STATUS_FINISHED, // I am done with this plugin, unplug me from the plugin list
         PLUGIN_STATUS_LOOP_ME, // Do not process next plugin until I am done

@@ -153,7 +153,7 @@ bool HUDPlugin::Draw() {
     return true;
 }
 
-int32_t HUDPlugin::KeyHandler(AInputEvent *event) {
+int32_t HUDPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 

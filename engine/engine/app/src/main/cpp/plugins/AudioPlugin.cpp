@@ -175,6 +175,6 @@ bool AudioPlugin::Draw() {
     return false; // Audio draws nothing
 }
 
-int32_t AudioPlugin::KeyHandler(AInputEvent *event) {
+int32_t AudioPlugin::KeyHandler(InputData *event) {
     return 1;
 }

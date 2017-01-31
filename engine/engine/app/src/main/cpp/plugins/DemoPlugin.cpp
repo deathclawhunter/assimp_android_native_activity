@@ -199,7 +199,7 @@ bool HelloWorldPlugin::Draw() {
     return true;
 }
 
-int32_t HelloWorldPlugin::KeyHandler(AInputEvent *event) {
+int32_t HelloWorldPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 
