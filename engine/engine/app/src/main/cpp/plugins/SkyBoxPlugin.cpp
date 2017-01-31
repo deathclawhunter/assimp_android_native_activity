@@ -1,4 +1,4 @@
-#define LOG_TAG "ENGINE_APP"
+#define LOG_TAG "SkyBoxPlugin"
 
 #include "AppLog.h"
 
@@ -26,8 +26,7 @@ SkyBox::~SkyBox() {
 
 bool SkyBox::Init(int w, int h) {
 
-    m_Width = w;
-    m_Height = h;
+    InteractivePlugin::Init(w, h);
 
     if (!m_Renderer.Init("skybox.vs", "skybox.fs")) {
         LOGE("Error initializing the skybox shaders\n");
@@ -69,7 +68,10 @@ bool SkyBox::Draw() {
     p.SetCamera(AppCamera::GetInstance()->GetPos(),
                 AppCamera::GetInstance()->GetTarget(),
                 AppCamera::GetInstance()->GetUp());
-    p.SetPerspectiveProj(AppCamera::GetInstance()->GetPersProjInfo());
+    PersProjInfo tmp = AppCamera::GetInstance()->GetPersProjInfo();
+    tmp.zNear = m_Near; // SkyBox has bigger near/far value
+    tmp.zFar = m_Far;
+    p.SetPerspectiveProj(tmp);
     p.Scale(1000.0f, 1000.0f, 1000.0f); // specialized for skybox, 1000 times bigger
     p.WorldPos(Player::GetInstance()->GetPosition());
     p.Rotate(Player::GetInstance()->GetRotation());
@@ -88,11 +90,8 @@ bool SkyBox::Draw() {
     m_pMesh->Render();
     glCullFace(OldCullFaceMode);
     glDepthFunc(OldDepthFuncMode);
-}
 
-int32_t SkyBox::KeyHandler(AInputEvent *event) {
-
-    return 1;
+    return true;
 }
 
 IPlugin::PLUGIN_STATUS SkyBox::status() {

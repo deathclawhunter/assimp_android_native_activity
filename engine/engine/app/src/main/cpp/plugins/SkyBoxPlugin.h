@@ -16,16 +16,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SKYBOX_H
-#define SKYBOX_H
+#ifndef _SKYBOX_H_
+#define _SKYBOX_H_
 
 #include "ogldev_camera.h"
-#include "ogldev_cubemap_texture.h"
-#include "mesh.h"
-#include "plugin.h"
 #include "BasicMesh.h"
+#include "InteractivePlugin.h"
 
-class SkyBox : public IPlugin {
+class SkyBox : public InteractivePlugin {
 public:
     SkyBox();
 
@@ -46,17 +44,16 @@ public:
 
     bool Draw();
 
-    int32_t KeyHandler(AInputEvent *event);
-
     IPlugin::PLUGIN_STATUS status();
 
 private:
     BasicTechnique m_Renderer;
     DirectionalLight m_DirectionalLight;
     BasicMesh *m_pMesh;
-    int m_Width, m_Height;
+    const float m_Near = 1.0f;
+    const float m_Far = 2000.0f;
     IPlugin::PLUGIN_STATUS m_Status = IPlugin::PLUGIN_STATUS_INIT_RIGHT_NOW;
 };
 
-#endif	/* SKYBOX_H */
+#endif	/* _SKYBOX_H_ */
 

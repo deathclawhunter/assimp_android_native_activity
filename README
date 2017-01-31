@@ -12,6 +12,7 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added SkyBox
 Added freetype to support text plugin
 Enabled separated HUD plugin instead of using in-scene plugin which is confusing.
 Figured out how to export blender animation to this engine. See notes.

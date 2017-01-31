@@ -20,7 +20,7 @@ AppCamera::AppCamera(int width, int height) {
     m_PersProjInfo.Height = height;
     m_PersProjInfo.Width = width;
     m_PersProjInfo.zNear = 1.0f;
-    m_PersProjInfo.zFar = 2000.0f;
+    m_PersProjInfo.zFar = 100.0f;
 }
 
 AppCamera::~AppCamera() {

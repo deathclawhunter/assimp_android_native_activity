@@ -1,3 +1,6 @@
+#ifndef _APP_CAMERA_H_
+#define _APP_CAMERA_H_
+
 #include "ogldev_camera.h"
 
 class AppCamera {
@@ -54,3 +57,5 @@ private:
 
     PersProjInfo m_PersProjInfo;
 };
+
+#endif /* _APP_CAMERA_H_ */

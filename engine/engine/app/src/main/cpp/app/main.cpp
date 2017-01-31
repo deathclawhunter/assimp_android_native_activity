@@ -130,12 +130,11 @@ void initPlugins(struct engine *engine) {
                                             new AudioPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO,
                                             new VideoPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
 
-    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
-    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new SkyBox());
 #endif
 
 }
