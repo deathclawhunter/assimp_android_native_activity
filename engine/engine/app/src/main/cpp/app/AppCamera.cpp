@@ -9,6 +9,7 @@ static AppCamera *m_AppCamera = NULL;
 
 AppCamera::AppCamera(int width, int height) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
+    // Vector3f Pos(0.0f, 1.0f, -20.0f);
     Vector3f Target(0.0f, 0.0f, 1.0f);
     Vector3f Up(0.0, 1.0f, 0.0f);
 
@@ -16,10 +17,10 @@ AppCamera::AppCamera(int width, int height) {
     m_Camera->SetStep(GAME_STEP_SCALE);
 
     m_PersProjInfo.FOV = 60.0f;
-    m_PersProjInfo.Height = width;
-    m_PersProjInfo.Width = height;
+    m_PersProjInfo.Height = height;
+    m_PersProjInfo.Width = width;
     m_PersProjInfo.zNear = 1.0f;
-    m_PersProjInfo.zFar = 100.0f;
+    m_PersProjInfo.zFar = 2000.0f;
 }
 
 AppCamera::~AppCamera() {

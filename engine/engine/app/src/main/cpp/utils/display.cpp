@@ -65,13 +65,6 @@ int init_display(struct engine *engine) {
     engine->display = display;
     engine->context = context;
     engine->surface = surface;
-    /* if (w >= h) {
-        engine->width = w;
-        engine->height = h;
-    } else {
-        engine->width = h;
-        engine->height = w;
-    } */
     engine->width = w;
     engine->height = h;
 
@@ -94,7 +87,6 @@ int init_display(struct engine *engine) {
     // Enable alpha
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-
 
     GLint texUnits = 0;
     glGetIntegerv(GL_MAX_TEXTURE_UNITS, &texUnits);

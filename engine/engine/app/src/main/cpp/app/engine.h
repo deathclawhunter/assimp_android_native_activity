@@ -4,7 +4,7 @@
 #include <android/sensor.h>
 #include <android_native_app_glue.h>
 
-#include "gl3stub.h"
+#include "GL3Stub.h"
 
 struct engine {
     struct android_app *app;

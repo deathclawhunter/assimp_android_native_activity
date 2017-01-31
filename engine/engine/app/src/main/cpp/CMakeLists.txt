@@ -84,6 +84,38 @@ file(GLOB app_xx_src
     "app/*.cpp"
 )
 
+file(GLOB ogldev_src
+    "ogldev/*.c"
+)
+
+file(GLOB ogldev_xx_src
+    "ogldev/*.cpp"
+)
+
+file(GLOB shaders_src
+    "shaders/*.c"
+)
+
+file(GLOB shaders_xx_src
+    "shaders/*.cpp"
+)
+
+file(GLOB meshes_src
+    "meshes/*.c"
+)
+
+file(GLOB meshes_xx_src
+    "meshes/*.cpp"
+)
+
+file(GLOB plugins_src
+    "plugins/*.c"
+)
+
+file(GLOB plugins_xx_src
+    "plugins/*.cpp"
+)
+
 file(GLOB FreeGlut_src
     "FreeGlut/*.c"
 )
@@ -118,6 +150,14 @@ add_library(engine SHARED
             ${filters_src}
             ${app_src}
             ${app_xx_src}
+            ${meshes_src}
+            ${meshes_xx_src}
+            ${plugins_src}
+            ${plugins_xx_src}
+            ${ogldev_src}
+            ${ogldev_xx_src}
+            ${shaders_src}
+            ${shaders_xx_src}
             ${FreeGlut_src}
             ${magickwand_src}
             ${Magick_src}
@@ -142,6 +182,10 @@ target_include_directories(engine PRIVATE
                            ${distribution_DIR}/ffmpeg/include
                            ${distribution_DIR}/freetype/include
                            ${CMAKE_SOURCE_DIR}/app
+                           ${CMAKE_SOURCE_DIR}/shaders
+                           ${CMAKE_SOURCE_DIR}/plugins
+                           ${CMAKE_SOURCE_DIR}/meshes
+                           ${CMAKE_SOURCE_DIR}/ogldev
                            ${CMAKE_SOURCE_DIR}/utils
                            ${CMAKE_SOURCE_DIR}/assimp
                            ${CMAKE_SOURCE_DIR}/assimp/contrib

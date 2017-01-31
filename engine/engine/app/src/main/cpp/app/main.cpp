@@ -6,11 +6,15 @@ using namespace std;
 
 #include "AppLog.h"
 #include "GLError.h"
-#include "video.h"
-#include "app.h"
+#include "VideoPlugin.h"
+#include "ScenePlugin.h"
 #include "PluginManager.h"
+#include "Player.h"
 
 #define HELLOWORD 0
+
+const Vector3f INIT_POSITION = Vector3f(0.0f, 0.0f, 6.0f);
+const Vector3f INIT_ROTATION = Vector3f(270.0f, 180.0f, 0.0f);
 
 extern "C" {
 void extract_assets(struct android_app *app);
@@ -19,6 +23,8 @@ void extract_assets(struct android_app *app);
 int init_display(struct engine *engine);
 
 void terminate_display(struct engine *engine);
+
+static void init(const struct engine *engine);
 
 /**
  * Just the current frame in the display.
@@ -40,28 +46,34 @@ void draw_frame(struct engine *engine) {
             checkGlError("test opengl: ");
         } else {
 
-            static float grey;
-            grey += 0.01f;
-            if (grey > 1.0f) {
-                grey = 0.0f;
-            }
-            glClearColor(grey, grey, grey, 1.0f);
-            checkGlError("glClearColor");
-
             LOGI("draw_frame: got prog = 0x%x in main\n", prog);
             engine->initialized = true;
 
-            // Initialize game camera
-            AppCamera::GetInstance(engine->width, engine->height);
-
-            // Initialize pulgins
-            PluginManager::GetInstance()->Init(engine->width, engine->height);
+            init(engine);
         }
     } else {
         if (PluginManager::GetInstance()->Draw()) {
             eglSwapBuffers(engine->display, engine->surface);
         }
     }
+}
+
+static void init(const struct engine *engine) {
+    // Initialize game camera and player
+    AppCamera::GetInstance(engine->width, engine->height);
+    Player::GetInstance()->SetPosition(INIT_POSITION);
+    Player::GetInstance()->SetRotation(INIT_ROTATION);
+
+    // Initialize pulgins
+    PluginManager::GetInstance()->Init(engine->width, engine->height);
+
+    static float grey;
+    grey += 0.01f;
+    if (grey > 1.0f) {
+        grey = 0.0f;
+    }
+    glClearColor(grey, grey, grey, 1.0f);
+    checkGlError("glClearColor");
 }
 
 /**
@@ -100,11 +112,11 @@ void app_cmd_handler(struct android_app *app, int32_t cmd) {
     }
 }
 
-#include "helloworld.h"
-#include "audio_plugin.h"
-#include "HUD.h"
-#include "text.h"
-#include "skybox.h"
+#include "DemoPlugin.h"
+#include "AudioPlugin.h"
+#include "HUDPlugin.h"
+#include "TextPlugin.h"
+#include "SkyBoxPlugin.h"
 
 void initPlugins(struct engine *engine) {
 
@@ -114,15 +126,16 @@ void initPlugins(struct engine *engine) {
 #else
     // Should be controlled by script, hard code right now for demo
     // sequence matters, check dev notes for game flow control
-    /* PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
                                             new AudioPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO,
                                             new VideoPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin()); */
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
 
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new SkyBox());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new SkyBox());
 #endif
 
 }

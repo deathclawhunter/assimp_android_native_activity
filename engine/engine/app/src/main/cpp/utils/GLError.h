@@ -1,7 +1,7 @@
 #ifndef _GLERROR_H_
 #define _GLERROR_H_
 
-#include "gl3stub.h"
+#include "GL3Stub.h"
 // #include <EGL/egl.h>
 
 #ifdef __cplusplus

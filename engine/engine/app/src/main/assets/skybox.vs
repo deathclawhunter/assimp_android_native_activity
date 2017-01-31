@@ -1,12 +1,22 @@
-attribute vec3 SkyBoxPosition;
+attribute vec3 Position;
+attribute vec2 TexCoord;
+attribute vec3 Normal;
 
-uniform mat4 SkyBoxWVP;
-                                                                                    
-varying vec3 SkyBoxTexCoord0;
-                                                                                    
-void main()                                                                         
+varying vec2 TexCoord0;
+varying vec3 Normal0;
+varying vec3 WorldPos0;
+
+uniform mat4 gWVP;
+uniform mat4 gWorld;
+
+void main()
 {
-    vec4 WVP_Pos = SkyBoxWVP * vec4(SkyBoxPosition, 1.0);
-    gl_Position = WVP_Pos.xyww;
-    SkyBoxTexCoord0   = SkyBoxPosition;
+    vec4 PosL    = vec4(Position, 1.0);
+//  gl_Position  = gWVP * PosL;
+    vec4 tmp = gWVP * PosL;
+    gl_Position = tmp.xyww;
+    TexCoord0    = TexCoord;
+    vec4 NormalL = vec4(Normal, 0.0);
+    Normal0      = (gWorld * NormalL).xyz;
+    WorldPos0    = (gWorld * PosL).xyz;
 }
