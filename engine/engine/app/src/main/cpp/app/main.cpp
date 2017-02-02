@@ -26,6 +26,10 @@ static void Init(struct engine *engine);
 
 static void SensorHandler(struct engine *engine);
 
+static const float ALPHA = 0.25f;
+float g_Pitch = 0;
+float g_Roll = 0;
+
 /**
  * Just the current frame in the display.
  */
@@ -65,18 +69,28 @@ static void SensorHandler(struct engine *engine) {
         while (ASensorEventQueue_getEvents(engine->m_SensorEventQueue,
                                            &event, 1) > 0) {
 
-            /* LOGI("h = %f, v = %f",
+            LOGI("h = %f, v = %f",
                  event.acceleration.roll, // -10 ~ +10
-                 event.acceleration.pitch); // -10 ~ +10 */
+                 event.acceleration.pitch); // -10 ~ +10
 
+            g_Pitch = g_Pitch + ALPHA * (event.acceleration.pitch - g_Pitch);
+            g_Roll = g_Roll + ALPHA * (event.acceleration.roll - g_Roll);
 
-            float x = event.acceleration.pitch + 10.0f;
+            float x = g_Pitch + 10.0f;
             x = x > 0 ? x : 0;
-            x = x * engine->m_Width / 20.0f;
+            x = x * engine->m_Width / 10.0f;
 
-            float y = event.acceleration.roll + 10.0f;
+            float y = g_Roll + 10.0f;
             y = y > 0 ? y : 0;
-            y = y * engine->m_Height / 20.0f;
+            y = y * engine->m_Height / 10.0f;
+
+            LOGI("x = %f, y = %f", x, y);
+
+            if (engine->m_X == x) {
+                return;
+            }
+
+            y = engine->m_Height / 2.0f;
 
             IPlugin::InputData data = {0};
             data.m_ButtonCount = 1;
@@ -84,10 +98,12 @@ static void SensorHandler(struct engine *engine) {
             data.m_X0 = x;
             data.m_Y0 = y;
 
-            // left half of the screen
-            if (engine->m_X < engine->m_Width / 2.0f && x > engine->m_X ||
-                engine->m_X > engine->m_Width / 2.0f && x < engine->m_X) {
+            LOGI("m_X = %f, m_Y = %f", engine->m_X, engine->m_Y);
 
+            // left half of the screen
+            if ((engine->m_X < engine->m_Width && x > engine->m_X) ||
+                (engine->m_X > engine->m_Width && x < engine->m_X)) {
+                LOGI("reset");
                 data.m_ButtonType = IPlugin::ACTION_TYPE_UP; // reset mouse
             } else {
                 data.m_ButtonType = IPlugin::ACTION_TYPE_MOVE;

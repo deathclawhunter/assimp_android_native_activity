@@ -92,13 +92,23 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key) {
     switch (Key) {
 
         case OGLDEV_KEY_UP: {
-            m_pos += (m_target * m_StepScale);
+            // m_pos += (m_target * m_StepScale);
+
+            // Not moving in Y direction
+            m_pos.x += m_target.x * m_StepScale;
+            m_pos.z += m_target.z * m_StepScale;
+
             Ret = true;
         }
             break;
 
         case OGLDEV_KEY_DOWN: {
-            m_pos -= (m_target * m_StepScale);
+            // m_pos -= (m_target * m_StepScale);
+
+            // Not moving in Y direction
+            m_pos.x -= m_target.x * m_StepScale;
+            m_pos.z -= m_target.z * m_StepScale;
+
             Ret = true;
         }
             break;
