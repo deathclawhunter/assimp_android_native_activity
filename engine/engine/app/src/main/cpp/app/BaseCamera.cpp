@@ -18,7 +18,7 @@
 
 #include "ogldev_camera.h"
 
-const static float STEP_SCALE = 1.0f;
+const static float STEP_SCALE = 100.0f;
 const static float EDGE_STEP = 0.5f;
 const static int MARGIN = 10;
 
@@ -152,6 +152,9 @@ bool Camera::OnKeyboard(OGLDEV_KEY Key) {
 
 
 void Camera::OnMouse(int x, int y) {
+
+    LOGI("OnMouse: x = %d, y = %d", x, y);
+
     const int DeltaX = m_ResetFlag ? 0 : x - m_mousePos.x;
     const int DeltaY = m_ResetFlag ? 0 : y - m_mousePos.y;
     // const int DeltaY = 0;

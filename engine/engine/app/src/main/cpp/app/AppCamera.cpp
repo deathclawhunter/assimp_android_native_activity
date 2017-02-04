@@ -5,7 +5,7 @@
 #include "AppCamera.h"
 
 
-static AppCamera *m_AppCamera = NULL;
+static AppCamera *s_AppCamera = NULL;
 
 AppCamera::AppCamera(int width, int height) {
     Vector3f Pos(0.0f, 3.0f, -1.0f);
@@ -28,14 +28,14 @@ AppCamera::~AppCamera() {
 }
 
 AppCamera *AppCamera::GetInstance(int width, int height) {
-    if (m_AppCamera == NULL) {
-        m_AppCamera = new AppCamera(width, height);
+    if (s_AppCamera == NULL) {
+        s_AppCamera = new AppCamera(width, height);
     }
 
-    return m_AppCamera;
+    return s_AppCamera;
 }
 
 AppCamera *AppCamera::GetInstance() {
-    return m_AppCamera;
+    return s_AppCamera;
 }
 

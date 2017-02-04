@@ -8,7 +8,10 @@ class IPlugin {
 public:
     enum ACTION_TYPE {
         ACTION_TYPE_MOVE,
-        ACTION_TYPE_UP
+        ACTION_TYPE_UP,
+        ACTION_TYPE_ROTATE,
+        ACTION_TYPE_RESET,
+        ACTION_TYPE_TIMER
     };
     typedef struct InputData_struct {
         float m_X0;

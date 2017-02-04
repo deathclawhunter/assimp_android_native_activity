@@ -51,7 +51,7 @@ private:
 
     AppCamera(int width, int height);
 
-    const float GAME_STEP_SCALE = 0.5f;
+    const float GAME_STEP_SCALE = 5.0f;
 
     Camera *m_Camera;
 

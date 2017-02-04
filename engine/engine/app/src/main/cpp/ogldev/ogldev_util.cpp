@@ -27,7 +27,7 @@
 
 #include "ogldev_util.h"
 
-static int ReadLine(FILE *fp, char *buf, int bufSize) {
+int ReadLine(FILE *fp, char *buf, int bufSize) {
     int readNum = 0;
     char *ptr = buf;
     *ptr = 0;

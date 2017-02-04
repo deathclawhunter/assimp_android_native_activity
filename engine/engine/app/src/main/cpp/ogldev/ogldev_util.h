@@ -35,6 +35,7 @@
 using namespace std;
 
 bool ReadFile(const char *fileName, string &outFile);
+int ReadLine(FILE *fp, char *buf, int bufSize);
 
 void OgldevError(const char *pFileName, uint line, const char *pError);
 

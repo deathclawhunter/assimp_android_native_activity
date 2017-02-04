@@ -39,6 +39,12 @@ public:
         AppCamera::GetInstance()->OnKeyboard(ConvertKey(x, y));
     }
 
+    void PassiveMoveKeyCB() {
+        if (m_Forward) {
+            AppCamera::GetInstance()->OnKeyboard(OGLDEV_KEY_UP);
+        }
+    }
+
     void ResetMouse();
 
     float DistToCenter(float x, float y);
@@ -46,6 +52,7 @@ public:
 private:
     float m_RCenterX, m_RCenterY; // Center point of right half of the screen
     int m_Width, m_Height;
+    bool m_Forward = false;
 
 private:
     const float MINIMAL_MOVE_DIFF = 0.1f;

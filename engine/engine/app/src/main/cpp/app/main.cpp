@@ -8,6 +8,7 @@
 #include "ScenePlugin.h"
 #include "PluginManager.h"
 #include "Player.h"
+#include "Config.h"
 
 #define HELLOWORD 0
 
@@ -63,55 +64,97 @@ void DrawFrame(struct engine *engine) {
     }
 }
 
+static void MovementHandler(struct engine *engine) {
+
+    if (!engine->m_Initialized) {
+        return;
+    }
+
+    if (engine->m_MovementCount > 10) {
+        engine->m_MovementCount = 0;
+    } else {
+        engine->m_MovementCount++;
+        return;
+    }
+    IPlugin::InputData data = {0};
+    // Map to screen resolution
+    data.m_ButtonType = IPlugin::ACTION_TYPE_TIMER;
+    PluginManager::GetInstance()->KeyHandler(&data);
+}
+
 static void SensorHandler(struct engine *engine) {
-    if (engine->m_Initialized && engine->m_AccelerometerSensor != NULL) {
-        ASensorEvent event;
-        while (ASensorEventQueue_getEvents(engine->m_SensorEventQueue,
-                                           &event, 1) > 0) {
 
-            LOGI("h = %f, v = %f",
-                 event.acceleration.roll, // -10 ~ +10
-                 event.acceleration.pitch); // -10 ~ +10
+    if (!engine->m_Initialized || engine->m_AccelerometerSensor == NULL) {
+        return;
+    }
 
-            g_Pitch = g_Pitch + ALPHA * (event.acceleration.pitch - g_Pitch);
-            g_Roll = g_Roll + ALPHA * (event.acceleration.roll - g_Roll);
-
-            float x = g_Pitch + 10.0f;
-            x = x > 0 ? x : 0;
-            x = x * engine->m_Width / 10.0f;
-
-            float y = g_Roll + 10.0f;
-            y = y > 0 ? y : 0;
-            y = y * engine->m_Height / 10.0f;
-
-            LOGI("x = %f, y = %f", x, y);
-
-            if (engine->m_X == x) {
-                return;
-            }
-
-            y = engine->m_Height / 2.0f;
-
-            IPlugin::InputData data = {0};
-            data.m_ButtonCount = 1;
-            // Map to screen resolution
-            data.m_X0 = x;
-            data.m_Y0 = y;
-
-            LOGI("m_X = %f, m_Y = %f", engine->m_X, engine->m_Y);
-
-            // left half of the screen
-            if ((engine->m_X < engine->m_Width && x > engine->m_X) ||
-                (engine->m_X > engine->m_Width && x < engine->m_X)) {
-                LOGI("reset");
-                data.m_ButtonType = IPlugin::ACTION_TYPE_UP; // reset mouse
-            } else {
-                data.m_ButtonType = IPlugin::ACTION_TYPE_MOVE;
-            }
-            engine->m_X = x;
-            engine->m_Y = y;
-            PluginManager::GetInstance()->KeyHandler(&data);
+    if (!Config::GetInstance(NULL)->GetbCfg(Config::CFG_USE_SENSOR, Config::DEFAULT_CFG_USE_SENSOR)) {
+        if (engine->m_SensorEnabled) {
+            ASensorEventQueue_disableSensor(engine->m_SensorEventQueue,
+                                            engine->m_AccelerometerSensor);
+            engine->m_SensorEnabled = false;
         }
+        return;
+    }
+
+    if (!engine->m_SensorEnabled) {
+        ASensorEventQueue_enableSensor(engine->m_SensorEventQueue,
+                                       engine->m_AccelerometerSensor);
+        // We'd like to get 60 events per second (in us).
+        ASensorEventQueue_setEventRate(engine->m_SensorEventQueue,
+                                       engine->m_AccelerometerSensor,
+                                       (1000L / 60) * 1000);
+        engine->m_SensorEnabled = true;
+    }
+
+    ASensorEvent event;
+    while (ASensorEventQueue_getEvents(engine->m_SensorEventQueue,
+                                       &event, 1) > 0) {
+
+        /* LOGI("event.data[0] = %f, event.data[1] = %f, event.data[2] = %f",
+             event.data[0], event.data[1], event.data[2]);
+        LOGI("roll = %f, pitch = %f",
+             event.acceleration.roll, // -10 ~ +10
+             event.acceleration.pitch); // -10 ~ +10 */
+
+        g_Pitch = g_Pitch + ALPHA * (event.acceleration.pitch - g_Pitch);
+        g_Roll = g_Roll + ALPHA * (event.acceleration.roll - g_Roll);
+
+        float x = g_Pitch + 10.0f;
+        x = x > 0 ? x : 0;
+        x = x * engine->m_Width / 10.0f;
+
+        float y = g_Roll + 10.0f;
+        y = y > 0 ? y : 0;
+        y = y * engine->m_Height / 10.0f;
+
+        // LOGI("x = %f, y = %f", x, y);
+
+        if (fabs(engine->m_X - x) < 10.0f) {
+            return;
+        }
+
+        y = engine->m_Height / 2.0f;
+
+        IPlugin::InputData data = {0};
+        data.m_ButtonCount = 1;
+        // Map to screen resolution
+        data.m_X0 = x;
+        data.m_Y0 = y;
+
+        // LOGI("m_X = %f, m_Y = %f", engine->m_X, engine->m_Y);
+
+        // left half of the screen
+        if ((engine->m_X < engine->m_Width && x > engine->m_X) ||
+            (engine->m_X > engine->m_Width && x < engine->m_X)) {
+            // LOGI("reset");
+            data.m_ButtonType = IPlugin::ACTION_TYPE_RESET; // reset mouse
+        } else {
+            data.m_ButtonType = IPlugin::ACTION_TYPE_ROTATE;
+        }
+        engine->m_X = x;
+        engine->m_Y = y;
+        PluginManager::GetInstance()->KeyHandler(&data);
     }
 }
 
@@ -137,34 +180,105 @@ static void Init(struct engine *engine) {
     checkGlError("glClearColor");
 }
 
+void CopyInputEvent(SysInputEvent *Copy, AInputEvent *Target) {
+    Copy->m_EventType = AInputEvent_getType(Target);
+    Copy->m_EventAction = AMotionEvent_getAction(Target);
+    Copy->m_EventPointerCount = AMotionEvent_getPointerCount(Target);
+    Copy->m_X0 = AMotionEvent_getX(Target, 0);
+    Copy->m_Y0 = AMotionEvent_getY(Target, 0);
+
+    if (Copy->m_EventPointerCount >= 2) {
+        Copy->m_X1 = AMotionEvent_getX(Target, 1);
+        Copy->m_Y1 = AMotionEvent_getY(Target, 1);
+    }
+}
+
+bool IsNoise(struct android_app *app, AInputEvent *event) {
+    struct engine *engine = (struct engine *) app->userData;
+
+    if (AInputEvent_getType(event) != AINPUT_EVENT_TYPE_MOTION) {
+        return true;
+    }
+
+    if (!engine->m_Initialized) {
+        return true;
+    }
+
+    if (engine->m_InputEvent.m_EventType == -1) {
+        CopyInputEvent(&engine->m_InputEvent, event);
+        return false;
+    }
+
+    if (engine->m_InputEvent.m_EventAction != AMotionEvent_getAction(event)) {
+        CopyInputEvent(&engine->m_InputEvent, event);
+        return false;
+    }
+
+    if (engine->m_InputEvent.m_EventPointerCount != AMotionEvent_getPointerCount(event)) {
+        CopyInputEvent(&engine->m_InputEvent, event);
+        return false;
+    }
+
+    if (fabs(AMotionEvent_getX(event, 0) - engine->m_InputEvent.m_X0) > 5.0f ||
+        fabs(AMotionEvent_getY(event, 0) - engine->m_InputEvent.m_Y0) > 5.0f) {
+        CopyInputEvent(&engine->m_InputEvent, event);
+        return false;
+    }
+
+    if (AMotionEvent_getPointerCount(event) >= 2) {
+        if (fabs(AMotionEvent_getX(event, 1) - engine->m_InputEvent.m_X1) > 5.0f ||
+            fabs(AMotionEvent_getY(event, 1) - engine->m_InputEvent.m_Y1) > 5.0f) {
+            CopyInputEvent(&engine->m_InputEvent, event);
+            return false;
+        }
+    }
+
+    return true;
+}
+
 /**
  * Process the next input event.
  */
 int32_t AppInputHandler(struct android_app *app, AInputEvent *event) {
-    if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
 
-        // Map system input event to internal data structure
-        int32_t action = AMotionEvent_getAction(event);
-        size_t count = AMotionEvent_getPointerCount(event);
-        IPlugin::InputData data = {0};
-        data.m_ButtonCount = count;
-        if (action == AMOTION_EVENT_ACTION_MOVE) {
-            data.m_ButtonType = IPlugin::ACTION_TYPE_MOVE;
-        } else if (action == AMOTION_EVENT_ACTION_UP) {
+    if (IsNoise(app, event)) {
+        return 0;
+    }
+
+    struct engine *engine = (struct engine *) app->userData;
+
+    // Map system input event to internal data structure
+    int32_t action = AMotionEvent_getAction(event);
+    size_t count = AMotionEvent_getPointerCount(event);
+    IPlugin::InputData data = {0};
+    data.m_ButtonCount = count;
+
+    if (action == AMOTION_EVENT_ACTION_MOVE) {
+        data.m_ButtonType = IPlugin::ACTION_TYPE_MOVE;
+    } else if (action == AMOTION_EVENT_ACTION_UP) {
+        data.m_ButtonType = IPlugin::ACTION_TYPE_UP;
+    } else {
+        return 1;
+    }
+
+    if (engine->m_PreviousCount == -1) {
+        engine->m_PreviousCount = count;
+    } else {
+        if (engine->m_PreviousCount == 1 && count == 2) {
             data.m_ButtonType = IPlugin::ACTION_TYPE_UP;
         }
 
-        data.m_X0 = AMotionEvent_getX(event, 0);
-        data.m_Y0 = AMotionEvent_getY(event, 0);
-
-        if (count == 2) {
-            data.m_X1 = AMotionEvent_getX(event, 1);
-            data.m_Y1 = AMotionEvent_getY(event, 1);
-        }
-        return PluginManager::GetInstance()->KeyHandler(&data);
+        engine->m_PreviousCount = count;
     }
 
-    return 0;
+    data.m_X0 = AMotionEvent_getX(event, 0);
+    data.m_Y0 = AMotionEvent_getY(event, 0);
+
+    if (count == 2) {
+        data.m_X1 = AMotionEvent_getX(event, 1);
+        data.m_Y1 = AMotionEvent_getY(event, 1);
+    }
+    return PluginManager::GetInstance()->KeyHandler(&data);
 }
 
 /**
@@ -173,39 +287,43 @@ int32_t AppInputHandler(struct android_app *app, AInputEvent *event) {
 void AppCmdHandler(struct android_app *app, int32_t cmd) {
     struct engine *engine = (struct engine *) app->userData;
     switch (cmd) {
-        case APP_CMD_SAVE_STATE:
-            break;
-        case APP_CMD_INIT_WINDOW:
-            // The window is being shown, get it ready.
-            if (engine->m_App->window != NULL) {
-                InitDisplay(engine);
-                DrawFrame(engine);
-            }
-            break;
-        case APP_CMD_TERM_WINDOW:
-            // The window is being hidden or closed, clean it up.
-            TerminateDisplay(engine);
-            break;
-        case APP_CMD_GAINED_FOCUS:
-            // When our app gains focus, we start monitoring the accelerometer.
-            if (engine->m_AccelerometerSensor != NULL) {
-                ASensorEventQueue_enableSensor(engine->m_SensorEventQueue,
-                                               engine->m_AccelerometerSensor);
-                // We'd like to get 60 events per second (in us).
-                ASensorEventQueue_setEventRate(engine->m_SensorEventQueue,
-                                               engine->m_AccelerometerSensor,
-                                               (1000L / 60) * 1000);
-            }
-            break;
-        case APP_CMD_LOST_FOCUS:
-            // When our app loses focus, we stop monitoring the accelerometer.
-            // This is to avoid consuming battery while not being used.
-            if (engine->m_AccelerometerSensor != NULL) {
-                ASensorEventQueue_disableSensor(engine->m_SensorEventQueue,
-                                                engine->m_AccelerometerSensor);
-            }
+    case APP_CMD_SAVE_STATE:
+        break;
+    case APP_CMD_INIT_WINDOW:
+        // The window is being shown, get it ready.
+        if (engine->m_App->window != NULL) {
+            InitDisplay(engine);
             DrawFrame(engine);
-            break;
+        }
+        break;
+    case APP_CMD_TERM_WINDOW:
+        // The window is being hidden or closed, clean it up.
+        TerminateDisplay(engine);
+        break;
+    case APP_CMD_GAINED_FOCUS:
+        // When our app gains focus, we start monitoring the accelerometer.
+        if (Config::GetInstance(NULL)->GetbCfg(Config::CFG_USE_SENSOR, Config::DEFAULT_CFG_USE_SENSOR) &&
+            engine->m_AccelerometerSensor != NULL && !engine->m_SensorEnabled) {
+            ASensorEventQueue_enableSensor(engine->m_SensorEventQueue,
+                                           engine->m_AccelerometerSensor);
+            // We'd like to get 60 events per second (in us).
+            ASensorEventQueue_setEventRate(engine->m_SensorEventQueue,
+                                           engine->m_AccelerometerSensor,
+                                           (1000L / 60) * 1000);
+            engine->m_SensorEnabled = true;
+        }
+        break;
+    case APP_CMD_LOST_FOCUS:
+        // When our app loses focus, we stop monitoring the accelerometer.
+        // This is to avoid consuming battery while not being used.
+        if (Config::GetInstance(NULL)->GetbCfg(Config::CFG_USE_SENSOR, Config::DEFAULT_CFG_USE_SENSOR) &&
+            engine->m_AccelerometerSensor != NULL && engine->m_SensorEnabled) {
+            ASensorEventQueue_disableSensor(engine->m_SensorEventQueue,
+                                            engine->m_AccelerometerSensor);
+            engine->m_SensorEnabled = false;
+        }
+        DrawFrame(engine);
+        break;
     }
 }
 
@@ -214,6 +332,7 @@ void AppCmdHandler(struct android_app *app, int32_t cmd) {
 #include "HUDPlugin.h"
 #include "TextPlugin.h"
 #include "SkyBoxPlugin.h"
+#include "Config.h"
 
 void InitPlugins(struct engine *engine) {
 
@@ -246,11 +365,14 @@ void android_main(struct android_app *state) {
 
     LOGI("in android_main\n");
 
+    Config::GetInstance(state);
+
     struct engine engine;
     memset(&engine, 0, sizeof(struct engine));
     state->userData = &engine;
     state->onAppCmd = AppCmdHandler;
     state->onInputEvent = AppInputHandler;
+    engine.m_InputEvent.m_EventType = -1; // initialize event type to -1
     engine.m_App = state;
     InitPlugins(&engine);
 
@@ -284,10 +406,12 @@ void android_main(struct android_app *state) {
             // Check if we are exiting.
             if (state->destroyRequested != 0) {
                 TerminateDisplay(&engine);
+                Config::GetInstance(NULL)->FlushCfgs();
                 exit(1); // exit directly
             }
         }
 
+        MovementHandler(&engine);
         // Draw the current frame
         DrawFrame(&engine);
     }

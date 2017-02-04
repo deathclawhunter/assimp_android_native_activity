@@ -12,6 +12,7 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added simple configure file
 Added SkyBox
 Added freetype to support text plugin
 Enabled separated HUD plugin instead of using in-scene plugin which is confusing.
@@ -53,6 +54,18 @@ Need to check if I can reuse FreeGlut framework, the answer is YES we can, but i
 
 Notes
 ===========
+Input Handling
+----------------
+Based on the study of other mobile gaming apps. Eventually decided to go with simple input. Simple input design including 2 options for user:
+
+1) Use single touch to rotate the screen horizontally, and use touch finger touch to start/stop running.
+
+2) Use accelerater sensor to rotate the screen horizontally, and use single finger touch to start/stop running.
+
+The fire action should be automatically taken care of once the cross hair align with the target.
+
+Limitations are user cannot rotate vertically and user cannot not run backwards.
+
 Export animation
 ----------------
 The author tool is Blender 2.7. I believe the reason is that either Blender does not export Bone animation correctly or assimp importer does not fully support Collada animation especially Bone animation. So here are the tricks to make it work:

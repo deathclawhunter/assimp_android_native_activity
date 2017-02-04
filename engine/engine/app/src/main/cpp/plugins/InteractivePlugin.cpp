@@ -1,13 +1,15 @@
-#define LOG_TAG "InteractivePlugin"
-
 #include <math.h>
 #include <string>
 #include <android_native_app_glue.h>
+#include <app/Config.h>
 
 #include "ogldev_app.h"
 #include "AppTechnique.h"
 #include "ogldev_glut_backend.h"
 #include "AppMesh.h"
+
+#define LOG_TAG "InteractivePlugin"
+#include "AppLog.h"
 
 using namespace std;
 
@@ -70,37 +72,63 @@ bool InteractivePlugin::Init(int32_t width, int32_t height) {
 
 int32_t InteractivePlugin::KeyHandler(InputData *event) {
 
+    if (event->m_ButtonType ==  IPlugin::ACTION_TYPE_TIMER) {
+
+        LOGI("Sensor movement");
+        PassiveMoveKeyCB(); // movement
+
+        return 1;
+    }
+
+    bool SensorEnabled = Config::GetInstance(NULL)->GetbCfg(Config::CFG_USE_SENSOR, Config::DEFAULT_CFG_USE_SENSOR);
     if (event->m_ButtonCount == 1) { // single finger touch
 
-        if (event->m_ButtonType == IPlugin::ACTION_TYPE_MOVE) {
+        // Sensor Controller
+        if (SensorEnabled) {
+            if (event->m_ButtonType == IPlugin::ACTION_TYPE_ROTATE) {
+                LOGI("Rotation by sensor");
+                PassiveMouseCB(event->m_X0, event->m_Y0); // rotation
+            } else if (event->m_ButtonType == IPlugin::ACTION_TYPE_UP) {
+                LOGI("reset m_Forward");
+                if (m_Forward) {
+                    m_Forward = false;
+                } else {
+                    m_Forward = true;
+                }
+            } else if (event->m_ButtonType == IPlugin::ACTION_TYPE_RESET) {
+                LOGI("Reset mouse");
+                ResetMouse();
+            }
+        // Screen controller
+        } else {
+            if (event->m_ButtonType == IPlugin::ACTION_TYPE_MOVE) {
 
-            float touchX = event->m_X0;
-            float touchY = event->m_Y0;
+                float touchX = event->m_X0;
+                float touchY = event->m_Y0;
 
-            LOGI("x = %f, y = %f", touchX, touchY);
+                LOGI("x = %f, y = %f", touchX, touchY);
 
-            PassiveMouseCB(touchX, touchY);
-        } else if (event->m_ButtonType == IPlugin::ACTION_TYPE_UP) {
+                touchX *= 2.0f;
+                touchY *= 2.0f;
+                LOGI("Rotation");
+                PassiveMouseCB(touchX, m_Height / 2.0f);
+            } else if (event->m_ButtonType == IPlugin::ACTION_TYPE_UP) {
 
-            LOGI("Reset mouse");
-            ResetMouse();
+                LOGI("Reset mouse");
+                ResetMouse();
+            }
         }
-    } else if (event->m_ButtonCount == 2) {
+    // Screen Controller
+    } else if (!SensorEnabled && event->m_ButtonCount == 2) {
 
-        if (event->m_ButtonType == IPlugin::ACTION_TYPE_MOVE) {
-
-            float touch2X = event->m_X1;
-            float touch2Y = event->m_Y1;
-
-            float touch1X = event->m_X0;
-            float touch1Y = event->m_Y0;
-
-            if (DistToCenter(touch1X, touch1Y) >
-                DistToCenter(touch2X, touch2Y)) {
-
-                PassiveKeyCB(touch2X, touch2Y);
+        LOGI(">>>>>>>>>>>>>>> TWO touch : event->m_ButtonType = %d", event->m_ButtonType);
+        if (event->m_ButtonType == IPlugin::ACTION_TYPE_UP) {
+            if (m_Forward) {
+                m_Forward = false;
+                LOGI("reset m_Forward to false");
             } else {
-                PassiveKeyCB(touch1X, touch1Y);
+                m_Forward = true;
+                LOGI("reset m_Forward to true");
             }
         }
     }
