@@ -63,3 +63,11 @@ static uint64_t ns() {
 #endif
 }
 
+uint64_t rx_hrtime() {
+    timeval t;
+    gettimeofday(&t, NULL);
+    uint64_t ret = t.tv_sec * 1000 + t.tv_usec / 1000; // to nano
+    return ret;
+}
+
+

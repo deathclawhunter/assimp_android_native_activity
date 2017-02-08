@@ -7,6 +7,7 @@
 #include "AppLog.h"
 
 #include "H264Decoder.h"
+#include "UtilTime.h"
 
 H264Decoder::H264Decoder(IH264CallBack *frameCallback, void *user)
         : codec(NULL), codec_context(NULL), parser(NULL), fp(NULL), frame(0),
@@ -86,13 +87,6 @@ bool H264Decoder::load(const char *filepath, float fps) {
     readBuffer();
 
     return true;
-}
-
-uint64_t H264Decoder::rx_hrtime() {
-    timeval t;
-    gettimeofday(&t, NULL);
-    uint64_t ret = t.tv_sec * 1000 + t.tv_usec / 1000; // to nano
-    return ret;
 }
 
 bool H264Decoder::readFrame() {

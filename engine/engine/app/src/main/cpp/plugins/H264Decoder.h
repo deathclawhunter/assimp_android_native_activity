@@ -75,9 +75,6 @@ private:
 
     /* decode a frame we read from the buffer */
 
-
-    uint64_t rx_hrtime();
-
 public:
     AVCodec *codec;
     /* the AVCodec* which represents the H264 decoder */

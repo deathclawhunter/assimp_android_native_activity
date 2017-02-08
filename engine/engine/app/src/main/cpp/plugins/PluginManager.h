@@ -10,7 +10,8 @@ public:
         PLUGIN_TYPE_SCENE,
         PLUGIN_TYPE_HUD,
         PLUGIN_TYPE_TEXT,
-        PLUGIN_TYPE_SKY
+        PLUGIN_TYPE_SKY,
+        PLUGIN_TYPE_MUZZLE_FLASH
     };
 
     static PluginManager *GetInstance();

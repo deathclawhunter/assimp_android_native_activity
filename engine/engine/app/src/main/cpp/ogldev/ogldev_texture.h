@@ -17,7 +17,7 @@
 */
 
 #ifndef TEXTURE_H
-#define    TEXTURE_H
+#define TEXTURE_H
 
 #include <string>
 
@@ -34,6 +34,9 @@ public:
     bool Load();
 
     void Bind(GLenum TextureUnit);
+
+    size_t GetRawImageWidth();
+    size_t GetRawImageHeight();
 
 private:
     std::string m_fileName;

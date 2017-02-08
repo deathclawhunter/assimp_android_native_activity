@@ -1,3 +1,4 @@
+#include <Magick++/Image.h>
 #include "TextPlugin.h"
 
 /**
