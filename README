@@ -12,6 +12,7 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added 2D animation for some special effect like: crosshair, muzzle flash etc.
 Added simple configure file
 Added SkyBox
 Added freetype to support text plugin
