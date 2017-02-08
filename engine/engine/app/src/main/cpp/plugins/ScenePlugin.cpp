@@ -93,6 +93,11 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
             m_Meshes[i]->SetHudMesh(true);
         }
 #endif
+        float start = m_Meshes[i]->AnimationInSeconds() / 2.0f;
+        float end = start * -1;
+
+        m_Meshes[i]->SetAnimationStartInSeconds(start);
+        m_Meshes[i]->SetAnimationEndInSeconds(end);
     }
 
     static float grey;
@@ -109,7 +114,9 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
 }
 
 void ScenePlugin::renderScene() {
+
     CalcFPS();
+    RenderFPS();
 
     m_Renderer.Enable();
 
@@ -205,11 +212,12 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     str[0].append("boblampclean.md5mesh");
     // str[0].append("mech1_animated.dae");
     // str[0].append("mech1_animated.fbx");
-    str[1].append("marcus.dae");
+    // str[1].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
     // str[0].append("untitled.dae");
+    // str[0].append("mech0.dae");
 
     // std::string str2[1];
     // str2[0].append("menu.dae");
@@ -218,7 +226,7 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
 #if ENABLE_IN_SCENE_HUD
     if (Init(str, 1, NULL, 0, width, height)) {
 #else
-    if (Init(str, 2, width, height)) {
+    if (Init(str, 1, width, height)) {
 #endif
         return true;
     }

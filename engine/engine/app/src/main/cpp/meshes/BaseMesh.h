@@ -46,6 +46,10 @@ public:
      */
     bool NeedCalcBoundary();
 
+    float AnimationInSeconds();
+    void SetAnimationStartInSeconds(float start);
+    void SetAnimationEndInSeconds(float end);
+
 protected:
     BaseTechnique *m_Render = NULL;
 
@@ -176,6 +180,8 @@ public:
     };
 
     GLuint m_BaseBuffers[BASE_NUM_VBs];
+
+    float m_Start = 0.0f, m_End = 0.0f;
 };
 
 

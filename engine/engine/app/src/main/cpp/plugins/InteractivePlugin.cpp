@@ -74,7 +74,7 @@ int32_t InteractivePlugin::KeyHandler(InputData *event) {
 
     if (event->m_ButtonType ==  IPlugin::ACTION_TYPE_TIMER) {
 
-        LOGI("Sensor movement");
+        // LOGI("Sensor movement");
         PassiveMoveKeyCB(); // movement
 
         return 1;

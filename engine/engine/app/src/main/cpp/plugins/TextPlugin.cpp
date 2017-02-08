@@ -62,6 +62,21 @@ bool TextPlugin::Init(int32_t width, int32_t height) {
     return false;
 }
 
+void TextPlugin::DisplayText(const char *text, float x, float y, float sx, float sy) {
+    if (m_Text != NULL) {
+        free(m_Text);
+    }
+    m_Text = strdup(text);
+    m_X = x;
+    m_Y = y;
+    m_ScaleX = sx;
+    m_ScaleY = sy;
+}
+
+void TextPlugin::SetFontSize(FT_UInt fontSize) {
+    m_FontSize = fontSize;
+}
+
 void TextPlugin::RenderText(const char *text, float x, float y, float sx, float sy) {
     const char *p;
 
@@ -103,6 +118,10 @@ void TextPlugin::RenderText(const char *text, float x, float y, float sx, float 
 
 bool TextPlugin::Draw() {
 
+    if (m_Text == NULL || strlen(m_Text) <= 0) {
+        return false;
+    }
+
     m_Shaders->Enable();
 
     glEnableVertexAttribArray(m_Shaders->GetAttrCoord());
@@ -122,9 +141,6 @@ bool TextPlugin::Draw() {
     glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, &minFilter);
     glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, &magFilter);
 
-
-
-
     /* Change texture settings */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -134,39 +150,19 @@ bool TextPlugin::Draw() {
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-
-    GLfloat black[4] = {0, 0, 0, 1};
-    m_Shaders->SetUniformColor(1, black);
-
     float sx = 2.0 / m_width;
     float sy = 2.0 / m_height;
 
-    GLfloat transparent_green[4] = {0, 1, 0, 0.5};
-    m_Shaders->SetUniformColor(1, transparent_green);
+    m_Shaders->SetUniformColor(1, m_TextColor);
 
-    RenderText("The Quick Brown Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 50 * sy, sx, sy);
-    RenderText("The Misaligned Fox Jumps Over The Lazy Dog",
-               -1 + 8.5 * sx, 1 - 100.5 * sy, sx, sy);
+    FT_Set_Pixel_Sizes(m_Face, 0, m_FontSize);
 
-    FT_Set_Pixel_Sizes(m_Face, 0, 48);
-    RenderText("The Small Texture Scaled Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 175 * sy, sx * 0.5, sy * 0.5);
-    FT_Set_Pixel_Sizes(m_Face, 0, 24);
-    RenderText("The Small Font Sized Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 200 * sy, sx, sy);
-    FT_Set_Pixel_Sizes(m_Face, 0, 48);
-    RenderText("The Tiny Texture Scaled Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 235 * sy, sx * 0.25, sy * 0.25);
-    FT_Set_Pixel_Sizes(m_Face, 0, 12);
-    RenderText("The Tiny Font Sized Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 250 * sy, sx, sy);
+    // Origin of the text
+    // RenderText(m_Text, -1 + 8 * sx, 1 - 50 * sy, sx, sy);
+    // RenderText(m_Text, -1 + 8 * m_X * sx, 1 - 50 * m_Y * sy, sx, sy);
+    RenderText(m_Text, -1 + m_X * sx, 1 - (m_Y + 50) * sy, sx, sy);
 
-    RenderText("The Transparent Green Fox Jumps Over The Lazy Dog",
-               -1 + 8 * sx, 1 - 380 * sy, sx, sy);
-    RenderText("The Transparent Green Fox Jumps Over The Lazy Dog",
-               -1 + 18 * sx, 1 - 440 * sy, sx, sy);
-
+    LOGI("Display text : %s", m_Text);
 
     /* Restore texture settings */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapS);

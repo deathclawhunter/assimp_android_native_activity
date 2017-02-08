@@ -15,10 +15,12 @@ public:
     ~Config();
 
     enum CFGS {
-        CFG_USE_SENSOR
+        CFG_USE_SENSOR,
+        CFG_SHOW_FPS
     };
 
-    static const bool DEFAULT_CFG_USE_SENSOR = true;
+    static const bool DEFAULT_CFG_USE_SENSOR = false;
+    static const bool DEFAULT_CFG_SHOW_FPS = true;
 
     bool GetbCfg(int Key, bool DefaultValue);
     void SetbCfg(int Key, bool Value);

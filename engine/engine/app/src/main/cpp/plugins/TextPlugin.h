@@ -1,3 +1,6 @@
+#ifndef _TEXT_PLUGIN_H_
+#define _TEXT_PLUGIN_H_
+
 #include <GLES/gl.h>
 #include <android_native_app_glue.h>
 
@@ -97,9 +100,25 @@ private:
 
     TextTechnique *m_Shaders;
 
+    char *m_Text = NULL;
+    float m_X = 0.0f;
+    float m_Y = 0.0f;
+    float m_ScaleX = 0.0f;
+    float m_ScaleY = 0.0f;
+
+    FT_UInt m_FontSize = 48;
+
+    GLfloat m_TextColor[4] = {0, 1, 0, 0.5};
+
+public:
+    void DisplayText(const char *text, float x, float y, float sx, float sy);
+    void SetFontSize(FT_UInt fontSize);
+    void SetFontColor(GLfloat color[4]);
+
 private:
     void RenderText(const char *text, float x, float y, float sx, float sy);
-
 };
+
+#endif /* _TEXT_PLUGIN_H_ */
 
 

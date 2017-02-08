@@ -1,5 +1,6 @@
 #include <map>
 #include "Plugin.h"
+#include "TextPlugin.h"
 
 class PluginManager : public IPlugin {
 
@@ -11,7 +12,8 @@ public:
         PLUGIN_TYPE_HUD,
         PLUGIN_TYPE_TEXT,
         PLUGIN_TYPE_SKY,
-        PLUGIN_TYPE_MUZZLE_FLASH
+        PLUGIN_TYPE_MUZZLE_FLASH,
+        PLUGIN_TYPE_CROSSHAIR
     };
 
     static PluginManager *GetInstance();

@@ -551,11 +551,32 @@ void BaseMesh::ReadNodeHeirarchy(float AnimationTime, const aiNode *pNode,
     }
 }
 
+float BaseMesh::AnimationInSeconds() {
+    if (m_pScene->mAnimations == NULL) {
+        return 0; // no animation
+    }
+
+    float TicksPerSecond = (float) (m_pScene->mAnimations[0]->mTicksPerSecond != 0
+                                    ? m_pScene->mAnimations[0]->mTicksPerSecond : 25.0f);
+    float Duration = (float) m_pScene->mAnimations[0]->mDuration;
+
+    return Duration / TicksPerSecond;
+}
+
+void BaseMesh::SetAnimationStartInSeconds(float start) {
+    m_Start = start;
+}
+
+void BaseMesh::SetAnimationEndInSeconds(float end) {
+    m_End = end;
+}
 
 void BaseMesh::BoneTransform(float TimeInSeconds, vector<Matrix4f> &Transforms) {
     if (m_pScene->mAnimations == NULL) {
         return; // no animation
     }
+
+    TimeInSeconds += m_Start;
 
     Matrix4f Identity;
     Identity.InitIdentity();
@@ -563,7 +584,11 @@ void BaseMesh::BoneTransform(float TimeInSeconds, vector<Matrix4f> &Transforms) 
     float TicksPerSecond = (float) (m_pScene->mAnimations[0]->mTicksPerSecond != 0
                                     ? m_pScene->mAnimations[0]->mTicksPerSecond : 25.0f);
     float TimeInTicks = TimeInSeconds * TicksPerSecond;
-    float AnimationTime = fmod(TimeInTicks, (float) m_pScene->mAnimations[0]->mDuration);
+    float Duration = (float) m_pScene->mAnimations[0]->mDuration + m_End * TicksPerSecond;
+    float AnimationTime = fmod(TimeInTicks, Duration);
+
+    LOGI("TimeInSeconds = %f, TicksPerSecond = %f, Duration = %f",
+         TimeInSeconds, TicksPerSecond, Duration);
 
     ReadNodeHeirarchy(AnimationTime, m_pScene->mRootNode, Identity);
 

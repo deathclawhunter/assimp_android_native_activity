@@ -17,21 +17,13 @@
 */
 
 
+#include <app/Config.h>
+#include <plugins/TextPlugin.h>
+#include <plugins/PluginManager.h>
 #include "ogldev_app.h"
 #include "ogldev_util.h"
 
-#ifndef WIN32
-/* Markup sMarkup = { (char*)"Arial", 64, 1, 0, 0.0, 0.0,
-                   {.1,1.0,1.0,.5}, {1,1,1,0},
-                   0, {1,0,0,1}, 0, {1,0,0,1},
-                   0, {0,0,0,1}, 0, {0,0,0,1} }; */
-#endif
-
-OgldevApp::OgldevApp()
-/* #ifndef WIN32
-           : m_fontRenderer(sMarkup)
-#endif */
-{
+OgldevApp::OgldevApp() {
     m_frameCount = 0;
     m_frameTime = 0;
     m_fps = 0;
@@ -46,6 +38,7 @@ void OgldevApp::CalcFPS() {
     long long time = GetCurrentTimeMillis();
 
     if (time - m_frameTime >= 1000) {
+
         m_frameTime = time;
         m_fps = m_frameCount;
         m_frameCount = 0;
@@ -53,13 +46,17 @@ void OgldevApp::CalcFPS() {
 }
 
 void OgldevApp::RenderFPS() {
-    char text[32];
-    ZERO_MEM(text);
-    SNPRINTF(text, sizeof(text), "FPS: %d", m_fps);
 
-/* TODO: #ifndef WIN32
-    m_fontRenderer.RenderText(10, 10, text);        
-#endif */
+    if (Config::GetInstance(NULL)->GetbCfg(Config::CFG_SHOW_FPS, Config::DEFAULT_CFG_SHOW_FPS)) {
+        TextPlugin *Text = (TextPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_TEXT);
+        if (Text != NULL) {
+            char text[32];
+            ZERO_MEM(text);
+            SNPRINTF(text, sizeof(text), "FPS: %d", m_fps);
+
+            Text->DisplayText(text, 10, 10, 2, 2);
+        }
+    }
 }
 
 float OgldevApp::GetRunningTime() {
