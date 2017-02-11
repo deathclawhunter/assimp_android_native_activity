@@ -13,7 +13,8 @@ public:
         PLUGIN_TYPE_TEXT,
         PLUGIN_TYPE_SKY,
         PLUGIN_TYPE_MUZZLE_FLASH,
-        PLUGIN_TYPE_CROSSHAIR
+        PLUGIN_TYPE_CROSSHAIR,
+        PLUGIN_TYPE_TERRAIN
     };
 
     static PluginManager *GetInstance();

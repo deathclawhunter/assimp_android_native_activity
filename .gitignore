@@ -1,0 +1,15 @@
+*.properties
+*.lock
+engine/engine/.gradle/2.14.1/taskArtifacts/fileHashes.bin
+engine/engine/.idea/compiler.xml
+*.bin
+engine/engine/.idea/*
+engine/engine/.gradle/*
+engine/engine/app/.externalNativeBuild/*
+engine/engine/app/build/*
+engine/engine/app/app.iml
+engine/engine/build.gradle
+engine/engine/build/generated/mockable-android-23.jar
+engine/engine/local.properties
+engine/engine/engine.iml
+engine/engine/build/intermediates/dex-cache/cache.xml

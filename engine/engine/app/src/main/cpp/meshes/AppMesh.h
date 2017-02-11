@@ -11,11 +11,6 @@
 #include "BaseMesh.h"
 
 /**
- * TODO: Keep in scenen HUD mesh code for now. Maybe need to remove as a whole later
- */
-#define ENABLE_IN_SCENE_HUD 0
-
-/**
  * Universal mesh for rigged and static meshes
  */
 class AppMesh : public BaseMesh {
@@ -23,11 +18,6 @@ public:
     AppMesh(AppTechnique *render);
 
     ~AppMesh();
-
-#if ENABLE_IN_SCENE_HUD
-    bool IsHudMesh();
-    void SetHudMesh(bool HudMesh);
-#endif
 
 protected:
 
@@ -42,10 +32,6 @@ private:
     };
 
     GLuint m_Buffers[APP_NUM_VBs];
-
-#if ENABLE_IN_SCENE_HUD
-    bool m_isHudMesh = false; // by default is NOT HUD mesh
-#endif
 };
 
 

@@ -2,6 +2,7 @@
 
 #include <plugins/MuzzleEffect.h>
 #include <plugins/CrossHair.h>
+#include <plugins/TerrainPlugin.h>
 #include "engine.h"
 
 #include "AppLog.h"
@@ -344,19 +345,21 @@ void InitPlugins(struct engine *engine) {
 #else
     // Should be controlled by script, hard code right now for demo
     // sequence matters, check dev notes for game flow control
-    /* PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_MUSIC,
                                             new AudioPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_START_VIDEO,
                                             new VideoPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TERRAIN, new TerrainPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
+
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MUZZLE_FLASH, new MuzzleEffectPlugin());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_CROSSHAIR, new CrossHairPlugin()); */
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_CROSSHAIR, new CrossHairPlugin());
 
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
+    // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
 
 #endif
 

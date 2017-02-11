@@ -1,4 +1,4 @@
-#define LOG_TAG "ScenePlugin"
+#define LOG_TAG "TerrainPlugin"
 
 #include <math.h>
 #include <string>
@@ -16,29 +16,26 @@
 using namespace std;
 
 #include "GLError.h"
-#include "ScenePlugin.h"
+#include "TerrainPlugin.h"
 #include "Player.h"
 
-ScenePlugin::ScenePlugin() {
+TerrainPlugin::TerrainPlugin() {
     m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
     m_DirectionalLight.AmbientIntensity = 0.55f;
     m_DirectionalLight.DiffuseIntensity = 0.9f;
     m_DirectionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
 
     sceneStatus = PLUGIN_STATUS_INIT_LATER;
-
-    m_Oct = new Octree(256);
 }
 
-ScenePlugin::~ScenePlugin() {
-    SAFE_DELETE(m_Oct);
+TerrainPlugin::~TerrainPlugin() {
 
     for (int i = 0; i < m_NumMesh; i++) {
         SAFE_DELETE(m_Meshes[i]);
     }
 }
 
-bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
+bool TerrainPlugin::Init(string mesh[], int numMesh, int w, int h) {
 
     m_width = w;
     m_height = h;
@@ -66,11 +63,11 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
         // float start = m_Meshes[i]->AnimationInSeconds() / 2.0f;
         // float end = m_Meshes[i]->AnimationInSeconds();
 
-        float start = 0;
+        /* float start = 0;
         float end = m_Meshes[i]->AnimationInSeconds() / 2.0f;
 
         m_Meshes[i]->SetAnimationStartInSeconds(start);
-        m_Meshes[i]->SetAnimationEndInSeconds(end);
+        m_Meshes[i]->SetAnimationEndInSeconds(end); */
     }
 
     static float grey;
@@ -86,10 +83,7 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
     return true;
 }
 
-void ScenePlugin::renderScene() {
-
-    CalcFPS();
-    RenderFPS();
+void TerrainPlugin::renderScene() {
 
     m_Renderer.Enable();
 
@@ -101,32 +95,30 @@ void ScenePlugin::renderScene() {
     p.SetCamera(AppCamera::GetInstance()->GetPos(),
                 AppCamera::GetInstance()->GetTarget(),
                 AppCamera::GetInstance()->GetUp());
-    p.SetPerspectiveProj(AppCamera::GetInstance()->GetPersProjInfo());
-    p.Scale(1.0f, 1.0f, 1.0f);
-    // p.Scale(0.1f, 0.1f, 0.1f);
-    // p.Scale(1000.0f, 1000.0f, 1000.0f);
-
+    PersProjInfo tmp = AppCamera::GetInstance()->GetPersProjInfo();
+    tmp.zNear = m_Near; // SkyBox has bigger near/far value
+    tmp.zFar = m_Far;
+    p.SetPerspectiveProj(tmp);
+    p.Scale(250.0f, 250.0f, 250.0f); // specialized for terrain bigger
     p.WorldPos(Player::GetInstance()->GetPosition());
     p.Rotate(Player::GetInstance()->GetRotation());
-    // p.Rotate(0.0f, 0.0f, 0.0f);
 
     Matrix4f wvp = p.GetWVPTrans();
     m_Renderer.SetWVP(wvp);
     m_Renderer.SetWorldMatrix(p.GetWorldTrans());
 
-    m_Oct->SetTransform(wvp);
-    m_Oct->Purge();
+    glEnable(GL_DEPTH_TEST);
+    glDepthRangef(m_Near, m_Far);
+    glDepthMask(GL_TRUE);
+    glDepthFunc(GL_ALWAYS );
+    glEnable(GL_DEPTH_TEST);
+
     for (int j = 0; j < m_NumMesh; j++) {
 
         vector<Matrix4f> Transforms;
         if (m_Meshes[j]->NumBones() > 0) {
 
-            // static float lastRunningTime = -1.0f;
             float RunningTime = GetRunningTime();
-            /* if (lastRunningTime < 0.0f) {
-                lastRunningTime = RunningTime;
-            } */
-            // m_Meshes[j]->BoneTransform(lastRunningTime, Transforms);
             m_Meshes[j]->BoneTransform(RunningTime, Transforms);
         } else {
             // use identity bone for static mesh
@@ -137,30 +129,11 @@ void ScenePlugin::renderScene() {
             m_Renderer.SetBoneTransform(i, Transforms[i]);
         }
         m_Renderer.SetWVP(wvp);
-
-#if DEBUG_POSITION
-        m_Meshes[j]->Simulate(Transforms, wvp);
-        vector<Vector3f> result = m_Meshes[j]->GetEndPositions();
-        Vector3f bound[2];
-        GetBound(result, bound);
-
-        LOGI(">>>>>>>>>>>>>>>>>>>>>>>> bound in shader");
-        bound[0].Print();
-        bound[1].Print();
-        LOGI(">>>>>>>>>>>>>>>>>>>>>>>> end of bound in shader");
-
-        m_Oct->AddMesh(m_Meshes[j]);
-
         m_Meshes[j]->Render();
-#else
-        m_Meshes[j]->Render();
-#endif
     }
-
-    RenderFPS();
 }
 
-bool ScenePlugin::Init(int32_t width, int32_t height) {
+bool TerrainPlugin::Init(int32_t width, int32_t height) {
     LOGI("in Scene init:\n");
 
     InteractivePlugin::Init(width, height);
@@ -168,7 +141,7 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     std::string str[2];
     // str[0].append("box.dae");
     // str[0].append("boblampclean.md5mesh");
-    str[0].append("mech0_animated.dae");
+    // str[0].append("mech0_animated.dae");
     // str[0].append("mech1_animated.fbx");
     // str[0].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
@@ -176,7 +149,8 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     // str[0].append("monkey.dae");
     // str[0].append("untitled.dae");
     // str[0].append("mech0.dae");
-    // str[0].append("scene0.dae");
+    str[0].append("scene0_001.dae");
+    // str[1].append("scene0_002.dae");
 
     // std::string str2[1];
     // str2[0].append("menu.dae");
@@ -189,46 +163,13 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
     return false;
 }
 
-bool ScenePlugin::Draw() {
+bool TerrainPlugin::Draw() {
     renderScene();
     return true;
 }
 
-IPlugin::PLUGIN_STATUS ScenePlugin::status() {
+IPlugin::PLUGIN_STATUS TerrainPlugin::status() {
     return sceneStatus; // this is mainloop scene, so return loop me always
 }
 
-#if DEBUG_POSITION
-void ScenePlugin::GetBound(vector<Vector3f> ary, Vector3f* ret) {
-    ret[0] = ary[0];
-    ret[1] = ary[0];
-
-    for (int i = 1; i < ary.size(); i++) {
-        if (ary[i].x < ret[0].x) {
-            ret[0].x = ary[i].x;
-        }
-
-        if (ary[i].y < ret[0].y) {
-            ret[0].y = ary[i].y;
-        }
-
-        if (ary[i].z < ret[0].z) {
-            ret[0].z = ary[i].z;
-        }
-
-        if (ary[i].x > ret[1].x) {
-            ret[1].x = ary[i].x;
-        }
-
-        if (ary[i].y > ret[1].y) {
-            ret[1].y = ary[i].y;
-        }
-
-        if (ary[i].z > ret[1].z) {
-            ret[1].z = ary[i].z;
-        }
-    }
-}
-
-#endif
 

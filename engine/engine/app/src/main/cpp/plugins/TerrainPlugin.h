@@ -1,3 +1,6 @@
+#ifndef _TERRAIN_PLUGIN_H_
+#define _TERRAIN_PLUGIN_H_
+
 #include <GL/freeglut.h>
 
 #include "ogldev_engine_common.h"
@@ -16,7 +19,7 @@ using namespace std;
 // cap for meshes in a scene
 #define MAX_NUM_MESHES 10
 
-class ScenePlugin : public InteractivePlugin {
+class TerrainPlugin : public InteractivePlugin {
 public:
 
     // Plugin API
@@ -26,9 +29,9 @@ public:
 
     IPlugin::PLUGIN_STATUS status();
 
-    ScenePlugin();
+    TerrainPlugin();
 
-    ~ScenePlugin();
+    ~TerrainPlugin();
 
     bool Init(string mesh[], int numMesh, int w, int h);
 
@@ -40,14 +43,11 @@ private:
     AppMesh *m_Meshes[MAX_NUM_MESHES] = {0};
     int m_NumMesh;
     int m_width, m_height;
+    const float m_Near = 1.0f;
+    const float m_Far = 2000.0f;
 
 private:
     IPlugin::PLUGIN_STATUS sceneStatus;
-    Octree *m_Oct = NULL;
-
-#if DEBUG_POSITION
-    Matrix4f m_OrthogonalMatrix;
-    bool m_OrthoMatrixInitialized = false;
-    void GetBound(vector<Vector3f> ary, Vector3f* ret);
-#endif
 };
+
+#endif /* _TERRAIN_PLUGIN_H_ */

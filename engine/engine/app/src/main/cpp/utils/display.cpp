@@ -71,8 +71,9 @@ int InitDisplay(struct engine *engine) {
 
     // Initialize GL state.
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    glDisable(GL_DEPTH_TEST);
-    // glEnable(GL_DEPTH_TEST);
+    // glDisable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
 
     // Enable culling front faces or back faces
     glEnable(GL_CULL_FACE);
