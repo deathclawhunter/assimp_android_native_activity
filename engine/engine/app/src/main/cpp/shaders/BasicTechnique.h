@@ -22,20 +22,11 @@ public:
 
     void SetDirectionalLight(const DirectionalLight &Light);
 
-    void SetEyeWorldPos(const Vector3f &EyeWorldPos);
-
-    void SetMatSpecularIntensity(float Intensity);
-
-    void SetMatSpecularPower(float Power);
-
 private:
 
     GLuint m_WVPLocation;
-    GLuint m_WorldMatrixLocation;
     GLuint m_ColorTextureLocation;
-    GLuint m_EyeWorldPosLocation;
-    GLuint m_MatSpecularIntensityLocation;
-    GLuint m_MatSpecularPowerLocation;
+    GLuint m_WorldMatrixLocation;
 
     struct {
         GLuint Color;

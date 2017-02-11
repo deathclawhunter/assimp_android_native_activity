@@ -11,9 +11,15 @@ bool AppTechnique::Init() {
 
     m_numPointLightsLocation = GetUniformLocation("gNumPointLights");
     m_numSpotLightsLocation = GetUniformLocation("gNumSpotLights");
+    m_EyeWorldPosLocation = GetUniformLocation("gEyeWorldPos");
+    m_MatSpecularIntensityLocation = GetUniformLocation("gMatSpecularIntensity");
+    m_MatSpecularPowerLocation = GetUniformLocation("gSpecularPower");
 
     if (m_numPointLightsLocation == INVALID_UNIFORM_LOCATION ||
-        m_numSpotLightsLocation == INVALID_UNIFORM_LOCATION) {
+        m_EyeWorldPosLocation == INVALID_UNIFORM_LOCATION ||
+        m_numSpotLightsLocation == INVALID_UNIFORM_LOCATION ||
+        m_MatSpecularIntensityLocation == INVALID_UNIFORM_LOCATION ||
+        m_MatSpecularPowerLocation == INVALID_UNIFORM_LOCATION) {
         return false;
     }
 
@@ -148,4 +154,18 @@ void AppTechnique::SetSpotLights(unsigned int NumLights, const SpotLight *pLight
 void AppTechnique::SetBoneTransform(uint Index, const Matrix4f &Transform) {
     assert(Index < MAX_BONES);
     glUniformMatrix4fv(m_BoneLocation[Index], 1, GL_TRUE, (const GLfloat *) Transform);
+}
+
+void AppTechnique::SetEyeWorldPos(const Vector3f &EyeWorldPos) {
+    glUniform3f(m_EyeWorldPosLocation, EyeWorldPos.x, EyeWorldPos.y, EyeWorldPos.z);
+}
+
+
+void AppTechnique::SetMatSpecularIntensity(float Intensity) {
+    glUniform1f(m_MatSpecularIntensityLocation, Intensity);
+}
+
+
+void AppTechnique::SetMatSpecularPower(float Power) {
+    glUniform1f(m_MatSpecularPowerLocation, Power);
 }

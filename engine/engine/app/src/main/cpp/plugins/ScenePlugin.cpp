@@ -93,8 +93,11 @@ bool ScenePlugin::Init(string mesh[], int numMesh, int w, int h) {
             m_Meshes[i]->SetHudMesh(true);
         }
 #endif
-        float start = m_Meshes[i]->AnimationInSeconds() / 2.0f;
-        float end = start * -1;
+        // float start = m_Meshes[i]->AnimationInSeconds() / 2.0f;
+        // float end = m_Meshes[i]->AnimationInSeconds();
+
+        float start = 0;
+        float end = m_Meshes[i]->AnimationInSeconds() / 2.0f;
 
         m_Meshes[i]->SetAnimationStartInSeconds(start);
         m_Meshes[i]->SetAnimationEndInSeconds(end);
@@ -129,8 +132,8 @@ void ScenePlugin::renderScene() {
                 AppCamera::GetInstance()->GetTarget(),
                 AppCamera::GetInstance()->GetUp());
     p.SetPerspectiveProj(AppCamera::GetInstance()->GetPersProjInfo());
-    // p.Scale(1.0f, 1.0f, 1.0f);
-    p.Scale(0.1f, 0.1f, 0.1f);
+    p.Scale(1.0f, 1.0f, 1.0f);
+    // p.Scale(0.1f, 0.1f, 0.1f);
     // p.Scale(1000.0f, 1000.0f, 1000.0f);
 
     p.WorldPos(Player::GetInstance()->GetPosition());
@@ -160,8 +163,13 @@ void ScenePlugin::renderScene() {
 
         vector<Matrix4f> Transforms;
         if (m_Meshes[j]->NumBones() > 0) {
+
+            static float lastRunningTime = -1.0f;
             float RunningTime = GetRunningTime();
-            m_Meshes[j]->BoneTransform(RunningTime, Transforms);
+            if (lastRunningTime < 0.0f) {
+                lastRunningTime = RunningTime;
+            }
+            m_Meshes[j]->BoneTransform(lastRunningTime, Transforms);
         } else {
             // use identity bone for static mesh
             Transforms.resize(1);
@@ -209,15 +217,16 @@ bool ScenePlugin::Init(int32_t width, int32_t height) {
 
     std::string str[2];
     // str[0].append("box.dae");
-    str[0].append("boblampclean.md5mesh");
-    // str[0].append("mech1_animated.dae");
+    // str[0].append("boblampclean.md5mesh");
+    str[0].append("mech0_animated.dae");
     // str[0].append("mech1_animated.fbx");
-    // str[1].append("marcus.dae");
+    // str[0].append("marcus.dae");
     // str[0].append("ArmyPilot.dae");
     // str.append("sf2arms.dae");
     // str[0].append("monkey.dae");
     // str[0].append("untitled.dae");
     // str[0].append("mech0.dae");
+    // str[0].append("scene0.dae");
 
     // std::string str2[1];
     // str2[0].append("menu.dae");

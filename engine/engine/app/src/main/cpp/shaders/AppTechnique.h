@@ -27,10 +27,19 @@ public:
 
     void SetBoneTransform(uint Index, const Matrix4f &Transform);
 
+    void SetEyeWorldPos(const Vector3f &EyeWorldPos);
+
+    void SetMatSpecularIntensity(float Intensity);
+
+    void SetMatSpecularPower(float Power);
+
 private:
 
     GLuint m_numPointLightsLocation;
     GLuint m_numSpotLightsLocation;
+    GLuint m_EyeWorldPosLocation;
+    GLuint m_MatSpecularIntensityLocation;
+    GLuint m_MatSpecularPowerLocation;
 
     struct {
         GLuint Color;

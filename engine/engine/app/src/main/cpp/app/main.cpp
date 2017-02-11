@@ -355,6 +355,7 @@ void InitPlugins(struct engine *engine) {
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MUZZLE_FLASH, new MuzzleEffectPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_CROSSHAIR, new CrossHairPlugin()); */
 
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
 
 #endif

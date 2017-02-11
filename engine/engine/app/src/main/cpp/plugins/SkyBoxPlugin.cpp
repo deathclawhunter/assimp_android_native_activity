@@ -36,8 +36,6 @@ bool SkyBox::Init(int w, int h) {
     m_Renderer.Enable();
     m_Renderer.SetColorTextureUnit(COLOR_TEXTURE_UNIT_INDEX);
     m_Renderer.SetDirectionalLight(m_DirectionalLight);
-    m_Renderer.SetMatSpecularIntensity(0.0f);
-    m_Renderer.SetMatSpecularPower(0);
 
     m_pMesh = new BasicMesh(&m_Renderer);
     if (!m_pMesh->LoadMesh("box.dae")) {
@@ -62,7 +60,7 @@ bool SkyBox::Init(int w, int h) {
 bool SkyBox::Draw() {
 
     m_Renderer.Enable();
-    m_Renderer.SetEyeWorldPos(AppCamera::GetInstance()->GetPos());
+    // m_Renderer.SetEyeWorldPos(AppCamera::GetInstance()->GetPos());
 
     Pipeline p;
     p.SetCamera(AppCamera::GetInstance()->GetPos(),

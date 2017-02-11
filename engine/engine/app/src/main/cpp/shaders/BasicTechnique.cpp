@@ -13,26 +13,20 @@ bool BasicTechnique::Init(const char *pVertexShader, const char *pFragmentShader
     m_WVPLocation = GetUniformLocation("gWVP");
     m_WorldMatrixLocation = GetUniformLocation("gWorld");
     m_ColorTextureLocation = GetUniformLocation("gColorMap");
-    m_EyeWorldPosLocation = GetUniformLocation("gEyeWorldPos");
     m_DirLightLocation.Color = GetUniformLocation("gDirectionalLight.Base.Color");
     m_DirLightLocation.AmbientIntensity = GetUniformLocation(
             "gDirectionalLight.Base.AmbientIntensity");
     m_DirLightLocation.Direction = GetUniformLocation("gDirectionalLight.Direction");
     m_DirLightLocation.DiffuseIntensity = GetUniformLocation(
             "gDirectionalLight.Base.DiffuseIntensity");
-    m_MatSpecularIntensityLocation = GetUniformLocation("gMatSpecularIntensity");
-    m_MatSpecularPowerLocation = GetUniformLocation("gSpecularPower");
 
     if (m_DirLightLocation.AmbientIntensity == INVALID_UNIFORM_LOCATION ||
         m_WVPLocation == INVALID_UNIFORM_LOCATION ||
         m_WorldMatrixLocation == INVALID_UNIFORM_LOCATION ||
         m_ColorTextureLocation == INVALID_UNIFORM_LOCATION ||
-        m_EyeWorldPosLocation == INVALID_UNIFORM_LOCATION ||
         m_DirLightLocation.Color == INVALID_UNIFORM_LOCATION ||
         m_DirLightLocation.DiffuseIntensity == INVALID_UNIFORM_LOCATION ||
-        m_DirLightLocation.Direction == INVALID_UNIFORM_LOCATION ||
-        m_MatSpecularIntensityLocation == INVALID_UNIFORM_LOCATION ||
-        m_MatSpecularPowerLocation == INVALID_UNIFORM_LOCATION) {
+        m_DirLightLocation.Direction == INVALID_UNIFORM_LOCATION) {
         return false;
     }
 
@@ -63,18 +57,4 @@ void BasicTechnique::SetDirectionalLight(const DirectionalLight &Light) {
     glUniform1f(m_DirLightLocation.DiffuseIntensity, Light.DiffuseIntensity);
 }
 
-
-void BasicTechnique::SetEyeWorldPos(const Vector3f &EyeWorldPos) {
-    glUniform3f(m_EyeWorldPosLocation, EyeWorldPos.x, EyeWorldPos.y, EyeWorldPos.z);
-}
-
-
-void BasicTechnique::SetMatSpecularIntensity(float Intensity) {
-    glUniform1f(m_MatSpecularIntensityLocation, Intensity);
-}
-
-
-void BasicTechnique::SetMatSpecularPower(float Power) {
-    glUniform1f(m_MatSpecularPowerLocation, Power);
-}
 
