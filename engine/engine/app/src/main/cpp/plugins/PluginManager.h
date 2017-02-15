@@ -13,7 +13,10 @@ public:
         PLUGIN_TYPE_TEXT,
         PLUGIN_TYPE_SKY,
         PLUGIN_TYPE_MUZZLE_FLASH,
-        PLUGIN_TYPE_CROSSHAIR
+        PLUGIN_TYPE_CROSSHAIR,
+        PLUGIN_TYPE_BACK_MUSIC,
+        PLUGIN_TYPE_FIRE_SOUND,
+        PLUGIN_TYPE_WALK_SOUND
     };
 
     static PluginManager *GetInstance();
@@ -29,7 +32,7 @@ public:
 
     int32_t KeyHandler(InputData *event);
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
     ~PluginManager();
 
