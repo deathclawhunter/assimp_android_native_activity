@@ -2,6 +2,7 @@
 
 #include <plugins/MuzzleEffect.h>
 #include <plugins/CrossHair.h>
+#include <plugins/TerrainPlugin.h>
 #include "engine.h"
 
 #include "AppLog.h"
@@ -357,7 +358,9 @@ void InitPlugins(struct engine *engine) {
                                             new VideoPlugin());
 
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TERRAIN, new TerrainPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());
+
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MUZZLE_FLASH, new MuzzleEffectPlugin());

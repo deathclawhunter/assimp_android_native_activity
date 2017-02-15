@@ -17,6 +17,7 @@ public:
         PLUGIN_TYPE_BACK_MUSIC,
         PLUGIN_TYPE_FIRE_SOUND,
         PLUGIN_TYPE_WALK_SOUND
+        PLUGIN_TYPE_TERRAIN
     };
 
     static PluginManager *GetInstance();

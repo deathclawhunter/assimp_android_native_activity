@@ -50,13 +50,3 @@ bool AppMesh::DrawMeshData() {
 
     return true;
 }
-
-#if ENABLE_IN_SCENE_HUD
-bool AppMesh::IsHudMesh() {
-    return m_isHudMesh;
-}
-
-void AppMesh::SetHudMesh(bool HudMesh) {
-    m_isHudMesh = HudMesh;
-}
-#endif

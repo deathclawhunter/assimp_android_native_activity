@@ -98,7 +98,7 @@ void fgPlatformOpenWindow( SFG_Window* window, const char* title,
   // Initialize GL state.
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
   glEnable(GL_CULL_FACE);
-  glDisable(GL_DEPTH_TEST);
+  // glDisable(GL_DEPTH_TEST);
   glViewport(0, 0, w, h);
 
   // End of Add by Davis

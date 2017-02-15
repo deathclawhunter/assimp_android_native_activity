@@ -7,11 +7,11 @@ Need to support collision detection
 Need to test multiple animation switch for the same mesh
 Need to support dynamic attribute in shader instead of fixed attribute
 Need to start import demo assets into test engine
-The models draw from COLLADA files seems wrong in z-order
 It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added the first scene. Found some problems with Z-order, see notes. Also probably found out the solution for this problem: The models draw from COLLADA files seems wrong in z-order.
 Added 2D animation for some special effect like: crosshair, muzzle flash etc.
 Added simple configure file
 Added SkyBox
@@ -55,6 +55,11 @@ Need to check if I can reuse FreeGlut framework, the answer is YES we can, but i
 
 Notes
 ===========
+Z-order with Blender Export
+----------------
+The reason is not very clear. But it seems connecting all meshes together will help OpenGL ES to come up with correct Z-order, otherwise the Z-order could be wrong probably due to the drawing order that OpenGL ES come up with with different vertex group.
+
+
 Input Handling
 ----------------
 Based on the study of other mobile gaming apps. Eventually decided to go with simple input. Simple input design including 2 options for user:
