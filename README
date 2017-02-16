@@ -11,6 +11,7 @@ It seems the lighting system is not working properly.
 
 DONE
 ===========
+Added more game objects: Player, Mech, Sound Effect
 Added the first scene. Found some problems with Z-order, see notes. Also probably found out the solution for this problem: The models draw from COLLADA files seems wrong in z-order.
 Added 2D animation for some special effect like: crosshair, muzzle flash etc.
 Added simple configure file

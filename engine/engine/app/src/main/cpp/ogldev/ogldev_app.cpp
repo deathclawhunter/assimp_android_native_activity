@@ -63,3 +63,7 @@ float OgldevApp::GetRunningTime() {
     float RunningTime = (float) ((double) GetCurrentTimeMillis() - (double) m_startTime) / 1000.0f;
     return RunningTime;
 }
+
+void OgldevApp::ResetRunningTime() {
+    m_startTime = GetCurrentTimeMillis();
+}

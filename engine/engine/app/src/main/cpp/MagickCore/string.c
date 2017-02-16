@@ -2508,7 +2508,7 @@ MagickExport void StripString(char *message)
 %
 %  SubstituteString() performs string substitution on a string, replacing the
 %  string with the substituted version. Buffer must be allocated from the heap.
-%  If the string is matched and status, MagickTrue is returned otherwise
+%  If the string is matched and Status, MagickTrue is returned otherwise
 %  MagickFalse.
 %
 %  The format of the SubstituteString method is:

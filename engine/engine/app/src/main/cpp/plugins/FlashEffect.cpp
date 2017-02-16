@@ -135,6 +135,10 @@ bool FlashEffectPlugin::RenderFlash(float x, float y, float sx, float sy) {
 
 bool FlashEffectPlugin::Draw() {
 
+    if (!m_ShowFlag) {
+        return false;
+    }
+
     m_Shaders->Enable();
 
     glEnableVertexAttribArray(m_Shaders->GetAttrCoord());
@@ -177,6 +181,14 @@ int32_t FlashEffectPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS FlashEffectPlugin::status() {
+IPlugin::PLUGIN_STATUS FlashEffectPlugin::Status() {
     return my_status; // example of never finish a plugin
+}
+
+void FlashEffectPlugin::Play() {
+    m_ShowFlag = true;
+}
+
+void FlashEffectPlugin::Pause() {
+    m_ShowFlag = false;
 }

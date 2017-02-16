@@ -92,7 +92,7 @@ bool SkyBox::Draw() {
     return true;
 }
 
-IPlugin::PLUGIN_STATUS SkyBox::status() {
+IPlugin::PLUGIN_STATUS SkyBox::Status() {
     return m_Status; // this is mainloop scene, so return loop me always
 }
 

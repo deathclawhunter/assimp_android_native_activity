@@ -80,7 +80,7 @@ void FGAPIENTRY glutMenuStateFunc( FGCBMenuState callback )
     fgState.MenuStateCallback = callback;
 }
 
-/* Sets the global menu status callback for the current window */
+/* Sets the global menu Status callback for the current window */
 void FGAPIENTRY glutMenuStatusFunc( FGCBMenuStatus callback )
 {
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutMenuStatusFunc" );
@@ -186,7 +186,7 @@ void FGAPIENTRY glutReshapeFunc( FGCBReshape callback )
  * DEVELOPER NOTE: in the library, only invoke the window status func, this
  * gets automatically translated to the visibility func if thats what the
  * user has set.
- * window status is kind of anemic on win32 as there are no window messages
+ * window Status is kind of anemic on win32 as there are no window messages
  * to notify us that the window is covered by other windows or not.
  * Should one want to query this, see
  * http://stackoverflow.com/questions/5445889/get-which-process-window-is-actually-visible-in-c-sharp
@@ -199,7 +199,7 @@ static void fghVisibility( int status )
     FREEGLUT_INTERNAL_ERROR_EXIT_IF_NOT_INITIALISED ( "Visibility Callback" );
     freeglut_return_if_fail( fgStructure.CurrentWindow );
 
-    /* Translate window status func states to visibility states */
+    /* Translate window Status func states to visibility states */
     if( ( GLUT_HIDDEN == status )  || ( GLUT_FULLY_COVERED == status ) )
         vis_status = GLUT_NOT_VISIBLE;
     else    /* GLUT_FULLY_RETAINED, GLUT_PARTIALLY_RETAINED */

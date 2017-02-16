@@ -16,8 +16,10 @@ public:
         PLUGIN_TYPE_CROSSHAIR,
         PLUGIN_TYPE_BACK_MUSIC,
         PLUGIN_TYPE_FIRE_SOUND,
-        PLUGIN_TYPE_WALK_SOUND
-        PLUGIN_TYPE_TERRAIN
+        PLUGIN_TYPE_WALK_SOUND,
+        PLUGIN_TYPE_TERRAIN,
+        PLUGIN_TYPE_MECH,
+        PLUGIN_TYPE_PLAYER
     };
 
     static PluginManager *GetInstance();

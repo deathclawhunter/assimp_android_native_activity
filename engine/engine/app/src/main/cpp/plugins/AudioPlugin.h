@@ -1,3 +1,6 @@
+#ifndef _AUDIO_PLUGIN_H_
+#define _AUDIO_PLUGIN_H_
+
 #include <iostream>
 
 extern "C"
@@ -32,17 +35,20 @@ class AudioPlugin : public IPlugin {
 
 public:
     // Plugin API
-    bool Init(int32_t width, int32_t height);
+    bool Init(int32_t width, int32_t height, const char *fileName, bool status = true);
 
     bool Draw();
 
     int32_t KeyHandler(InputData *event);
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
     AudioPlugin();
 
     ~AudioPlugin();
+
+    void Play();
+    void Pause();
 
 private:
     void CreateAudioEngine();
@@ -78,6 +84,9 @@ private:
     SLMuteSoloItf fdPlayerMuteSolo;
     SLVolumeItf fdPlayerVolume;
 
+    bool m_PlayFlag = true;
 };
+
+#endif /* _AUDIO_PLUGIN_H_ */
 
 

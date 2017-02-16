@@ -224,7 +224,7 @@ static const RGB_Record WPG1_Palette[256]={
 %
 %  A description of each parameter follows:
 %
-%    o status:  Method IsWPG returns True if the image format type is WPG.
+%    o Status:  Method IsWPG returns True if the image format type is WPG.
 %
 %    o magick: compare image format pattern against these bytes.
 %

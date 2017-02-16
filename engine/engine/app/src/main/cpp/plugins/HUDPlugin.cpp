@@ -157,6 +157,6 @@ int32_t HUDPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS HUDPlugin::status() {
+IPlugin::PLUGIN_STATUS HUDPlugin::Status() {
     return my_status; // example of never finish a plugin
 }

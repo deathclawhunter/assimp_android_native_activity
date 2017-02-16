@@ -73,11 +73,14 @@ public:
 
     int32_t KeyHandler(InputData *event);
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
     bool Init(int frameCount, const char **frames);
 
     ~FlashEffectPlugin();
+
+    void Play();
+    void Pause();
 
 private:
 
@@ -93,6 +96,8 @@ private:
     int m_FrameCount;
 
     int m_FrameIndex = 0; // internal counter for frame index
+
+    bool m_ShowFlag = false;
 
 private:
     bool RenderFlash(float x, float y, float sx, float sy);

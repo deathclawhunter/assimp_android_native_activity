@@ -1415,7 +1415,7 @@ MagickExport Image *XAnimateImages(Display *display,
 
       if (*working_directory == '\0')
         (void) CopyMagickString(working_directory,".",MagickPathExtent);
-      status=chdir(working_directory);
+      Status=chdir(working_directory);
       if (status == -1)
         (void) ThrowMagickException(exception,GetMagickModule(),FileOpenError,
           "UnableToOpenFile","%s",working_directory);

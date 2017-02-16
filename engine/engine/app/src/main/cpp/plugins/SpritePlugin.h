@@ -1,6 +1,3 @@
-#ifndef _TERRAIN_PLUGIN_H_
-#define _TERRAIN_PLUGIN_H_
-
 #include <GL/freeglut.h>
 
 #include "ogldev_engine_common.h"
@@ -19,23 +16,33 @@ using namespace std;
 // cap for meshes in a scene
 #define MAX_NUM_MESHES 10
 
-class TerrainPlugin : public InteractivePlugin {
+class SpritePlugin : public InteractivePlugin {
 public:
 
     // Plugin API
-    bool Init(int32_t width, int32_t height);
-
     bool Draw();
 
     IPlugin::PLUGIN_STATUS Status();
 
-    TerrainPlugin();
+    SpritePlugin();
 
-    ~TerrainPlugin();
+    ~SpritePlugin();
 
     bool Init(string mesh[], int numMesh, int w, int h);
 
     void renderScene();
+
+    enum SpriteStatus {
+        SPRITE_STATUS_IDLE,
+        SPRITE_STATUS_ATTACK,
+        SPRITE_STATUS_RUN
+    };
+
+    void SetSpriteStatus(SpriteStatus status);
+    SpriteStatus GetSpriteStatus();
+
+private:
+    void ResetAnimation();
 
 private:
     AppTechnique m_Renderer;
@@ -43,11 +50,13 @@ private:
     AppMesh *m_Meshes[MAX_NUM_MESHES] = {0};
     int m_NumMesh;
     int m_Width, m_Height;
-    const float m_Near = 1.0f;
-    const float m_Far = 2000.0f;
-
-private:
     IPlugin::PLUGIN_STATUS m_Status;
-};
+    Octree *m_Oct = NULL;
+    SpriteStatus m_SpriteStatus = SPRITE_STATUS_IDLE;
 
-#endif /* _TERRAIN_PLUGIN_H_ */
+#if DEBUG_POSITION
+    Matrix4f m_OrthogonalMatrix;
+    bool m_OrthoMatrixInitialized = false;
+    void GetBound(vector<Vector3f> ary, Vector3f* ret);
+#endif
+};

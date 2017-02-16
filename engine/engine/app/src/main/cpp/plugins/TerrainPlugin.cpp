@@ -25,7 +25,7 @@ TerrainPlugin::TerrainPlugin() {
     m_DirectionalLight.DiffuseIntensity = 0.9f;
     m_DirectionalLight.Direction = Vector3f(1.0f, 0.0, 0.0);
 
-    sceneStatus = PLUGIN_STATUS_INIT_LATER;
+    m_Status = PLUGIN_STATUS_INIT_LATER;
 }
 
 TerrainPlugin::~TerrainPlugin() {
@@ -37,13 +37,13 @@ TerrainPlugin::~TerrainPlugin() {
 
 bool TerrainPlugin::Init(string mesh[], int numMesh, int w, int h) {
 
-    m_width = w;
-    m_height = h;
+    m_Width = w;
+    m_Height = h;
 
     AppCamera::GetInstance(w, h); // initialize camera
     if (!m_Renderer.Init()) {
         LOGE("Error initializing the lighting technique\n");
-        sceneStatus = PLUGIN_STATUS_INIT_FAIL;
+        m_Status = PLUGIN_STATUS_INIT_FAIL;
         return false;
     }
     m_Renderer.Enable();
@@ -57,7 +57,7 @@ bool TerrainPlugin::Init(string mesh[], int numMesh, int w, int h) {
         m_Meshes[i] = new AppMesh(&m_Renderer);
         if (!m_Meshes[i]->LoadMesh(mesh[i])) {
             LOGE("fail to load mesh %s\n", mesh[i].c_str());
-            sceneStatus = PLUGIN_STATUS_INIT_FAIL;
+            m_Status = PLUGIN_STATUS_INIT_FAIL;
             return false;
         }
         // float start = m_Meshes[i]->AnimationInSeconds() / 2.0f;
@@ -78,7 +78,7 @@ bool TerrainPlugin::Init(string mesh[], int numMesh, int w, int h) {
     glClearColor(grey, grey, grey, 1.0f);
     checkGlError("glClearColor");
 
-    sceneStatus = PLUGIN_STATUS_NEXT;
+    m_Status = PLUGIN_STATUS_NEXT;
 
     return true;
 }
@@ -168,8 +168,8 @@ bool TerrainPlugin::Draw() {
     return true;
 }
 
-IPlugin::PLUGIN_STATUS TerrainPlugin::status() {
-    return sceneStatus; // this is mainloop scene, so return loop me always
+IPlugin::PLUGIN_STATUS TerrainPlugin::Status() {
+    return m_Status; // this is mainloop scene, so return loop me always
 }
 
 

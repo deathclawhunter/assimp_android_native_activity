@@ -44,7 +44,7 @@ public:
 
     bool Draw();
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
 private:
     BasicTechnique m_Renderer;

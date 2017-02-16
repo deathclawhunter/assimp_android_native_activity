@@ -707,7 +707,7 @@ MagickPrivate void ExpandFilename(char *path)
 %
 %  The format of the ExpandFilenames function is:
 %
-%      status=ExpandFilenames(int *number_arguments,char ***arguments)
+%      Status=ExpandFilenames(int *number_arguments,char ***arguments)
 %
 %  A description of each parameter follows:
 %

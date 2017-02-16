@@ -24,6 +24,8 @@ public:
         Frames[0] = "CrossHair.png";
 
         Init(1, Frames);
+
+        FlashEffectPlugin::Play(); // make sure by default we show it
     }
 
 };

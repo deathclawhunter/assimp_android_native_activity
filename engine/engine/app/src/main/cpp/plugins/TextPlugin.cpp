@@ -182,6 +182,6 @@ int32_t TextPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS TextPlugin::status() {
+IPlugin::PLUGIN_STATUS TextPlugin::Status() {
     return my_status; // example of never finish a plugin
 }

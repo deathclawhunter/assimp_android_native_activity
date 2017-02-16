@@ -4769,7 +4769,7 @@ static Image *ReadOneJNGImage(MngInfo *mng_info,
     }
 
   mng_info->image_found++;
-  status=SetImageProgress(image,LoadImagesTag,2*TellBlob(image),
+  Status=SetImageProgress(image,LoadImagesTag,2*TellBlob(image),
     2*GetBlobSize(image));
 
   if (status == MagickFalse)
@@ -11798,7 +11798,7 @@ static MagickBooleanType WritePNGImage(const ImageInfo *image_info,
    * "exclude-chunk" string, it can define "all" or "none" as
    * well as a comma-separated list.  Chunks that are unknown to
    * ImageMagick are always excluded, regardless of their "copy-safe"
-   * status according to the PNG specification, and even if they
+   * Status according to the PNG specification, and even if they
    * appear in the "include-chunk" list. Such defines appearing among
    * the image options take priority over those found among the image
    * artifacts.
@@ -12328,7 +12328,7 @@ static MagickBooleanType WriteOneJNGImage(MngInfo *mng_info,
             *value;
 
           /* Encode alpha as a grayscale PNG blob */
-          status=OpenBlob(jpeg_image_info,jpeg_image,WriteBinaryBlobMode,
+          Status=OpenBlob(jpeg_image_info,jpeg_image,WriteBinaryBlobMode,
             exception);
           if (status == MagickFalse)
             ThrowWriterException(ResourceLimitError,"MemoryAllocationFailed");
@@ -13647,7 +13647,7 @@ static MagickBooleanType WriteMNGImage(const ImageInfo *image_info,Image *image,
        /* To do: specify the desired alpha compression method. */
        write_info=CloneImageInfo(image_info);
        write_info->compression=UndefinedCompression;
-       status=WriteOneJNGImage(mng_info,write_info,image,exception);
+       Status=WriteOneJNGImage(mng_info,write_info,image,exception);
        write_info=DestroyImageInfo(write_info);
      }
    else

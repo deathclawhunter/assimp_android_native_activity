@@ -30,7 +30,7 @@ public:
 
     int32_t KeyHandler(InputData *event);
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
     // H264 decoder API
     void h264_decoder_callback(H264_DECODER_STATUS status, AVFrame *frame, AVPacket *pkt);

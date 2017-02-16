@@ -75,7 +75,7 @@ bool AudioPlugin::CreateAssetAudioPlayer(const char *filename) {
     struct stat buf;
     int ret = fstat(fd, &buf);
     if (ret != 0) {
-        LOGE("fail to get file status");
+        LOGE("fail to get file Status");
         return false;
     }
 
@@ -139,42 +139,45 @@ void AudioPlugin::PlayingAssetAudioPlayer(bool isPlaying) {
         // set the player's state
         result = (*fdPlayerPlay)->SetPlayState(fdPlayerPlay, isPlaying ?
                                                              SL_PLAYSTATE_PLAYING
-                                                                       : SL_PLAYSTATE_PAUSED);
+                                                             : SL_PLAYSTATE_PAUSED);
         assert(SL_RESULT_SUCCESS == result);
         (void) result;
     }
 
 }
 
-bool AudioPlugin::Init(int32_t width, int32_t height) {
-
-    /* if (!OpenDecoder()) {
-        LOGE("fail to open audio decoder");
-        pluginStatus = PLUGIN_STATUS_INIT_FAIL;
-        return false;
-    } */
+bool AudioPlugin::Init(int32_t width, int32_t height, const char *fileName, bool initStatus) {
 
     CreateAudioEngine();
-    // CreateBufferQueueAudioPlayer(0, 0);
-    // PlayHello();
 
-    CreateAssetAudioPlayer("SampleAudio.mp3");
-    PlayingAssetAudioPlayer(true);
+    CreateAssetAudioPlayer(fileName);
+    m_PlayFlag = initStatus;
+    PlayingAssetAudioPlayer(m_PlayFlag);
 
     pluginStatus = PLUGIN_STATUS_NEXT; // ensure video or game can play at the same time
 
     return true;
 }
 
-IPlugin::PLUGIN_STATUS AudioPlugin::status() {
+IPlugin::PLUGIN_STATUS AudioPlugin::Status() {
     return pluginStatus;
 }
 
 bool AudioPlugin::Draw() {
+
+    PlayingAssetAudioPlayer(m_PlayFlag);
 
     return false; // Audio draws nothing
 }
 
 int32_t AudioPlugin::KeyHandler(InputData *event) {
     return 1;
+}
+
+void AudioPlugin::Play() {
+    m_PlayFlag = true;
+}
+
+void AudioPlugin::Pause() {
+    m_PlayFlag = false;
 }

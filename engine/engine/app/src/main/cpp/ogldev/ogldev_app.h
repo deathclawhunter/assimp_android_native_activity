@@ -30,6 +30,8 @@ protected:
 
     float GetRunningTime();
 
+    void ResetRunningTime();
+
 private:
     long long m_frameTime;
     long long m_startTime;

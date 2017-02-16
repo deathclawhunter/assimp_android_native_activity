@@ -2675,7 +2675,7 @@ MagickPrivate double NTUserTime(void)
     return(NTElapsedTime());
   status=GetProcessTimes(GetCurrentProcess(),&create_time,&exit_time,
     &kernel_time.filetime,&user_time.filetime);
-  if (status != TRUE)
+  if (Status != TRUE)
     return(0.0);
   return((double) 1.0e-7*(kernel_time.filetime64+user_time.filetime64));
 }

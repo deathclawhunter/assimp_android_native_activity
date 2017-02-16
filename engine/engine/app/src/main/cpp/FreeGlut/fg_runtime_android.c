@@ -65,7 +65,7 @@ extern int main(int argc, char* argv[]);
    FreeGLUT thread. Use android_app_write_cmd. */
 
 /* Could be used instead of onNativeWindowRedrawNeeded */
-/* Deals with status bar presence */
+/* Deals with Status bar presence */
 static void onContentRectChanged(ANativeActivity* activity, const ARect* rect) {
   LOGI("onContentRectChanged: l=%d,t=%d,r=%d,b=%d", rect->left, rect->top, rect->right, rect->bottom);
 }

@@ -550,7 +550,7 @@ void fgPlatformPosResZordWork(SFG_Window* window, unsigned int workMask)
 
 void fgPlatformVisibilityWork(SFG_Window* window)
 {
-    /* Visibility status of window should get updated in the window message handlers
+    /* Visibility Status of window should get updated in the window message handlers
      * For now, none of these functions called below do anything, so don't worry
      * about it
      */

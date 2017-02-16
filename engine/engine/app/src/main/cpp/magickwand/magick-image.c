@@ -2023,7 +2023,7 @@ WandExport MagickBooleanType MagickCompositeLayers(MagickWand *wand,
       (source_wand->images == (Image *) NULL))
     ThrowWandException(WandError,"ContainsNoImages",wand->name);
   CompositeLayers(wand->images,compose,source_wand->images,x,y,wand->exception);
-  status=MagickTrue;  /* FUTURE: determine status from exceptions */
+  status=MagickTrue;  /* FUTURE: determine Status from exceptions */
   return(status);
 }
 

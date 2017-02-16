@@ -33,7 +33,7 @@ public:
         PLUGIN_STATUS_INIT_RIGHT_NOW,
         PLUGIN_STATUS_INIT_FAIL
     };
-    virtual IPlugin::PLUGIN_STATUS status() = 0;
+    virtual IPlugin::PLUGIN_STATUS Status() = 0;
 
 public:
     IPlugin *next = NULL;

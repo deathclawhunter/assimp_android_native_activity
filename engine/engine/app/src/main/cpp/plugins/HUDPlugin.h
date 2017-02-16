@@ -64,7 +64,7 @@ public:
 
     int32_t KeyHandler(InputData *event);
 
-    IPlugin::PLUGIN_STATUS status();
+    IPlugin::PLUGIN_STATUS Status();
 
     HUDPlugin();
 

@@ -56,9 +56,9 @@ bool PluginManager::Init(int32_t width, int32_t height) {
 
     IPlugin *plugin = m_Plugins;
     while (plugin != NULL) {
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_RIGHT_NOW &&
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_INIT_RIGHT_NOW &&
             !plugin->Init(width, height)) {
-            // Instead of deleting plugin, use plugin status finished or fail
+            // Instead of deleting plugin, use plugin Status finished or fail
             LOGE("fail to init plugin");
         } else {
             plugin = plugin->next;
@@ -73,7 +73,7 @@ bool PluginManager::Draw() {
     bool update = false;
     while (plugin != NULL) {
 
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_INIT_LATER) {
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_INIT_LATER) {
             if (!plugin->Init(width, height)) {
                 LOGE("fail to init plugin");
                 plugin = plugin->next;
@@ -81,8 +81,8 @@ bool PluginManager::Draw() {
             }
         }
 
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_FINISHED ||
-            plugin->status() == IPlugin::PLUGIN_STATUS_INIT_FAIL) {
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_FINISHED ||
+                plugin->Status() == IPlugin::PLUGIN_STATUS_INIT_FAIL) {
             plugin = plugin->next;
             continue;
         }
@@ -94,9 +94,9 @@ bool PluginManager::Draw() {
             update = plugin->Draw();
         }
 
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
             break;
-        } else if (plugin->status() == IPlugin::PLUGIN_STATUS_NEXT) {
+        } else if (plugin->Status() == IPlugin::PLUGIN_STATUS_NEXT) {
             plugin = plugin->next;
         } else {
             // undefined
@@ -111,15 +111,15 @@ int32_t PluginManager::KeyHandler(InputData *event) {
     IPlugin *plugin = m_Plugins;
     while (plugin != NULL) {
 
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_FINISHED ||
-            plugin->status() == IPlugin::PLUGIN_STATUS_INIT_FAIL) {
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_FINISHED ||
+                plugin->Status() == IPlugin::PLUGIN_STATUS_INIT_FAIL) {
             plugin = plugin->next;
             continue;
         }
 
         plugin->KeyHandler(event);
 
-        if (plugin->status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
+        if (plugin->Status() == IPlugin::PLUGIN_STATUS_LOOP_ME) {
             break;
         }
         plugin = plugin->next;
@@ -128,7 +128,7 @@ int32_t PluginManager::KeyHandler(InputData *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS PluginManager::status() {
+IPlugin::PLUGIN_STATUS PluginManager::Status() {
     return IPlugin::PLUGIN_STATUS_FINISHED; // This should never be called.
 }
 

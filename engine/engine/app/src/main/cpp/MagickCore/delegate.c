@@ -299,7 +299,7 @@ MagickPrivate void DelegateComponentTerminus(void)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  ExternalDelegateCommand() executes the specified command and waits until it
-%  terminates.  The returned value is the exit status of the command.
+%  terminates.  The returned value is the exit Status of the command.
 %
 %  The format of the ExternalDelegateCommand method is:
 %
@@ -379,7 +379,7 @@ MagickExport int ExternalDelegateCommand(const MagickBooleanType asynchronous,
     *message='\0';
 #if defined(MAGICKCORE_POSIX_SUPPORT)
 #if !defined(MAGICKCORE_HAVE_EXECVP)
-  status=system(sanitize_command);
+  Status=system(sanitize_command);
 #else
   if ((asynchronous != MagickFalse) ||
       (strpbrk(sanitize_command,"&;<>|") != (char *) NULL))
@@ -450,7 +450,7 @@ MagickExport int ExternalDelegateCommand(const MagickBooleanType asynchronous,
 #elif defined(macintosh)
   status=MACSystemCommand(sanitize_command);
 #elif defined(vms)
-  status=system(sanitize_command);
+  Status=system(sanitize_command);
 #else
 #  error No suitable system() method.
 #endif

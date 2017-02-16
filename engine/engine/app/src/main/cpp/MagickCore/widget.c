@@ -2755,7 +2755,7 @@ MagickPrivate void XColorBrowserWidget(Display *display,XWindows *windows,
   if ((*reply == '\0') || (strchr(reply,'-') != (char *) NULL))
     return;
   status=XParseColor(display,windows->widget.map_info->colormap,reply,&color);
-  if (status != False)
+  if (Status != False)
     return;
   XNoticeWidget(display,windows,"Color is unknown to X server:",reply);
   (void) CopyMagickString(reply,"gray",MagickPathExtent);

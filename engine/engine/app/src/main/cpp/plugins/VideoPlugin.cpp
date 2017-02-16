@@ -230,7 +230,7 @@ void VideoPlugin::PrintFrame(AVFrame *frame) {
     }
 }
 
-IPlugin::PLUGIN_STATUS VideoPlugin::status() {
+IPlugin::PLUGIN_STATUS VideoPlugin::Status() {
     return playStatus;
 }
 

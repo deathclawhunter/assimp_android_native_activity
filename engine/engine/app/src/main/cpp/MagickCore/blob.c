@@ -529,7 +529,7 @@ MagickExport MagickBooleanType CloseBlob(Image *image)
     case BZipStream:
     {
 #if defined(MAGICKCORE_BZLIB_DELEGATE)
-      (void) BZ2_bzerror(image->blob->file_info.bzfile,&status);
+      (void) BZ2_bzerror(image->blob->file_info.bzfile,&Status);
 #endif
       break;
     }
@@ -905,7 +905,7 @@ MagickExport int EOFBlob(const Image *image)
 
       status=0;
       (void) BZ2_bzerror(image->blob->file_info.bzfile,&status);
-      image->blob->eof=status == BZ_UNEXPECTED_EOF ? MagickTrue : MagickFalse;
+      image->blob->eof=Status == BZ_UNEXPECTED_EOF ? MagickTrue : MagickFalse;
 #endif
       break;
     }
@@ -4037,7 +4037,7 @@ MagickExport MagickOffsetType SeekBlob(Image *image,
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  SetBlobExempt() sets the blob exempt status.
+%  SetBlobExempt() sets the blob exempt Status.
 %
 %  The format of the SetBlobExempt method is:
 %
@@ -4263,7 +4263,7 @@ static int SyncBlob(Image *image)
     case BZipStream:
     {
 #if defined(MAGICKCORE_BZLIB_DELEGATE)
-      status=BZ2_bzflush(image->blob->file_info.bzfile);
+      Status=BZ2_bzflush(image->blob->file_info.bzfile);
 #endif
       break;
     }

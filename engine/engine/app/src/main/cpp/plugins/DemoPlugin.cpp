@@ -203,6 +203,6 @@ int32_t HelloWorldPlugin::KeyHandler(InputData *event) {
     return 1;
 }
 
-IPlugin::PLUGIN_STATUS HelloWorldPlugin::status() {
+IPlugin::PLUGIN_STATUS HelloWorldPlugin::Status() {
     return my_status; // example of never finish a plugin
 }

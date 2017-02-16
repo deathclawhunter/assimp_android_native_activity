@@ -4395,6 +4395,6 @@ MagickExport MagickBooleanType SetImageProperty(Image *image,
   /* Default: not an attribute, add as a property */
   status=AddValueToSplayTree((SplayTreeInfo *) image->properties,
     ConstantString(property),ConstantString(value));
-  /* FUTURE: error if status is bad? */
+  /* FUTURE: error if Status is bad? */
   return(status);
 }
