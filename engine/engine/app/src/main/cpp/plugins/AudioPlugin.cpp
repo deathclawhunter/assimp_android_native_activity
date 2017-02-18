@@ -20,6 +20,9 @@ AudioPlugin::~AudioPlugin() {
 void AudioPlugin::CreateAudioEngine() {
     SLresult result;
 
+    engineObject = NULL;
+    engineEngine = NULL;
+
     // create engine
     result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL);
     assert(SL_RESULT_SUCCESS == result);
@@ -126,7 +129,7 @@ bool AudioPlugin::CreateAssetAudioPlayer(const char *filename) {
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
 
-    return JNI_TRUE;
+    return true;
 }
 
 // set the playing state for the asset audio player

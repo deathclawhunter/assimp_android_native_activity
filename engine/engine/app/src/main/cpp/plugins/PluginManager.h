@@ -19,7 +19,10 @@ public:
         PLUGIN_TYPE_WALK_SOUND,
         PLUGIN_TYPE_TERRAIN,
         PLUGIN_TYPE_MECH,
-        PLUGIN_TYPE_PLAYER
+        PLUGIN_TYPE_PLAYER,
+        PLUGIN_TYPE_GAME,
+        PLUGIN_TYPE_MECH_ATTACK,
+        PLUGIN_TYPE_MECH_ATTACK_SOUND
     };
 
     static PluginManager *GetInstance();

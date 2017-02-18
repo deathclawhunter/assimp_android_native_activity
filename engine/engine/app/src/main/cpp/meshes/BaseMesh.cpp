@@ -65,11 +65,6 @@ bool BaseMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
     m_Entries.resize(pScene->mNumMeshes);
     m_Textures.resize(pScene->mNumMaterials);
 
-#if !DEBUG_POSITION
-    vector<Vector3f> Positions;
-    vector<VertexBoneData> Bones;
-    vector<uint> Indices;
-#endif
     vector<Vector3f> Normals;
     vector<Vector2f> TexCoords;
 
@@ -93,36 +88,36 @@ bool BaseMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
     }
 
     // Reserve space in the vectors for the vertex attributes and indices
-    Positions.reserve(NumVertices);
+    m_Positions.reserve(NumVertices);
     Normals.reserve(NumVertices);
     TexCoords.reserve(NumVertices);
-    Bones.resize(NumVertices);
+    m_Bones.resize(NumVertices);
     if (!hasBone) {
-        for (uint i = 0; i < Bones.size(); i++) {
-            Bones[i].Reset();
-            Bones[i].AddBoneData(0, 1.0f);
+        for (uint i = 0; i < m_Bones.size(); i++) {
+            m_Bones[i].Reset();
+            m_Bones[i].AddBoneData(0, 1.0f);
         }
     }
-    Indices.reserve(NumIndices);
+    m_Indices.reserve(NumIndices);
 
 
     // Initialize the meshes in the scene one by one
     for (uint i = 0; i < m_Entries.size(); i++) {
         const aiMesh *paiMesh = pScene->mMeshes[i];
-        InitMesh(i, paiMesh, Positions, Normals, TexCoords, Bones, Indices);
+        InitMesh(i, paiMesh, m_Positions, Normals, TexCoords, m_Bones, m_Indices);
 
         // This is to fix glDrawElementsBaseVertex() not support issue by
         // pre adding BaseVertex to Indices values
         if (i >= 1) {
-            for (int j = m_Entries[i].BaseIndex; j < Indices.size(); j++) {
-                Indices[j] += m_Entries[i].BaseVertex;
+            for (int j = m_Entries[i].BaseIndex; j < m_Indices.size(); j++) {
+                m_Indices[j] += m_Entries[i].BaseVertex;
             }
         }
     }
 
     Vector3f minVertex, maxVertex;
-    for (uint i = 0; i < Positions.size(); i++) {
-        Vector3f vertex = Positions[i];
+    for (uint i = 0; i < m_Positions.size(); i++) {
+        Vector3f vertex = m_Positions[i];
 
         if (i == 0) {
             minVertex = vertex;
@@ -150,10 +145,7 @@ bool BaseMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
 
     m_BoundingBox[0] = Vector4f(minVertex.x, minVertex.y, minVertex.z, 1.0f);
     m_BoundingBox[1] = Vector4f(maxVertex.x, maxVertex.y, maxVertex.z, 1.0f);
-
-#if DEBUG_POSITION
-    EndPositions.resize(Positions.size());
-#endif
+    m_EndPositions.resize(m_Positions.size());
 
     if (!InitMaterials(pScene, Filename)) {
         return false;
@@ -163,7 +155,7 @@ bool BaseMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
 
     // Generate and populate the buffers with vertex attributes and the indices
     glBindBuffer(GL_ARRAY_BUFFER, m_BaseBuffers[POS_VB]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Positions[0]) * Positions.size(), &Positions[0],
+    glBufferData(GL_ARRAY_BUFFER, sizeof(m_Positions[0]) * m_Positions.size(), &m_Positions[0],
                  GL_STATIC_DRAW);
     glEnableVertexAttribArray(m_Render->m_AttrPositionLocation);
     glVertexAttribPointer(m_Render->m_AttrPositionLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -179,12 +171,12 @@ bool BaseMesh::InitFromScene(const aiScene *pScene, const string &Filename) {
     glEnableVertexAttribArray(m_Render->m_AttrNormalLocation);
     glVertexAttribPointer(m_Render->m_AttrNormalLocation, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-    if (!InitMeshData(Bones)) {
+    if (!InitMeshData(m_Bones)) {
         return false;
     }
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BaseBuffers[INDEX_BUFFER]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * Indices.size(), &Indices[0],
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_Indices[0]) * m_Indices.size(), &m_Indices[0],
                  GL_STATIC_DRAW);
 
     return true;
@@ -224,6 +216,9 @@ void BaseMesh::InitMesh(uint MeshIndex,
         Indices.push_back(Face.mIndices[1]);
         Indices.push_back(Face.mIndices[2]);
     }
+
+    m_Start = 0.0f;
+    m_End = AnimationInSeconds(); // initialize
 }
 
 
@@ -324,31 +319,24 @@ bool BaseMesh::InitMaterials(const aiScene *pScene, const string &Filename) {
 }
 
 
-#if DEBUG_POSITION
-void AppMesh::Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
+void BaseMesh::Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
 
-    for (int i = 0; i < Indices.size(); i++) {
-        Vector3f pos = Positions[Indices[i]];
-        Matrix4f BoneTransform = BoneTransforms[int(Bones[Indices[i]].IDs[0])] * Bones[Indices[i]].Weights[0];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[1])] * Bones[Indices[i]].Weights[1];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[2])] * Bones[Indices[i]].Weights[2];
-        BoneTransform = BoneTransform + BoneTransforms[int(Bones[Indices[i]].IDs[3])] * Bones[Indices[i]].Weights[3];
-        // BoneTransform.Print();
+    for (int i = 0; i < m_Indices.size(); i++) {
+        Vector3f pos = m_Positions[m_Indices[i]];
+        Matrix4f BoneTransform = BoneTransforms[int(m_Bones[m_Indices[i]].IDs[0])] * m_Bones[m_Indices[i]].Weights[0];
+        BoneTransform = BoneTransform + BoneTransforms[int(m_Bones[m_Indices[i]].IDs[1])] * m_Bones[m_Indices[i]].Weights[1];
+        BoneTransform = BoneTransform + BoneTransforms[int(m_Bones[m_Indices[i]].IDs[2])] * m_Bones[m_Indices[i]].Weights[2];
+        BoneTransform = BoneTransform + BoneTransforms[int(m_Bones[m_Indices[i]].IDs[3])] * m_Bones[m_Indices[i]].Weights[3];
         Vector4f _pos = BoneTransform * Vector4f(pos.x, pos.y, pos.z, 1.0);
-        // Vector4f _pos = Vector4f(pos.x, pos.y, pos.z, 1.0);
         _pos = WVP * _pos;
 
-        // _pos.Print(true);
-
-        EndPositions[Indices[i]] = Vector3f(_pos.x, _pos.y, _pos.z);
-        // EndPositions[Indices[i]] = pos;
+        m_EndPositions[m_Indices[i]] = Vector3f(_pos.x, _pos.y, _pos.z);
     }
 }
 
-vector<Vector3f> AppMesh::GetEndPositions() {
-    return EndPositions;
+vector<Vector3f> BaseMesh::GetEndPositions() {
+    return m_EndPositions;
 }
-#endif
 
 
 void BaseMesh::Render() {
@@ -636,4 +624,35 @@ bool BaseMesh::NeedCalcBoundary() {
     }
 
     return Need;
+}
+
+void BaseMesh::GetBound(vector<Vector3f> ary, Vector3f* ret) {
+    ret[0] = ary[0];
+    ret[1] = ary[0];
+
+    for (int i = 1; i < ary.size(); i++) {
+        if (ary[i].x < ret[0].x) {
+            ret[0].x = ary[i].x;
+        }
+
+        if (ary[i].y < ret[0].y) {
+            ret[0].y = ary[i].y;
+        }
+
+        if (ary[i].z < ret[0].z) {
+            ret[0].z = ary[i].z;
+        }
+
+        if (ary[i].x > ret[1].x) {
+            ret[1].x = ary[i].x;
+        }
+
+        if (ary[i].y > ret[1].y) {
+            ret[1].y = ary[i].y;
+        }
+
+        if (ary[i].z > ret[1].z) {
+            ret[1].z = ary[i].z;
+        }
+    }
 }

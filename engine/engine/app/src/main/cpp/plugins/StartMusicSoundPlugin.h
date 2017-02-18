@@ -12,7 +12,7 @@ class StartMusicSoundPlugin : public AudioPlugin {
 public:
     // Plugin API
     bool Init(int32_t width, int32_t height) {
-        AudioPlugin::Init(width, height, "SampleAudio.mp3");
+        return AudioPlugin::Init(width, height, "SampleAudio.mp3");
     }
 };
 

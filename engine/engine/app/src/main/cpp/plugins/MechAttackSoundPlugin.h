@@ -1,5 +1,6 @@
-#ifndef _BACK_MUSIC_H_
-#define _BACK_MUSIC_H_
+#ifndef _MECH_ATTACK_SOUND_PLUGIN_H_
+#define _MECH_ATTACK_SOUND_PLUGIN_H_
+
 
 #include "AudioPlugin.h"
 
@@ -7,7 +8,7 @@
 /**
  * A simple audio player for gaming
  */
-class BackMusicPlugin : public AudioPlugin {
+class MechAttackSoundPlugin : public AudioPlugin {
 
 public:
     // Plugin API
@@ -16,7 +17,6 @@ public:
     }
 };
 
-#endif /* _BACK_MUSIC_H_ */
-
+#endif /* _MECH_ATTACK_SOUND_PLUGIN_H_ */
 
 

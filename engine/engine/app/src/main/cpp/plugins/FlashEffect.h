@@ -22,6 +22,7 @@ class FlashEffectTechnique : public Technique {
 private:
     GLint m_AttrCoord;
     GLint m_UnifTex;
+    GLint m_UnifModifier;
 
 public:
     bool Init() {
@@ -45,8 +46,10 @@ public:
 
         m_AttrCoord = GetAttributeLocation("coord");
         m_UnifTex = GetUniformLocation("tex");
+        m_UnifModifier = GetUniformLocation("modifier");
 
-        if (m_AttrCoord == -1 || m_UnifTex == INVALID_UNIFORM_LOCATION) {
+        if (m_AttrCoord == -1 || m_UnifTex == INVALID_UNIFORM_LOCATION ||
+            m_UnifModifier == INVALID_UNIFORM_LOCATION) {
             return false;
         }
 
@@ -59,6 +62,10 @@ public:
 
     void SetUniformTexture(GLint value) {
         glUniform1i(m_UnifTex, value);
+    }
+
+    void SetUniformModifier(GLsizei count, const GLfloat *xy) {
+        glUniform2fv(m_UnifModifier, count, xy);
     }
 };
 
@@ -82,10 +89,14 @@ public:
     void Play();
     void Pause();
 
+    void Recoil();
+    void Moving();
+    void Idle();
+
 private:
 
-    PLUGIN_STATUS my_status = PLUGIN_STATUS_INIT_RIGHT_NOW;
-    int m_width, m_height;
+    PLUGIN_STATUS m_Status = PLUGIN_STATUS_INIT_RIGHT_NOW;
+    int m_Width, m_Height;
 
     GLuint m_VBO;
 
@@ -98,6 +109,9 @@ private:
     int m_FrameIndex = 0; // internal counter for frame index
 
     bool m_ShowFlag = false;
+
+    float m_DistY = 0.0f; // Distance in Y axis for this effect
+    float m_Pulse = 0.0f; // Frame count for this effect
 
 private:
     bool RenderFlash(float x, float y, float sx, float sy);

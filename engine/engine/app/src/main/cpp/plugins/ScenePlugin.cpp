@@ -142,7 +142,7 @@ void ScenePlugin::renderScene() {
         m_Meshes[j]->Simulate(Transforms, wvp);
         vector<Vector3f> result = m_Meshes[j]->GetEndPositions();
         Vector3f bound[2];
-        GetBound(result, bound);
+        BaseMesh::GetBound(result, bound);
 
         LOGI(">>>>>>>>>>>>>>>>>>>>>>>> bound in shader");
         bound[0].Print();
@@ -198,37 +198,4 @@ IPlugin::PLUGIN_STATUS ScenePlugin::status() {
     return sceneStatus; // this is mainloop scene, so return loop me always
 }
 
-#if DEBUG_POSITION
-void ScenePlugin::GetBound(vector<Vector3f> ary, Vector3f* ret) {
-    ret[0] = ary[0];
-    ret[1] = ary[0];
-
-    for (int i = 1; i < ary.size(); i++) {
-        if (ary[i].x < ret[0].x) {
-            ret[0].x = ary[i].x;
-        }
-
-        if (ary[i].y < ret[0].y) {
-            ret[0].y = ary[i].y;
-        }
-
-        if (ary[i].z < ret[0].z) {
-            ret[0].z = ary[i].z;
-        }
-
-        if (ary[i].x > ret[1].x) {
-            ret[1].x = ary[i].x;
-        }
-
-        if (ary[i].y > ret[1].y) {
-            ret[1].y = ary[i].y;
-        }
-
-        if (ary[i].z > ret[1].z) {
-            ret[1].z = ary[i].z;
-        }
-    }
-}
-
-#endif
 

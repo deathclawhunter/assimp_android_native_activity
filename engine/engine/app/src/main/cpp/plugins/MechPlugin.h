@@ -1,3 +1,6 @@
+#ifndef _MECH_PLUGIN_H_
+#define _MECH_PLUGIN_H_
+
 #include <GL/freeglut.h>
 
 #include "ogldev_engine_common.h"
@@ -14,15 +17,12 @@
 
 using namespace std;
 
-// cap for meshes in a scene
-#define MAX_NUM_MESHES 10
-
 class MechPlugin : public SpritePlugin {
 public:
 
     // Plugin API
     bool Init(int32_t width, int32_t height) {
-        LOGI("in Target init:\n");
+        LOGI("in MeshPlugin init:\n");
 
         std::string str[2];
         str[0].append("mech0_animated.dae");
@@ -34,3 +34,5 @@ public:
         return false;
     }
 };
+
+#endif /* _MECH_PLUGIN_H_ */

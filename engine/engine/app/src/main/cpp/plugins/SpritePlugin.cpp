@@ -17,6 +17,15 @@ using namespace std;
 
 #include "GLError.h"
 #include "Player.h"
+#include "PluginManager.h"
+#include "PlayerPlugin.h"
+#include "MuzzleEffect.h"
+#include "FireSoundPlugin.h"
+#include "GamePlugin.h"
+#include "MechAttackEffect.h"
+#include "MechAttackSoundPlugin.h"
+
+#include <utils/UtilTime.h>
 
 SpritePlugin::SpritePlugin() {
     m_DirectionalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
@@ -106,7 +115,7 @@ void SpritePlugin::ResetAnimation() {
     ResetRunningTime();
 }
 
-void SpritePlugin::renderScene() {
+void SpritePlugin::RenderScene() {
 
     m_Renderer.Enable();
 
@@ -146,6 +155,10 @@ void SpritePlugin::renderScene() {
         }
         m_Renderer.SetWVP(wvp);
 
+        AutoAttackFromPlayer(m_Meshes[j], Transforms, wvp);
+
+        AutoAttackFromMech(m_Meshes[j], Transforms, wvp);
+
 #if DEBUG_POSITION
         m_Meshes[j]->Simulate(Transforms, wvp);
         vector<Vector3f> result = m_Meshes[j]->GetEndPositions();
@@ -167,8 +180,101 @@ void SpritePlugin::renderScene() {
 }
 
 bool SpritePlugin::Draw() {
-    renderScene();
+    RenderScene();
     return true;
+}
+
+void SpritePlugin::AutoAttackFromPlayer(AppMesh *Mesh, vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
+    PlayerPlugin *Player = (PlayerPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_PLAYER);
+    if (Player == NULL) {
+        return;
+    }
+
+    // Decide if attack
+    srand(rx_hrtime());
+    int dec = rand() % 100;
+
+    if (dec <= 10) {
+        return; // No attack right now
+    }
+
+    if (!Player->CanAttack()) { // out of ammo or cool down
+        return;
+    }
+
+    Mesh->Simulate(BoneTransforms, WVP);
+    vector<Vector3f> result = Mesh->GetEndPositions();
+    Vector3f bound[2];
+    BaseMesh::GetBound(result, bound);
+
+    if (bound[0].x < 0.5f && bound[0].y < 0.5f && bound[1].x > 0.5f && bound[1].y > 0.5f) {
+        // hit
+
+        // light muzzle
+        MuzzleEffectPlugin *Effect = (MuzzleEffectPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_MUZZLE_FLASH);
+        Effect->Play();
+
+        // play sound effect
+        FireSoundPlugin *FireSound = (FireSoundPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_FIRE_SOUND);
+        FireSound->Play();
+
+        // calculate damage
+        GetShot(Player->GetDamage());
+    }
+}
+
+void SpritePlugin::AutoAttackFromMech(AppMesh *Mesh, vector<Matrix4f> BoneTransforms, Matrix4f& WVP) {
+    PlayerPlugin *Player = (PlayerPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_PLAYER);
+    if (Player == NULL) {
+        return;
+    }
+
+    // Decide if attack
+    srand(rx_hrtime());
+    int dec = rand() % 100;
+
+    if (dec <= 50) {
+        return; // No attack right now
+    }
+
+    if (!CanAttack()) {
+        return;
+    }
+
+    Mesh->Simulate(BoneTransforms, WVP);
+    vector<Vector3f> result = Mesh->GetEndPositions();
+    Vector3f bound[2];
+    BaseMesh::GetBound(result, bound);
+
+    if ((bound[0].x > 0.0f && bound[0].y > 0.0f && bound[0].x < 1.0f && bound[0].y < 1.0f) ||
+        (bound[1].x > 0.0f && bound[1].y > 0.0f && bound[1].x < 1.0f && bound[1].y < 1.0f)) {
+        // Inside player sight
+
+        // player being attacked effect
+        MechAttackEffectPlugin *Effect = (MechAttackEffectPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_MECH_ATTACK);
+        Effect->Play();
+
+        // play sound effect
+        MechAttackSoundPlugin *MeshAttackSound = (MechAttackSoundPlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_MECH_ATTACK_SOUND);
+        MeshAttackSound->Play();
+
+        // calculate damage
+        Player->GetShot(GetDamage());
+    }
+}
+
+void SpritePlugin::GetShot(float Damage) {
+    srand(rx_hrtime());
+    m_CurrentLife -= (Damage - (float) (rand() % (int) (m_DR * 100.0f)) / 100.0f);
+
+    if (m_CurrentLife <= 0.0f) {
+        Dead();
+    }
+}
+
+void SpritePlugin::Dead() {
+    GamePlugin *Game = (GamePlugin *) PluginManager::GetInstance()->GetPlugin(PluginManager::PLUGIN_TYPE_GAME);
+    Game->PlayerWin();
 }
 
 IPlugin::PLUGIN_STATUS SpritePlugin::Status() {
@@ -184,6 +290,42 @@ void SpritePlugin::SetSpriteStatus(SpriteStatus status) {
 
 SpritePlugin::SpriteStatus SpritePlugin::GetSpriteStatus() {
     return m_SpriteStatus;
+}
+
+float SpritePlugin::GetDamage() {
+
+    float Damage = 0.0f;
+    uint64_t current = rx_hrtime();
+
+    for (int i = 0; i < m_Equiped; i++) {
+        if (current - m_LastFire < m_Weapons[i].CoolDown) {
+            continue;
+        }
+        if (m_Weapons[i].AmmoCount == 0) {
+            continue;
+        }
+        m_Weapons[i].AmmoCount--;
+        Damage += m_Weapons[i].Damage;
+    }
+
+
+    return Damage;
+}
+
+bool SpritePlugin::CanAttack() {
+
+    srand(rx_hrtime());
+
+    int dec = rand() % 100;
+
+    if (dec <= 80 && GetDamage() > 0.001f) {
+
+        m_LastFire = rx_hrtime();
+
+        return true;
+    }
+
+    return false;
 }
 
 #if DEBUG_POSITION

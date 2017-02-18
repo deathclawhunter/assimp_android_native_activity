@@ -13,7 +13,7 @@ class FireSoundPlugin : public AudioPlugin {
 public:
     // Plugin API
     bool Init(int32_t width, int32_t height) {
-        AudioPlugin::Init(width, height, "SampleAudio.mp3", false);
+        return AudioPlugin::Init(width, height, "SampleAudio.mp3", false);
     }
 };
 

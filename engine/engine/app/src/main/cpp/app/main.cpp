@@ -9,6 +9,8 @@
 #include <plugins/StartMusicSoundPlugin.h>
 #include <plugins/MechPlugin.h>
 #include <plugins/PlayerPlugin.h>
+#include <plugins/MechAttackEffect.h>
+#include <plugins/MechAttackSoundPlugin.h>
 #include "engine.h"
 
 #include "AppLog.h"
@@ -357,6 +359,8 @@ void InitPlugins(struct engine *engine) {
                                             new BackMusicPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_FIRE_SOUND,
                                             new FireSoundPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MECH_ATTACK_SOUND,
+                                            new MechAttackSoundPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_WALK_SOUND,
                                             new WalkSoundPlugin());
 
@@ -370,9 +374,10 @@ void InitPlugins(struct engine *engine) {
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_HUD, new HUDPlugin);
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_TEXT, new TextPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MUZZLE_FLASH, new MuzzleEffectPlugin());
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_MECH_ATTACK, new MechAttackEffectPlugin());
     PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_CROSSHAIR, new CrossHairPlugin());
 
-    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_PLAYER, new PlayerPlugin);
+    PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_PLAYER, new PlayerPlugin());
 
     // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SKY, new SkyBox());
     // PluginManager::GetInstance()->AddPlugin(PluginManager::PLUGIN_TYPE_SCENE, new ScenePlugin());

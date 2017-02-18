@@ -50,6 +50,10 @@ public:
     void SetAnimationStartInSeconds(float start);
     void SetAnimationEndInSeconds(float end);
 
+    void Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP);
+    vector<Vector3f> GetEndPositions();
+    static void GetBound(vector<Vector3f> ary, Vector3f* ret);
+
 protected:
     BaseTechnique *m_Render = NULL;
 
@@ -160,16 +164,11 @@ private:
     // simple box bound
     Vector4f m_BoundingBox[2];
 
-#if DEBUG_POSITION
-    vector<Vector3f> Positions;
-    vector<VertexBoneData> Bones;
-    vector<uint> Indices;
+    vector<Vector3f> m_Positions;
+    vector<VertexBoneData> m_Bones;
+    vector<uint> m_Indices;
 
-    vector<Vector3f> EndPositions;
-public:
-    void Simulate(vector<Matrix4f> BoneTransforms, Matrix4f& WVP);
-    vector<Vector3f> GetEndPositions();
-#endif
+    vector<Vector3f> m_EndPositions;
 
     enum BASE_VB_TYPES {
         INDEX_BUFFER,

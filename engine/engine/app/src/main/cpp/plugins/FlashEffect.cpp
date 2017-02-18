@@ -56,11 +56,11 @@ bool FlashEffectPlugin::Init(int32_t width, int32_t height) {
 
     LOGI("in flash effect init\n");
 
-    m_width = width;
-    m_height = height;
+    m_Width = width;
+    m_Height = height;
     if (m_Shaders->Init()) {
 
-        my_status = PLUGIN_STATUS_NEXT;
+        m_Status = PLUGIN_STATUS_NEXT;
 
         static float grey;
         grey += 0.01f;
@@ -72,6 +72,8 @@ bool FlashEffectPlugin::Init(int32_t width, int32_t height) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         m_Shaders->SetUniformTexture(0);
+        GLfloat DefModifier[2] = {0.0f, 0.0f};
+        m_Shaders->SetUniformModifier(2, (GLfloat *) DefModifier);
 
         glGenBuffers(1, &m_VBO);
         glEnableVertexAttribArray(m_Shaders->GetAttrCoord());
@@ -182,7 +184,7 @@ int32_t FlashEffectPlugin::KeyHandler(InputData *event) {
 }
 
 IPlugin::PLUGIN_STATUS FlashEffectPlugin::Status() {
-    return my_status; // example of never finish a plugin
+    return m_Status; // example of never finish a plugin
 }
 
 void FlashEffectPlugin::Play() {
@@ -191,4 +193,19 @@ void FlashEffectPlugin::Play() {
 
 void FlashEffectPlugin::Pause() {
     m_ShowFlag = false;
+}
+
+void FlashEffectPlugin::Recoil() {
+    m_DistY = 0.5f;
+    m_Pulse = 5;
+}
+
+void FlashEffectPlugin::Moving() {
+    m_DistY = 0.2f;
+    m_Pulse = -1.0f; // negtive mean forever until pause or status change
+}
+
+void FlashEffectPlugin::Idle() {
+    m_DistY = 0.0f;
+    m_Pulse = 0.0f;
 }

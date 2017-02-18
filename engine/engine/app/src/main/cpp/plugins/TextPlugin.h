@@ -113,7 +113,7 @@ private:
 public:
     void DisplayText(const char *text, float x, float y, float sx, float sy);
     void SetFontSize(FT_UInt fontSize);
-    void SetFontColor(GLfloat color[4]);
+    void SetFontColor(float *color);
 
 private:
     void RenderText(const char *text, float x, float y, float sx, float sy);

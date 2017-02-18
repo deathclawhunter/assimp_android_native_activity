@@ -185,3 +185,10 @@ int32_t TextPlugin::KeyHandler(InputData *event) {
 IPlugin::PLUGIN_STATUS TextPlugin::Status() {
     return my_status; // example of never finish a plugin
 }
+
+void TextPlugin::SetFontColor(float *color) {
+    m_TextColor[0] = color[0];
+    m_TextColor[1] = color[1];
+    m_TextColor[2] = color[2];
+    m_TextColor[3] = color[3];
+}
